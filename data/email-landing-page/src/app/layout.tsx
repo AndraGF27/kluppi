@@ -3,7 +3,7 @@ import "./webflow.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ProFile X — Branding expert and specialist",
+  title: "Kluppi — Branding expert and specialist",
   description:
     "Portfolio and waitlist for a branding expert and specialist. Showcasing creative design work.",
 };
