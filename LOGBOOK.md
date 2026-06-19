@@ -118,6 +118,14 @@ Scope: navbar logo only. Parallax photo columns left exactly as in the original 
   - Left column: `is-image-1`→Hero3, `is-image-2`→Hero6, `is-image-3`→Hero2, `is-image-4`→Hero4
   - Right column: `is-image-5`→Hero5, `is-image-6`→Hero8
 
+### 2026-06-19 — Recolour below-hero sections to Kluppi (requested)
+
+**`src/app/globals.css`**
+- For the five non-footer sections below the hero (`.section-about`, `.section-stats`, `.section-portfolio`, `.section-banner-cta`, `.section-contact`): background → Lemon Sorbet `#FFF0BC`, default text → Cassis `#351E28` (overrides the template's `.background-black` black/white and `.section-banner-cta` black).
+- Headings → Dare Devil `#FF5B22`: `.heading-style-h2/-h3/-h5/-h6`, `.cta-heading-top`, `.cta-heading-bottom`, and `.mid-grey-span` (the grey heading accent), scoped within those sections.
+- Grey body copy (`.text-colour-grey`) within those sections → Cassis.
+- Footer (`.footer-component`) and the hero left untouched. Left as-is (not "text", own backgrounds): `.portfolio-tag-item` grey pills (white text), the `.form-input` field (white/black), and `.error-text` (red error state) — flagged to the user.
+
 ### 2026-06-19 — Nav menu: remove socials + restyle (requested)
 
 **`src/app/page.tsx`**

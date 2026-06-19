@@ -209,3 +209,27 @@ html {
   font-family: "Switzer", sans-serif;
   text-transform: none; /* sentence case */
 }
+
+/* ─── Below-the-hero sections (excludes footer): Kluppi recolour ─── */
+/* Lemon Sorbet background + Cassis default text (overrides .background-black). */
+.section-about,
+.section-stats,
+.section-portfolio,
+.section-banner-cta,
+.section-contact {
+  background-color: #FFF0BC; /* Lemon Sorbet */
+  color: #351E28; /* Cassis */
+}
+
+/* Headings (incl. the grey heading accent + CTA banner headings) → Dare Devil */
+:is(.section-about, .section-stats, .section-portfolio, .section-banner-cta, .section-contact)
+  :is(.heading-style-h2, .heading-style-h3, .heading-style-h5, .heading-style-h6,
+      .cta-heading-top, .cta-heading-bottom, .mid-grey-span) {
+  color: #FF5B22; /* Dare Devil */
+}
+
+/* Grey body copy → Cassis */
+:is(.section-about, .section-stats, .section-portfolio, .section-banner-cta, .section-contact)
+  .text-colour-grey {
+  color: #351E28; /* Cassis */
+}
