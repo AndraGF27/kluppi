@@ -63,3 +63,82 @@ html {
 .waitlist-message {
   margin-top: 1rem;
 }
+
+/* ─── Kluppi hero (added 2026-06-19) ─── */
+/* Scoped to the hero only via .kluppi-hero / .kluppi-hero-* hooks.
+   Loaded after webflow.css, so these win over template defaults by source order. */
+.kluppi-hero {
+  background-color: #FFF0BC; /* Lemon Sorbet */
+}
+
+/* Keep hero text above the template's parallax image columns */
+.kluppi-hero .header-content {
+  position: relative;
+  z-index: 2;
+}
+
+.kluppi-hero-eyebrow {
+  font-family: "Switzer", sans-serif;
+  font-weight: 200; /* extra light */
+  letter-spacing: 0.18em;
+  text-transform: uppercase; /* ALL CAPS */
+  color: #351E28; /* Cassis */
+  margin-bottom: 1.5rem;
+}
+
+.kluppi-hero-h1 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700; /* bold */
+  color: #FF5B22; /* Dare Devil */
+  text-transform: none; /* sentence case */
+  /* Fluid size: ~2rem on small phones → 4.9rem on desktop.
+     Anchored 2rem @375px (keeps the headline to ~4 lines on iPhone SE) and
+     4.9rem @992px. Overrides the template's .heading-style-h1 breakpoints by
+     source order (globals loads after webflow). */
+  font-size: clamp(2rem, 7.52vw + 0.24rem, 4.9rem);
+}
+
+.kluppi-hero-body {
+  font-family: "Switzer", sans-serif;
+  font-weight: 400; /* normal */
+  color: #351E28; /* Cassis */
+}
+
+.kluppi-hero-cta {
+  display: inline-block;
+  font-family: "Switzer", sans-serif;
+  font-weight: 500;
+  font-size: 1.0625rem;
+  line-height: 1;
+  color: #FFFFFF;
+  background-color: #FF5B22; /* Dare Devil */
+  padding: 1.125rem 2.25rem;
+  border-radius: 100px;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.kluppi-hero-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+.kluppi-hero-cta:active { transform: translateY(0); }
+
+.kluppi-hero-trust {
+  margin-top: 1.25rem;
+  font-family: "Switzer", sans-serif;
+  font-weight: 400;
+  font-size: 0.9375rem;
+  color: #351E28; /* Cassis */
+  opacity: 0.7;
+}
+
+/* ─── Kluppi navbar (added 2026-06-19) ─── */
+.navbar-component {
+  background-color: #FFF0BC; /* Lemon Sorbet */
+  border-bottom: none; /* remove template's 1px #363636 divider */
+}
+
+/* Hamburger (navbar-menu-button) lines → Dare Devil */
+.navbar-menu-button .menu-icon-line-top,
+.navbar-menu-button .menu-icon-line-middle,
+.navbar-menu-button .menu-icon-line-middle-base,
+.navbar-menu-button .menu-icon-line-bottom {
+  background-color: #FF5B22; /* Dare Devil */
+}

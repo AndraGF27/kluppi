@@ -150,13 +150,9 @@ export default function Home() {
       >
         <div className="navbar-container">
           <a href="#top" aria-current="page" className="navbar-logo-link w-nav-brand w--current">
-            <img src={LOGO} loading="lazy" alt="" className="navbar-logo" />
+            <img src="/logo.svg" loading="lazy" alt="Kluppi" className="navbar-logo" />
           </a>
           <div className="navbar-wrapper">
-            <a href="#contact" className="button is-alternate is-navbar w-inline-block">
-              <div>Get in touch</div>
-              <ButtonArrow />
-            </a>
             <nav
               role="navigation"
               className="navbar-menu w-nav-menu"
@@ -207,7 +203,7 @@ export default function Home() {
       </div>
 
       <div className="main-wrapper max-width-full">
-        <header className="section-header background-black" id="top">
+        <header className="section-header kluppi-hero" id="top">
           <div className="padding-global">
             <div className="header-component" ref={componentRef}>
               <div className="header-content-wrapper">
@@ -239,26 +235,18 @@ export default function Home() {
                 </div>
                 <div className="header-content">
                   <div className="text-align-center">
-                    <div className="margin-bottom margin-small" data-reveal>
-                      <h1 className="heading-style-h1 text-allcaps">
-                        hey, i&apos;m a{" "}
-                        <span className="mid-grey-span">Branding expert and specialist</span>
+                    <p className="kluppi-hero-eyebrow z-index-2" data-reveal>Lansăm în curând</p>
+                    <div className="margin-bottom margin-small z-index-2" data-reveal style={{ "--reveal-delay": "0.08s" } as React.CSSProperties}>
+                      <h1 className="heading-style-h1 kluppi-hero-h1">
+                        Coduri și avantaje exclusive, direct de la branduri, în fiecare lună
                       </h1>
                     </div>
-                    <p className="text-size-large weight-normal z-index-2" data-reveal style={{ "--reveal-delay": "0.12s" } as React.CSSProperties}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <p className="text-size-large kluppi-hero-body z-index-2" data-reveal style={{ "--reveal-delay": "0.16s" } as React.CSSProperties}>
+                      Lucrăm direct cu brandurile și îți aducem, lună de lună, coduri de reducere și beneficii reale, create special pentru membrii Kluppi.
                     </p>
-                    <div className="margin-top margin-medium" data-reveal style={{ "--reveal-delay": "0.24s" } as React.CSSProperties}>
-                      <div className="button-group is-center z-index-2">
-                        <a href="#work" className="button is-alternate w-inline-block">
-                          <div>Discover</div>
-                          <ButtonArrow />
-                        </a>
-                        <a href="#about" className="button-secondary is-alternate w-inline-block">
-                          <div>Learn more</div>
-                          <ButtonArrow />
-                        </a>
-                      </div>
+                    <div className="margin-top margin-medium z-index-2" data-reveal style={{ "--reveal-delay": "0.24s" } as React.CSSProperties}>
+                      <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+                      <p className="kluppi-hero-trust">Înscriere gratuită · Fără obligații</p>
                     </div>
                   </div>
                 </div>
