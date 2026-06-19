@@ -1,0 +1,65 @@
+/* App-specific additions layered on top of the Webflow template stylesheet.
+   The template (webflow.css) owns all base styles, layout, and tokens. */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Entrance fade-in reveal (replaces Webflow's IX2 load animations).
+   Elements tagged data-reveal start hidden and animate in when scrolled into view. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Header image columns are driven by a JS scroll parallax in page.tsx.
+   These keep the motion smooth and ensure the columns transform from the top. */
+.header-image-list {
+  will-change: transform;
+}
+
+/* Waitlist form built from the template's own form components. */
+.waitlist-form-wrapper {
+  width: 100%;
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.waitlist-field-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.waitlist-field-row .form-input {
+  flex: 1 1 16rem;
+  margin-bottom: 0;
+}
+
+.waitlist-field-row .button.is-form {
+  width: auto;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.waitlist-message {
+  margin-top: 1rem;
+}
