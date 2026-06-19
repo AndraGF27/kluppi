@@ -406,8 +406,8 @@ export default function Home() {
         <section className="section-banner-cta">
           <div className="section-padding-large">
             <a href="#contact" className="banner-cta-component w-inline-block" data-reveal>
-              <h2 className="cta-heading-top">Showcasing Creative Excellence with ProFile X</h2>
-              <h2 className="cta-heading-bottom">Unleash Your Creative Potential with ProFile X</h2>
+              <h2 className="cta-heading-top">Showcasing Creative Excellence with Kluppi</h2>
+              <h2 className="cta-heading-bottom">Unleash Your Creative Potential with Kluppi</h2>
             </a>
           </div>
         </section>
@@ -501,7 +501,7 @@ export default function Home() {
                 <div className="line-divider" />
                 <div className="padding-vertical padding-medium">
                   <div className="footer-bottom">
-                    <div className="footer-credit-text">© 2024 ProFile X.</div>
+                    <div className="footer-credit-text">© {new Date().getFullYear()} Kluppi.</div>
                     <div className="footer-credit-text">Branding expert and specialist.</div>
                   </div>
                 </div>
