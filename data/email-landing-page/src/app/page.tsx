@@ -63,30 +63,46 @@ export default function Home() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    const handleScroll = () => {
-      const component = componentRef.current;
-      if (!component) return;
+    const wrapper = componentRef.current;
+    const left = leftListRef.current;
+    const right = rightListRef.current;
+    if (!wrapper || !left || !right) return;
 
-      const rect = component.getBoundingClientRect();
-      const scrollable = component.offsetHeight - window.innerHeight;
+    let ticking = false;
+
+    const render = () => {
+      ticking = false;
+      const vh = window.innerHeight;
+      const rect = wrapper.getBoundingClientRect();
+      const scrollable = wrapper.offsetHeight - vh;
       const progress =
         scrollable <= 0 ? 0 : Math.min(Math.max(-rect.top / scrollable, 0), 1);
 
-      const vh = window.innerHeight;
-      if (leftListRef.current) {
-        leftListRef.current.style.transform = `translate3d(0, ${-progress * vh * 1.7}px, 0)`;
-      }
-      if (rightListRef.current) {
-        rightListRef.current.style.transform = `translate3d(0, ${-progress * vh * 2.05}px, 0)`;
+      // Drift each column by exactly its own overflow past the viewport,
+      // recomputed every frame so it stays correct as the lazy images finish
+      // loading. Tying the distance to each column's real height keeps the
+      // images scrolling through seamlessly without over-running — the fixed
+      // viewport multiples used before pushed the shorter right column right
+      // off the screen, leaving an empty gap.
+      const leftShift = Math.max(0, left.offsetHeight - vh);
+      const rightShift = Math.max(0, right.offsetHeight - vh);
+      left.style.transform = `translate3d(0, ${-progress * leftShift}px, 0)`;
+      right.style.transform = `translate3d(0, ${-progress * rightShift}px, 0)`;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(render);
       }
     };
 
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
+    render();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
 
@@ -165,19 +181,6 @@ export default function Home() {
                   <a href="#work" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Projects</a>
                   <a href="#contact" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Contact</a>
                 </div>
-                <div className="navbar-bottom">
-                  <div className="w-layout-grid navbar-social-list">
-                    {socials.map((s) => (
-                      <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label} className="navbar-social-link w-inline-block">
-                        <div className="icon-xsmall w-embed">
-                          <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d={s.path} fill="currentColor" />
-                          </svg>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                </div>
               </div>
             </nav>
             <div
@@ -210,26 +213,26 @@ export default function Home() {
                 <div className="header-images-wrapper">
                   <div className="header-image-list" ref={leftListRef}>
                     <div className="header-image-wrapper is-image-1">
-                      <img className="header-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66ab984ef0ad2ab41d4e7f32_mk-2-wG6qTlEBMM8-unsplash-min.jpg" alt="" sizes="(max-width: 767px) 30vw, (max-width: 991px) 28vw, 22vw" loading="lazy" srcSet="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66ab984ef0ad2ab41d4e7f32_mk-2-wG6qTlEBMM8-unsplash-min-p-500.jpg 500w, https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66ab984ef0ad2ab41d4e7f32_mk-2-wG6qTlEBMM8-unsplash-min-p-800.jpg 800w, https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66ab984ef0ad2ab41d4e7f32_mk-2-wG6qTlEBMM8-unsplash-min.jpg 6000w" />
+                      <img className="header-image" src="/Hero3.jpg" alt="" sizes="(max-width: 767px) 30vw, (max-width: 991px) 28vw, 22vw" loading="lazy" />
                     </div>
                     <div className="header-image-wrapper is-image-2">
-                      <img className="header-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66ab9aaf126f1a3a9d69ebc2_mk-2-ypeZtZBUW6E-unsplash.jpg" alt="" sizes="(max-width: 767px) 30vw, (max-width: 991px) 28vw, 22vw" loading="lazy" />
+                      <img className="header-image" src="/Hero6.jpg" alt="" sizes="(max-width: 767px) 30vw, (max-width: 991px) 28vw, 22vw" loading="lazy" />
                     </div>
                     <div className="header-image-wrapper is-image-3">
-                      <img className="header-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c36022311552387248d6fa_ales-nesetril-Im7lZjxeLhg-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 28vw, (max-width: 991px) 26vw, 20vw" alt="" />
+                      <img className="header-image" src="/Hero4.jpg" loading="lazy" sizes="(max-width: 767px) 28vw, (max-width: 991px) 26vw, 20vw" alt="" />
                     </div>
                     <div className="header-image-wrapper is-image-4">
-                      <img className="header-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66ab9b12d45388739dfb6323_mk-2-XoiBIpYkPJA-unsplash%20(1).jpg" loading="lazy" sizes="(max-width: 767px) 26vw, (max-width: 991px) 24vw, 18vw" alt="" />
+                      <img className="header-image" src="/Hero2.jpg" loading="lazy" sizes="(max-width: 767px) 26vw, (max-width: 991px) 24vw, 18vw" alt="" />
                     </div>
                   </div>
                 </div>
                 <div className="header-images-wrapper images-wrapper-right">
                   <div className="header-image-list image-list-right" ref={rightListRef}>
                     <div className="header-image-wrapper is-image-5">
-                      <img className="header-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66ab9e39bfb91be59c4f3df4_mk-2-biKeArOcXXo-unsplash.jpg" alt="" sizes="(max-width: 767px) 28vw, (max-width: 991px) 26vw, 20vw" loading="lazy" />
+                      <img className="header-image" src="/Hero5.jpg" alt="" sizes="(max-width: 767px) 28vw, (max-width: 991px) 26vw, 20vw" loading="lazy" />
                     </div>
                     <div className="header-image-wrapper is-image-6">
-                      <img className="header-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66ab9a09f2ab9bcb54565c5f_mk-2-zzHJ3VSKrZg-unsplash%20(1).jpg" alt="" sizes="(max-width: 767px) 26vw, (max-width: 991px) 24vw, 18vw" loading="lazy" />
+                      <img className="header-image" src="/Hero8.jpg" alt="" sizes="(max-width: 767px) 26vw, (max-width: 991px) 24vw, 18vw" loading="lazy" />
                     </div>
                   </div>
                 </div>

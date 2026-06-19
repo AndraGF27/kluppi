@@ -120,10 +120,14 @@ html {
 .kluppi-hero-cta:hover { opacity: 0.9; transform: translateY(-1px); }
 .kluppi-hero-cta:active { transform: translateY(0); }
 
+@media (min-width: 992px) { /* desktop */
+  .kluppi-hero-cta { font-size: 1.25rem; }
+}
+
 .kluppi-hero-trust {
-  margin-top: 1.25rem;
+  margin-top: 1rem; /* was 1.25rem, −20% */
   font-family: "Switzer", sans-serif;
-  font-weight: 400;
+  font-weight: 200;
   font-size: 0.9375rem;
   color: #351E28; /* Cassis */
   opacity: 0.7;
@@ -141,4 +145,67 @@ html {
 .navbar-menu-button .menu-icon-line-middle-base,
 .navbar-menu-button .menu-icon-line-bottom {
   background-color: #FF5B22; /* Dare Devil */
+}
+
+/* Animated hamburger → X (mirrors the original Webflow click animation).
+   Driven by the `w--open` class React already toggles on .navbar-menu-button.
+   Two-stage: the top/bottom bars collapse onto the middle (one line), then the
+   middle rotates 45° and its base rotates to 135° to form the X — and reverse.
+   Transition delays sequence the two stages in each direction. */
+.menu-icon-line-top,
+.menu-icon-line-bottom {
+  /* closing: bars slide back out only after the X has un-rotated */
+  transition: transform 0.2s ease 0.2s, opacity 0.2s ease 0s;
+}
+.menu-icon-line-middle,
+.menu-icon-line-middle-base {
+  /* closing: un-rotate immediately */
+  transition: transform 0.2s ease 0s;
+}
+
+.navbar-menu-button.w--open .menu-icon-line-top,
+.navbar-menu-button.w--open .menu-icon-line-bottom {
+  opacity: 0;
+  /* opening: collapse immediately, then fade as the X forms */
+  transition: transform 0.2s ease 0s, opacity 0.2s ease 0.2s;
+}
+.navbar-menu-button.w--open .menu-icon-line-top { transform: translateY(8px); }
+.navbar-menu-button.w--open .menu-icon-line-bottom { transform: translateY(-8px); }
+
+.navbar-menu-button.w--open .menu-icon-line-middle {
+  transform: rotate(45deg);
+  transition: transform 0.2s ease 0.2s; /* opening: rotate after the bars merge */
+}
+.navbar-menu-button.w--open .menu-icon-line-middle-base {
+  transform: rotate(90deg); /* +45° from the parent = 135°, the other diagonal */
+  transition: transform 0.2s ease 0.2s;
+}
+
+/* Hero content padding reduced 25% (template: 7 / 6 / 4rem) */
+.kluppi-hero .header-content {
+  padding-top: 5.25rem;    /* 7rem × 0.75 */
+  padding-bottom: 5.25rem;
+}
+@media (max-width: 991px) {
+  .kluppi-hero .header-content {
+    padding-top: 4.5rem;   /* 6rem × 0.75 */
+    padding-bottom: 4.5rem;
+  }
+}
+@media (max-width: 767px) {
+  .kluppi-hero .header-content {
+    padding-top: 3rem;     /* 4rem × 0.75 (top only; bottom stays 4.5rem) */
+  }
+}
+
+/* Nav menu (full-screen overlay): Lemon Sorbet bg, Cassis text. Link labels
+   left as-is for now — only restyled, not renamed. */
+.navbar-menu {
+  background-color: #FFF0BC; /* Lemon Sorbet */
+  color: #351E28; /* Cassis */
+}
+.navbar-menu .navbar-link {
+  color: #351E28; /* Cassis — also overrides .navbar-link.w--current */
+  font-family: "Switzer", sans-serif;
+  text-transform: none; /* sentence case */
 }

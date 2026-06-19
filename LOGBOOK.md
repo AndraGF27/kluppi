@@ -89,3 +89,75 @@ Scope: navbar logo only. Parallax photo columns left exactly as in the original 
 
 **`src/app/globals.css`**
 - Added `border-bottom: none` to the `.navbar-component` rule to remove the template's `1px solid #363636` divider under the navbar.
+
+### 2026-06-19 — Replaced hero images with Kluppi photos (requested)
+
+**`public/`**
+- Added `Hero1.jpg`–`Hero6.jpg` (copied from the user's `~/Downloads/Hero Images/`, ~290–420KB each).
+
+**`src/app/page.tsx`** (hero `<img>` tags only)
+- Repointed all six hero images from the Webflow CDN Unsplash URLs to the local files, arranged to alternate tone (light/dark) per column and spread the two orange-heavy shots diagonally:
+  - Left column: `is-image-1`→Hero1 (light), `is-image-2`→Hero5 (dark), `is-image-3`→Hero2 (light), `is-image-4`→Hero6 (vibrant orange)
+  - Right column: `is-image-5`→Hero3 (light/orange), `is-image-6`→Hero4 (dark)
+- _Superseded by the swap below._
+
+### 2026-06-19 — Swapped two hero image pairs (requested)
+
+**`src/app/page.tsx`** (hero `<img>` srcs only)
+- Swapped Hero4 ↔ Hero5 and Hero3 ↔ Hero1 at their slots. Resulting arrangement:
+  - Left column: `is-image-1`→Hero3, `is-image-2`→Hero4, `is-image-3`→Hero2, `is-image-4`→Hero6
+  - Right column: `is-image-5`→Hero1, `is-image-6`→Hero5
+
+### 2026-06-19 — Hero image reshuffle + added Hero8 (requested)
+
+**`public/`**
+- Added `Hero8.jpg` (the "%" voucher gift-bag flat lay) from `~/Downloads/Hero Images/`. `Hero7.png` exists in that folder but is not used in the layout yet.
+
+**`src/app/page.tsx`** (hero `<img>` srcs only)
+- Applied: swap Hero5 ↔ Hero1, replace Hero1 with Hero8, swap Hero4 ↔ Hero6 (the last per the user's clarification that step 3 was a Hero4/Hero6 position swap). Resulting arrangement:
+  - Left column: `is-image-1`→Hero3, `is-image-2`→Hero6, `is-image-3`→Hero2, `is-image-4`→Hero4
+  - Right column: `is-image-5`→Hero5, `is-image-6`→Hero8
+
+### 2026-06-19 — Nav menu: remove socials + restyle (requested)
+
+**`src/app/page.tsx`**
+- Removed the socials block (`.navbar-bottom` → `.navbar-social-list` with the `socials.map(...)`) from the full-screen nav menu. The `socials` const is kept — the footer still renders it.
+
+**`src/app/globals.css`**
+- `.navbar-menu`: background → Lemon Sorbet `#FFF0BC` (was black), color → Cassis `#351E28` (was white).
+- `.navbar-menu .navbar-link`: color → Cassis, font-family → Switzer, `text-transform: none` (sentence case). Overrides the template's white/uppercase/Manrope and the `.w--current` color by source order. Link labels (Home/About/Projects/Contact) left unchanged per request — to be revisited.
+
+### 2026-06-19 — Animated hamburger → X on click (requested)
+
+**`src/app/globals.css`**
+- Added a CSS hamburger→X animation on `.navbar-menu-button`, driven by the `w--open` class that `page.tsx` already toggles via the `menuOpen` state — no JS change needed. Mirrors the original Webflow motion: top/bottom bars collapse onto the middle (forming a single line), then `.menu-icon-line-middle` rotates 45° and `.menu-icon-line-middle-base` rotates 90° (→135°) to form the X; reverses on close. Two-stage sequencing via transition delays (0.2s) on transform/opacity, set per direction. Additive; nothing existing removed.
+
+### 2026-06-19 — Hero trust line tweaks (requested)
+
+**`src/app/globals.css`**
+- `.kluppi-hero-trust`: `margin-top` `1.25rem` → `1rem` (−20%); `font-weight` `400` → `200` (Switzer 200 already loaded).
+
+### 2026-06-19 — Hero CTA size 1.25rem on desktop (requested)
+
+**`src/app/globals.css`**
+- Added `@media (min-width: 992px) { .kluppi-hero-cta { font-size: 1.25rem } }`. The base CTA font-size (`1.0625rem`) is kept for tablet/mobile; desktop bumps to `1.25rem`. Padding unchanged.
+
+### 2026-06-19 — Reduced hero content padding 25% (requested)
+
+**`src/app/globals.css`**
+- Added a scoped `.kluppi-hero .header-content` override reducing the template's vertical padding by 25% at each breakpoint: desktop `7rem`→`5.25rem`, `≤991px` `6rem`→`4.5rem`, `≤767px` `4rem`→`3rem` (top only; bottom stays `4.5rem`, mirroring the template). 2-class selector wins over the template's 1-class rule; `webflow.css` untouched, nothing removed.
+
+### 2026-06-19 — Swapped Hero2 ↔ Hero4 (requested)
+
+**`src/app/page.tsx`** (hero `<img>` srcs only)
+- Swapped Hero2 and Hero4 positions: `is-image-3` Hero2→Hero4, `is-image-4` Hero4→Hero2. Current arrangement:
+  - Left column: `is-image-1`→Hero3, `is-image-2`→Hero6, `is-image-3`→Hero4, `is-image-4`→Hero2
+  - Right column: `is-image-5`→Hero5, `is-image-6`→Hero8
+- Removed the stale `srcSet` on `is-image-1` (it still pointed at CDN variants). `alt`/`sizes` left as-is.
+- Scoped edits with the `header-image` class so the reused `ales-nesetril` photo in the stats section was left untouched.
+
+### 2026-06-19 — Fixed hero parallax image animation (requested)
+
+**`src/app/page.tsx`** (parallax `useEffect` only)
+- Reworked the scroll handler so each image column drifts by exactly its own overflow past the viewport (`offsetHeight − innerHeight`), recomputed each frame, instead of fixed viewport multiples (`vh × 1.7` / `vh × 2.05`). The old multiples shifted the shorter 2-image right column by ~1.4× its own height, so it scrolled fully off and left an empty gap — the "not seamless" behaviour. The new approach matches the original Webflow model (movement proportional to each column's height) and keeps both columns drifting smoothly through the sticky viewport.
+- Throttled scroll updates with `requestAnimationFrame` for smoother motion; recomputing heights each frame keeps it correct as the lazy-loaded images finish loading. No markup, CSS, or other logic changed.
