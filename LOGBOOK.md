@@ -19,6 +19,97 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-20 — Fix FAQ collapse + footer logo swap / remove footer image (requested)
+
+**FAQ answers were staying open.** The `grid-template-rows: 0fr` collapse trick wasn't collapsing (matches the known Safari `0fr` quirk; couldn't browser-verify locally — the preview dev server wouldn't stay up). Replaced it with a **JS-measured pixel height** that animates reliably everywhere.
+- **`src/app/page.tsx`**: added `answerRefs` (per-answer `<p>` refs) + a resize listener (`remeasureFaqs`) that re-renders so open answers re-measure on viewport change. The wrap now gets `style={{ height: open ? answerRefs.current[i]?.scrollHeight ?? 0 : 0 }}`.
+- **`src/app/globals.css`**: `.kluppi-faq-answer-wrap` → `height: 0; overflow: hidden; transition: height 0.3s` (dropped the grid-rows rules); `.kluppi-faq-answer` keeps its padding/type.
+
+**Footer logo + image (page.tsx):**
+- Removed the large `footer-bottom-logo` `<img>` (the Profile X footer SVG).
+- Footer brand logo `src={LOGO}` → `src="/logo.svg"` (the Kluppi Dare Devil logo, `alt="Kluppi"`).
+- Removed the now-unused `LOGO` constant (the Profile X light SVG URL) — navbar already used `/logo.svg`.
+
+Typecheck (`tsc --noEmit`) passes. (Footer still has the "Branding expert and specialist." credit line + greyed text from the template — pending the footer cleanup #9.)
+
+### 2026-06-20 — Delete About, move/animate tagline banner, animate FAQ, page → Lemon (requested)
+
+Four changes in one pass.
+
+**1. Deleted the "A passionate designer…" section** (`section-about` / `id="about"`). `ButtonArrow` still used by the contact form, so kept. (Dead nav/footer `#about` links now join the `#work` ones — flagged.)
+
+**2. Tagline banner moved below the form + restyled + animated.**
+- New **`src/app/SplitBanner.tsx`** (client component): renders `<section className="section-banner-cta kluppi-banner">` with two lines and a scroll-driven transform — the lines start pulled toward the centre and spread to the edges (line 1 left, line 2 right) as the section scrolls up. rAF-throttled; respects reduced-motion.
+- **`page.tsx`**: removed the old `section-banner-cta` (was between About and FAQ) and rendered `<SplitBanner />` **after the contact section**, before the footer. Imported it.
+- **`globals.css`** `.kluppi-banner*`: line 1 "Cumpără ce voiai oricum." = Switzer 300, Cassis, 5rem, sentence case, left; line 2 "Doar mai smart." = Bricolage 800, Dare Devil, 7rem, sentence case, right. `overflow:hidden` on the section to clip during the spread; responsive sizes at ≤991/≤767.
+
+**3. FAQ animation.** Converted the native `<details>/<summary>` to a JS-controlled accordion (state `openFaqs[]` + `toggleFaq`, `<button aria-expanded>` + answer wrapper). Smooth open/close via the **grid-template-rows 0fr→1fr** trick (`.kluppi-faq-answer-wrap`, 0.3s) — content stays rendered so both directions animate. Chevron now keys off `.is-open`. (Recommendation chosen for reliable cross-browser animation; native details can't transition its show/hide.)
+
+**4. Page background → Lemon Sorbet, no black.**
+- `.body { background-color: #FFF0BC }` — overrides the template's `.body { background: var(--black) }` (needed the **class** selector; a bare `body` rule is out-ranked by `.body`).
+- Footer recoloured: `.footer-component` → Lemon bg + Cassis text + faint Cassis top border + divider; its greys/links/credit → Cassis. (All `.background-black` sections were already recoloured to Lemon.)
+
+Typecheck (`tsc --noEmit`) passes.
+
+**Flags:** (a) the contact section is still the English placeholder (#8), and its "Notify me" button is the template's dark-grey (`var(--dark-grey)`) — small element, left for the #8 form pass; (b) the footer's two logos are the white Profile X SVGs → invisible on Lemon, pending the footer cleanup (#9); (c) dead nav/footer links now include `#about` (+ existing `#work`).
+
+### 2026-06-20 — FAQ section ("Întrebări frecvente") — new native accordion (requested)
+
+Section #7 — a new, clean, centered FAQ accordion built on native `<details>/<summary>` (no JS). 8 Q&As, exact RO copy from `Teaser Landing Page Copy.docx`. H2 is "Întrebări frecvente" (not "FAQ"), per the copy. Inserted just before the contact/form section.
+
+**`src/app/page.tsx`**
+- Added a module-level `faqs` array (8 `{ q, a }`) and imported `ChevronDown`.
+- New `<section className="kluppi-faq">`: centered H2 + a `.kluppi-faq-list` mapping `faqs` to `<details className="kluppi-faq-item">` → `<summary className="kluppi-faq-question">{q}<ChevronDown/></summary>` + `<p className="kluppi-faq-answer">{a}</p>`. All start collapsed.
+
+**`src/app/globals.css`** (appended `.kluppi-faq*`)
+- Lemon Sorbet section, centered Bricolage/Dare Devil heading (clamp size, matching the others), max-width 46rem column.
+- Hairline Cassis dividers between items; question Switzer 600 Cassis with a Dare Devil chevron that rotates 180° on `[open]`; answer Switzer 400 Cassis. Native marker hidden (`list-style:none` + `::-webkit-details-marker`).
+
+NOTE/flag: placed before `section-contact`, so it currently sits **after the two leftover template sections** still on the page — `.section-about` ("A passionate designer…") and `.section-banner-cta` ("Showcasing Creative Excellence…"). Those are slated for removal/repurposing and will move the FAQ into its final position.
+
+Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-20 — "Kluppi este pentru tine dacă…" adopts the benefits 3×4 structure (image cells) (requested)
+
+Made the "pentru tine dacă" grid match the benefits grid ("Ce te așteaptă în Kluppi?") — same white cards, same 3×4 arrangement, same text styles — but with **image placeholders instead of icon cards**. Since both grids now share the same structure, the redesign was **promoted from the `#services` scope onto the base `.kluppi-benefits-*` classes** (no more divergence), and the benefits-only icon-card styling was un-scoped (it's keyed off markup classes that only the benefits grid uses).
+
+**`src/app/globals.css`**
+- Base `.kluppi-benefits-grid`: 3×3 → **3×4** (`i1 b1 b1 / b2 b2 i2 / i3 b3 b3 / b4 b4 i4`); added base `.kluppi-benefit-img--i4 { grid-area: i4 }`.
+- Base `.kluppi-benefit` → white; `.kluppi-benefit-title/-desc` → Cassis. Removed the old `.kluppi-benefit--b1 { space-between }` + the now-dead `.kluppi-benefit-icon` rule (no inline icons anywhere now).
+- Base `≤991px` collapse resets i4 too. Deleted the whole `#services` override block (everything is base now); kept `.kluppi-benefit-icon-card` / `.kluppi-benefit-card-icon` as plain (un-scoped) classes.
+
+**`src/app/page.tsx`** ("pentru tine dacă" grid)
+- Removed the b1 inline `ShieldCheck` icon; reordered children to `b1, i1, b2, i2, b3, i3, b4, i4`; **added a 4th image** `i4` = `/Hero8.jpg` (placeholder). Images now lee-campbell / mk-2 / ales-nesetril / Hero8 (all placeholders). `sizes` tuned to ~31vw.
+- Benefits grid (#services) is visually unchanged — it just gets its layout/colours from the base classes now instead of the `#services` block; still uses icon cards.
+
+Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-20 — Steps timeline: line thinner + Cassis (dots stay Dare Devil) (requested)
+
+**`src/app/globals.css`**
+- `.kluppi-steps-line` (track): width `5px` → `3px` (radius to match); still a faded Cassis track.
+- `.kluppi-steps-line-fill`: Dare Devil `#FF5B22` → Cassis `#351E28`, so the scroll-fill recolours the line in Cassis. Dots remain Dare Devil (now the only Dare Devil element in the timeline) — they still carry the progress read.
+
+Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-20 — Steps timeline: cards → white with Cassis text (requested)
+
+**`src/app/globals.css`**
+- `.kluppi-step-card` background Cassis `#351E28` → white `#FFFFFF`.
+- `.kluppi-step-title` / `.kluppi-step-desc` color Lemon `#FFF0BC` → Cassis `#351E28`.
+- `.kluppi-step-label` ("PASUL 0X") kept Dare Devil as the accent (matches the benefits cards' Dare Devil accent); line/dots unchanged.
+
+Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-20 — Removed the portfolio section ("Showcasing my Creative Design Work") (requested)
+
+**`src/app/page.tsx`**
+- Deleted the entire `<section className="section-portfolio" id="work">` (the heading "Showcasing my Creative Design Work", the 4 portfolio cards + "View all" button). It was leftover template, not part of the teaser plan.
+- `ButtonArrow` is still used by the About and Contact sections, so the component is kept.
+- NOTE/flag: two nav links still point to the now-removed `#work` anchor — the navbar "Projects" link and the footer "Projects" link. Left untouched pending the user's call (the nav/footer labels are still slated for a later cleanup pass).
+
+Typecheck (`tsc --noEmit`) passes.
+
 ### 2026-06-20 — Benefits section: photo cells → icon cards (requested)
 
 Replaced the 4 image cells in the benefits grid (`#services`) with white **icon cards** — one centred representative icon each (4.5rem) — so the rows shrink to the text-card height instead of the old 14rem image floor.

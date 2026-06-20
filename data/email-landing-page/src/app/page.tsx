@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ShieldCheck, Gift, Target, Ticket } from "lucide-react";
+import { ShieldCheck, Gift, Target, Ticket, ChevronDown } from "lucide-react";
 import PainPointsCarousel from "./PainPointsCarousel";
 import HowItWorks from "./HowItWorks";
-
-const LOGO =
-  "https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66ac8dae2b34c047cf51afab_Profile%20X_Logo%20Light.svg";
+import SplitBanner from "./SplitBanner";
 
 function ButtonArrow() {
   return (
@@ -52,14 +50,61 @@ const socials = [
   },
 ];
 
+const faqs = [
+  {
+    q: "Ce este Kluppi?",
+    a: "Kluppi este un club de shopping care îți oferă acces la coduri de reducere și alte avantaje obținute direct de la branduri, doar pentru membri.",
+  },
+  {
+    q: "Trebuie să plătesc pentru a-mi rezerva locul?",
+    a: "Nu. Înscrierea în club este complet gratuită.",
+  },
+  {
+    q: "De ce informații am nevoie pentru înscriere?",
+    a: "Doar de numele tău și de o adresă de e-mail.",
+  },
+  {
+    q: "Îmi creez contul acum?",
+    a: "Nu încă. Acum îți rezervi locul. Îți vei crea contul și îți vei configura preferințele când lansăm oficial Kluppi.",
+  },
+  {
+    q: "Ce fel de avantaje voi putea accesa?",
+    a: "În funcție de brand, poți accesa coduri de reducere, vouchere, transport gratuit, cadouri surpriză sau alte beneficii create pentru membrii Kluppi.",
+  },
+  {
+    q: "Pot folosi Kluppi gratuit?",
+    a: "Da. La lansare, vei putea intra gratuit în Kluppi și vei decide singur cum vrei să folosești clubul.",
+  },
+  {
+    q: "Când se lansează?",
+    a: "Foarte curând. Dacă îți rezervi locul, vei fi printre primii care află.",
+  },
+  {
+    q: "Ce primesc dacă mă înscriu înainte de lansare?",
+    a: "Dacă îți rezervi deja accesul, primești o surpriză din partea noastră în momentul lansării. Este felul nostru de a-ți mulțumi pentru susținere. Îți vom spune mai multe la momentul potrivit. (Și, da, abia așteptăm, suntem noi mai entuziasmați decât tine).",
+  },
+];
+
 type SubmitState = "idle" | "loading" | "success" | "error";
 
 export default function Home() {
   const leftListRef = useRef<HTMLDivElement>(null);
   const rightListRef = useRef<HTMLDivElement>(null);
   const componentRef = useRef<HTMLDivElement>(null);
+  const answerRefs = useRef<(HTMLParagraphElement | null)[]>([]);
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openFaqs, setOpenFaqs] = useState<number[]>([]);
+  const [, remeasureFaqs] = useState(0);
+  const toggleFaq = (i: number) =>
+    setOpenFaqs((prev) => (prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i]));
+
+  // Keep open answers' pinned heights correct when the viewport (and thus text wrap) changes.
+  useEffect(() => {
+    const onResize = () => remeasureFaqs((t) => t + 1);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<SubmitState>("idle");
@@ -369,14 +414,13 @@ export default function Home() {
                   <h2 className="kluppi-benefits-heading" data-reveal>Kluppi este pentru tine dacă…</h2>
                   <div className="kluppi-benefits-grid" data-reveal>
                     <article className="kluppi-benefit kluppi-benefit--b1">
-                      <ShieldCheck className="kluppi-benefit-icon" aria-hidden="true" strokeWidth={1.5} />
                       <div className="kluppi-benefit-text">
                         <h3 className="kluppi-benefit-title">Îți place să cumperi, nu să fii influențat</h3>
                         <p className="kluppi-benefit-desc">Nu vrei să renunți la lucrurile care îți plac. Ai nevoie doar să știi că ai făcut o alegere bună.</p>
                       </div>
                     </article>
                     <div className="kluppi-benefit-img kluppi-benefit-img--i1">
-                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c35fc21fa23caa564836d4_lee-campbell-DtDlVpy-vvQ-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 90vw, 28vw" alt="" />
+                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c35fc21fa23caa564836d4_lee-campbell-DtDlVpy-vvQ-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
                     </div>
                     <article className="kluppi-benefit kluppi-benefit--b2">
                       <div className="kluppi-benefit-text">
@@ -384,6 +428,9 @@ export default function Home() {
                         <p className="kluppi-benefit-desc">Ai văzut suficiente oferte și reduceri “de neratat” ca să te mai impresioneze ceva.</p>
                       </div>
                     </article>
+                    <div className="kluppi-benefit-img kluppi-benefit-img--i2">
+                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66aba0a990cff59371467899_mk-2-yeQfucZ-g2I-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
+                    </div>
                     <article className="kluppi-benefit kluppi-benefit--b3">
                       <div className="kluppi-benefit-text">
                         <h3 className="kluppi-benefit-title">Nu vrei motive să cumperi mai mult</h3>
@@ -391,10 +438,7 @@ export default function Home() {
                       </div>
                     </article>
                     <div className="kluppi-benefit-img kluppi-benefit-img--i3">
-                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c36022311552387248d6fa_ales-nesetril-Im7lZjxeLhg-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 90vw, 28vw" alt="" />
-                    </div>
-                    <div className="kluppi-benefit-img kluppi-benefit-img--i2">
-                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66aba0a990cff59371467899_mk-2-yeQfucZ-g2I-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 90vw, 28vw" alt="" />
+                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c36022311552387248d6fa_ales-nesetril-Im7lZjxeLhg-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
                     </div>
                     <article className="kluppi-benefit kluppi-benefit--b4">
                       <div className="kluppi-benefit-text">
@@ -402,6 +446,9 @@ export default function Home() {
                         <p className="kluppi-benefit-desc">Iei decizii atunci când vrei tu, nu atunci când te grăbește cineva să acționezi.</p>
                       </div>
                     </article>
+                    <div className="kluppi-benefit-img kluppi-benefit-img--i4">
+                      <img className="stat-image" src="/Hero8.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
+                    </div>
                   </div>
                   <div className="kluppi-benefits-cta-block" data-reveal>
                     <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
@@ -413,100 +460,40 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section-about background-black" id="about">
-          <div className="padding-global">
-            <div className="container-large">
-              <div className="section-padding-large">
-                <div className="w-layout-grid about-component">
-                  <div className="about-content">
-                    <div className="margin-bottom margin-small" data-reveal>
-                      <h2 className="heading-style-h2 text-allcaps">A passionate designer with a creative flair like no other</h2>
-                    </div>
-                    <p className="text-size-medium text-colour-grey" data-reveal style={{ "--reveal-delay": "0.1s" } as React.CSSProperties}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <div className="margin-top margin-medium" data-reveal style={{ "--reveal-delay": "0.2s" } as React.CSSProperties}>
-                      <div className="button-group">
-                        <a href="#contact" className="button is-alternate w-inline-block">
-                          <div>Read more about us</div>
-                          <ButtonArrow />
-                        </a>
-                      </div>
+        <section className="kluppi-faq">
+          <div className="kluppi-faq-inner">
+            <h2 className="kluppi-faq-heading" data-reveal>Întrebări frecvente</h2>
+            <div className="kluppi-faq-list" data-reveal>
+              {faqs.map((item, i) => {
+                const open = openFaqs.includes(i);
+                return (
+                  <div className={`kluppi-faq-item${open ? " is-open" : ""}`} key={item.q}>
+                    <button
+                      type="button"
+                      className="kluppi-faq-question"
+                      onClick={() => toggleFaq(i)}
+                      aria-expanded={open}
+                    >
+                      {item.q}
+                      <ChevronDown className="kluppi-faq-chevron" aria-hidden="true" strokeWidth={2} />
+                    </button>
+                    <div
+                      className="kluppi-faq-answer-wrap"
+                      style={{ height: open ? answerRefs.current[i]?.scrollHeight ?? 0 : 0 }}
+                    >
+                      <p
+                        ref={(el) => {
+                          answerRefs.current[i] = el;
+                        }}
+                        className="kluppi-faq-answer"
+                      >
+                        {item.a}
+                      </p>
                     </div>
                   </div>
-                  <div className="about-image-wrapper" data-reveal style={{ "--reveal-delay": "0.15s" } as React.CSSProperties}>
-                    <img className="about-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66aba0a990cff59371467899_mk-2-yeQfucZ-g2I-unsplash.jpg" alt="" sizes="(max-width: 991px) 90vw, 41vw" loading="lazy" />
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
-          </div>
-        </section>
-
-        <section className="section-portfolio background-black" id="work">
-          <div className="padding-global">
-            <div className="container-large">
-              <div className="section-padding-large">
-                <div className="margin-bottom margin-xxlarge">
-                  <div className="text-align-center">
-                    <div className="max-width-large align-center" data-reveal>
-                      <div className="margin-bottom margin-small">
-                        <h2 className="heading-style-h2 text-allcaps">
-                          <span className="mid-grey-span">Showcasing</span> my Creative Design Work
-                        </h2>
-                      </div>
-                      <p className="text-size-medium text-colour-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="portfolio-component">
-                  <div className="portfolio-list-wrapper w-dyn-list">
-                    <div role="list" className="portfolio-list w-dyn-items" data-reveal>
-                      {[
-                        { href: "#contact", title: "Vino Rosso", img: "https://cdn.prod.website-files.com/66aa5c84201514536a227e91/66aba3b2f07cc9d9bc6b9175_mk-2-P3OLWbU65po-unsplash%20(1).webp" },
-                        { href: "#contact", title: "Soapbox", img: "https://cdn.prod.website-files.com/66aa5c84201514536a227e91/66c360e5d0bf609ded67a952_valeriia-miller--BQ08InEGLI-unsplash.jpg" },
-                        { href: "#contact", title: "Castro Capital", img: "https://cdn.prod.website-files.com/66aa5c84201514536a227e91/66b09b478c4eac345a1793eb_1.webp" },
-                        { href: "#contact", title: "Café Fugaz", img: "https://cdn.prod.website-files.com/66aa5c84201514536a227e91/66bb301d9cca853c5270cf95_66ab9b12d45388739dfb6323_mk-2-XoiBIpYkPJA-unsplash%20(1)%201.webp" },
-                      ].map((p) => (
-                        <div key={p.title} role="listitem" className="w-dyn-item">
-                          <a href={p.href} className="portfolio-item w-inline-block">
-                            <div className="portfolio-image-link">
-                              <div className="portfolio-image-wrapper">
-                                <img alt="" loading="lazy" src={p.img} sizes="(max-width: 479px) 86vw, (max-width: 991px) 88vw, 40vw" className="portfolio-image" />
-                              </div>
-                            </div>
-                            <div className="portfolio-title-link">
-                              <h3 className="heading-style-h5">{p.title}</h3>
-                            </div>
-                            <div className="text-size-regular text-colour-grey">Showcasing the Best of Design, Creativity, and Freelance Work</div>
-                            <div className="portfolio-tag-list">
-                              <div className="portfolio-tag-item"><div>Graphic Design</div></div>
-                              <div className="portfolio-tag-item"><div>Web Development</div></div>
-                              <div className="portfolio-tag-item"><div>Illustration</div></div>
-                            </div>
-                          </a>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="margin-top margin-xsmall">
-                    <div className="button-group is-center">
-                      <a href="#contact" className="button is-alternate w-inline-block">
-                        <div>View all</div>
-                        <ButtonArrow />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section-banner-cta">
-          <div className="section-padding-large">
-            <a href="#contact" className="banner-cta-component w-inline-block" data-reveal>
-              <h2 className="cta-heading-top">Showcasing Creative Excellence with Kluppi</h2>
-              <h2 className="cta-heading-bottom">Unleash Your Creative Potential with Kluppi</h2>
-            </a>
           </div>
         </section>
 
@@ -553,6 +540,8 @@ export default function Home() {
           </div>
         </section>
 
+        <SplitBanner />
+
         <footer className="footer-component">
           <div className="padding-global">
             <div className="container-large">
@@ -562,7 +551,7 @@ export default function Home() {
                     <div className="footer-left-wrapper">
                       <div className="margin-bottom margin-medium">
                         <a href="#top" aria-current="page" className="footer-logo-link w-nav-brand w--current">
-                          <img src={LOGO} loading="lazy" alt="" className="footer-logo" />
+                          <img src="/logo.svg" loading="lazy" alt="Kluppi" className="footer-logo" />
                         </a>
                       </div>
                       <div className="footer-details-wrapper">
@@ -603,7 +592,6 @@ export default function Home() {
                     <div className="footer-credit-text">Branding expert and specialist.</div>
                   </div>
                 </div>
-                <img src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66ab52894b5a386eb15de47b_ProFile_Logo%20Footer.svg" loading="lazy" alt="" className="footer-bottom-logo" />
               </div>
             </div>
           </div>

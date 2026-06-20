@@ -401,11 +401,12 @@ html {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto auto auto;
   grid-template-areas:
-    "b1 i1 b2"
-    "b1 b3 i3"
-    "i2 b4 i3";
+    "i1 b1 b1"
+    "b2 b2 i2"
+    "i3 b3 b3"
+    "b4 b4 i4";
   gap: 1.5rem;
   align-items: stretch;
 }
@@ -416,24 +417,17 @@ html {
 .kluppi-benefit-img--i1 { grid-area: i1; }
 .kluppi-benefit-img--i2 { grid-area: i2; }
 .kluppi-benefit-img--i3 { grid-area: i3; }
+.kluppi-benefit-img--i4 { grid-area: i4; }
 
 .kluppi-benefit {
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* text sits at the bottom-left of the card */
   gap: 1rem;
-  background-color: #351E28; /* Cassis */
+  background-color: #FFFFFF;
   border-radius: 6px;
   padding: 2rem;
   box-shadow: 0 12px 30px rgba(53, 30, 40, 0.12);
-}
-/* b1 carries the icon top-left + text bottom-left */
-.kluppi-benefit--b1 { justify-content: space-between; }
-.kluppi-benefit-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  flex: 0 0 auto;
-  color: #FF5B22; /* Dare Devil */
 }
 .kluppi-benefit-text {
   display: flex;
@@ -443,14 +437,14 @@ html {
 .kluppi-benefit-title {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
-  color: #FFF0BC; /* Lemon Sorbet */
+  color: #351E28; /* Cassis */
   font-size: 1.375rem;
   line-height: 1.2;
 }
 .kluppi-benefit-desc {
   font-family: "Switzer", sans-serif;
   font-weight: 400;
-  color: #FFF0BC; /* Lemon Sorbet */
+  color: #351E28; /* Cassis */
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -479,38 +473,21 @@ html {
 }
 
 @media (max-width: 991px) {
-  /* Collapse the 3×3 grid into a single stacked column on tablet/mobile */
+  /* Collapse the grid into a single stacked column on tablet/mobile */
   .kluppi-benefits-grid {
     grid-template-columns: 1fr;
     grid-template-areas: none;
   }
   .kluppi-benefit--b1, .kluppi-benefit--b2, .kluppi-benefit--b3, .kluppi-benefit--b4,
-  .kluppi-benefit-img--i1, .kluppi-benefit-img--i2, .kluppi-benefit-img--i3 {
+  .kluppi-benefit-img--i1, .kluppi-benefit-img--i2, .kluppi-benefit-img--i3, .kluppi-benefit-img--i4 {
     grid-area: auto;
   }
 }
 
-/* Benefits section ("Ce te aștepta în Kluppi?") redesign — scoped to #services so the
-   duplicated "Kluppi este pentru tine dacă…" grid (no id) keeps its own 3×3 look.
-   3×4 grid: each card spans two cells with an image alongside, alternating sides;
-   white cards with Cassis text. */
-#services .kluppi-benefits-grid {
-  grid-template-rows: auto auto auto auto;
-  grid-template-areas:
-    "i1 b1 b1"
-    "b2 b2 i2"
-    "i3 b3 b3"
-    "b4 b4 i4";
-}
-#services .kluppi-benefit-img--i4 { grid-area: i4; }
-#services .kluppi-benefit { background-color: #FFFFFF; }
-#services .kluppi-benefit-title,
-#services .kluppi-benefit-desc { color: #351E28; } /* Cassis */
-#services .kluppi-benefit--b1 { justify-content: flex-end; } /* no inline icon now → bottom-align like the others */
-
-/* Icon cards replace the photo cells — a single centred icon, so rows shrink to the
-   text-card height instead of the old 14rem image min-height. */
-#services .kluppi-benefit-icon-card {
+/* Icon cards — used in the benefits grid ("Ce te aștepta în Kluppi?") in place of
+   image cells: a card with one centred icon, so its rows shrink to the text-card
+   height. (The "Kluppi este pentru tine dacă…" grid uses image cells instead.) */
+.kluppi-benefit-icon-card {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -519,17 +496,10 @@ html {
   padding: 2rem;
   box-shadow: 0 12px 30px rgba(53, 30, 40, 0.12);
 }
-#services .kluppi-benefit-card-icon {
+.kluppi-benefit-card-icon {
   width: 4.5rem;
   height: 4.5rem;
   color: #FF5B22; /* Dare Devil */
-}
-
-@media (max-width: 991px) {
-  /* Benefits collapse: clear the 4-row areas + reset the 4th image (base rule
-     handles the single column + resets b1–b4 / i1–i3). */
-  #services .kluppi-benefits-grid { grid-template-areas: none; }
-  #services .kluppi-benefit-img--i4 { grid-area: auto; }
 }
 
 /* ─── Steps timeline ("Cum funcționează?") — new alternating, scroll-filled timeline ─── */
@@ -567,16 +537,16 @@ html {
   /* JS sets top/height to span first→last dot; these are a visible fallback if it doesn't */
   top: 0;
   bottom: 0;
-  width: 5px;
-  border-radius: 5px;
-  background-color: rgba(53, 30, 40, 0.22); /* visible Cassis-tinted track */
+  width: 3px;
+  border-radius: 3px;
+  background-color: rgba(53, 30, 40, 0.22); /* faded Cassis track */
   z-index: 0;
 }
 .kluppi-steps-line-fill {
   width: 100%;
   height: 0%;
-  border-radius: 5px;
-  background-color: #FF5B22; /* Dare Devil — grows with scroll, recolouring the line */
+  border-radius: 3px;
+  background-color: #351E28; /* Cassis — grows with scroll (only the dots stay Dare Devil) */
 }
 
 /* Each step is a 3-col row: card | dot | (empty), mirrored for right-side steps */
@@ -602,7 +572,7 @@ html {
 
 .kluppi-step-card {
   width: 100%;
-  background-color: #351E28; /* Cassis */
+  background-color: #FFFFFF;
   border-radius: 6px;
   padding: 1.75rem 2rem;
   box-shadow: 0 12px 30px rgba(53, 30, 40, 0.12);
@@ -619,7 +589,7 @@ html {
 .kluppi-step-title {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
-  color: #FFF0BC; /* Lemon Sorbet */
+  color: #351E28; /* Cassis */
   font-size: 1.375rem;
   line-height: 1.2;
   margin-bottom: 0.5rem;
@@ -627,7 +597,7 @@ html {
 .kluppi-step-desc {
   font-family: "Switzer", sans-serif;
   font-weight: 400;
-  color: #FFF0BC; /* Lemon Sorbet */
+  color: #351E28; /* Cassis */
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -654,3 +624,129 @@ html {
   }
   .kluppi-step-dot { justify-self: center; margin-top: 0.5rem; }
 }
+
+/* ─── FAQ accordion ("Întrebări frecvente") — native <details>/<summary> ─── */
+.kluppi-faq {
+  background-color: #FFF0BC; /* Lemon Sorbet */
+  padding: 6rem 5%;
+}
+.kluppi-faq-inner {
+  max-width: 46rem;
+  margin-inline: auto;
+}
+.kluppi-faq-heading {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  color: #FF5B22; /* Dare Devil */
+  font-size: clamp(2rem, 5vw, 3.5rem); /* matches the other section headings */
+  line-height: 1.05;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.kluppi-faq-list {
+  border-top: 1px solid rgba(53, 30, 40, 0.15); /* Cassis hairline dividers */
+}
+.kluppi-faq-item {
+  border-bottom: 1px solid rgba(53, 30, 40, 0.15);
+}
+.kluppi-faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  padding: 1.5rem 0;
+  font-family: "Switzer", sans-serif;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.35;
+  color: #351E28; /* Cassis */
+}
+.kluppi-faq-chevron {
+  flex: 0 0 auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #FF5B22; /* Dare Devil */
+  transition: transform 0.25s ease;
+}
+.kluppi-faq-item.is-open .kluppi-faq-chevron { transform: rotate(180deg); }
+/* Smooth expand/collapse: JS pins the wrap's height (0 ↔ measured px) and CSS animates it. */
+.kluppi-faq-answer-wrap {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+.kluppi-faq-answer {
+  margin: 0;
+  padding: 0 2.75rem 1.5rem 0; /* right pad keeps the answer clear of the chevron column */
+  font-family: "Switzer", sans-serif;
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: #351E28; /* Cassis */
+}
+
+@media (max-width: 767px) {
+  .kluppi-faq { padding: 4rem 5%; }
+  .kluppi-faq-question { font-size: 1.0625rem; }
+}
+
+/* ─── Split tagline banner (below the form) — scroll-driven spread ─── */
+.kluppi-banner {
+  overflow: hidden; /* clip the lines while they're pulled toward the centre */
+  padding: 6rem 5%;
+}
+.kluppi-banner-inner {
+  max-width: 90rem;
+  margin-inline: auto;
+}
+.kluppi-banner-line1,
+.kluppi-banner-line2 {
+  margin: 0;
+  line-height: 1.05;
+  text-transform: none; /* sentence case */
+  will-change: transform;
+}
+.kluppi-banner-line1 {
+  font-family: "Switzer", sans-serif;
+  font-weight: 300; /* light */
+  color: #351E28; /* Cassis */
+  font-size: 5rem;
+  text-align: left;
+}
+.kluppi-banner-line2 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800; /* extra bold */
+  color: #FF5B22; /* Dare Devil */
+  font-size: 7rem;
+  text-align: right;
+}
+@media (max-width: 991px) {
+  .kluppi-banner-line1 { font-size: 3rem; }
+  .kluppi-banner-line2 { font-size: 4rem; }
+}
+@media (max-width: 767px) {
+  .kluppi-banner { padding: 4rem 5%; }
+  .kluppi-banner-line1 { font-size: 2.25rem; }
+  .kluppi-banner-line2 { font-size: 3rem; }
+}
+
+/* ─── Page background: Lemon Sorbet everywhere (no black) ─── */
+/* Target .body (the class on <body>) — it outranks a bare `body` selector, which is
+   how the template sets its black page background. */
+.body { background-color: #FFF0BC; }
+
+/* Footer → Lemon + Cassis text (removes the last black surface; full footer trim still pending). */
+.footer-component {
+  background-color: #FFF0BC; /* Lemon Sorbet */
+  color: #351E28; /* Cassis */
+  border-top-color: rgba(53, 30, 40, 0.15);
+}
+.footer-component :is(.text-colour-grey, .footer-link, .footer-credit-text, .link, .link-2) {
+  color: #351E28; /* Cassis */
+}
+.footer-component .line-divider { background-color: rgba(53, 30, 40, 0.15); }
