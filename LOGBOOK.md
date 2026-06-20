@@ -19,6 +19,66 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-20 — Pain-points: conclusion/outro headings → H3 + Cassis (requested)
+
+**`src/app/page.tsx`**
+- "Nu ți s-a întâmplat doar ție." and "Noi ne-am săturat de toate astea." changed from `<h2>` to `<h3>` (class `kluppi-painpoints-h2` kept as the styling hook).
+
+**`src/app/globals.css`**
+- `.kluppi-painpoints-h2`: added `color: #351E28` (Cassis), overriding the shared Dare Devil. Size (2rem) / weight (700) unchanged; main "De câte ori ai…" heading stays Dare Devil.
+
+Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-20 — Pain-points carousel: 5s autoplay loop, pauses on arrow hover (requested)
+
+**`src/app/PainPointsCarousel.tsx`**
+- Added a `paused` state + a `useEffect` autoplay: a 5s `setTimeout` advances to the next slide, looping with `(i + 1) % count`. It re-arms on every `index`/`paused` change, so manual arrow clicks also reset the 5s timer.
+- The `.kluppi-carousel-arrows` row gets `onMouseEnter`/`onMouseLeave` → sets `paused`, which clears the pending timer while the cursor is over the arrows, and resumes on leave.
+- Manual arrows left as-is (still disabled at the first/last slide). NOTE/flag: the autoplay loops past the last slide while the next arrow shows disabled there — left the arrow behaviour unchanged pending the user's call on whether to make the arrows wrap too.
+
+Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-20 — Pain-points: new bg image + type tweaks (requested)
+
+**`public/`**
+- Added `PainPoints2.jpg` (from `~/Downloads/`) — the new carousel band background.
+
+**`src/app/globals.css`**
+1. `.kluppi-carousel` background `url("/PainPoints.jpg")` → `url("/PainPoints2.jpg")`. (Old `PainPoints.jpg` left in place, now unused.)
+2. `.kluppi-painpoints-h2` (the two cell headings "Nu ți s-a…" / "Noi ne-am săturat…"): `font-size: 2rem` fixed, overriding the shared `clamp(2rem,5vw,3.5rem)` (weight 700 unchanged; the main "De câte ori ai…" heading keeps the clamp).
+3. Conclusion/outro body paragraphs: `margin-top` 1.25rem → 1rem; `font-family: Switzer`; `font-size: 1.3rem`; `font-weight: 300` (Light).
+4. `.kluppi-carousel-text`: `font-size` clamp → `1.3rem`; `.kluppi-carousel-card` now `display:flex; flex-direction:column; justify-content:center` so the card text is vertically centered (cards are already equal-height). Mobile `≤767px` keeps its `1.125rem` carousel-text override (flagged).
+
+Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-20 — Pain-points: move closing copy + CTA into the grid as a 4th row (requested)
+
+Restructured the bottom of the "De câte ori ai…" section: removed the separate centered `.kluppi-painpoints-cta-block` and folded its copy + CTA into the diagonal grid (now 2×**4**).
+
+**`src/app/page.tsx`**
+- `.kluppi-painpoints-conclusion` is now a div (was an `<h2>`): holds the H2 "Nu ți s-a întâmplat doar ție." **plus** the paragraph "A devenit din ce în ce mai rară…", left-aligned, in the same cell (col 2 / row 3).
+- New `.kluppi-painpoints-outro` cell (col 1 / **row 4**): H2 "Noi ne-am săturat de toate astea." + the left-aligned remainder "Și am creat Kluppi: …" + a `.kluppi-painpoints-cta` group (CTA "Rezervă-ți locul în club" + microcopy "Rapid, doar cu nume și e-mail."). The right cell of row 4 is left empty.
+- The old two-paragraph sentence was split: "Noi ne-am săturat de toate astea." → H2; the rest → body.
+
+**`src/app/globals.css`**
+- `.kluppi-painpoints-inner` grid rows `auto auto auto` → `auto auto auto auto`.
+- Heading font rule now targets `.kluppi-painpoints-heading, .kluppi-painpoints-h2` (the inner H2s); added `.kluppi-painpoints-outro { grid-column: 1/2; grid-row: 4 }`.
+- Removed `.kluppi-painpoints-cta-block` rules; added left-aligned body spacing for the conclusion/outro cells and `.kluppi-painpoints-cta { display: inline-block; text-align: center }` so the microcopy stays centered under the button while the group sits left in the cell.
+- `≤991px` collapse now also spans `.kluppi-painpoints-outro` full-width.
+
+Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-20 — "Kluppi este pentru tine dacă…" — duplicated benefits grid (requested)
+
+Section #6. Per the user's revised plan (no longer the `section-about` 2×2 idea): **duplicated the benefits `section-stats` block** and placed the copy under `.kluppi-steps`. Same 3×3 layout/classes; only the copy changed. Copy is the exact RO from `Teaser Landing Page Copy.docx` (incl. the curly quotes “de neratat”).
+
+**`src/app/page.tsx`**
+- Inserted a second `<section className="section-stats background-black">` between the steps section and `.section-about`. **No `id`** (the original keeps `id="services"`; avoided a duplicate id).
+- Reuses every `.kluppi-benefits-*` / `.kluppi-benefit*` class (identical layout), so **no CSS change**. Mapped the 4 items b1–b4 in reading order: "Îți place să cumperi, nu să fii influențat" / "Știi deja toate trucurile de marketing" / "Nu vrei motive să cumperi mai mult" / "Preferi să alegi tu momentul potrivit". Heading "Kluppi este pentru tine dacă…", CTA microcopy "Surpriză specială la lansare.".
+- Left as-is from the duplicate (flagged to user): the `ShieldCheck` icon still sits on card b1 (was specific to "încredere la checkout"), and the 3 images are the same Unsplash placeholders as the benefits section.
+
+Typecheck (`tsc --noEmit`) passes.
+
 ### 2026-06-20 — Steps timeline: fix invisible line + dead animation (bug fix, requested)
 
 The line wasn't rendering and nothing animated. Root cause: positions were measured with `offsetTop`, but the step rows carry a CSS `transform` (from the `data-reveal` entrance), which makes `offsetTop` resolve against each step instead of the whole timeline — so every dot reported ~the same offset → a ~1px (invisible) track and all dots flipping together instead of in sequence. (Confirmed by the symptom: dots were getting coloured but uniformly, i.e. the scroll handler *was* running.)

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const slides = [
@@ -12,8 +12,18 @@ const slides = [
 
 export default function PainPointsCarousel() {
   const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
   const count = slides.length;
   const go = (i: number) => setIndex(Math.min(Math.max(i, 0), count - 1));
+
+  // Auto-advance every 5s, looping back to the first slide. The timer re-arms on
+  // each index/paused change (so manual nav also resets it); hovering either arrow
+  // sets `paused`, which clears the pending timer until the cursor leaves.
+  useEffect(() => {
+    if (paused) return;
+    const id = window.setTimeout(() => setIndex((i) => (i + 1) % count), 5000);
+    return () => window.clearTimeout(id);
+  }, [index, paused, count]);
 
   return (
     <div className="kluppi-carousel">
@@ -32,7 +42,11 @@ export default function PainPointsCarousel() {
         </div>
       </div>
 
-      <div className="kluppi-carousel-arrows">
+      <div
+        className="kluppi-carousel-arrows"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
         <button
           type="button"
           className="kluppi-carousel-arrow"

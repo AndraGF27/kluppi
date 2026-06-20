@@ -273,13 +273,13 @@ html {
   text-align: left;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto auto auto;
   column-gap: 5rem;
   row-gap: 2.5rem;
   align-items: start;
 }
 .kluppi-painpoints-heading,
-.kluppi-painpoints-conclusion {
+.kluppi-painpoints-h2 {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
   color: #FF5B22; /* Dare Devil */
@@ -287,13 +287,15 @@ html {
   line-height: 1.05;
 }
 .kluppi-painpoints-heading { grid-column: 1 / 2; grid-row: 1; } /* top-left cell */
-.kluppi-painpoints-conclusion { grid-column: 2 / 3; grid-row: 3; } /* bottom-right cell */
+.kluppi-painpoints-conclusion { grid-column: 2 / 3; grid-row: 3; } /* right cell, row 3 */
+.kluppi-painpoints-outro { grid-column: 1 / 2; grid-row: 4; } /* left cell, row 4 (right cell left empty) */
+.kluppi-painpoints-h2 { font-size: 2rem; color: #351E28; } /* fixed size + Cassis (override the shared clamp/Dare Devil); weight 700 from above */
 
 /* Carousel band — PainPoints image as background; white cards + arrows on top */
 .kluppi-carousel {
   grid-column: 1 / -1; /* spans the full middle row (cells 3 + 4 merged) */
   grid-row: 2;
-  background-image: url("/PainPoints.jpg");
+  background-image: url("/PainPoints2.jpg");
   background-size: cover;
   background-position: center;
   border-radius: 6px;
@@ -316,12 +318,15 @@ html {
   border-radius: 6px;
   padding: 2.5rem;
   box-shadow: 0 12px 30px rgba(53, 30, 40, 0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centre the text vertically in the (equal-height) card */
 }
 .kluppi-carousel-text {
   font-family: "Switzer", sans-serif;
   font-weight: 500;
   color: #351E28; /* Cassis */
-  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-size: 1.3rem;
   line-height: 1.45;
   text-align: left;
 }
@@ -346,21 +351,31 @@ html {
 .kluppi-carousel-arrow:hover { background-color: #FFFFFF; }
 .kluppi-carousel-arrow:disabled { opacity: 0.4; cursor: default; }
 
-/* Conclusion text + CTA below the grid — reuses the hero body/CTA/trust styles */
-.kluppi-painpoints-cta-block {
-  max-width: 44rem;
-  margin: 3.5rem auto 0;
-  text-align: center;
+/* Conclusion / outro cells: left-aligned body under the H2 (reuses the hero body
+   style); the CTA group keeps the microcopy centered to the button while the group
+   itself sits left in the cell. */
+.kluppi-painpoints-conclusion .kluppi-hero-body,
+.kluppi-painpoints-outro .kluppi-hero-body {
+  margin-top: 1rem;
+  font-family: "Switzer", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 300;
 }
-.kluppi-painpoints-cta-block .kluppi-hero-body + .kluppi-hero-body { margin-top: 1rem; }
-.kluppi-painpoints-cta-block .kluppi-hero-cta { margin-top: 2rem; }
+.kluppi-painpoints-outro .kluppi-painpoints-cta {
+  margin-top: 1.75rem;
+}
+.kluppi-painpoints-cta {
+  display: inline-block;
+  text-align: center; /* keeps the microcopy centered under the button */
+}
 
 @media (max-width: 991px) {
   /* Collapse the diagonal grid into a single stacked column on tablet/mobile */
   .kluppi-painpoints-inner { grid-template-columns: 1fr; }
   .kluppi-painpoints-heading,
   .kluppi-carousel,
-  .kluppi-painpoints-conclusion { grid-column: 1 / -1; }
+  .kluppi-painpoints-conclusion,
+  .kluppi-painpoints-outro { grid-column: 1 / -1; }
 }
 
 @media (max-width: 767px) {

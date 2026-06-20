@@ -277,17 +277,22 @@ export default function Home() {
           <div className="kluppi-painpoints-inner">
             <h2 className="kluppi-painpoints-heading" data-reveal>De câte ori ai…</h2>
             <PainPointsCarousel />
-            <h2 className="kluppi-painpoints-conclusion" data-reveal>Nu ți s-a întâmplat doar ție.</h2>
-          </div>
-          <div className="kluppi-painpoints-cta-block" data-reveal>
-            <p className="text-size-large kluppi-hero-body">
-              A devenit din ce în ce mai rară senzația că plătești prețul corect atunci când cumperi online.
-            </p>
-            <p className="text-size-large kluppi-hero-body">
-              Noi ne-am săturat de toate astea. Și am creat Kluppi: prietenul care are mereu un cod de reducere bun, exact când îți trebuie.
-            </p>
-            <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
-            <p className="kluppi-hero-trust">Rapid, doar cu nume și e-mail.</p>
+            <div className="kluppi-painpoints-conclusion" data-reveal>
+              <h3 className="kluppi-painpoints-h2">Nu ți s-a întâmplat doar ție.</h3>
+              <p className="text-size-large kluppi-hero-body">
+                A devenit din ce în ce mai rară senzația că plătești prețul corect atunci când cumperi online.
+              </p>
+            </div>
+            <div className="kluppi-painpoints-outro" data-reveal>
+              <h3 className="kluppi-painpoints-h2">Noi ne-am săturat de toate astea.</h3>
+              <p className="text-size-large kluppi-hero-body">
+                Și am creat Kluppi: prietenul care are mereu un cod de reducere bun, exact când îți trebuie.
+              </p>
+              <div className="kluppi-painpoints-cta">
+                <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+                <p className="kluppi-hero-trust">Rapid, doar cu nume și e-mail.</p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -350,6 +355,58 @@ export default function Home() {
             <div className="kluppi-steps-cta-block" data-reveal>
               <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
               <p className="kluppi-hero-trust">În mai puțin de un minut.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-stats background-black">
+          <div className="padding-global">
+            <div className="container-large">
+              <div className="section-padding-large">
+                <div className="stats-component">
+                  <h2 className="kluppi-benefits-heading" data-reveal>Kluppi este pentru tine dacă…</h2>
+                  <div className="kluppi-benefits-grid" data-reveal>
+                    <article className="kluppi-benefit kluppi-benefit--b1">
+                      <ShieldCheck className="kluppi-benefit-icon" aria-hidden="true" strokeWidth={1.5} />
+                      <div className="kluppi-benefit-text">
+                        <h3 className="kluppi-benefit-title">Îți place să cumperi, nu să fii influențat</h3>
+                        <p className="kluppi-benefit-desc">Nu vrei să renunți la lucrurile care îți plac. Ai nevoie doar să știi că ai făcut o alegere bună.</p>
+                      </div>
+                    </article>
+                    <div className="kluppi-benefit-img kluppi-benefit-img--i1">
+                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c35fc21fa23caa564836d4_lee-campbell-DtDlVpy-vvQ-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 90vw, 28vw" alt="" />
+                    </div>
+                    <article className="kluppi-benefit kluppi-benefit--b2">
+                      <div className="kluppi-benefit-text">
+                        <h3 className="kluppi-benefit-title">Știi deja toate trucurile de marketing</h3>
+                        <p className="kluppi-benefit-desc">Ai văzut suficiente oferte și reduceri “de neratat” ca să te mai impresioneze ceva.</p>
+                      </div>
+                    </article>
+                    <article className="kluppi-benefit kluppi-benefit--b3">
+                      <div className="kluppi-benefit-text">
+                        <h3 className="kluppi-benefit-title">Nu vrei motive să cumperi mai mult</h3>
+                        <p className="kluppi-benefit-desc">Nu îți place să cumperi impulsiv. Cauți doar un preț mai bun pentru ceea ce voiai deja.</p>
+                      </div>
+                    </article>
+                    <div className="kluppi-benefit-img kluppi-benefit-img--i3">
+                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c36022311552387248d6fa_ales-nesetril-Im7lZjxeLhg-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 90vw, 28vw" alt="" />
+                    </div>
+                    <div className="kluppi-benefit-img kluppi-benefit-img--i2">
+                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66aba0a990cff59371467899_mk-2-yeQfucZ-g2I-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 90vw, 28vw" alt="" />
+                    </div>
+                    <article className="kluppi-benefit kluppi-benefit--b4">
+                      <div className="kluppi-benefit-text">
+                        <h3 className="kluppi-benefit-title">Preferi să alegi tu momentul potrivit</h3>
+                        <p className="kluppi-benefit-desc">Iei decizii atunci când vrei tu, nu atunci când te grăbește cineva să acționezi.</p>
+                      </div>
+                    </article>
+                  </div>
+                  <div className="kluppi-benefits-cta-block" data-reveal>
+                    <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+                    <p className="kluppi-hero-trust">Surpriză specială la lansare.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
