@@ -19,6 +19,37 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-20 — Signup: heading/text full width, form stays narrow (requested)
+
+**`src/app/globals.css`**
+- Removed `max-width: 30rem` from `.kluppi-signup` and `max-width: 26rem` from `.kluppi-signup-text`, so the heading + text now span the full container width.
+- Moved the width constraint onto `.kluppi-signup-form` (`max-width: 30rem; margin-inline: auto`) so the input fields stay a tidy width.
+
+Typecheck passes.
+
+### 2026-06-20 — Signup heading/text sizes (requested)
+
+**`src/app/globals.css`**
+- `.kluppi-signup-heading` font-size `clamp(1.75rem, 4vw, 2.75rem)` → `clamp(2rem, 5vw, 3.5rem)` (same as the other section H2s; 3.5rem on desktop).
+- `.kluppi-signup-text` font-size `1.125rem` → `1.3rem`.
+
+Typecheck passes.
+
+### 2026-06-20 — Signup form rebuild (centered) + footer trim (requested)
+
+**1. Signup form (`section-contact`, #8).** Replaced the English "Join the waitlist" placeholder with the real RO form, all centered in a `.kluppi-signup` column:
+- H2 "Fii printre primii care află când lansăm." (Dare Devil, centered) + text "Rezervă-ți gratuit locul în Kluppi, iar noi îți spunem când vine ziua cea mare." (Cassis, centered).
+- **Two stacked fields**: Prenume (`type=text`, placeholder "Introdu prenumele") + Adresă de e-mail (placeholder "Introdu adresa de e-mail"), both `.form-input` with centered text; new `firstName` state.
+- CTA = full-width `.kluppi-hero-cta` "Rezervă-ți locul în club" (submit). `handleSubmit` now sends `{ firstName, email }` and the status/loading messages are Romanian.
+- Removed the old `.waitlist-*` row markup + the `ButtonArrow` SVG component (it was only used here — now deleted; `.waitlist-*` CSS left in place, now unused).
+- **`globals.css`**: added `.kluppi-signup*` (centered column, heading/text, stacked inputs, full-width CTA, success/error message colors).
+
+**2. CTAs → form.** Verified: the 5 section CTAs (hero, pain-points, benefits, steps, "pentru tine dacă") already use `href="#contact"` → the form section (`id="contact"`); the form's own submit is the excluded "very last" CTA. No change needed.
+
+**3. Footer trim (`page.tsx`).** Removed the `footer-details-wrapper` (Address + Contact/email block) and the "Branding expert and specialist." credit line. Kept the logo, the menu links + socials, and the "© {year} Kluppi." line.
+
+Typecheck (`tsc --noEmit`) passes. (Still pending: footer nav still has dead `#about`/`#work` links; the form remains a placeholder posting to `/api/subscribe` until the email-tool embed.)
+
 ### 2026-06-20 — Fix FAQ collapse + footer logo swap / remove footer image (requested)
 
 **FAQ answers were staying open.** The `grid-template-rows: 0fr` collapse trick wasn't collapsing (matches the known Safari `0fr` quirk; couldn't browser-verify locally — the preview dev server wouldn't stay up). Replaced it with a **JS-measured pixel height** that animates reliably everywhere.

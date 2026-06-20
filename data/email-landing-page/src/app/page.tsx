@@ -6,27 +6,6 @@ import PainPointsCarousel from "./PainPointsCarousel";
 import HowItWorks from "./HowItWorks";
 import SplitBanner from "./SplitBanner";
 
-function ButtonArrow() {
-  return (
-    <div className="button-arrow w-embed">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        role="img"
-        width="100%"
-        height="100%"
-        preserveAspectRatio="xMidYMid meet"
-        viewBox="0 0 256 256"
-      >
-        <path
-          fill="currentColor"
-          d="M128 26a102 102 0 1 0 102 102A102.2 102.2 0 0 0 128 26Zm0 192a90 90 0 1 1 90-90a90.1 90.1 0 0 1-90 90Zm34-118v48a6 6 0 0 1-12 0v-33.5l-45.8 45.7a5.9 5.9 0 0 1-8.4-8.4l45.7-45.8H108a6 6 0 0 1 0-12h48a6 6 0 0 1 6 6Z"
-        />
-      </svg>
-    </div>
-  );
-}
-
 const socials = [
   {
     href: "https://www.facebook.com/",
@@ -106,6 +85,7 @@ export default function Home() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<SubmitState>("idle");
   const [message, setMessage] = useState("");
@@ -188,20 +168,21 @@ export default function Home() {
       const response = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ firstName, email }),
       });
       const data = await response.json();
       if (!response.ok) {
         setStatus("error");
-        setMessage(data.error || "Something went wrong. Please try again.");
+        setMessage(data.error || "Ceva n-a mers. Mai încearcă o dată.");
         return;
       }
       setStatus("success");
-      setMessage("You're on the list. Talk soon.");
+      setMessage("Gata! Ți-ai rezervat locul. Ne auzim curând.");
+      setFirstName("");
       setEmail("");
     } catch {
       setStatus("error");
-      setMessage("Network error. Please try again.");
+      setMessage("Eroare de rețea. Mai încearcă o dată.");
     }
   };
 
@@ -501,38 +482,54 @@ export default function Home() {
           <div className="padding-global">
             <div className="container-large">
               <div className="section-padding-large">
-                <div className="text-align-center margin-bottom margin-medium" data-reveal>
-                  <div className="margin-bottom margin-small">
-                    <h2 className="heading-style-h3 text-allcaps">Join the waitlist</h2>
-                  </div>
-                  <p className="text-size-medium text-colour-grey">Drop your email and I&apos;ll reach out about your next branding project.</p>
-                </div>
-                <div className="w-form waitlist-form-wrapper" data-reveal style={{ "--reveal-delay": "0.12s" } as React.CSSProperties}>
-                  <form onSubmit={handleSubmit} noValidate>
-                    <div className="waitlist-field-row">
-                      <input
-                        className="form-input"
-                        type="email"
-                        name="email"
-                        placeholder="you@example.com"
-                        aria-label="Email address"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        disabled={status === "loading"}
-                      />
-                      <button className="button is-form" type="submit" disabled={status === "loading"}>
-                        <div className="button-text-item">
-                          {status === "loading" ? "Sending…" : "Notify me"}
-                        </div>
-                        <ButtonArrow />
-                      </button>
-                    </div>
+                <div className="kluppi-signup">
+                  <h2 className="kluppi-signup-heading" data-reveal>
+                    Fii printre primii care află când lansăm.
+                  </h2>
+                  <p
+                    className="kluppi-signup-text"
+                    data-reveal
+                    style={{ "--reveal-delay": "0.08s" } as React.CSSProperties}
+                  >
+                    Rezervă-ți gratuit locul în Kluppi, iar noi îți spunem când vine ziua cea mare.
+                  </p>
+                  <form
+                    className="kluppi-signup-form"
+                    onSubmit={handleSubmit}
+                    noValidate
+                    data-reveal
+                    style={{ "--reveal-delay": "0.16s" } as React.CSSProperties}
+                  >
+                    <input
+                      className="form-input kluppi-signup-input"
+                      type="text"
+                      name="firstName"
+                      placeholder="Introdu prenumele"
+                      aria-label="Prenume"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required
+                      disabled={status === "loading"}
+                    />
+                    <input
+                      className="form-input kluppi-signup-input"
+                      type="email"
+                      name="email"
+                      placeholder="Introdu adresa de e-mail"
+                      aria-label="Adresă de e-mail"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      disabled={status === "loading"}
+                    />
+                    <button className="kluppi-hero-cta kluppi-signup-cta" type="submit" disabled={status === "loading"}>
+                      {status === "loading" ? "Se trimite…" : "Rezervă-ți locul în club"}
+                    </button>
                   </form>
                   {message && (
-                    <div className={`waitlist-message ${status === "error" ? "error-message" : "seccess-message"}`}>
-                      <div className={status === "error" ? "error-text" : "success-text"}>{message}</div>
-                    </div>
+                    <p className={`kluppi-signup-message ${status === "error" ? "is-error" : "is-success"}`}>
+                      {message}
+                    </p>
                   )}
                 </div>
               </div>
@@ -554,21 +551,6 @@ export default function Home() {
                           <img src="/logo.svg" loading="lazy" alt="Kluppi" className="footer-logo" />
                         </a>
                       </div>
-                      <div className="footer-details-wrapper">
-                        <div className="margin-bottom margin-tiny">
-                          <div className="text-size-regular weight-semibold text-colour-grey">Address:</div>
-                        </div>
-                        <div className="margin-bottom margin-small">
-                          <div className="text-size-small">Office Complex, 13 Imaginary Street, Manchester</div>
-                        </div>
-                        <div className="margin-bottom margin-tiny">
-                          <div className="text-size-regular weight-semibold text-colour-grey">Contact:</div>
-                        </div>
-                        <div className="text-size-small">
-                          <a href="#contact" className="link-2">Email us now on </a>
-                          <a href="mailto:info@profilex.com" className="link">info@profilex.com</a>
-                        </div>
-                      </div>
                     </div>
                     <div className="w-layout-grid footer-menu-wrapper">
                       <div id="w-node-_5d53571d-05a3-3001-8aed-4eb278bd7ac9-78bd7aaf" className="footer-link-list">
@@ -589,7 +571,6 @@ export default function Home() {
                 <div className="padding-vertical padding-medium">
                   <div className="footer-bottom">
                     <div className="footer-credit-text">© {new Date().getFullYear()} Kluppi.</div>
-                    <div className="footer-credit-text">Branding expert and specialist.</div>
                   </div>
                 </div>
               </div>

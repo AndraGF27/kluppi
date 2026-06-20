@@ -750,3 +750,49 @@ html {
   color: #351E28; /* Cassis */
 }
 .footer-component .line-divider { background-color: rgba(53, 30, 40, 0.15); }
+
+/* ─── Signup form ("Fii printre primii…") — centered column ─── */
+.kluppi-signup {
+  text-align: center; /* heading + text span the full container width */
+}
+.kluppi-signup-heading {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  color: #FF5B22; /* Dare Devil */
+  font-size: clamp(2rem, 5vw, 3.5rem); /* matches the other section H2s (3.5rem on desktop) */
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.kluppi-signup-text {
+  font-family: "Switzer", sans-serif;
+  font-weight: 400;
+  color: #351E28; /* Cassis */
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin: 0 0 2.5rem;
+}
+.kluppi-signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 30rem; /* fields stay a tidy width even though the heading/text are full-width */
+  margin-inline: auto;
+}
+.kluppi-signup-input {
+  width: 100%;
+  text-align: center; /* centered placeholder/value */
+}
+.kluppi-signup-cta {
+  width: 100%;
+  margin-top: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+.kluppi-signup-cta:disabled { opacity: 0.6; cursor: default; }
+.kluppi-signup-message {
+  margin-top: 1.25rem;
+  font-family: "Switzer", sans-serif;
+  font-size: 1rem;
+}
+.kluppi-signup-message.is-success { color: #351E28; } /* Cassis */
+.kluppi-signup-message.is-error { color: #FF5B22; } /* Dare Devil */
