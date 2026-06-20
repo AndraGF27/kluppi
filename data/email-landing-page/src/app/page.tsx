@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ShieldCheck } from "lucide-react";
 import PainPointsCarousel from "./PainPointsCarousel";
+import HowItWorks from "./HowItWorks";
 
 const LOGO =
   "https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66ac8dae2b34c047cf51afab_Profile%20X_Logo%20Light.svg";
@@ -289,6 +291,69 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="section-stats background-black" id="services">
+          <div className="padding-global">
+            <div className="container-large">
+              <div className="section-padding-large">
+                <div className="stats-component">
+                  <h2 className="kluppi-benefits-heading" data-reveal>Ce te așteaptă în Kluppi?</h2>
+                  <div className="kluppi-benefits-grid" data-reveal>
+                    <article className="kluppi-benefit kluppi-benefit--b1">
+                      <ShieldCheck className="kluppi-benefit-icon" aria-hidden="true" strokeWidth={1.5} />
+                      <div className="kluppi-benefit-text">
+                        <h3 className="kluppi-benefit-title">Mai multă încredere la checkout</h3>
+                        <p className="kluppi-benefit-desc">Nu ar trebui să te întrebi de fiecare dată dacă oferta este reală sau dacă prețul a fost umflat înainte să fie redus. Noi discutăm direct cu brandurile și verificăm fiecare beneficiu înainte să ajungă la tine.</p>
+                      </div>
+                    </article>
+                    <div className="kluppi-benefit-img kluppi-benefit-img--i1">
+                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c35fc21fa23caa564836d4_lee-campbell-DtDlVpy-vvQ-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 90vw, 28vw" alt="" />
+                    </div>
+                    <article className="kluppi-benefit kluppi-benefit--b2">
+                      <div className="kluppi-benefit-text">
+                        <h3 className="kluppi-benefit-title">Beneficii noi, în fiecare lună</h3>
+                        <p className="kluppi-benefit-desc">Nu suntem un site de cupoane care adaugă oferte din când în când. Aducem periodic avantaje și branduri noi în club, pentru ca tu să poți cumpăra smart exact atunci când ai nevoie.</p>
+                      </div>
+                    </article>
+                    <article className="kluppi-benefit kluppi-benefit--b3">
+                      <div className="kluppi-benefit-text">
+                        <h3 className="kluppi-benefit-title">Oferte relevante pentru tine</h3>
+                        <p className="kluppi-benefit-desc">Fiecare mesaj pe care îl primești trebuie să conteze. Tu alegi categoriile care te interesează, iar noi îți trimitem avantajele relevante pentru tine.</p>
+                      </div>
+                    </article>
+                    <div className="kluppi-benefit-img kluppi-benefit-img--i3">
+                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c36022311552387248d6fa_ales-nesetril-Im7lZjxeLhg-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 90vw, 28vw" alt="" />
+                    </div>
+                    <div className="kluppi-benefit-img kluppi-benefit-img--i2">
+                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66aba0a990cff59371467899_mk-2-yeQfucZ-g2I-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 90vw, 28vw" alt="" />
+                    </div>
+                    <article className="kluppi-benefit kluppi-benefit--b4">
+                      <div className="kluppi-benefit-text">
+                        <h3 className="kluppi-benefit-title">Acces gratuit în club</h3>
+                        <p className="kluppi-benefit-desc">Nu trebuie să plătești ca să îți rezervi locul sau să obții oferte din categoria preferată. Te înscrii rapid și ai acces gratuit la Kluppi odată ce lansăm. Și dacă te răzgândești, te dezabonezi și gata.</p>
+                      </div>
+                    </article>
+                  </div>
+                  <div className="kluppi-benefits-cta-block" data-reveal>
+                    <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+                    <p className="kluppi-hero-trust">Pleci oricând, fără explicații.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="kluppi-steps">
+          <div className="kluppi-steps-inner">
+            <h2 className="kluppi-steps-heading" data-reveal>Cum funcționează?</h2>
+            <HowItWorks />
+            <div className="kluppi-steps-cta-block" data-reveal>
+              <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+              <p className="kluppi-hero-trust">În mai puțin de un minut.</p>
+            </div>
+          </div>
+        </section>
+
         <section className="section-about background-black" id="about">
           <div className="padding-global">
             <div className="container-large">
@@ -310,53 +375,6 @@ export default function Home() {
                   </div>
                   <div className="about-image-wrapper" data-reveal style={{ "--reveal-delay": "0.15s" } as React.CSSProperties}>
                     <img className="about-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66aba0a990cff59371467899_mk-2-yeQfucZ-g2I-unsplash.jpg" alt="" sizes="(max-width: 991px) 90vw, 41vw" loading="lazy" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section-stats background-black" id="services">
-          <div className="padding-global">
-            <div className="container-large">
-              <div className="section-padding-large">
-                <div className="stats-component">
-                  <div className="margin-bottom margin-xxlarge">
-                    <div className="w-layout-grid stats-content">
-                      <div id="w-node-_01fe231a-c26f-5431-a9d2-eb07c475ec63-6a227e7d" className="stats-content-left" data-reveal>
-                        <h2 className="heading-style-h2 text-allcaps">based in the uk, working with clients globally</h2>
-                      </div>
-                      <div id="w-node-_01fe231a-c26f-5431-a9d2-eb07c475ec66-6a227e7d" className="stats-content-right" data-reveal style={{ "--reveal-delay": "0.12s" } as React.CSSProperties}>
-                        <p className="text-size-medium text-colour-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="w-layout-grid stats-list" data-reveal>
-                    <div id="w-node-_01fe231a-c26f-5431-a9d2-eb07c475ec6a-6a227e7d" className="stat-item">
-                      <div className="margin-bottom margin-xxsmall">
-                        <div className="stat-number">34<span className="text-span-7">%</span></div>
-                      </div>
-                      <h3 className="heading-style-h6 weight-medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</h3>
-                    </div>
-                    <div className="stat-image-wrapper">
-                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c35fc21fa23caa564836d4_lee-campbell-DtDlVpy-vvQ-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 44vw, 28vw" alt="" />
-                    </div>
-                    <div className="stat-item">
-                      <div className="margin-bottom margin-xxsmall">
-                        <div className="stat-number">47<span className="text-span-7">%</span></div>
-                      </div>
-                      <h3 className="heading-style-h6 weight-medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</h3>
-                    </div>
-                    <div id="w-node-_01fe231a-c26f-5431-a9d2-eb07c475ec78-6a227e7d" className="stat-item">
-                      <div className="margin-bottom margin-xxsmall">
-                        <div className="stat-number">71<span className="text-span-7">%</span></div>
-                      </div>
-                      <h3 className="heading-style-h6 weight-medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</h3>
-                    </div>
-                    <div className="stat-image-wrapper">
-                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c36022311552387248d6fa_ales-nesetril-Im7lZjxeLhg-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 44vw, 28vw" alt="" />
-                    </div>
                   </div>
                 </div>
               </div>

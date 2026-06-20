@@ -19,6 +19,82 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-20 — Steps timeline: fix invisible line + dead animation (bug fix, requested)
+
+The line wasn't rendering and nothing animated. Root cause: positions were measured with `offsetTop`, but the step rows carry a CSS `transform` (from the `data-reveal` entrance), which makes `offsetTop` resolve against each step instead of the whole timeline — so every dot reported ~the same offset → a ~1px (invisible) track and all dots flipping together instead of in sequence. (Confirmed by the symptom: dots were getting coloured but uniformly, i.e. the scroll handler *was* running.)
+
+**`src/app/HowItWorks.tsx`**
+- `render()` now measures dot centres + track span with `getBoundingClientRect` relative to the timeline (transform-proof) instead of `offsetTop`. Fill % and each dot's ramp use the same coordinate space, so the line fills and dots brighten in order as you scroll.
+
+**`src/app/globals.css`**
+- `.kluppi-steps-line`: added `top: 0; bottom: 0;` as a visible fallback so the track shows even if the JS measurement ever bails (JS still overrides with the precise first→last-dot span).
+
+Typecheck passes. (Verification note: tried to drive the running dev server via the preview tool but it couldn't attach cleanly — nvm's node wasn't on the spawned shell's PATH and port 3000 was taken; relied on the screenshot's diagnostic signature instead.)
+
+### 2026-06-20 — Steps timeline: more visible line + scroll-progress recolour (requested)
+
+**`src/app/globals.css`**
+- `.kluppi-steps-line` (track): width `3px` → `5px`; colour faded Dare Devil `rgba(255,91,34,0.2)` → **Cassis-tint `rgba(53,30,40,0.22)`** so the unfilled line is clearly visible and the Dare Devil fill reads as progress. Fill radius bumped to match.
+- `.kluppi-step-dot`: removed the binary `.is-active` rule + its CSS transition (the dot colour/scale is now driven per-frame by JS); base background set to `rgba(255,91,34,0.25)`.
+
+**`src/app/HowItWorks.tsx`**
+- Dots now ramp **smoothly** instead of snapping: each dot interpolates its background `rgba` alpha `0.25 → 1` and scales `1 → 1.15` over a 160px window as the scroll "scan line" approaches and reaches it (mirrors the fractional-opacity gradient in the user's reference snippet).
+
+Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-20 — "Cum funcționează?" steps timeline (new section, requested)
+
+Section #5 of the teaser build — a brand-new section (no template equivalent), inspired by a reference insurance "Secure Your Policy" stepper the user shared. Adapted from the reference's 3-card zig-zag to a **5-step alternating timeline** with a **scroll-filled** centre line + dots that brighten as you scroll (user chose animated; cards Cassis / copy Lemon). Inserted between the benefits section (`section-stats`) and `.section-about`, per the section plan order. Copy is the exact RO from `Teaser Landing Page Copy.docx`.
+
+**`src/app/HowItWorks.tsx`** (new client component)
+- Renders the 5 steps (Pasul 01–05) alternating left/right of a centre line. A scroll handler (rAF-throttled, like the hero parallax) sets the line track to span first→last dot centre, grows a Dare Devil fill as a "scan line" (60% down the viewport) descends, and toggles `.is-active` on each dot as the fill reaches it. Respects `prefers-reduced-motion` (fills fully, no motion). Steps use the existing `data-reveal` entrance with a per-step stagger.
+
+**`src/app/page.tsx`**
+- Imported `HowItWorks`; added `<section className="kluppi-steps">` (between benefits and About): centered H2 "Cum funcționează?", `<HowItWorks />`, and a CTA block ("Rezervă-ți locul în club" + microcopy "În mai puțin de un minut.", reusing `.kluppi-hero-cta` / `.kluppi-hero-trust`).
+
+**`src/app/globals.css`** (appended a scoped `.kluppi-steps*` block)
+- Section Lemon Sorbet, centered Bricolage/Dare Devil heading. Timeline = flex column of step rows; absolute line track (`--line-x: 50%`) with a Dare Devil fill. Each step a 3-col grid (`1fr auto 1fr`): card left (odd) / right (even), dot in the centre column. Dots: faded Dare Devil → solid + slight scale when `.is-active`, Lemon ring. Cards Cassis with Dare Devil "Pasul 0X" label + Lemon title/desc.
+- `≤767px`: line moves to the left (`--line-x: 1.25rem`), grid → `2.5rem 1fr` so every card stacks to the right of the line.
+
+Typecheck (`tsc --noEmit`) passes. (No new deps; the step cards have no icons, matching the reference.)
+
+### 2026-06-20 — Benefits section: move + restyle pass (requested)
+
+Five tweaks to the benefits section built earlier today.
+
+**`src/app/page.tsx`**
+1. **Moved** the whole `<section className="section-stats" id="services">` from between `.section-about` and `.section-portfolio` to immediately **after `.kluppi-painpoints`** (now: painpoints → benefits → about → …). Markup moved verbatim aside from the changes below.
+2. **Icon on b1:** imported `ShieldCheck` from `lucide-react`; added `<ShieldCheck className="kluppi-benefit-icon" …>` as the first child of card b1 (top-left).
+3. Wrapped each card's `h3 + p` in a `.kluppi-benefit-text` div (lets the icon sit top while text sits bottom).
+4. **Swapped b2 ↔ b3 copy:** b2 now "Beneficii noi, în fiecare lună"; b3 now "Oferte relevante pentru tine" (grid positions unchanged).
+
+**`src/app/globals.css`** (`.kluppi-benefit*` rules)
+- Cards: background `#FFFFFF` → **Cassis `#351E28`**; title + description color Cassis → **Lemon Sorbet `#FFF0BC`**.
+- `justify-content: flex-end` so card text sits **bottom-left**; b1 uses `space-between` (icon top, text bottom). Added `.kluppi-benefit-icon` (2.5rem, Dare Devil) and `.kluppi-benefit-text` (flex column). Shadow nudged 0.08 → 0.12.
+
+Typecheck (`tsc --noEmit`) passes. (`lucide-react` already a dependency from the carousel — no new install.)
+
+### 2026-06-20 — Benefits section ("Ce te așteaptă în Kluppi?") — repurposed stats grid (requested)
+
+Section #4 of the teaser build. The `section-stats` block was repurposed per the user's layout sketch: drop the big-number stat cards; turn the grid into a 3×3 arrangement of 4 benefit cards + 3 images, with two tall cells (benefit 1 spans col 1 / rows 1–2; image 3 spans col 3 / rows 2–3 — the user's "merge cells 6 and 9"). Copy is the exact RO from `Teaser Landing Page Copy.docx`.
+
+**`src/app/page.tsx`** (inside the existing `<section className="section-stats" id="services">`, `.stats-component` only — wrapper/section/id untouched)
+- Replaced the `stats-content` intro grid + `stats-list` (stat-numbers + 2 images, all Webflow node-ID placements) with:
+  - H2 `.kluppi-benefits-heading` "Ce te așteaptă în Kluppi?".
+  - `.kluppi-benefits-grid` with 4 `<article className="kluppi-benefit">` cards (title + description) and 3 `.kluppi-benefit-img` cells. Source order = desktop reading order (b1, i1, b2, b3, i3, i2, b4).
+  - `.kluppi-benefits-cta-block`: CTA "Rezervă-ți locul în club" (reuses `.kluppi-hero-cta`) + microcopy "Pleci oricând, fără explicații." (reuses `.kluppi-hero-trust`).
+- **Images are placeholders** (user still sourcing): reused the two existing stats Unsplash photos (lee-campbell → i1, ales-nesetril → i3) + the About photo (mk-2 → i2). `.stat-image` class kept on the `<img>`s for object-fit.
+- No icons on the benefit cards (matches the spec; can add Lucide ones if wanted).
+
+**`src/app/globals.css`** (appended a scoped `.kluppi-benefits-*` block)
+- Heading typography matches `.kluppi-painpoints-heading` (Bricolage 700, Dare Devil, clamp size).
+- `.kluppi-benefits-grid`: `grid-template-areas` `"b1 i1 b2" / "b1 b3 i3" / "i2 b4 i3"`, 3 equal cols, 1.5rem gap.
+- `.kluppi-benefit` cards: white, 6px radius, soft shadow; title Cassis (Bricolage 700), description Cassis (Switzer 400).
+- `.kluppi-benefit-img`: fills its (sometimes tall) cell — overrides `.stat-image`'s `aspect-ratio:3/2` to `auto` + `object-fit:cover`, `min-height:14rem`.
+- `≤991px`: grid collapses to a single stacked column (areas cleared, items `grid-area:auto`).
+
+Typecheck (`tsc --noEmit`) passes.
+
 ### 2026-06-20 — Pain-points carousel section ("De câte ori ai…") (requested)
 
 New section inserted under `.kluppi-band`, built in the style of the Webflow `w-slider` the user referenced (centered slide, side arrows, dots) but as a working React carousel (Webflow's slider JS isn't in this project). Background adapted to Cassis for contrast (user granted latitude on bg/fonts/colors).

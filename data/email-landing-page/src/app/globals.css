@@ -369,3 +369,231 @@ html {
   .kluppi-carousel-card { max-width: none; padding: 1.75rem; }
   .kluppi-carousel-text { font-size: 1.125rem; }
 }
+
+/* ─── Benefits grid ("Ce te aștepta în Kluppi?") — repurposes the stats section ─── */
+/* Section keeps .section-stats (Lemon Sorbet bg from the recolour block). The big
+   numbers/stat cards are dropped; this is a 3×3 grid of 4 benefit cards + 3 images.
+   Two cells are tall: benefit 1 (col 1, rows 1–2) and image 3 (col 3, rows 2–3). */
+.kluppi-benefits-heading {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  color: #FF5B22; /* Dare Devil */
+  font-size: clamp(2rem, 5vw, 3.5rem); /* matches the pain-points heading */
+  line-height: 1.05;
+  margin-bottom: 3rem;
+}
+.kluppi-benefits-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "b1 i1 b2"
+    "b1 b3 i3"
+    "i2 b4 i3";
+  gap: 1.5rem;
+  align-items: stretch;
+}
+.kluppi-benefit--b1 { grid-area: b1; }
+.kluppi-benefit--b2 { grid-area: b2; }
+.kluppi-benefit--b3 { grid-area: b3; }
+.kluppi-benefit--b4 { grid-area: b4; }
+.kluppi-benefit-img--i1 { grid-area: i1; }
+.kluppi-benefit-img--i2 { grid-area: i2; }
+.kluppi-benefit-img--i3 { grid-area: i3; }
+
+.kluppi-benefit {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* text sits at the bottom-left of the card */
+  gap: 1rem;
+  background-color: #351E28; /* Cassis */
+  border-radius: 6px;
+  padding: 2rem;
+  box-shadow: 0 12px 30px rgba(53, 30, 40, 0.12);
+}
+/* b1 carries the icon top-left + text bottom-left */
+.kluppi-benefit--b1 { justify-content: space-between; }
+.kluppi-benefit-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+  color: #FF5B22; /* Dare Devil */
+}
+.kluppi-benefit-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.kluppi-benefit-title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  color: #FFF0BC; /* Lemon Sorbet */
+  font-size: 1.375rem;
+  line-height: 1.2;
+}
+.kluppi-benefit-desc {
+  font-family: "Switzer", sans-serif;
+  font-weight: 400;
+  color: #FFF0BC; /* Lemon Sorbet */
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Image cells fill their (sometimes tall) grid cell; override .stat-image's 3/2 ratio */
+.kluppi-benefit-img {
+  height: 100%;
+  min-height: 14rem;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.kluppi-benefit-img .stat-image {
+  aspect-ratio: auto;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* CTA + microcopy below the grid — reuses the hero CTA/trust styles, centered */
+.kluppi-benefits-cta-block {
+  width: 100%;
+  text-align: center;
+  margin-top: 3.5rem;
+}
+
+@media (max-width: 991px) {
+  /* Collapse the 3×3 grid into a single stacked column on tablet/mobile */
+  .kluppi-benefits-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: none;
+  }
+  .kluppi-benefit--b1, .kluppi-benefit--b2, .kluppi-benefit--b3, .kluppi-benefit--b4,
+  .kluppi-benefit-img--i1, .kluppi-benefit-img--i2, .kluppi-benefit-img--i3 {
+    grid-area: auto;
+  }
+}
+
+/* ─── Steps timeline ("Cum funcționează?") — new alternating, scroll-filled timeline ─── */
+.kluppi-steps {
+  background-color: #FFF0BC; /* Lemon Sorbet */
+  padding: 6rem 5%;
+}
+.kluppi-steps-inner {
+  max-width: 68rem;
+  margin-inline: auto;
+}
+.kluppi-steps-heading {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  color: #FF5B22; /* Dare Devil */
+  font-size: clamp(2rem, 5vw, 3.5rem); /* matches the other section headings */
+  line-height: 1.05;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+/* Timeline: vertical flex of step rows; the line is an absolute track behind them.
+   --line-x is the horizontal centre of the line (50% on desktop; moves left on mobile). */
+.kluppi-steps-timeline {
+  --line-x: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.kluppi-steps-line {
+  position: absolute;
+  left: var(--line-x);
+  transform: translateX(-50%);
+  /* JS sets top/height to span first→last dot; these are a visible fallback if it doesn't */
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  border-radius: 5px;
+  background-color: rgba(53, 30, 40, 0.22); /* visible Cassis-tinted track */
+  z-index: 0;
+}
+.kluppi-steps-line-fill {
+  width: 100%;
+  height: 0%;
+  border-radius: 5px;
+  background-color: #FF5B22; /* Dare Devil — grows with scroll, recolouring the line */
+}
+
+/* Each step is a 3-col row: card | dot | (empty), mirrored for right-side steps */
+.kluppi-step {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  column-gap: 2.5rem;
+  align-items: center;
+}
+.kluppi-step-dot { grid-column: 2; }
+.kluppi-step--left .kluppi-step-card { grid-column: 1; }
+.kluppi-step--right .kluppi-step-card { grid-column: 3; }
+
+.kluppi-step-dot {
+  position: relative;
+  z-index: 1;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  border: 3px solid #FFF0BC; /* Lemon ring lifts the dot off the line */
+  background-color: rgba(255, 91, 34, 0.25); /* base; JS ramps it 0.25 → 1 with scroll */
+}
+
+.kluppi-step-card {
+  width: 100%;
+  background-color: #351E28; /* Cassis */
+  border-radius: 6px;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 12px 30px rgba(53, 30, 40, 0.12);
+}
+.kluppi-step-label {
+  font-family: "Switzer", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  color: #FF5B22; /* Dare Devil */
+  margin-bottom: 0.75rem;
+}
+.kluppi-step-title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  color: #FFF0BC; /* Lemon Sorbet */
+  font-size: 1.375rem;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.kluppi-step-desc {
+  font-family: "Switzer", sans-serif;
+  font-weight: 400;
+  color: #FFF0BC; /* Lemon Sorbet */
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.kluppi-steps-cta-block {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+/* Mobile: line moves to the left, all cards stack to its right */
+@media (max-width: 767px) {
+  .kluppi-steps { padding: 4rem 5%; }
+  .kluppi-steps-heading { margin-bottom: 3rem; }
+  .kluppi-steps-timeline { --line-x: 1.25rem; gap: 2rem; }
+  .kluppi-step {
+    grid-template-columns: 2.5rem 1fr;
+    column-gap: 1.25rem;
+    align-items: start;
+  }
+  .kluppi-step-dot,
+  .kluppi-step--left .kluppi-step-card,
+  .kluppi-step--right .kluppi-step-card {
+    grid-column: auto;
+  }
+  .kluppi-step-dot { justify-self: center; margin-top: 0.5rem; }
+}
