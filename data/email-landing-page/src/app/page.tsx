@@ -275,16 +275,17 @@ export default function Home() {
           <div className="kluppi-painpoints-inner">
             <h2 className="kluppi-painpoints-heading" data-reveal>De câte ori ai…</h2>
             <PainPointsCarousel />
-            <div className="kluppi-painpoints-outro" data-reveal>
-              <p className="kluppi-painpoints-lead">
-                Nu ți s-a întâmplat doar ție. A devenit din ce în ce mai rară senzația că plătești prețul corect atunci când cumperi online.
-              </p>
-              <p className="kluppi-painpoints-lead">
-                Noi ne-am săturat de toate astea. Și am creat Kluppi: prietenul care are mereu un cod de reducere bun, exact când îți trebuie.
-              </p>
-              <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
-              <p className="kluppi-painpoints-note">Rapid, doar cu nume și e-mail.</p>
-            </div>
+            <h2 className="kluppi-painpoints-conclusion" data-reveal>Nu ți s-a întâmplat doar ție.</h2>
+          </div>
+          <div className="kluppi-painpoints-cta-block" data-reveal>
+            <p className="text-size-large kluppi-hero-body">
+              A devenit din ce în ce mai rară senzația că plătești prețul corect atunci când cumperi online.
+            </p>
+            <p className="text-size-large kluppi-hero-body">
+              Noi ne-am săturat de toate astea. Și am creat Kluppi: prietenul care are mereu un cod de reducere bun, exact când îți trebuie.
+            </p>
+            <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+            <p className="kluppi-hero-trust">Rapid, doar cu nume și e-mail.</p>
           </div>
         </section>
 

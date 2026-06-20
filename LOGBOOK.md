@@ -34,6 +34,27 @@ New section inserted under `.kluppi-band`, built in the style of the Webflow `w-
 
 Typecheck (`tsc --noEmit`) passes. Note: lucide-react is a new import — dev server may need a restart to resolve it.
 
+### 2026-06-20 — Pain-points: conclusion H2 + hero-style CTA block + 6px radius (requested)
+
+**`src/app/page.tsx`**
+- Bottom-right grid cell is now an H2 "Nu ți s-a întâmplat doar ție." (`.kluppi-painpoints-conclusion`); removed the old outro paragraphs/CTA from the grid.
+- Added a centered block below the grid (`.kluppi-painpoints-cta-block`) holding the remaining two paragraphs ("A devenit din ce în ce mai rară…" / "Noi ne-am săturat…") + CTA + note, reusing the hero classes `text-size-large kluppi-hero-body`, `kluppi-hero-cta`, `kluppi-hero-trust`.
+
+**`src/app/globals.css`**
+- Shared the H2 typography across `.kluppi-painpoints-heading` + `.kluppi-painpoints-conclusion`; conclusion placed bottom-right (`grid-column 2/3`, row 3).
+- Added `.kluppi-painpoints-cta-block` (max-width 44rem, centered, margin-top 3.5rem) with paragraph/CTA spacing.
+- Removed the now-unused `.kluppi-painpoints-outro/-lead/-note` rules; updated the ≤991 collapse and ≤767 query accordingly.
+- Added `border-radius: 6px` to `.kluppi-carousel` (band) and `.kluppi-carousel-card`.
+
+### 2026-06-20 — Pain-points section as a diagonal 2×3 grid (requested)
+
+**`src/app/globals.css`** (CSS only; markup unchanged)
+- Made `.kluppi-painpoints-inner` a 2-col × 3-row grid (`1fr 1fr`, column-gap 5rem, row-gap 2.5rem, align-items start), echoing the stats-content diagonal:
+  - `.kluppi-painpoints-heading` → top-left cell (`grid-column 1/2`, row 1); removed its `margin-bottom` (row-gap handles spacing).
+  - `.kluppi-carousel` → full middle row (`grid-column 1/-1`, row 2).
+  - `.kluppi-painpoints-outro` → bottom-right cell (`grid-column 2/3`, row 3); removed its `margin-top`.
+- Added a `≤991px` collapse: grid → single column, all three children full-width (stacks heading → carousel → outro on tablet/mobile).
+
 ### 2026-06-20 — Redesign pain-points carousel to match reference (requested)
 
 Reworked the carousel aesthetic to match the Webflow testimonial example the user shared.
