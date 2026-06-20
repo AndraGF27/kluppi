@@ -776,16 +776,73 @@ html {
    how the template sets its black page background. */
 .body { background-color: #FFF0BC; }
 
-/* Footer → Lemon + Cassis text (removes the last black surface; full footer trim still pending). */
-.footer-component {
+/* ─── Footer — minimalist: centered logo + socials, divider, legal + copyright ─── */
+.kluppi-footer {
   background-color: #FFF0BC; /* Lemon Sorbet */
-  color: #351E28; /* Cassis */
-  border-top-color: rgba(53, 30, 40, 0.15);
+  padding: 4.5rem 5% 2.5rem;
 }
-.footer-component :is(.text-colour-grey, .footer-link, .footer-credit-text, .link, .link-2) {
+.kluppi-footer-inner {
+  max-width: 75rem;
+  margin-inline: auto;
+}
+.kluppi-footer-logo-link {
+  display: block;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto 2.5rem;
+}
+.kluppi-footer-logo {
+  display: block;
+  height: 3rem;
+  width: auto;
+}
+.kluppi-footer-socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 3rem;
+  margin-bottom: 3rem;
+}
+.kluppi-footer-social {
+  font-family: "Switzer", sans-serif;
+  font-weight: 500;
+  font-size: 1.125rem;
+  color: #351E28; /* Cassis */
+  transition: color 0.15s ease;
+}
+.kluppi-footer-social:hover { color: #FF5B22; /* Dare Devil */ }
+.kluppi-footer-divider {
+  height: 1px;
+  background-color: rgba(53, 30, 40, 0.15);
+  margin-bottom: 1.75rem;
+}
+.kluppi-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem 2rem;
+}
+.kluppi-footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+}
+.kluppi-footer-link,
+.kluppi-footer-copy {
+  font-family: "Switzer", sans-serif;
+  font-weight: 300;
+  font-size: 0.9375rem;
   color: #351E28; /* Cassis */
 }
-.footer-component .line-divider { background-color: rgba(53, 30, 40, 0.15); }
+.kluppi-footer-link { transition: color 0.15s ease; }
+.kluppi-footer-link:hover { color: #FF5B22; /* Dare Devil */ }
+.kluppi-footer-copy { margin: 0; }
+
+@media (max-width: 767px) {
+  .kluppi-footer-socials { gap: 1rem 1.75rem; }
+  .kluppi-footer-bottom { flex-direction: column; align-items: flex-start; }
+}
 
 /* ─── Signup form ("Fii printre primii…") — centered column ─── */
 .kluppi-signup {

@@ -19,6 +19,21 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-21 — Minimalist footer rebuild (requested)
+
+Rebuilt the footer to match the user's reference: centered Kluppi logo, centered social links, a hairline divider, then legal links (left) + copyright (right). Replaced the whole template footer markup + the dead `Home/About/Projects/Contact` nav links (clears the footer's dead `#about`/`#work` anchors).
+
+**`src/app/page.tsx`**
+- `socials` array trimmed to the 3 brand channels with real `joinkluppi` URLs (Facebook/Instagram/LinkedIn); dropped X and the now-unused SVG `path`s (footer renders text labels).
+- New `<footer className="kluppi-footer">`: centered `/logo.svg` + `.kluppi-footer-socials` (maps `socials`) + `.kluppi-footer-divider` + `.kluppi-footer-bottom` (legal links `Termeni și condiții` / `Politica de confidențialitate` / `Politica de utilizare cookie-uri`, all `href="#"` placeholders, + "© Copyright {year} · Toate drepturile rezervate").
+
+**`src/app/globals.css`**
+- Removed the old `.footer-component` recolour rules; added the `.kluppi-footer*` block (Lemon bg, centered logo/socials, Cassis text with Dare Devil hover, legal/copyright Switzer 300; stacks on ≤767px).
+
+Typecheck (`tsc --noEmit`) passes.
+
+**Flags:** legal links are placeholder `#` (no pages yet); copy doc's footer listed "Contact" rather than a cookie policy — went with the reference's set; the **navbar** full-screen menu still has the dead `#about`/`#work` ("About"/"Projects") links + EN labels — separate nav cleanup.
+
 ### 2026-06-20 — Benefits cards: title 1.3rem, top-left content; Switzer body → Light 300 (requested)
 
 **`src/app/globals.css`**
