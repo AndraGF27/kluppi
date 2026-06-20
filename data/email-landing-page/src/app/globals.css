@@ -443,7 +443,7 @@ html {
 }
 .kluppi-benefit-desc {
   font-family: "Switzer", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   color: #351E28; /* Cassis */
   font-size: 1rem;
   line-height: 1.5;
@@ -484,22 +484,58 @@ html {
   }
 }
 
-/* Icon cards — used in the benefits grid ("Ce te aștepta în Kluppi?") in place of
-   image cells: a card with one centred icon, so its rows shrink to the text-card
-   height. (The "Kluppi este pentru tine dacă…" grid uses image cells instead.) */
-.kluppi-benefit-icon-card {
+/* Benefits cards ("Ce te aștepta în Kluppi?") — 1×4 row that starts stacked and
+   spreads on scroll (transforms set by BenefitsCards.tsx). Icon top-left, text
+   bottom-left, white cards. (Distinct from the .kluppi-benefit* grid that
+   "Kluppi este pentru tine dacă…" still uses.) */
+.kluppi-bcards {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+.kluppi-bcard {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 22rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* all content top-left */
+  gap: 1.5rem;
   background-color: #FFFFFF;
   border-radius: 6px;
   padding: 2rem;
   box-shadow: 0 12px 30px rgba(53, 30, 40, 0.12);
+  will-change: transform;
 }
-.kluppi-benefit-card-icon {
-  width: 4.5rem;
-  height: 4.5rem;
+.kluppi-bcard-icon {
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
   color: #FF5B22; /* Dare Devil */
+}
+.kluppi-bcard-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.kluppi-bcard-title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  color: #351E28; /* Cassis */
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+.kluppi-bcard-desc {
+  font-family: "Switzer", sans-serif;
+  font-weight: 300;
+  color: #351E28; /* Cassis */
+  font-size: 1rem;
+  line-height: 1.5;
+}
+@media (max-width: 991px) {
+  /* No room for the 4-up spread — stack vertically (JS disables the transform here) */
+  .kluppi-bcards { flex-direction: column; }
+  .kluppi-bcard { min-height: 0; }
 }
 
 /* ─── Steps timeline ("Cum funcționează?") — new alternating, scroll-filled timeline ─── */
@@ -596,7 +632,7 @@ html {
 }
 .kluppi-step-desc {
   font-family: "Switzer", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   color: #351E28; /* Cassis */
   font-size: 1rem;
   line-height: 1.5;
@@ -684,7 +720,7 @@ html {
   margin: 0;
   padding: 0 2.75rem 1.5rem 0; /* right pad keeps the answer clear of the chevron column */
   font-family: "Switzer", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 1.0625rem;
   line-height: 1.55;
   color: #351E28; /* Cassis */
@@ -765,7 +801,7 @@ html {
 }
 .kluppi-signup-text {
   font-family: "Switzer", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   color: #351E28; /* Cassis */
   font-size: 1.3rem;
   line-height: 1.5;

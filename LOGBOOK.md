@@ -19,6 +19,30 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-20 — Benefits cards: title 1.3rem, top-left content; Switzer body → Light 300 (requested)
+
+**`src/app/globals.css`**
+- `.kluppi-bcard-title` (benefits card H3) font-size `1.375rem` → `1.3rem`.
+- `.kluppi-bcard` `justify-content: space-between` → `flex-start`, so the icon + text sit **top-left** (cards stay equal-height; shorter cards just have space below).
+- All Switzer **400 → 300 (Light)**, except the hero body (`.kluppi-hero-body`, kept 400): `.kluppi-benefit-desc`, `.kluppi-bcard-desc`, `.kluppi-step-desc`, `.kluppi-faq-answer`, `.kluppi-signup-text`. (Pain-points conclusion/outro body was already 300.)
+
+Typecheck (`tsc --noEmit`) passes. (Left as-is: `.kluppi-signup-message` status text has no explicit weight — renders at the default 400; flag if it should be 300 too.)
+
+### 2026-06-20 — Benefits section redesign: 1×4 cards that spread on scroll (requested)
+
+Reworked the benefits section ("Ce te așteaptă în Kluppi?", `#services`) per the user's reference: 4 white cards in a single row that **start stacked/bunched on the left and slide into their row positions as you scroll** (and re-stack on the way back up). Icons top-left (replacing numbers), title + description bottom-left, kept verbatim. This **re-diverges** benefits from "Kluppi este pentru tine dacă…", which keeps the `.kluppi-benefit*` 3×4 grid.
+
+**`src/app/BenefitsCards.tsx`** (new client component)
+- 4 cards (ShieldCheck/Gift/Target/Ticket + the existing titles/descs). A rAF-throttled scroll handler measures the column step (`offsetLeft` diff, transform-independent) and sets each card `translateX = -(1−progress)·i·(step−PEEK)` so card `i` starts `i·PEEK` from the left and ends at its row slot. `progress` runs 0→1 as the row top scrolls from 0.9→0.35 of the viewport. `z-index = i+1` (later cards on top → each peeks from the left). Disabled (no transform) on ≤991px and for reduced-motion.
+
+**`src/app/page.tsx`**
+- Replaced the benefits grid markup (4 text cards + 4 icon cards) with `<BenefitsCards />`; kept the heading + CTA block. Removed the `ShieldCheck/Gift/Target/Ticket` imports (moved into the component; only `ChevronDown` remains for the FAQ).
+
+**`src/app/globals.css`**
+- Removed the now-unused `.kluppi-benefit-icon-card` / `.kluppi-benefit-card-icon` rules; added `.kluppi-bcards` (flex row, `flex:1` equal cards) + `.kluppi-bcard*` (white, min-height 22rem, icon top / text bottom via `space-between`, Cassis text). `≤991px` stacks them vertically.
+
+Typecheck (`tsc --noEmit`) passes. (PEEK = 90px and the 0.9→0.35 scroll trigger are easy to tune.)
+
 ### 2026-06-20 — Signup: heading/text full width, form stays narrow (requested)
 
 **`src/app/globals.css`**
