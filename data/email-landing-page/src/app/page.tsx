@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck, Gift, Target, Ticket } from "lucide-react";
 import PainPointsCarousel from "./PainPointsCarousel";
 import HowItWorks from "./HowItWorks";
 
@@ -304,14 +304,13 @@ export default function Home() {
                   <h2 className="kluppi-benefits-heading" data-reveal>Ce te așteaptă în Kluppi?</h2>
                   <div className="kluppi-benefits-grid" data-reveal>
                     <article className="kluppi-benefit kluppi-benefit--b1">
-                      <ShieldCheck className="kluppi-benefit-icon" aria-hidden="true" strokeWidth={1.5} />
                       <div className="kluppi-benefit-text">
                         <h3 className="kluppi-benefit-title">Mai multă încredere la checkout</h3>
                         <p className="kluppi-benefit-desc">Nu ar trebui să te întrebi de fiecare dată dacă oferta este reală sau dacă prețul a fost umflat înainte să fie redus. Noi discutăm direct cu brandurile și verificăm fiecare beneficiu înainte să ajungă la tine.</p>
                       </div>
                     </article>
-                    <div className="kluppi-benefit-img kluppi-benefit-img--i1">
-                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c35fc21fa23caa564836d4_lee-campbell-DtDlVpy-vvQ-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 90vw, 28vw" alt="" />
+                    <div className="kluppi-benefit-img--i1 kluppi-benefit-icon-card">
+                      <ShieldCheck className="kluppi-benefit-card-icon" aria-hidden="true" strokeWidth={1.5} />
                     </div>
                     <article className="kluppi-benefit kluppi-benefit--b2">
                       <div className="kluppi-benefit-text">
@@ -319,17 +318,17 @@ export default function Home() {
                         <p className="kluppi-benefit-desc">Nu suntem un site de cupoane care adaugă oferte din când în când. Aducem periodic avantaje și branduri noi în club, pentru ca tu să poți cumpăra smart exact atunci când ai nevoie.</p>
                       </div>
                     </article>
+                    <div className="kluppi-benefit-img--i2 kluppi-benefit-icon-card">
+                      <Gift className="kluppi-benefit-card-icon" aria-hidden="true" strokeWidth={1.5} />
+                    </div>
                     <article className="kluppi-benefit kluppi-benefit--b3">
                       <div className="kluppi-benefit-text">
                         <h3 className="kluppi-benefit-title">Oferte relevante pentru tine</h3>
                         <p className="kluppi-benefit-desc">Fiecare mesaj pe care îl primești trebuie să conteze. Tu alegi categoriile care te interesează, iar noi îți trimitem avantajele relevante pentru tine.</p>
                       </div>
                     </article>
-                    <div className="kluppi-benefit-img kluppi-benefit-img--i3">
-                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c36022311552387248d6fa_ales-nesetril-Im7lZjxeLhg-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 90vw, 28vw" alt="" />
-                    </div>
-                    <div className="kluppi-benefit-img kluppi-benefit-img--i2">
-                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66aba0a990cff59371467899_mk-2-yeQfucZ-g2I-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 90vw, 28vw" alt="" />
+                    <div className="kluppi-benefit-img--i3 kluppi-benefit-icon-card">
+                      <Target className="kluppi-benefit-card-icon" aria-hidden="true" strokeWidth={1.5} />
                     </div>
                     <article className="kluppi-benefit kluppi-benefit--b4">
                       <div className="kluppi-benefit-text">
@@ -337,6 +336,9 @@ export default function Home() {
                         <p className="kluppi-benefit-desc">Nu trebuie să plătești ca să îți rezervi locul sau să obții oferte din categoria preferată. Te înscrii rapid și ai acces gratuit la Kluppi odată ce lansăm. Și dacă te răzgândești, te dezabonezi și gata.</p>
                       </div>
                     </article>
+                    <div className="kluppi-benefit-img--i4 kluppi-benefit-icon-card">
+                      <Ticket className="kluppi-benefit-card-icon" aria-hidden="true" strokeWidth={1.5} />
+                    </div>
                   </div>
                   <div className="kluppi-benefits-cta-block" data-reveal>
                     <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>

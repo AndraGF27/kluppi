@@ -19,6 +19,38 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-20 — Benefits section: photo cells → icon cards (requested)
+
+Replaced the 4 image cells in the benefits grid (`#services`) with white **icon cards** — one centred representative icon each (4.5rem) — so the rows shrink to the text-card height instead of the old 14rem image floor.
+
+**`src/app/page.tsx`**
+- Imported `Gift, Target, Ticket` (alongside `ShieldCheck`) from lucide-react.
+- Each `.kluppi-benefit-img--iN` cell is now `<div className="kluppi-benefit-img--iN kluppi-benefit-icon-card">` with a single `.kluppi-benefit-card-icon` (no `kluppi-benefit-img` class, so no image styling/min-height). Icons by paired benefit: i1 `ShieldCheck` (încredere), i2 `Gift` (beneficii noi), i3 `Target` (oferte relevante), i4 `Ticket` (acces gratuit).
+- Removed the inline `ShieldCheck` from card **b1** (now redundant with the icon cards) — the shield concept moved to the i1 icon card. b1 is otherwise unchanged.
+
+**`src/app/globals.css`** (`#services` block)
+- Added `#services .kluppi-benefit-icon-card` (white, rounded, centred flex, shadow) + `#services .kluppi-benefit-card-icon { width/height: 4.5rem; color: Dare Devil }`.
+- `#services .kluppi-benefit--b1 { justify-content: flex-end }` so b1 bottom-aligns like the others (the global `--b1 { space-between }` is kept for the duplicated "pentru tine dacă" b1, which still has its icon).
+
+Icon choices are my picks (easy to swap). Old benefit images (lee-campbell/ales-nesetril/mk-2/Hero8) are no longer referenced here; the first three are still used by "pentru tine dacă". Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-20 — Benefits section: grid redesign to 3×4 + white cards (requested)
+
+Total redesign of the benefits grid only (`#services` / "Ce te așteaptă în Kluppi?"). New 3-col × 4-row layout where each card spans 2 cells with an image alongside, alternating sides:
+`i1 b1 b1` / `b2 b2 i2` / `i3 b3 b3` / `b4 b4 i4`. **Scoped to `#services`** so the duplicated "Kluppi este pentru tine dacă…" grid (shares the classes, has no id) is untouched — confirmed with the user.
+
+**`src/app/page.tsx`** (benefits grid markup)
+- Reordered the grid children to `b1, i1, b2, i2, b3, i3, b4, i4` (card-then-image, gives a clean alternating stack on mobile) and **added a 4th image `i4`** = `/Hero8.jpg` (placeholder — flagged). Copy, the b1 ShieldCheck icon, and all classes unchanged. Tweaked image `sizes` to ~31vw (1 of 3 cols).
+
+**`src/app/globals.css`** (new `#services`-scoped block; base `.kluppi-benefits-*` rules left intact for the duplicate)
+- `#services .kluppi-benefits-grid`: 4 rows + the new `grid-template-areas`; `#services .kluppi-benefit-img--i4 { grid-area: i4 }`.
+- `#services .kluppi-benefit` → white; `#services .kluppi-benefit-title/-desc` → Cassis (overrides the shared Cassis-card/Lemon-text).
+- `≤991px`: `#services` areas → none + i4 reset (base media rule still gives the single column + b1–b4/i1–i3 resets).
+
+Card text is still bottom-left (b1 icon top via `space-between`) — unchanged from before; flagged in case you want it re-centered now that the cards are uniform.
+
+Typecheck (`tsc --noEmit`) passes.
+
 ### 2026-06-20 — Pain-points: conclusion/outro headings → H3 + Cassis (requested)
 
 **`src/app/page.tsx`**

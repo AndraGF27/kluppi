@@ -490,6 +490,48 @@ html {
   }
 }
 
+/* Benefits section ("Ce te aștepta în Kluppi?") redesign — scoped to #services so the
+   duplicated "Kluppi este pentru tine dacă…" grid (no id) keeps its own 3×3 look.
+   3×4 grid: each card spans two cells with an image alongside, alternating sides;
+   white cards with Cassis text. */
+#services .kluppi-benefits-grid {
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas:
+    "i1 b1 b1"
+    "b2 b2 i2"
+    "i3 b3 b3"
+    "b4 b4 i4";
+}
+#services .kluppi-benefit-img--i4 { grid-area: i4; }
+#services .kluppi-benefit { background-color: #FFFFFF; }
+#services .kluppi-benefit-title,
+#services .kluppi-benefit-desc { color: #351E28; } /* Cassis */
+#services .kluppi-benefit--b1 { justify-content: flex-end; } /* no inline icon now → bottom-align like the others */
+
+/* Icon cards replace the photo cells — a single centred icon, so rows shrink to the
+   text-card height instead of the old 14rem image min-height. */
+#services .kluppi-benefit-icon-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+  border-radius: 6px;
+  padding: 2rem;
+  box-shadow: 0 12px 30px rgba(53, 30, 40, 0.12);
+}
+#services .kluppi-benefit-card-icon {
+  width: 4.5rem;
+  height: 4.5rem;
+  color: #FF5B22; /* Dare Devil */
+}
+
+@media (max-width: 991px) {
+  /* Benefits collapse: clear the 4-row areas + reset the 4th image (base rule
+     handles the single column + resets b1–b4 / i1–i3). */
+  #services .kluppi-benefits-grid { grid-template-areas: none; }
+  #services .kluppi-benefit-img--i4 { grid-area: auto; }
+}
+
 /* ─── Steps timeline ("Cum funcționează?") — new alternating, scroll-filled timeline ─── */
 .kluppi-steps {
   background-color: #FFF0BC; /* Lemon Sorbet */
