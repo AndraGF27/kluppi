@@ -79,7 +79,7 @@ html {
 
 .kluppi-hero-eyebrow {
   font-family: "Switzer", sans-serif;
-  font-weight: 200; /* extra light */
+  font-weight: 300; /* light */
   letter-spacing: 0.18em;
   text-transform: uppercase; /* ALL CAPS */
   color: #351E28; /* Cassis */
@@ -127,7 +127,7 @@ html {
 .kluppi-hero-trust {
   margin-top: 1rem; /* was 1.25rem, −20% */
   font-family: "Switzer", sans-serif;
-  font-weight: 200;
+  font-weight: 300;
   font-size: 0.9375rem;
   color: #351E28; /* Cassis */
   opacity: 0.7;
@@ -232,4 +232,32 @@ html {
 :is(.section-about, .section-stats, .section-portfolio, .section-banner-cta, .section-contact)
   .text-colour-grey {
   color: #351E28; /* Cassis */
+}
+
+/* ─── Minimal intro band (above About): teaser "Coduri dedicate…" ─── */
+.kluppi-band {
+  background-color: #FFF0BC; /* Lemon Sorbet */
+  text-align: center;
+  padding: 7.5rem 5%;
+}
+.kluppi-band-inner {
+  max-width: 60rem;
+  margin-inline: auto;
+}
+.kluppi-band-title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700; /* bold — overrides .text-size-large's 500 by source order */
+  color: #351E28; /* Cassis */
+  font-size: 2rem; /* desktop/tablet; ≤767px → 1.5rem (keeps the ~0.75 proportion) */
+}
+.kluppi-band-sub {
+  margin-top: 1rem;
+  font-family: "Switzer", sans-serif;
+  font-weight: 300; /* Light */
+  font-size: 1.3rem; /* was 1rem (eyebrow size); bumped per request */
+  color: #FF5B22; /* Dare Devil */
+}
+@media (max-width: 767px) {
+  .kluppi-band { padding: 5.25rem 5%; } /* 3.5rem × 1.5, matching the desktop bump */
+  .kluppi-band-title { font-size: 1.5rem; } /* 2rem × 0.75 */
 }

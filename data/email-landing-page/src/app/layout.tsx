@@ -31,7 +31,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <link
-          href="https://api.fontshare.com/v2/css?f[]=switzer@200,400,500,600&display=swap"
+          href="https://api.fontshare.com/v2/css?f[]=switzer@200,300,400,500,600&display=swap"
           rel="stylesheet"
         />
       </head>

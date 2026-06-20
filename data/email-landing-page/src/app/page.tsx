@@ -259,6 +259,17 @@ export default function Home() {
           </div>
         </header>
 
+        <section className="kluppi-band">
+          <div className="kluppi-band-inner">
+            <p className="text-size-large kluppi-band-title" data-reveal>
+              Coduri dedicate · Doar pentru membri · Exact pe gustul tău
+            </p>
+            <p className="kluppi-band-sub" data-reveal style={{ "--reveal-delay": "0.1s" } as React.CSSProperties}>
+              Te alături acum? Primești o surpriză specială la lansare.
+            </p>
+          </div>
+        </section>
+
         <section className="section-about background-black" id="about">
           <div className="padding-global">
             <div className="container-large">

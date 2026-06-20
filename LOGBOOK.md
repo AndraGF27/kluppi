@@ -19,6 +19,29 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-20 — Intro band tweaks + lighten 200 weights (requested)
+
+**`src/app/globals.css`**
+1. All extra-light `font-weight: 200` → `300` (light) for readability: `.kluppi-hero-eyebrow` and `.kluppi-hero-trust`. (Switzer 300 already loaded.)
+2. `.kluppi-band-title` font-size → `2rem` desktop/tablet, `1.5rem` ≤767px (keeps ~0.75 proportion; overrides the inherited `.text-size-large` size).
+3. `.kluppi-band-sub` font-size `1rem` → `1.3rem`.
+4. `.kluppi-band` padding `5rem` → `7.5rem` (≤767px `3.5rem` → `5.25rem`, scaled ×1.5 to match).
+
+### 2026-06-20 — New minimal intro band above About (requested)
+
+First section of the teaser rebuild (see the section plan). New section inserted between the hero and `section-about`.
+
+**`src/app/page.tsx`**
+- Added `<section className="kluppi-band">` above `.section-about`, with two centered lines: title "Coduri dedicate · Doar pentru membri · Exact pe gustul tău" (`.text-size-large kluppi-band-title`) and sub "Te alături acum? Primești o surpriză specială la lansare." (`.kluppi-band-sub`). Both use the existing `data-reveal` entrance.
+
+**`src/app/layout.tsx`**
+- Added weight `300` to the Switzer font load (`switzer@200,400,500,600` → `…200,300,400,500,600`) for the Light sub-line.
+
+**`src/app/globals.css`**
+- `.kluppi-band`: Lemon Sorbet background, centered, `5rem` vertical padding (`3.5rem` ≤767px). `.kluppi-band-inner` max-width 60rem, centered.
+- `.kluppi-band-title`: Bricolage Grotesque bold (700), Cassis; size inherited from `.text-size-large` (matches the hero body under the H1).
+- `.kluppi-band-sub`: Switzer Light (300), Dare Devil, `1rem` (matches the hero eyebrow).
+
 ### 2026-06-19 — Hero section rebrand (requested)
 
 Scope: hero `<header id="top">` only. Background, copy, H1/body typography, and CTA changed per request. Nothing outside the hero was altered. The template's parallax image columns inside the hero were left untouched (pending decision).
