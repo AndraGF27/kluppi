@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import PainPointsCarousel from "./PainPointsCarousel";
 
 const LOGO =
   "https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66ac8dae2b34c047cf51afab_Profile%20X_Logo%20Light.svg";
@@ -267,6 +268,23 @@ export default function Home() {
             <p className="kluppi-band-sub" data-reveal style={{ "--reveal-delay": "0.1s" } as React.CSSProperties}>
               Te alături acum? Primești o surpriză specială la lansare.
             </p>
+          </div>
+        </section>
+
+        <section className="kluppi-painpoints">
+          <div className="kluppi-painpoints-inner">
+            <h2 className="kluppi-painpoints-heading" data-reveal>De câte ori ai…</h2>
+            <PainPointsCarousel />
+            <div className="kluppi-painpoints-outro" data-reveal>
+              <p className="kluppi-painpoints-lead">
+                Nu ți s-a întâmplat doar ție. A devenit din ce în ce mai rară senzația că plătești prețul corect atunci când cumperi online.
+              </p>
+              <p className="kluppi-painpoints-lead">
+                Noi ne-am săturat de toate astea. Și am creat Kluppi: prietenul care are mereu un cod de reducere bun, exact când îți trebuie.
+              </p>
+              <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+              <p className="kluppi-painpoints-note">Rapid, doar cu nume și e-mail.</p>
+            </div>
           </div>
         </section>
 

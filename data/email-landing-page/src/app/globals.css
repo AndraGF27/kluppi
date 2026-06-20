@@ -261,3 +261,107 @@ html {
   .kluppi-band { padding: 5.25rem 5%; } /* 3.5rem × 1.5, matching the desktop bump */
   .kluppi-band-title { font-size: 1.5rem; } /* 2rem × 0.75 */
 }
+
+/* ─── Pain-points carousel ("De câte ori ai…") — under the intro band ─── */
+.kluppi-painpoints {
+  background-color: #FFF0BC; /* Lemon Sorbet */
+  padding: 6rem 5%;
+}
+.kluppi-painpoints-inner {
+  max-width: 75rem;
+  margin-inline: auto;
+  text-align: left;
+}
+.kluppi-painpoints-heading {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  color: #FF5B22; /* Dare Devil */
+  font-size: clamp(2rem, 5vw, 3.5rem); /* matches the section-about/stats h2 */
+  line-height: 1.05;
+  margin-bottom: 2rem;
+}
+
+/* Carousel band — PainPoints image as background; white cards + arrows on top */
+.kluppi-carousel {
+  background-image: url("/PainPoints.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 3rem;
+}
+.kluppi-carousel-viewport { overflow: hidden; }
+.kluppi-carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.kluppi-carousel-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  display: flex; /* card left-aligned; slides stretch to equal height */
+}
+.kluppi-carousel-card {
+  width: 100%;
+  max-width: 40rem;
+  background-color: #FFFFFF;
+  padding: 2.5rem;
+  box-shadow: 0 12px 30px rgba(53, 30, 40, 0.12);
+}
+.kluppi-carousel-text {
+  font-family: "Switzer", sans-serif;
+  font-weight: 500;
+  color: #351E28; /* Cassis */
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  line-height: 1.45;
+  text-align: left;
+}
+.kluppi-carousel-arrows {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.kluppi-carousel-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #351E28; /* Cassis */
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+.kluppi-carousel-arrow:hover { background-color: #FFFFFF; }
+.kluppi-carousel-arrow:disabled { opacity: 0.4; cursor: default; }
+
+/* Outro + CTA — left-aligned on Lemon, like the stats intro paragraph */
+.kluppi-painpoints-outro {
+  max-width: 45rem;
+  margin-top: 3rem;
+  text-align: left;
+}
+.kluppi-painpoints-lead {
+  font-family: "Switzer", sans-serif;
+  font-weight: 400;
+  color: #351E28; /* Cassis */
+  font-size: 1.125rem; /* text-size-medium */
+  line-height: 1.55;
+}
+.kluppi-painpoints-lead + .kluppi-painpoints-lead { margin-top: 1rem; }
+.kluppi-painpoints-outro .kluppi-hero-cta { margin-top: 2rem; }
+.kluppi-painpoints-note {
+  margin-top: 1rem;
+  font-family: "Switzer", sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  color: #351E28; /* Cassis */
+  opacity: 0.75;
+}
+
+@media (max-width: 767px) {
+  .kluppi-painpoints { padding: 4rem 5%; }
+  .kluppi-carousel { padding: 1.5rem; }
+  .kluppi-carousel-card { max-width: none; padding: 1.75rem; }
+  .kluppi-carousel-text { font-size: 1.125rem; }
+  .kluppi-painpoints-lead { font-size: 1rem; }
+}

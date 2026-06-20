@@ -19,6 +19,38 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-20 — Pain-points carousel section ("De câte ori ai…") (requested)
+
+New section inserted under `.kluppi-band`, built in the style of the Webflow `w-slider` the user referenced (centered slide, side arrows, dots) but as a working React carousel (Webflow's slider JS isn't in this project). Background adapted to Cassis for contrast (user granted latitude on bg/fonts/colors).
+
+**`src/app/PainPointsCarousel.tsx`** (new file, client component)
+- React carousel: 4 slides (the teaser pain points), `translateX` track with 0.5s transition, prev/next arrows (disabled at ends, non-infinite like the reference), dot nav. Each slide has a Lucide icon (`Tag`, `BadgePercent`, `Truck`, `Timer`) + the question text. Arrows use Lucide `ArrowLeft`/`ArrowRight`. Inactive slides `aria-hidden`.
+
+**`src/app/page.tsx`**
+- Imported `PainPointsCarousel`; added `<section className="kluppi-painpoints">` between `.kluppi-band` and `.section-about`: H2 "De câte ori ai…", the carousel, the two closing paragraphs, and a CTA ("Rezervă-ți locul în club" reusing `.kluppi-hero-cta`) + note "Rapid, doar cu nume și e-mail.".
+
+**`src/app/globals.css`**
+- `.kluppi-painpoints` (Cassis bg, 6rem padding / 4rem mobile) + heading (Bricolage 700, Dare Devil), carousel (viewport/track/slide, Dare Devil arrows & active dot, Lemon Sorbet text & muted dots), and outro/CTA/note styling.
+
+Typecheck (`tsc --noEmit`) passes. Note: lucide-react is a new import — dev server may need a restart to resolve it.
+
+### 2026-06-20 — Redesign pain-points carousel to match reference (requested)
+
+Reworked the carousel aesthetic to match the Webflow testimonial example the user shared.
+
+**`public/`**
+- Added `PainPoints.jpg` (shopping-bags lifestyle photo) from `~/Downloads/`.
+
+**`src/app/PainPointsCarousel.tsx`**
+- Removed per-slide Lucide icons and the dot nav. Slides are now plain text in white cards. Kept one-card-at-a-time `translateX` track + prev/next arrows; arrows moved into a bottom-left row (`.kluppi-carousel-arrows`).
+
+**`src/app/globals.css`** (replaced the whole pain-points block)
+- Section background Cassis → Lemon Sorbet; everything left-aligned. Heading left-aligned, Dare Devil, sized to match `heading-style-h2` (clamp → 3.5rem).
+- Carousel band now uses `/PainPoints.jpg` as `background-size: cover` background; white left-aligned cards (`max-width: 40rem`, shadow) slide over it. Arrows are circular, light, bottom-left.
+- Outro/lead/CTA/note left-aligned, Cassis on Lemon, `text-size-medium` sizing (like the stats intro paragraph).
+
+Typecheck passes. (Page markup in `page.tsx` unchanged — only styling + component internals.)
+
 ### 2026-06-20 — Intro band tweaks + lighten 200 weights (requested)
 
 **`src/app/globals.css`**
