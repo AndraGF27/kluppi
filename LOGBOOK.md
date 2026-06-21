@@ -19,6 +19,19 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-21 — Steps line 1px + navbar menu rebuilt (RO items, Cassis 3rem) (requested)
+
+**1. Steps timeline line → 1px (`src/app/globals.css`)**
+- `.kluppi-steps-line` `width: 3px` → `1px` (radius `3px` → `1px` to match). JS only sets the track's top/height + the fill height, so the CSS width change is all that's needed; dots/fill colour unchanged.
+
+**2. Navbar full-screen menu rebuilt (`src/app/page.tsx` + `globals.css`)** — also clears the long-standing dead `#about`/`#work` links + English labels (Home/About/Projects/Contact).
+- Replaced the 4 old links with 5 RO items: **Înscrie-te în club** → `#contact` (the form section), **Cum funcționează** → `#cum-functioneaza`, **Întrebări frecvente** → `#intrebari-frecvente`, **Devino partener** → JS-assembled `mailto:partners@kluppi.com`, **Contact** → JS-assembled `mailto:hello@kluppi.com`. Each still closes the menu (`setMenuOpen(false)`); all keep the `navbar-link w-nav-link` classes.
+- Added section anchors so the in-page links resolve: `id="cum-functioneaza"` on `.kluppi-steps`, `id="intrebari-frecvente"` on `.kluppi-faq` (the form already had `id="contact"`).
+- Mailto items reuse the footer's anti-scrape pattern: new `partnersHref` state alongside `contactHref`, both set in the mount effect from parts (`["partners","kluppi.com"].join("@")` / `["hello",…]`) — no contiguous address in HTML or JS; `onClick` fallback for the pre-effect window.
+- `globals.css`: `.navbar-menu .navbar-link` gets `font-size: 3rem` (overrides the template's 5rem). Colour was already Cassis `#351E28`; weight left at the template's 600.
+
+Typecheck (`tsc --noEmit`) passes. Verified all three in-page anchors exist, no `#about`/`#work`/EN labels remain, and `partners@kluppi.com` is not contiguous in `src/`.
+
 ### 2026-06-21 — Pain-points carousel slide text → Switzer 300 (requested)
 
 **`src/app/globals.css`**

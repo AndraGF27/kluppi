@@ -74,13 +74,16 @@ export default function Home() {
   const [status, setStatus] = useState<SubmitState>("idle");
   const [message, setMessage] = useState("");
 
-  // Contact email assembled client-side from parts, so the literal address is in
-  // neither the server-rendered HTML nor a single JS string — stops the naive
-  // HTML-scraping bots that harvest most spam targets. (Set after mount, so the
-  // first client render matches the server: no href → no hydration mismatch.)
+  // Contact + partner emails assembled client-side from parts, so the literal
+  // addresses are in neither the server-rendered HTML nor a single JS string —
+  // stops the naive HTML-scraping bots that harvest most spam targets. (Set after
+  // mount, so the first client render matches the server: no href → no hydration
+  // mismatch.)
   const [contactHref, setContactHref] = useState<string>();
+  const [partnersHref, setPartnersHref] = useState<string>();
   useEffect(() => {
     setContactHref(`mailto:${["hello", "kluppi.com"].join("@")}`);
+    setPartnersHref(`mailto:${["partners", "kluppi.com"].join("@")}`);
   }, []);
 
   useEffect(() => {
@@ -198,10 +201,36 @@ export default function Home() {
             >
               <div className="navbar-menu-wrapper">
                 <div className="navbar-links-wrapper">
-                  <a href="#top" aria-current="page" className="navbar-link w-nav-link w--current" onClick={() => setMenuOpen(false)}>Home</a>
-                  <a href="#about" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>About</a>
-                  <a href="#work" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Projects</a>
-                  <a href="#contact" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Contact</a>
+                  <a href="#contact" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Înscrie-te în club</a>
+                  <a href="#cum-functioneaza" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Cum funcționează</a>
+                  <a href="#intrebari-frecvente" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Întrebări frecvente</a>
+                  <a
+                    href={partnersHref}
+                    className="navbar-link w-nav-link"
+                    onClick={(e) => {
+                      // Fallback for the (tiny) window before the effect sets the href.
+                      if (!partnersHref) {
+                        e.preventDefault();
+                        window.location.href = `mailto:${["partners", "kluppi.com"].join("@")}`;
+                      }
+                      setMenuOpen(false);
+                    }}
+                  >
+                    Devino partener
+                  </a>
+                  <a
+                    href={contactHref}
+                    className="navbar-link w-nav-link"
+                    onClick={(e) => {
+                      if (!contactHref) {
+                        e.preventDefault();
+                        window.location.href = `mailto:${["hello", "kluppi.com"].join("@")}`;
+                      }
+                      setMenuOpen(false);
+                    }}
+                  >
+                    Contact
+                  </a>
                 </div>
               </div>
             </nav>
@@ -332,7 +361,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="kluppi-steps">
+        <section className="kluppi-steps" id="cum-functioneaza">
           <div className="kluppi-steps-inner">
             <h2 className="kluppi-steps-heading" data-reveal>Cum funcționează?</h2>
             <HowItWorks />
@@ -397,7 +426,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="kluppi-faq">
+        <section className="kluppi-faq" id="intrebari-frecvente">
           <div className="kluppi-faq-inner">
             <h2 className="kluppi-faq-heading" data-reveal>Întrebări frecvente</h2>
             <div className="kluppi-faq-list" data-reveal>

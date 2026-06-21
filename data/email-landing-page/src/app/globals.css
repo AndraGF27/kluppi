@@ -207,6 +207,7 @@ html {
 .navbar-menu .navbar-link {
   color: #351E28; /* Cassis — also overrides .navbar-link.w--current */
   font-family: "Switzer", sans-serif;
+  font-size: 3rem; /* overrides the template's 5rem */
   text-transform: none; /* sentence case */
 }
 
@@ -575,8 +576,8 @@ html {
   /* JS sets top/height to span first→last dot; these are a visible fallback if it doesn't */
   top: 0;
   bottom: 0;
-  width: 3px;
-  border-radius: 3px;
+  width: 1px;
+  border-radius: 1px;
   background-color: rgba(53, 30, 40, 0.22); /* faded Cassis track */
   z-index: 0;
 }
