@@ -19,6 +19,28 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-21 — Pain-points carousel slide text → Switzer 300 (requested)
+
+**`src/app/globals.css`**
+- `.kluppi-carousel-text` (the text on all 4 `.kluppi-carousel-slide` cards) `font-weight: 500` → `300` (Light). Size/colour/alignment unchanged.
+
+Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-21 — Footer social links → Switzer 300 (requested)
+
+**`src/app/globals.css`**
+- `.kluppi-footer-social` (Facebook · Instagram · LinkedIn · Contact) `font-weight: 500` → `300` (Light). All four links share this class, so they change together. Size/colour/hover unchanged.
+
+Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-21 — Footer: top divider + Contact (anti-scrape mailto) link (requested)
+
+**`src/app/page.tsx`** (footer only)
+- Added a second `<div className="kluppi-footer-divider" />` as the first child of `.kluppi-footer-inner` (above the logo) — reuses the existing divider style, so it matches the one between the socials and the legal row.
+- Appended a `Contact` link to the socials line (now Facebook · Instagram · LinkedIn · Contact), as a **JS-assembled `mailto:`** (user chose this over a plain one to cut email scraping). A new `contactHref` state is set in a mount `useEffect` to ``mailto:${["hello","kluppi.com"].join("@")}``, so the literal address is in **neither the server-rendered HTML nor a single JS string** — defeats the naive HTML-harvesting bots that do most scraping. `href` is `undefined` on the server / first client render (so no hydration mismatch), then filled after mount; an `onClick` fallback assembles it for the tiny pre-effect window. Tradeoff: the link needs JS to work (consistent with the rest of the page, which already does).
+
+Typecheck (`tsc --noEmit`) passes. Verified the contiguous string `hello@kluppi.com` appears nowhere in `src/`.
+
 ### 2026-06-21 — Fix black SplitBanner background (regression from the rename pass)
 
 The tagline banner above the footer (`SplitBanner.tsx`) went black. Cause: the previous rename pass removed `.section-banner-cta` from the old recolour block believing it was a deleted section — but `SplitBanner` still wore that class, and the template defines `.section-banner-cta { background-color: var(--black) }`. With the Lemon override gone, the black showed through.

@@ -326,7 +326,7 @@ html {
 }
 .kluppi-carousel-text {
   font-family: "Switzer", sans-serif;
-  font-weight: 500;
+  font-weight: 300;
   color: #351E28; /* Cassis */
   font-size: 1.3rem;
   line-height: 1.45;
@@ -816,7 +816,7 @@ html {
 }
 .kluppi-footer-social {
   font-family: "Switzer", sans-serif;
-  font-weight: 500;
+  font-weight: 300;
   font-size: 1.125rem;
   color: #351E28; /* Cassis */
   transition: color 0.15s ease;

@@ -74,6 +74,15 @@ export default function Home() {
   const [status, setStatus] = useState<SubmitState>("idle");
   const [message, setMessage] = useState("");
 
+  // Contact email assembled client-side from parts, so the literal address is in
+  // neither the server-rendered HTML nor a single JS string — stops the naive
+  // HTML-scraping bots that harvest most spam targets. (Set after mount, so the
+  // first client render matches the server: no href → no hydration mismatch.)
+  const [contactHref, setContactHref] = useState<string>();
+  useEffect(() => {
+    setContactHref(`mailto:${["hello", "kluppi.com"].join("@")}`);
+  }, []);
+
   useEffect(() => {
     const wrapper = componentRef.current;
     const left = leftListRef.current;
@@ -488,6 +497,7 @@ export default function Home() {
 
         <footer className="kluppi-footer">
           <div className="kluppi-footer-inner">
+            <div className="kluppi-footer-divider" />
             <a href="#top" aria-current="page" className="kluppi-footer-logo-link">
               <img src="/logo.svg" loading="lazy" alt="Kluppi" className="kluppi-footer-logo" />
             </a>
@@ -495,6 +505,19 @@ export default function Home() {
               {socials.map((s) => (
                 <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="kluppi-footer-social">{s.label}</a>
               ))}
+              <a
+                href={contactHref}
+                className="kluppi-footer-social"
+                onClick={(e) => {
+                  // Fallback for the (tiny) window before the effect sets the href.
+                  if (!contactHref) {
+                    e.preventDefault();
+                    window.location.href = `mailto:${["hello", "kluppi.com"].join("@")}`;
+                  }
+                }}
+              >
+                Contact
+              </a>
             </nav>
             <div className="kluppi-footer-divider" />
             <div className="kluppi-footer-bottom">
