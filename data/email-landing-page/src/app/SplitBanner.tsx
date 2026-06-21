@@ -50,7 +50,7 @@ export default function SplitBanner() {
   }, []);
 
   return (
-    <section className="section-banner-cta kluppi-banner" ref={sectionRef}>
+    <section className="kluppi-banner" ref={sectionRef}>
       <div className="kluppi-banner-inner">
         <p className="kluppi-banner-line1" ref={line1Ref}>
           Cumpără ce voiai oricum.

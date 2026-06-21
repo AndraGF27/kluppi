@@ -210,28 +210,30 @@ html {
   text-transform: none; /* sentence case */
 }
 
-/* ─── Below-the-hero sections (excludes footer): Kluppi recolour ─── */
-/* Lemon Sorbet background + Cassis default text (overrides .background-black). */
-.section-about,
-.section-stats,
-.section-portfolio,
-.section-banner-cta,
-.section-contact {
+/* ─── Content sections (benefits / reasons / signup): Kluppi base look ─── */
+/* These replace the template's misleading `section-stats background-black` /
+   `section-contact background-black` wrappers. Lemon Sorbet bg + Cassis default
+   text — set directly (no more black to override). The old recolour block also
+   re-coloured the heading-style, cta-heading and text-colour-grey helper classes
+   plus the now-deleted about/portfolio/banner sections; none of those exist on the
+   page, so those sub-rules were dropped. */
+.kluppi-benefits,
+.kluppi-reasons,
+.kluppi-signup-section {
   background-color: #FFF0BC; /* Lemon Sorbet */
   color: #351E28; /* Cassis */
 }
-
-/* Headings (incl. the grey heading accent + CTA banner headings) → Dare Devil */
-:is(.section-about, .section-stats, .section-portfolio, .section-banner-cta, .section-contact)
-  :is(.heading-style-h2, .heading-style-h3, .heading-style-h5, .heading-style-h6,
-      .cta-heading-top, .cta-heading-bottom, .mid-grey-span) {
-  color: #FF5B22; /* Dare Devil */
+/* Preserve the template's old .section-contact spacing above the signup section */
+.kluppi-signup-section { margin-top: 4rem; }
+@media (max-width: 479px) {
+  .kluppi-signup-section { margin-top: 3rem; }
 }
 
-/* Grey body copy → Cassis */
-:is(.section-about, .section-stats, .section-portfolio, .section-banner-cta, .section-contact)
-  .text-colour-grey {
-  color: #351E28; /* Cassis */
+/* Content column — was the template's `.stats-component` (benefits + reasons) */
+.kluppi-section-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 /* ─── Minimal intro band (above About): teaser "Coduri dedicate…" ─── */
@@ -283,7 +285,7 @@ html {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
   color: #FF5B22; /* Dare Devil */
-  font-size: clamp(2rem, 5vw, 3.5rem); /* matches the section-about/stats h2 */
+  font-size: clamp(2rem, 5vw, 3.5rem); /* matches the other section H2s */
   line-height: 1.05;
 }
 .kluppi-painpoints-heading { grid-column: 1 / 2; grid-row: 1; } /* top-left cell */
@@ -386,9 +388,9 @@ html {
 }
 
 /* ─── Benefits grid ("Ce te aștepta în Kluppi?") — repurposes the stats section ─── */
-/* Section keeps .section-stats (Lemon Sorbet bg from the recolour block). The big
-   numbers/stat cards are dropped; this is a 3×3 grid of 4 benefit cards + 3 images.
-   Two cells are tall: benefit 1 (col 1, rows 1–2) and image 3 (col 3, rows 2–3). */
+/* Now lives in `.kluppi-reasons` (Lemon Sorbet bg from the content-section block);
+   it's the 3-col × 4-row grid of 4 cards + 4 image cells (areas defined below).
+   The original stat numbers/cards were dropped when the stats block was repurposed. */
 .kluppi-benefits-heading {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
@@ -733,6 +735,7 @@ html {
 
 /* ─── Split tagline banner (below the form) — scroll-driven spread ─── */
 .kluppi-banner {
+  background-color: #FFF0BC; /* Lemon Sorbet (was relying on the removed .section-banner-cta override → showed the template's black) */
   overflow: hidden; /* clip the lines while they're pulled toward the centre */
   padding: 6rem 5%;
 }
@@ -774,7 +777,15 @@ html {
 /* ─── Page background: Lemon Sorbet everywhere (no black) ─── */
 /* Target .body (the class on <body>) — it outranks a bare `body` selector, which is
    how the template sets its black page background. */
-.body { background-color: #FFF0BC; }
+.body {
+  background-color: #FFF0BC;
+  /* Default body type → Switzer Light, replacing the template's Manrope 400.
+     The Manrope/Inter loads were removed (layout.tsx). Elements that inherit the
+     default (e.g. .form-input) now render Switzer 300; every explicitly-styled
+     Kluppi element (Bricolage headings, Switzer body) is unaffected. */
+  font-family: "Switzer", sans-serif;
+  font-weight: 300;
+}
 
 /* ─── Footer — minimalist: centered logo + socials, divider, legal + copyright ─── */
 .kluppi-footer {

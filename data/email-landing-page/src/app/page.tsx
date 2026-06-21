@@ -306,11 +306,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section-stats background-black" id="services">
+        <section className="kluppi-benefits" id="services">
           <div className="padding-global">
             <div className="container-large">
               <div className="section-padding-large">
-                <div className="stats-component">
+                <div className="kluppi-section-content">
                   <h2 className="kluppi-benefits-heading" data-reveal>Ce te așteaptă în Kluppi?</h2>
                   <BenefitsCards />
                   <div className="kluppi-benefits-cta-block" data-reveal>
@@ -334,11 +334,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section-stats background-black">
+        <section className="kluppi-reasons">
           <div className="padding-global">
             <div className="container-large">
               <div className="section-padding-large">
-                <div className="stats-component">
+                <div className="kluppi-section-content">
                   <h2 className="kluppi-benefits-heading" data-reveal>Kluppi este pentru tine dacă…</h2>
                   <div className="kluppi-benefits-grid" data-reveal>
                     <article className="kluppi-benefit kluppi-benefit--b1">
@@ -425,7 +425,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section-contact background-black" id="contact">
+        <section className="kluppi-signup-section" id="contact">
           <div className="padding-global">
             <div className="container-large">
               <div className="section-padding-large">

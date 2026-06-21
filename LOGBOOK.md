@@ -19,6 +19,52 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-21 — Fix black SplitBanner background (regression from the rename pass)
+
+The tagline banner above the footer (`SplitBanner.tsx`) went black. Cause: the previous rename pass removed `.section-banner-cta` from the old recolour block believing it was a deleted section — but `SplitBanner` still wore that class, and the template defines `.section-banner-cta { background-color: var(--black) }`. With the Lemon override gone, the black showed through.
+
+**`src/app/SplitBanner.tsx`**
+- Section class `section-banner-cta kluppi-banner` → `kluppi-banner`. The only thing `.section-banner-cta` still provided was the black bg + `overflow:hidden`, and `.kluppi-banner` already sets `overflow:hidden` — so the template class was a pure artefact.
+
+**`src/app/globals.css`**
+- `.kluppi-banner` now sets `background-color: #FFF0BC` (Lemon Sorbet) explicitly, matching every other Kluppi section (instead of relying on a removed override / the body bg).
+
+Typecheck (`tsc --noEmit`) passes. Confirmed no `section-*`/`background-black` template section classes remain in any tsx.
+
+### 2026-06-21 — Rename template section classes → semantic Kluppi names (requested)
+
+Cleaned up the misleading template class names on the 3 repurposed content sections (scope chosen by the user: **these 3 sections only, rename-only** — generic layout utilities `padding-global`/`container-large`/`section-padding-large` and the hero/navbar Webflow scaffolding left untouched). Layout kept pixel-identical.
+
+**`src/app/page.tsx`**
+- Benefits ("Ce te așteaptă în Kluppi?"): `section-stats background-black` → `kluppi-benefits` (kept `id="services"`).
+- Reasons ("Kluppi este pentru tine dacă…"): `section-stats background-black` → `kluppi-reasons`.
+- Signup ("Fii printre primii…"): `section-contact background-black` → `kluppi-signup-section` (kept `id="contact"`).
+- The inner `stats-component` wrapper (×2, benefits + reasons) → `kluppi-section-content`.
+
+**`src/app/globals.css`**
+- Replaced the old "recolour" block (`.section-about, .section-stats, .section-portfolio, .section-banner-cta, .section-contact …`) with a `.kluppi-benefits, .kluppi-reasons, .kluppi-signup-section` block that sets Lemon Sorbet bg + Cassis text directly (no black to override now). **Dropped the dead sub-rules**: the heading→Dare-Devil rule targeted `.heading-style-*`/`.cta-heading-*`/`.mid-grey-span` and the `.text-colour-grey` rule — none of those classes exist in these sections (headings use `kluppi-*`), and `.section-about/-portfolio/-banner-cta` were deleted sections.
+- Preserved the template's `.section-contact` spacing as `.kluppi-signup-section { margin-top: 4rem }` (+ `3rem` ≤479px).
+- Added `.kluppi-section-content { display:flex; flex-direction:column; align-items:flex-start }` — the exact behaviour the old `.stats-component` provided (the benefits-row spread relies on it).
+- Fixed two now-stale comments that referenced `.section-stats` / `section-about`.
+
+Typecheck (`tsc --noEmit`) passes. Verified no `section-stats`/`background-black`/`stats-component`/`section-contact` class usages remain in tsx/globals (only explanatory comments). webflow.css untouched (its `.background-black`/`.stats-component` rules are now simply unused).
+
+**Flag:** the navbar full-screen menu still has dead `#about`/`#work` anchors + EN labels (Home/About/Projects/Contact), and the hero/navbar still wear Webflow scaffolding classes — both deliberately out of this pass's scope.
+
+### 2026-06-21 — Kill template fonts: default → Switzer 300, drop Manrope/Inter (requested)
+
+Removed the template's default typography artefacts. The page's default body font was the template's **Manrope 400**; switched it to **Switzer 300 (Light)** and stopped loading the unused webfonts.
+
+**`src/app/layout.tsx`**
+- Removed the `<link>` that loaded `Inter` + `Manrope` from Google Fonts. **Inter** was never referenced by any selector (pure artefact); **Manrope** was only the template's default/`h1`–`h6`/`.stat-number`/`.navbar-link` font — all of which are either overridden on-page (every heading uses Bricolage; `.navbar-menu .navbar-link` uses Switzer) or unused (`.stat-number`). Bricolage + Switzer loads kept.
+
+**`src/app/globals.css`**
+- `.body` now sets `font-family: "Switzer", sans-serif; font-weight: 300` (was just the Lemon background). `.body` (class) outranks the template's `body { font-family: Manrope }` element rule, so this becomes the inherited default.
+
+**Effect:** only text that inherited the default changes — in practice the signup `.form-input` (no font-family of its own) goes Manrope 400 → Switzer 300. All explicitly-styled Kluppi text (Bricolage headings, Switzer body at their set weights) is untouched, as requested. webflow.css left untouched (its dead Manrope refs now fall back to sans-serif but nothing renders bare).
+
+Typecheck (`tsc --noEmit`) passes. (Restart not needed — CSS/markup only; but the removed font `<link>` means a hard refresh is worth it to drop the cached Manrope.)
+
 ### 2026-06-21 — Minimalist footer rebuild (requested)
 
 Rebuilt the footer to match the user's reference: centered Kluppi logo, centered social links, a hairline divider, then legal links (left) + copyright (right). Replaced the whole template footer markup + the dead `Home/About/Projects/Contact` nav links (clears the footer's dead `#about`/`#work` anchors).
