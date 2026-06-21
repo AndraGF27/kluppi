@@ -241,7 +241,7 @@ html {
 .kluppi-band {
   background-color: #FFF0BC; /* Lemon Sorbet */
   text-align: center;
-  padding: 7.5rem 5%;
+  padding: 15rem 5% 7.5rem; /* top 15rem, sides 5%, bottom 7.5rem */
 }
 .kluppi-band-inner {
   max-width: 60rem;

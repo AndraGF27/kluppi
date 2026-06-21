@@ -19,6 +19,22 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-21 — Intro band: top padding 15rem (requested)
+
+**`src/app/globals.css`**
+- `.kluppi-band` `padding: 7.5rem 5%` → `padding: 15rem 5% 7.5rem` (top 15rem, sides 5%, bottom stays 7.5rem).
+- Left the `≤767px` override (`padding: 5.25rem 5%`) untouched — mobile top/bottom stay 5.25rem as before. Flag if you also want the mobile top bumped.
+
+Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-21 — Benefits cards: swap 3 icons (requested)
+
+**`src/app/BenefitsCards.tsx`**
+- "Beneficii noi, în fiecare lună" `Gift` → `Calendar`; "Oferte relevante pentru tine" `Target` → `UserStar`; "Acces gratuit în club" `Ticket` → `Gift`. "Mai multă încredere la checkout" keeps `ShieldCheck` (not in the request).
+- Import line now `ShieldCheck, Calendar, UserStar, Gift`; dropped the now-unused `Target`/`Ticket`. Confirmed all four are exported by the installed `lucide-react` (1.21.0), incl. the newer `UserStar`. No new dep (lucide-react already installed); strokeWidth 1.5 unchanged.
+
+Typecheck (`tsc --noEmit`) passes.
+
 ### 2026-06-21 — Steps line 1px + navbar menu rebuilt (RO items, Cassis 3rem) (requested)
 
 **1. Steps timeline line → 1px (`src/app/globals.css`)**

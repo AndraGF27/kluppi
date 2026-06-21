@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ShieldCheck, Gift, Target, Ticket } from "lucide-react";
+import { ShieldCheck, Calendar, UserStar, Gift } from "lucide-react";
 
 const benefits = [
   {
@@ -10,17 +10,17 @@ const benefits = [
     desc: "Nu ar trebui să te întrebi de fiecare dată dacă oferta este reală sau dacă prețul a fost umflat înainte să fie redus. Noi discutăm direct cu brandurile și verificăm fiecare beneficiu înainte să ajungă la tine.",
   },
   {
-    Icon: Gift,
+    Icon: Calendar,
     title: "Beneficii noi, în fiecare lună",
     desc: "Nu suntem un site de cupoane care adaugă oferte din când în când. Aducem periodic avantaje și branduri noi în club, pentru ca tu să poți cumpăra smart exact atunci când ai nevoie.",
   },
   {
-    Icon: Target,
+    Icon: UserStar,
     title: "Oferte relevante pentru tine",
     desc: "Fiecare mesaj pe care îl primești trebuie să conteze. Tu alegi categoriile care te interesează, iar noi îți trimitem avantajele relevante pentru tine.",
   },
   {
-    Icon: Ticket,
+    Icon: Gift,
     title: "Acces gratuit în club",
     desc: "Nu trebuie să plătești ca să îți rezervi locul sau să obții oferte din categoria preferată. Te înscrii rapid și ai acces gratuit la Kluppi odată ce lansăm. Și dacă te răzgândești, te dezabonezi și gata.",
   },
