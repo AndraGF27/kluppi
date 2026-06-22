@@ -6,7 +6,7 @@ import { ShieldCheck, Calendar, UserStar, Gift } from "lucide-react";
 const benefits = [
   {
     Icon: ShieldCheck,
-    title: "Mai multă încredere la checkout",
+    title: "Încredere la checkout",
     desc: "Nu ar trebui să te întrebi de fiecare dată dacă oferta este reală sau dacă prețul a fost umflat înainte să fie redus. Noi discutăm direct cu brandurile și verificăm fiecare beneficiu înainte să ajungă la tine.",
   },
   {

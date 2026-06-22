@@ -19,6 +19,69 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-22 — Steps line fill orange + benefit cards wrap responsively (requested)
+
+**`src/app/globals.css`**
+- **Steps line fill → Dare Devil.** `.kluppi-steps-line-fill` background `#351E28` (Cassis) → `var(--accent)`, so the line goes orange as it fills with scroll (matching the dots). The unfilled track stays faded Cassis.
+- **Benefit cards responsive reflow.** Replaced the `≤991px → single column` rule with a flex-wrap reflow: `.kluppi-bcards { flex-wrap: wrap }` + `.kluppi-bcard { flex: 1 1 14rem; min-width: 14rem; min-height: 0 }`. As the screen narrows below the desktop 4-up scroll-spread, the cards now go **3-in-a-row + 1 full-width → 2×2 → single column** (the lone wrapped card grows to fill its row). Desktop (>991px) keeps the single-row scroll-spread unchanged; the JS still clears the transform ≤991px so the cards sit in their natural wrapped positions.
+
+Typecheck (`tsc --noEmit`) passes; CSS balanced.
+
+### 2026-06-22 — Steps dots: absolute positioning (real fix) + Arctic surprise card (requested)
+
+**Steps dots (`src/app/globals.css`).** The grid `align-items: start` + dot `margin-top` was landing the dots at *inconsistent* offsets across the varied card heights (desktop screenshot: some dots aligned, some sat high). Replaced the grid-based dot positioning with **absolute positioning** so every dot is pinned to a fixed offset from its step's top — i.e. always level with the card's "Pasul 0X" row.
+- `.kluppi-step`: `grid-template-columns: 1fr auto 1fr` → `1fr 1.125rem 1fr` (fixed centre col = dot width, so cards don't shift); added `position: relative`; dropped `align-items: start` and the `.kluppi-step-dot { grid-column: 2 }` rule.
+- `.kluppi-step-dot`: now `position: absolute; top: 1.75rem; left: var(--line-x); margin-left: -0.5625rem` (centres on the line via margin, NOT a transform — the JS owns `transform: scale()`). `top` is the single tunable knob for both desktop and mobile.
+- Mobile: card → `grid-column: 2` (col 1 reserves the line lane); the absolute dot rides `--line-x: 1.25rem`. The JS line still measures dot centres via `getBoundingClientRect`, so it follows.
+
+**Arctic surprise card.** Added `--arctic: #AEE6ED` to `:root`; `.kluppi-band-sub` (the "Te alături acum? Primești o surpriză specială la lansare." card) background `var(--surprise)` (Royal) → `var(--arctic)`.
+
+Typecheck (`tsc --noEmit`) passes; CSS balanced.
+
+### 2026-06-22 — Steps dots (mobile) + pain-close heading size (requested)
+
+**`src/app/globals.css`**
+- **Steps dots on mobile.** The ≤767px rule still pinned `.kluppi-step-dot { margin-top: 0.5rem }`, sitting the dot ~1.25rem above the card's "Pasul 0X" row (the screenshot was the mobile layout — line left, cards right). Dropped that override so mobile uses the base `1.75rem` and the dot lines up with the card top, same as desktop.
+- **Pain-close headings.** "Nu ți s-a întâmplat doar ție." / "Noi ne-am săturat de toate astea." (`.kluppi-painpoints-h2`) were rendering at the full `--fs-h2` clamp (up to 3.25rem). Set to **2rem desktop / 1.5rem ≤767px** to match the intro band title ("Coduri dedicate · …"). (Reverts the spec §7.1 full-H2 sizing for these two; colour stays Cassis.)
+
+Typecheck (`tsc --noEmit`) passes.
+
+### 2026-06-22 — Design-spec follow-up fixes (requested)
+
+Five corrections after reviewing the spec pass:
+
+**`src/app/globals.css`**
+1. **H1 restored to pre-spec sizing.** `.kluppi-hero-h1` font-size back to `clamp(2rem, 7.52vw + 0.24rem, 4.9rem)`; removed the spec's `max-width: 18ch` + `line-height: 1.03`. Also removed the `.kluppi-hero .text-align-center { max-width: 50rem }` column cap. Those two caps together had wrapped the headline to ~4 lines on desktop.
+2. **Steps dots top-aligned.** `.kluppi-step` `align-items: center` → `start`; `.kluppi-step-dot` gets `margin-top: 1.75rem` so it lines up with the card's top row ("Pasul 0X"). The JS line re-measures dot centres, so the track follows. (margin-top is tunable.)
+3. **"Pasul 0X" → Dare Devil.** `.kluppi-step-label` color `var(--text)` → `var(--accent)` (reverted the spec's Cassis recolour). Weight stays 300/uppercase/.12em per spec — say the word if you want the old bold 600 back too.
+4. **Signup heading on one line.** Removed the spec's `.kluppi-signup-section .container-large { max-width: 46rem }` cap (it had wrapped "Fii printre primii care află când lansăm."). Signup now uses the standard 75rem; form stays 30rem. (One line on standard desktop; may wrap on a <~1200px laptop — flag if so and I'll widen it or trim the size.)
+
+**`src/app/BenefitsCards.tsx`**
+5. First benefit card title "Mai multă încredere la checkout" → **"Încredere la checkout"**.
+
+CSS integrity verified (braces 181/181, comments 174/174). Typecheck (`tsc --noEmit`) passes. Still not backed up — pending your review of this + the spec pass.
+
+### 2026-06-21 — Apply the locked Kluppi design spec (tokens + type + color + spacing) (requested)
+
+Applied the "Claude Design" locked spec to **production** (`globals.css` only — no markup change). Per the user's call: full token/type/color/spacing/card system, **but keep the signature interactions** (benefits scroll-spread, reasons photo-grid, hero parallax), and **flag** (don't auto-revert) the 15rem intro-band top.
+
+**`src/app/globals.css`**
+- **Tokens (§1):** added a `:root` block — colors (`--bg/--text/--accent/--link-hover/--surprise/--card/--hairline/--shadow-card`), fonts (`--font-display/--font-body`), sizes (`--fs-display/-h2/-h3/-lead/-body/-small/-caption`), radii (`--radius-card/-pill`), and the shared `--gutter`. Swept existing rules onto these tokens (font sizes, card shadow, 6px/100px radii, `#FFFFFF` card surfaces).
+- **Global (§0):** `.body` now sets `color: var(--text)`; added `h1,h2,h3 { text-wrap: balance }`, `p { text-wrap: pretty }`, and `::selection` (accent bg / white).
+- **Type scale (§3):** H1 → `--fs-display` (clamp 2.5–4.5), lh 1.03, `max-width:18ch`. All section H2 → `--fs-h2` (clamp 2–3.25). H3 card titles (bcard/benefit/step) → `--fs-h3` 1.5rem, lh 1.15. Hero subhead → 1.4rem/400, max-width 42rem. Intro/standalone body (pain-close, signup-text) → `--fs-body` 1.25rem, lh 1.55. Eyebrow + "Pasul" label → `--fs-caption` .85rem, ls .12em. FAQ question → 1.25rem/500. CTA microcopy → 1rem. Footer legal → .85rem.
+- **Color (§6/§7):** hyperlink hover → Electric `--link-hover` (footer social + legal + nav menu items; were Dare Devil). Intro sub-line restyled as the **surprise card** (`--surprise` #DBB8FF bg, Cassis text, padding 1.5rem 2.25rem). pain-close H2s now H2-sized + Cassis (was fixed 2rem). Buttons: `--accent` fill, padding 1.05rem 2.2rem, hover opacity .92, flat 1.25rem (dropped the desktop bump).
+- **Spacing (§4) / widths (§5):** standardized the horizontal gutter by overriding the template utilities globally — `.padding-global` → `var(--gutter)`, `.section-padding-large` → `clamp(4rem,8vw,7rem)`, `.container-large` → 75rem (signup → 46rem). Hand-built sections (painpoints/steps/faq/banner/footer) → `clamp(4rem,8vw,7rem) var(--gutter)` (+ footer `clamp(3,6vw,4.5)…2.5rem`); removed their now-redundant ≤767 padding overrides. Hero content padding → `clamp(2.5,5vw,4) / clamp(4,8vw,7)`, hero copy column capped 50rem.
+- **Components (§6):** reasons cards min-height 14rem; benefit-row gap 1.25rem; carousel quote card max-width 42rem; signup inputs min-height 3rem / padding .6rem 1rem.
+
+**Deliberate divergences (flagged):**
+1. **Intro band top kept at 15rem** (spec says clamp 3–6rem) — per the user's earlier explicit request; sides now use the gutter.
+2. **Benefit scroll-spread cards keep `flex:1 1 0` (equal-shrink), not the spec's `flex:1 1 14rem`** — the 14rem wrapping basis is for a wrapping layout; the single-row spread needs equal cards. Visual tokens (padding/gap/shadow/type) still applied.
+3. Reasons keep the 3×4 photo-grid (not the spec's auto-fit cards); hero keeps the parallax columns.
+
+**Notable visual shifts to eyeball:** pain-close headings now larger; "Pasul 0X" labels now Cassis Light (were Dare-Devil bold); intro sub is a lavender card; link hovers are Electric blue; benefits/reasons/signup are narrower (105rem→75rem/46rem) and side gutters are tighter on wide screens (5%→≤2rem).
+
+CSS integrity verified (braces 183/183, comments 173/173, no stray `*/`, no leftover `5%`/literal clamps/shadows). Typecheck (`tsc --noEmit`) passes. Not backed up — pending your visual review.
+
 ### 2026-06-21 — Intro band: top padding 15rem (requested)
 
 **`src/app/globals.css`**

@@ -5,6 +5,36 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ─── Kluppi design tokens (locked spec, 2026-06-21) ─── */
+:root {
+  --bg: #FFF0BC;            /* page background (Lemon Sorbet) */
+  --text: #351E28;          /* body text (Cassis) */
+  --accent: #FF5B22;        /* Dare Devil — H1/H2, button fill */
+  --link-hover: #3939FF;    /* Electric — hyperlink hover only */
+  --surprise: #DBB8FF;      /* Royal */
+  --arctic: #AEE6ED;        /* Arctic — surprise/teaser card */
+  --card: #FFFFFF;
+  --hairline: rgba(53, 30, 40, 0.2);
+  --shadow-card: 0 12px 30px rgba(53, 30, 40, 0.12);
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-body: "Switzer", sans-serif;
+  --fs-display: clamp(2.5rem, 7vw, 4.5rem);  /* H1 hero */
+  --fs-h2: clamp(2rem, 5vw, 3.25rem);
+  --fs-h3: 1.5rem;
+  --fs-lead: 1.4rem;        /* hero subhead */
+  --fs-body: 1.25rem;       /* intro / standalone paragraphs */
+  --fs-small: 1rem;         /* card body + CTA microcopy */
+  --fs-caption: 0.85rem;    /* eyebrow, legal links */
+  --radius-card: 6px;
+  --radius-pill: 100px;
+  --gutter: clamp(1.25rem, 5vw, 2rem);
+}
+
+/* Global rules (spec §0) */
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+::selection { background: var(--accent); color: #FFFFFF; }
+
 /* Entrance fade-in reveal (replaces Webflow's IX2 load animations).
    Elements tagged data-reveal start hidden and animate in when scrolled into view. */
 [data-reveal] {
@@ -78,58 +108,57 @@ html {
 }
 
 .kluppi-hero-eyebrow {
-  font-family: "Switzer", sans-serif;
+  font-family: var(--font-body);
   font-weight: 300; /* light */
-  letter-spacing: 0.18em;
+  font-size: var(--fs-caption); /* 0.85rem */
+  letter-spacing: 0.12em;
   text-transform: uppercase; /* ALL CAPS */
-  color: #351E28; /* Cassis */
+  color: var(--text); /* Cassis */
   margin-bottom: 1.5rem;
 }
 
 .kluppi-hero-h1 {
-  font-family: "Bricolage Grotesque", sans-serif;
+  font-family: var(--font-display);
   font-weight: 700; /* bold */
-  color: #FF5B22; /* Dare Devil */
+  color: var(--accent); /* Dare Devil */
   text-transform: none; /* sentence case */
-  /* Fluid size: ~2rem on small phones → 4.9rem on desktop.
-     Anchored 2rem @375px (keeps the headline to ~4 lines on iPhone SE) and
-     4.9rem @992px. Overrides the template's .heading-style-h1 breakpoints by
-     source order (globals loads after webflow). */
+  /* Restored to the pre-spec sizing — the spec's --fs-display + 18ch cap wrapped
+     the headline to ~4 lines on desktop. No max-width, taller ceiling. */
   font-size: clamp(2rem, 7.52vw + 0.24rem, 4.9rem);
 }
 
 .kluppi-hero-body {
-  font-family: "Switzer", sans-serif;
-  font-weight: 400; /* normal */
-  color: #351E28; /* Cassis */
+  font-family: var(--font-body);
+  font-weight: 400; /* lead / hero subhead */
+  color: var(--text); /* Cassis */
+  font-size: var(--fs-lead); /* 1.4rem */
+  line-height: 1.5;
+  max-width: 42rem;
+  margin-inline: auto;
 }
 
 .kluppi-hero-cta {
   display: inline-block;
-  font-family: "Switzer", sans-serif;
+  font-family: var(--font-body);
   font-weight: 500;
-  font-size: 1.0625rem;
+  font-size: 1.25rem; /* spec: button label (flat, no desktop bump) */
   line-height: 1;
   color: #FFFFFF;
-  background-color: #FF5B22; /* Dare Devil */
-  padding: 1.125rem 2.25rem;
-  border-radius: 100px;
+  background-color: var(--accent); /* Dare Devil */
+  padding: 1.05rem 2.2rem;
+  border-radius: var(--radius-pill);
   transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
-.kluppi-hero-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+.kluppi-hero-cta:hover { opacity: 0.92; transform: translateY(-1px); }
 .kluppi-hero-cta:active { transform: translateY(0); }
 
-@media (min-width: 992px) { /* desktop */
-  .kluppi-hero-cta { font-size: 1.25rem; }
-}
-
 .kluppi-hero-trust {
-  margin-top: 1rem; /* was 1.25rem, −20% */
-  font-family: "Switzer", sans-serif;
+  margin-top: 1rem;
+  font-family: var(--font-body);
   font-weight: 300;
-  font-size: 0.9375rem;
-  color: #351E28; /* Cassis */
+  font-size: var(--fs-small); /* CTA microcopy = 1rem (spec §7.3) */
+  color: var(--text); /* Cassis */
   opacity: 0.7;
 }
 
@@ -181,21 +210,11 @@ html {
   transition: transform 0.2s ease 0.2s;
 }
 
-/* Hero content padding reduced 25% (template: 7 / 6 / 4rem) */
+/* Hero content padding (spec §4). The 50rem copy-column cap was removed — it (with
+   the H1's 18ch cap) squeezed the headline onto ~4 lines on desktop. */
 .kluppi-hero .header-content {
-  padding-top: 5.25rem;    /* 7rem × 0.75 */
-  padding-bottom: 5.25rem;
-}
-@media (max-width: 991px) {
-  .kluppi-hero .header-content {
-    padding-top: 4.5rem;   /* 6rem × 0.75 */
-    padding-bottom: 4.5rem;
-  }
-}
-@media (max-width: 767px) {
-  .kluppi-hero .header-content {
-    padding-top: 3rem;     /* 4rem × 0.75 (top only; bottom stays 4.5rem) */
-  }
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
 }
 
 /* Nav menu (full-screen overlay): Lemon Sorbet bg, Cassis text. Link labels
@@ -210,6 +229,7 @@ html {
   font-size: 3rem; /* overrides the template's 5rem */
   text-transform: none; /* sentence case */
 }
+.navbar-menu .navbar-link:hover { color: var(--link-hover); } /* Electric (spec §6) */
 
 /* ─── Content sections (benefits / reasons / signup): Kluppi base look ─── */
 /* These replace the template's misleading `section-stats background-black` /
@@ -237,11 +257,25 @@ html {
   align-items: flex-start;
 }
 
+/* ─── Spec §0/§4/§5: standardize the template's layout chain to the tokens ───
+   These three template utilities are used only by the hero + the benefits/
+   reasons/signup sections, so overriding them globally hits exactly those. */
+.padding-global { padding-left: var(--gutter); padding-right: var(--gutter); }
+.section-padding-large {
+  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+.container-large { max-width: 75rem; }            /* standard section width */
+/* (spec §5 put signup at 46rem, but that wrapped the heading — kept at 75rem so
+   "Fii printre primii care află când lansăm." stays on one line; form is 30rem.) */
+
 /* ─── Minimal intro band (above About): teaser "Coduri dedicate…" ─── */
 .kluppi-band {
-  background-color: #FFF0BC; /* Lemon Sorbet */
+  background-color: var(--bg);
   text-align: center;
-  padding: 15rem 5% 7.5rem; /* top 15rem, sides 5%, bottom 7.5rem */
+  /* NOTE: spec §4 intro band = clamp(3rem,7vw,6rem); the 15rem top is kept per the
+     user's earlier request (flagged, not auto-reverted). Sides use the gutter. */
+  padding: 15rem var(--gutter) 7.5rem;
 }
 .kluppi-band-inner {
   max-width: 60rem;
@@ -254,21 +288,25 @@ html {
   font-size: 2rem; /* desktop/tablet; ≤767px → 1.5rem (keeps the ~0.75 proportion) */
 }
 .kluppi-band-sub {
-  margin-top: 1rem;
-  font-family: "Switzer", sans-serif;
+  display: inline-block; /* surprise / teaser card (spec §6) */
+  margin-top: 1.5rem;
+  font-family: var(--font-body);
   font-weight: 300; /* Light */
-  font-size: 1.3rem; /* was 1rem (eyebrow size); bumped per request */
-  color: #FF5B22; /* Dare Devil */
+  font-size: var(--fs-body); /* 1.25rem */
+  color: var(--text); /* Cassis on Arctic */
+  background-color: var(--arctic); /* #AEE6ED */
+  padding: 1.5rem 2.25rem;
+  border-radius: var(--radius-card);
 }
 @media (max-width: 767px) {
-  .kluppi-band { padding: 5.25rem 5%; } /* 3.5rem × 1.5, matching the desktop bump */
+  .kluppi-band { padding: 5.25rem var(--gutter); }
   .kluppi-band-title { font-size: 1.5rem; } /* 2rem × 0.75 */
 }
 
 /* ─── Pain-points carousel ("De câte ori ai…") — under the intro band ─── */
 .kluppi-painpoints {
-  background-color: #FFF0BC; /* Lemon Sorbet */
-  padding: 6rem 5%;
+  background-color: var(--bg);
+  padding: clamp(4rem, 8vw, 7rem) var(--gutter); /* spec §4 standard section */
 }
 .kluppi-painpoints-inner {
   max-width: 75rem;
@@ -286,13 +324,13 @@ html {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
   color: #FF5B22; /* Dare Devil */
-  font-size: clamp(2rem, 5vw, 3.5rem); /* matches the other section H2s */
+  font-size: var(--fs-h2); /* matches the other section H2s */
   line-height: 1.05;
 }
 .kluppi-painpoints-heading { grid-column: 1 / 2; grid-row: 1; } /* top-left cell */
 .kluppi-painpoints-conclusion { grid-column: 2 / 3; grid-row: 3; } /* right cell, row 3 */
 .kluppi-painpoints-outro { grid-column: 1 / 2; grid-row: 4; } /* left cell, row 4 (right cell left empty) */
-.kluppi-painpoints-h2 { font-size: 2rem; color: #351E28; } /* fixed size + Cassis (override the shared clamp/Dare Devil); weight 700 from above */
+.kluppi-painpoints-h2 { font-size: 2rem; color: var(--text); } /* match the intro band title size (Cassis, not the full H2 clamp) */
 
 /* Carousel band — PainPoints image as background; white cards + arrows on top */
 .kluppi-carousel {
@@ -301,7 +339,7 @@ html {
   background-image: url("/PainPoints2.jpg");
   background-size: cover;
   background-position: center;
-  border-radius: 6px;
+  border-radius: var(--radius-card);
   padding: 3rem;
 }
 .kluppi-carousel-viewport { overflow: hidden; }
@@ -316,11 +354,11 @@ html {
 }
 .kluppi-carousel-card {
   width: 100%;
-  max-width: 40rem;
-  background-color: #FFFFFF;
-  border-radius: 6px;
+  max-width: 42rem; /* spec §6 carousel quote card */
+  background-color: var(--card);
+  border-radius: var(--radius-card);
   padding: 2.5rem;
-  box-shadow: 0 12px 30px rgba(53, 30, 40, 0.12);
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   justify-content: center; /* centre the text vertically in the (equal-height) card */
@@ -360,9 +398,11 @@ html {
 .kluppi-painpoints-conclusion .kluppi-hero-body,
 .kluppi-painpoints-outro .kluppi-hero-body {
   margin-top: 1rem;
-  font-family: "Switzer", sans-serif;
-  font-size: 1.3rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-body); /* intro/standalone body = 1.25rem */
+  line-height: 1.55;
   font-weight: 300;
+  max-width: none; /* these cells are left-aligned — drop the hero lead's 42rem cap */
 }
 .kluppi-painpoints-outro .kluppi-painpoints-cta {
   margin-top: 1.75rem;
@@ -382,10 +422,10 @@ html {
 }
 
 @media (max-width: 767px) {
-  .kluppi-painpoints { padding: 4rem 5%; }
   .kluppi-carousel { padding: 1.5rem; }
   .kluppi-carousel-card { max-width: none; padding: 1.75rem; }
   .kluppi-carousel-text { font-size: 1.125rem; }
+  .kluppi-painpoints-h2 { font-size: 1.5rem; } /* match the band title's mobile size */
 }
 
 /* ─── Benefits grid ("Ce te aștepta în Kluppi?") — repurposes the stats section ─── */
@@ -396,7 +436,7 @@ html {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
   color: #FF5B22; /* Dare Devil */
-  font-size: clamp(2rem, 5vw, 3.5rem); /* matches the pain-points heading */
+  font-size: var(--fs-h2); /* matches the pain-points heading */
   line-height: 1.05;
   margin-bottom: 3rem;
 }
@@ -427,10 +467,11 @@ html {
   flex-direction: column;
   justify-content: flex-end; /* text sits at the bottom-left of the card */
   gap: 1rem;
-  background-color: #FFFFFF;
-  border-radius: 6px;
+  min-height: 14rem; /* spec §6 reasons card */
+  background-color: var(--card);
+  border-radius: var(--radius-card);
   padding: 2rem;
-  box-shadow: 0 12px 30px rgba(53, 30, 40, 0.12);
+  box-shadow: var(--shadow-card);
 }
 .kluppi-benefit-text {
   display: flex;
@@ -438,11 +479,11 @@ html {
   gap: 0.75rem;
 }
 .kluppi-benefit-title {
-  font-family: "Bricolage Grotesque", sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
-  color: #351E28; /* Cassis */
-  font-size: 1.375rem;
-  line-height: 1.2;
+  color: var(--text); /* Cassis */
+  font-size: var(--fs-h3); /* 1.5rem */
+  line-height: 1.15;
 }
 .kluppi-benefit-desc {
   font-family: "Switzer", sans-serif;
@@ -456,7 +497,7 @@ html {
 .kluppi-benefit-img {
   height: 100%;
   min-height: 14rem;
-  border-radius: 6px;
+  border-radius: var(--radius-card);
   overflow: hidden;
 }
 .kluppi-benefit-img .stat-image {
@@ -465,7 +506,7 @@ html {
   height: 100%;
   min-height: inherit;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: var(--radius-card);
 }
 
 /* CTA + microcopy below the grid — reuses the hero CTA/trust styles, centered */
@@ -493,7 +534,7 @@ html {
    "Kluppi este pentru tine dacă…" still uses.) */
 .kluppi-bcards {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem; /* spec §6 benefit cards */
   align-items: stretch;
 }
 .kluppi-bcard {
@@ -504,10 +545,10 @@ html {
   flex-direction: column;
   justify-content: flex-start; /* all content top-left */
   gap: 1.5rem;
-  background-color: #FFFFFF;
-  border-radius: 6px;
+  background-color: var(--card);
+  border-radius: var(--radius-card);
   padding: 2rem;
-  box-shadow: 0 12px 30px rgba(53, 30, 40, 0.12);
+  box-shadow: var(--shadow-card);
   will-change: transform;
 }
 .kluppi-bcard-icon {
@@ -522,11 +563,11 @@ html {
   gap: 0.75rem;
 }
 .kluppi-bcard-title {
-  font-family: "Bricolage Grotesque", sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
-  color: #351E28; /* Cassis */
-  font-size: 1.3rem;
-  line-height: 1.2;
+  color: var(--text); /* Cassis */
+  font-size: var(--fs-h3); /* 1.5rem */
+  line-height: 1.15;
 }
 .kluppi-bcard-desc {
   font-family: "Switzer", sans-serif;
@@ -536,15 +577,17 @@ html {
   line-height: 1.5;
 }
 @media (max-width: 991px) {
-  /* No room for the 4-up spread — stack vertically (JS disables the transform here) */
-  .kluppi-bcards { flex-direction: column; }
-  .kluppi-bcard { min-height: 0; }
+  /* Below the 4-up spread, the cards wrap responsively as the screen narrows:
+     3-in-a-row + 1 full-width → 2×2 → single column. (The JS clears the scroll
+     transform at this width, so the cards sit in their natural wrapped positions.) */
+  .kluppi-bcards { flex-wrap: wrap; }
+  .kluppi-bcard { flex: 1 1 14rem; min-width: 14rem; min-height: 0; }
 }
 
 /* ─── Steps timeline ("Cum funcționează?") — new alternating, scroll-filled timeline ─── */
 .kluppi-steps {
-  background-color: #FFF0BC; /* Lemon Sorbet */
-  padding: 6rem 5%;
+  background-color: var(--bg);
+  padding: clamp(4rem, 8vw, 7rem) var(--gutter); /* spec §4 standard section */
 }
 .kluppi-steps-inner {
   max-width: 68rem;
@@ -554,7 +597,7 @@ html {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
   color: #FF5B22; /* Dare Devil */
-  font-size: clamp(2rem, 5vw, 3.5rem); /* matches the other section headings */
+  font-size: var(--fs-h2); /* matches the other section headings */
   line-height: 1.05;
   text-align: center;
   margin-bottom: 4rem;
@@ -585,52 +628,59 @@ html {
   width: 100%;
   height: 0%;
   border-radius: 3px;
-  background-color: #351E28; /* Cassis — grows with scroll (only the dots stay Dare Devil) */
+  background-color: var(--accent); /* Dare Devil — the line goes orange as it fills with scroll */
 }
 
 /* Each step is a 3-col row: card | dot | (empty), mirrored for right-side steps */
 .kluppi-step {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr 1.125rem 1fr; /* fixed centre col (dot width) keeps the cards put now the dot is absolute */
   column-gap: 2.5rem;
-  align-items: center;
+  position: relative; /* positioning context for the dot */
 }
-.kluppi-step-dot { grid-column: 2; }
 .kluppi-step--left .kluppi-step-card { grid-column: 1; }
 .kluppi-step--right .kluppi-step-card { grid-column: 3; }
 
 .kluppi-step-dot {
-  position: relative;
+  /* Absolutely positioned on the line at a fixed offset from each step's top, so it
+     ALWAYS lines up with the card's "Pasul 0X" row regardless of the card's height
+     (grid align-items was landing inconsistently across the varied card heights).
+     `top` is the tunable knob. Horizontal centring uses left + margin-left (NOT a
+     transform — the JS sets transform: scale() on the dot). */
+  position: absolute;
+  top: 1.75rem;
+  left: var(--line-x);
+  margin-left: -0.5625rem; /* half the dot width */
   z-index: 1;
   width: 1.125rem;
   height: 1.125rem;
   border-radius: 50%;
-  border: 3px solid #FFF0BC; /* Lemon ring lifts the dot off the line */
+  border: 3px solid var(--bg); /* Lemon ring lifts the dot off the line */
   background-color: rgba(255, 91, 34, 0.25); /* base; JS ramps it 0.25 → 1 with scroll */
 }
 
 .kluppi-step-card {
   width: 100%;
-  background-color: #FFFFFF;
-  border-radius: 6px;
+  background-color: var(--card);
+  border-radius: var(--radius-card);
   padding: 1.75rem 2rem;
-  box-shadow: 0 12px 30px rgba(53, 30, 40, 0.12);
+  box-shadow: var(--shadow-card);
 }
 .kluppi-step-label {
-  font-family: "Switzer", sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-family: var(--font-body);
+  font-weight: 300; /* spec groups the "Pasul" label with the eyebrow */
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-size: 0.8125rem;
-  color: #FF5B22; /* Dare Devil */
+  font-size: var(--fs-caption); /* 0.85rem */
+  color: var(--accent); /* Dare Devil (reverted per request) */
   margin-bottom: 0.75rem;
 }
 .kluppi-step-title {
-  font-family: "Bricolage Grotesque", sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
-  color: #351E28; /* Cassis */
-  font-size: 1.375rem;
-  line-height: 1.2;
+  color: var(--text); /* Cassis */
+  font-size: var(--fs-h3); /* 1.5rem */
+  line-height: 1.15;
   margin-bottom: 0.5rem;
 }
 .kluppi-step-desc {
@@ -648,26 +698,23 @@ html {
 
 /* Mobile: line moves to the left, all cards stack to its right */
 @media (max-width: 767px) {
-  .kluppi-steps { padding: 4rem 5%; }
   .kluppi-steps-heading { margin-bottom: 3rem; }
   .kluppi-steps-timeline { --line-x: 1.25rem; gap: 2rem; }
   .kluppi-step {
-    grid-template-columns: 2.5rem 1fr;
+    grid-template-columns: 2.5rem 1fr; /* col 1 reserves the line lane; card in col 2 */
     column-gap: 1.25rem;
-    align-items: start;
   }
-  .kluppi-step-dot,
   .kluppi-step--left .kluppi-step-card,
   .kluppi-step--right .kluppi-step-card {
-    grid-column: auto;
+    grid-column: 2;
   }
-  .kluppi-step-dot { justify-self: center; margin-top: 0.5rem; }
+  /* the dot positions itself absolutely on the line (--line-x: 1.25rem) */
 }
 
 /* ─── FAQ accordion ("Întrebări frecvente") — native <details>/<summary> ─── */
 .kluppi-faq {
-  background-color: #FFF0BC; /* Lemon Sorbet */
-  padding: 6rem 5%;
+  background-color: var(--bg);
+  padding: clamp(4rem, 8vw, 7rem) var(--gutter); /* spec §4 standard section */
 }
 .kluppi-faq-inner {
   max-width: 46rem;
@@ -677,7 +724,7 @@ html {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
   color: #FF5B22; /* Dare Devil */
-  font-size: clamp(2rem, 5vw, 3.5rem); /* matches the other section headings */
+  font-size: var(--fs-h2); /* matches the other section headings */
   line-height: 1.05;
   text-align: center;
   margin-bottom: 3rem;
@@ -699,11 +746,11 @@ html {
   text-align: left;
   cursor: pointer;
   padding: 1.5rem 0;
-  font-family: "Switzer", sans-serif;
-  font-weight: 600;
-  font-size: 1.125rem;
+  font-family: var(--font-body);
+  font-weight: 500; /* spec §3 FAQ question */
+  font-size: 1.25rem;
   line-height: 1.35;
-  color: #351E28; /* Cassis */
+  color: var(--text); /* Cassis */
 }
 .kluppi-faq-chevron {
   flex: 0 0 auto;
@@ -730,15 +777,14 @@ html {
 }
 
 @media (max-width: 767px) {
-  .kluppi-faq { padding: 4rem 5%; }
   .kluppi-faq-question { font-size: 1.0625rem; }
 }
 
 /* ─── Split tagline banner (below the form) — scroll-driven spread ─── */
 .kluppi-banner {
-  background-color: #FFF0BC; /* Lemon Sorbet (was relying on the removed .section-banner-cta override → showed the template's black) */
+  background-color: var(--bg);
   overflow: hidden; /* clip the lines while they're pulled toward the centre */
-  padding: 6rem 5%;
+  padding: clamp(4rem, 8vw, 7rem) var(--gutter); /* spec §4 standard section */
 }
 .kluppi-banner-inner {
   max-width: 90rem;
@@ -770,7 +816,6 @@ html {
   .kluppi-banner-line2 { font-size: 4rem; }
 }
 @media (max-width: 767px) {
-  .kluppi-banner { padding: 4rem 5%; }
   .kluppi-banner-line1 { font-size: 2.25rem; }
   .kluppi-banner-line2 { font-size: 3rem; }
 }
@@ -779,19 +824,20 @@ html {
 /* Target .body (the class on <body>) — it outranks a bare `body` selector, which is
    how the template sets its black page background. */
 .body {
-  background-color: #FFF0BC;
+  background-color: var(--bg);
+  color: var(--text); /* global base text (spec §0) */
   /* Default body type → Switzer Light, replacing the template's Manrope 400.
      The Manrope/Inter loads were removed (layout.tsx). Elements that inherit the
      default (e.g. .form-input) now render Switzer 300; every explicitly-styled
      Kluppi element (Bricolage headings, Switzer body) is unaffected. */
-  font-family: "Switzer", sans-serif;
+  font-family: var(--font-body);
   font-weight: 300;
 }
 
 /* ─── Footer — minimalist: centered logo + socials, divider, legal + copyright ─── */
 .kluppi-footer {
-  background-color: #FFF0BC; /* Lemon Sorbet */
-  padding: 4.5rem 5% 2.5rem;
+  background-color: var(--bg);
+  padding: clamp(3rem, 6vw, 4.5rem) var(--gutter) 2.5rem; /* spec §4 */
 }
 .kluppi-footer-inner {
   max-width: 75rem;
@@ -822,7 +868,7 @@ html {
   color: #351E28; /* Cassis */
   transition: color 0.15s ease;
 }
-.kluppi-footer-social:hover { color: #FF5B22; /* Dare Devil */ }
+.kluppi-footer-social:hover { color: var(--link-hover); } /* Electric (spec §6) */
 .kluppi-footer-divider {
   height: 1px;
   background-color: rgba(53, 30, 40, 0.15);
@@ -842,13 +888,13 @@ html {
 }
 .kluppi-footer-link,
 .kluppi-footer-copy {
-  font-family: "Switzer", sans-serif;
+  font-family: var(--font-body);
   font-weight: 300;
-  font-size: 0.9375rem;
-  color: #351E28; /* Cassis */
+  font-size: var(--fs-caption); /* legal links 0.85rem (spec §3) */
+  color: var(--text); /* Cassis */
 }
 .kluppi-footer-link { transition: color 0.15s ease; }
-.kluppi-footer-link:hover { color: #FF5B22; /* Dare Devil */ }
+.kluppi-footer-link:hover { color: var(--link-hover); } /* Electric (spec §6) */
 .kluppi-footer-copy { margin: 0; }
 
 @media (max-width: 767px) {
@@ -861,19 +907,19 @@ html {
   text-align: center; /* heading + text span the full container width */
 }
 .kluppi-signup-heading {
-  font-family: "Bricolage Grotesque", sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
-  color: #FF5B22; /* Dare Devil */
-  font-size: clamp(2rem, 5vw, 3.5rem); /* matches the other section H2s (3.5rem on desktop) */
-  line-height: 1.1;
+  color: var(--accent); /* Dare Devil */
+  font-size: var(--fs-h2);
+  line-height: 1.05;
   margin-bottom: 1rem;
 }
 .kluppi-signup-text {
-  font-family: "Switzer", sans-serif;
+  font-family: var(--font-body);
   font-weight: 300;
-  color: #351E28; /* Cassis */
-  font-size: 1.3rem;
-  line-height: 1.5;
+  color: var(--text); /* Cassis */
+  font-size: var(--fs-body); /* 1.25rem intro paragraph */
+  line-height: 1.55;
   margin: 0 0 2.5rem;
 }
 .kluppi-signup-form {
@@ -886,6 +932,9 @@ html {
 .kluppi-signup-input {
   width: 100%;
   text-align: center; /* centered placeholder/value */
+  min-height: 3rem; /* spec §6 inputs */
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-card);
 }
 .kluppi-signup-cta {
   width: 100%;
