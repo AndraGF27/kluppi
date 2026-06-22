@@ -19,6 +19,30 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-22 — CTA button hover: lift + soft Cassis shadow (requested)
+
+**`src/app/globals.css`** — reworked the `.kluppi-hero-cta` hover so the orange (Dare Devil) fill no longer fades. Every CTA on the page shares this class — hero, pain-points, benefits (×2), steps, and the signup submit (`kluppi-hero-cta kluppi-signup-cta`) — so this single rule updates all six.
+- transition: `opacity 0.15s, transform 0.15s` → `transform 0.2s, box-shadow 0.2s`.
+- `:hover` was `opacity: 0.92; transform: translateY(-1px)` → now `transform: translateY(-2px); box-shadow: 0 10px 24px rgba(53,30,40,0.3)` (Cassis, kept fill solid).
+- `:active` now settles: `translateY(0)` + smaller Cassis shadow `0 4px 12px rgba(53,30,40,0.22)`.
+- Added a `prefers-reduced-motion: reduce` guard that drops the lift (keeps the shadow). I'd flagged this in the proposal; say the word if you'd rather not gate it.
+
+Typecheck (`tsc --noEmit`) passes; comment markers balance (181/181).
+
+### 2026-06-22 — "Kluppi este pentru tine dacă…" real photos (requested)
+
+**`public/`** — added `Reasons1.jpg`–`Reasons4.jpg` (from `~/Downloads/KP Reasons/`).
+
+**`src/app/page.tsx`** — the reasons grid's 4 image cells now point to the local photos (were Unsplash CDN placeholders + Hero8):
+- i1 `lee-campbell` → `/Reasons1.jpg` (laptop / relaxed, pairs with "Îți place să cumperi, nu să fii influențat")
+- i2 `mk-2` → `/Reasons2.jpg` (shrug, pairs with "Știi deja toate trucurile de marketing")
+- i3 `ales-nesetril` → `/Reasons3.jpg` (necklace, pairs with "Nu vrei motive să cumperi mai mult")
+- i4 `/Hero8.jpg` → `/Reasons4.jpg` (watch, pairs with "Preferi să alegi tu momentul potrivit")
+
+`alt=""` kept (decorative — the adjacent cards carry the meaning). The hero's own `/Hero8.jpg` (is-image-6) is untouched. Typecheck (`tsc --noEmit`) passes.
+
+**Flag:** the files are heavy (1.5M / 864K / 990K / 896K ≈ 4.2MB total) — worth resizing/compressing before launch (the hero images are ~300–420KB each for comparison). Say the word and I'll optimize them.
+
 ### 2026-06-22 — Steps line fill orange + benefit cards wrap responsively (requested)
 
 **`src/app/globals.css`**

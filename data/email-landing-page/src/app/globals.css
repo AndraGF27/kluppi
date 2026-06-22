@@ -147,11 +147,18 @@ p { text-wrap: pretty; }
   background-color: var(--accent); /* Dare Devil */
   padding: 1.05rem 2.2rem;
   border-radius: var(--radius-pill);
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.kluppi-hero-cta:hover { opacity: 0.92; transform: translateY(-1px); }
-.kluppi-hero-cta:active { transform: translateY(0); }
+/* Hover: keep the Dare Devil fill, lift and float on a soft Cassis shadow */
+.kluppi-hero-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(53, 30, 40, 0.3); }
+.kluppi-hero-cta:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(53, 30, 40, 0.22); }
+
+@media (prefers-reduced-motion: reduce) {
+  .kluppi-hero-cta { transition: box-shadow 0.2s ease; }
+  .kluppi-hero-cta:hover,
+  .kluppi-hero-cta:active { transform: none; }
+}
 
 .kluppi-hero-trust {
   margin-top: 1rem;
