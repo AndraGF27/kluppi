@@ -19,6 +19,22 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-22 — Reasons section: swap 2nd & 4th photos (requested)
+
+- Replaced the 2nd (`i2` → `public/Reasons2.jpg`) and 4th (`i4` → `public/Reasons4.jpg`) reasons-section images with new files from `~/Downloads/KP Reasons/` (already named `Reasons2.jpg` / `Reasons4.jpg`). Content overwrite at existing paths — no markup, `sizes`, or order changes. Slots 1 and 3 untouched. Old images recoverable from git.
+
+### 2026-06-22 — New hero collage photos (requested)
+
+- Replaced the six hero collage photos with new images from `~/Downloads/Hero/`. Done by **overwriting file contents** at the existing `public/` paths — no markup, `sizes`, or layout-comment changes, so each `is-image-N` slot keeps its tuned positioning and just renders the new photo.
+- Slot → public file ← new download source:
+  - `is-image-1` → `public/Hero3.jpg` ← Downloads `Hero5.jpg`
+  - `is-image-2` → `public/Hero6.jpg` ← Downloads `Hero1.jpg`
+  - `is-image-3` → `public/Hero4.jpg` ← Downloads `Hero2.jpg`
+  - `is-image-4` → `public/Hero2.jpg` ← Downloads `Hero3.jpg`
+  - `is-image-5` → `public/Hero5.jpg` ← Downloads `Hero6.jpg`
+  - `is-image-6` → `public/Hero8.jpg` ← Downloads `Hero4.jpg`
+- Note: the public filenames (Hero2/3/4/5/6/8) were already a non-semantic, scrambled set; kept them as-is to avoid markup churn. Old images remain recoverable from git (`b9b6435`). Downloads also had a `Hero6 (2).jpg` duplicate — used the canonical `Hero6.jpg`.
+
 ### 2026-06-22 — Band padding, banner CTA, reasons reveal (requested)
 
 - **`globals.css`** `.kluppi-band` padding `11rem … 7.5rem` → `10.5rem var(--gutter) 7rem`.
