@@ -53,6 +53,7 @@ type SubmitState = "idle" | "loading" | "success" | "error";
 export default function Home() {
   const leftListRef = useRef<HTMLDivElement>(null);
   const rightListRef = useRef<HTMLDivElement>(null);
+  const hero5Ref = useRef<HTMLDivElement>(null);
   const componentRef = useRef<HTMLDivElement>(null);
   const answerRefs = useRef<(HTMLParagraphElement | null)[]>([]);
 
@@ -112,6 +113,20 @@ export default function Home() {
       const rightShift = Math.max(0, right.offsetHeight - vh);
       left.style.transform = `translate3d(0, ${-progress * leftShift}px, 0)`;
       right.style.transform = `translate3d(0, ${-progress * rightShift}px, 0)`;
+
+      // Hero5 (is-image-5) drifts a touch more than the rest of the right
+      // column: it now starts lower (CSS `top` on is-image-5) but this extra
+      // upward travel lands its end point higher on the page. 0 at the top of
+      // the page → 12vw by the end. Desktop only (matches the CSS offsets).
+      const hero5 = hero5Ref.current;
+      if (hero5) {
+        if (window.matchMedia("(min-width: 992px)").matches) {
+          const extra = (progress * 12 * window.innerWidth) / 100; // 12vw over the scroll
+          hero5.style.transform = `translate3d(0, ${-extra}px, 0)`;
+        } else {
+          hero5.style.transform = "";
+        }
+      }
     };
 
     const onScroll = () => {
@@ -279,7 +294,7 @@ export default function Home() {
                 </div>
                 <div className="header-images-wrapper images-wrapper-right">
                   <div className="header-image-list image-list-right" ref={rightListRef}>
-                    <div className="header-image-wrapper is-image-5">
+                    <div className="header-image-wrapper is-image-5" ref={hero5Ref}>
                       <img className="header-image" src="/Hero5.jpg" alt="" sizes="(max-width: 767px) 28vw, (max-width: 991px) 26vw, 20vw" loading="lazy" />
                     </div>
                     <div className="header-image-wrapper is-image-6">

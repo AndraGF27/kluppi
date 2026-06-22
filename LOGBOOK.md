@@ -19,6 +19,25 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-22 — Hero collage: lower the start of Hero3 & Hero5; Hero5 ends higher (requested)
+
+Goal: the two "front" header images (Hero3 = `is-image-1`, left col; Hero5 = `is-image-5`, right col) sat higher than Hero6/Hero8. Drop their starting point so their tops line up with Hero6/Hero8; additionally Hero5 should end *higher* after the parallax (user picked "lower start, end rises").
+
+**`src/app/globals.css`** — desktop-only (`@media (min-width: 992px)`) `top` offsets that shift only those two images, leaving Hero6/Hero8/Hero4/Hero2 in place:
+- `.header-image-wrapper.is-image-1 { top: 6.4vw; }` (Hero3 → aligns with Hero6)
+- `.header-image-wrapper.is-image-5 { top: 6vw; }` (Hero5 → aligns with Hero8)
+- `will-change: transform` added to `is-image-5` (now animated per-frame).
+
+**`src/app/page.tsx`** — Hero5 gets its own drift on top of the right column's shared parallax: new `hero5Ref` on the `is-image-5` wrapper; in the parallax `render()` it applies `translate3d(0, -(progress·12vw), 0)` (0 at top of page → 12vw up by the end), desktop only (else transform cleared). Net: Hero5 starts 6vw lower but ends ~6vw higher than before. Left/right column transforms unchanged.
+
+Offsets (6.4vw / 6vw / 12vw drift) are first estimates — tunable after eyeballing. Mobile/tablet left as-is. Typecheck (`tsc --noEmit`) passes; CSS comment markers balance (183/183).
+
+**Follow-up (same day):** user confirmed Hero3/Hero6 are right (left untouched) but wanted Hero5 *and* Hero8 to *start* lower while keeping their (perfect) end positions. Added `.header-image-list.image-list-right { padding-top: 80vh; }` (was 70vh, desktop only). Because the JS ties each column's parallax distance to its own `offsetHeight`, the taller right column auto-compensates: both images start ~10vh lower but land at the same end point. Hero5's individual `top`/extra-drift kept as-is (preserves its end). `padding-top: 80vh` is a first estimate — tunable.
+
+**Follow-up 2 (same day):** clarified goal — the right column should *mirror* the left, i.e. Hero8 aligned to Hero3 and Hero5 aligned to Hero6 at the start. Measured the live page (Chrome MCP against the dev server): left pair tops = 593.9px, right pair was at 662px (the 80vh drop). Tuned the right column's `padding-top` to `70.7vh`, which lands Hero5/Hero8 tops at 593.8px — flush with the left pair. (Left col is 70vh; right needs +0.7vh for its different image sizes.) End point preserved by the same column-height self-compensation; Hero5's extra drift left in place (its end was already approved). Verified in-browser: all four tops ≈ 594.
+
+**Follow-up 3 (same day):** the all-flush result lost the template's staggered collage. User wanted the two CENTER images (Hero6, Hero8) dropped lower than the two OUTER images (Hero3, Hero5) — "like the original" — keeping the outer pair at their current (low) height. Added `top` offsets to the center images: `.is-image-2 { top: 6.4vw }` (Hero6) and `.is-image-6 { top: 6vw }` (Hero8) inside the desktop media query (relative offset → only those images move). Kept Hero3/Hero5 (`is-image-1`/`is-image-5`) and the 70.7vh right padding so the outer pair stays put. Verified in-browser (Chrome MCP) at 1470×746: outer pair tops = 616, center pair = 704/710 (~90px stagger), and screenshot confirms the staggered look. Note: center images peek a bit less now (expected — user chose "keep outer low, drop center").
+
 ### 2026-06-22 — Steps timeline: stop the track line showing through unfilled dots (requested)
 
 **`src/app/globals.css` + `src/app/HowItWorks.tsx`** — the faded Cassis track between dots stays; the issue was that an *unfilled* dot's fill is translucent (`rgba(255,91,34,0.25)`), so the track line behind it showed THROUGH the dot. Fix layers the dot as `line → opaque Lemon → coloured face`:

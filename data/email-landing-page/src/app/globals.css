@@ -64,6 +64,25 @@ p { text-wrap: pretty; }
   will-change: transform;
 }
 
+/* The four header images form a staggered collage (like the template's
+   original): the two OUTER images (Hero3 far-left, Hero5 far-right) sit higher,
+   and the two CENTER images (Hero6, Hero8) sit ~6vw lower. All four are pushed
+   down from the template default so the cluster starts lower on the page. Each
+   `top` shifts only its own image (relative offset, no effect on flow). Hero5
+   also gets extra upward drift in the JS parallax (page.tsx), so it ends higher
+   despite the lower start. Desktop only — the collage differs at smaller widths. */
+.header-image-wrapper.is-image-5 { will-change: transform; }
+@media (min-width: 992px) {
+  .header-image-wrapper.is-image-1 { top: 6.4vw; } /* Hero3 — outer (higher) */
+  .header-image-wrapper.is-image-5 { top: 6vw; }   /* Hero5 — outer (higher) */
+  .header-image-wrapper.is-image-2 { top: 6.4vw; } /* Hero6 — center, sits ~6.4vw below Hero3 */
+  .header-image-wrapper.is-image-6 { top: 6vw; }   /* Hero8 — center, sits ~6vw below Hero5 */
+  /* Right column starts a hair lower than the left so the OUTER pair (Hero3,
+     Hero5) line up at the same height. Column height drives the parallax
+     distance, so the already-perfect END point is preserved. */
+  .header-image-list.image-list-right { padding-top: 70.7vh; }
+}
+
 /* Waitlist form built from the template's own form components. */
 .waitlist-form-wrapper {
   width: 100%;
