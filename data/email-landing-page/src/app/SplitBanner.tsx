@@ -1,11 +1,27 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
-// Tagline banner below the form. The two lines start pulled toward the centre and,
-// as the section scrolls up through the viewport, spread apart to the edges — line 1
-// to the left, line 2 to the right. Pure scroll-driven transform (rAF-throttled).
-export default function SplitBanner() {
+type SplitBannerProps = {
+  line1?: string; // Switzer / light line
+  line2?: string; // Bricolage / bold line
+  reversed?: boolean; // render the Bricolage line above the Switzer line (order flipped)
+  converge?: boolean; // lines start at the outer edges and drift to the centre (vs the default spread)
+  cta?: ReactNode; // optional CTA block rendered (centred) under the lines
+};
+
+// Tagline banner. By default the two lines start pulled toward the centre and, as the
+// section scrolls up, spread apart to the edges — the Switzer line (line1) to the left,
+// the Bricolage line (line2) to the right. Pure scroll-driven transform (rAF-throttled).
+// `reversed` flips their vertical order. `converge` inverts the motion: the lines begin
+// at the outer edges and drift toward the centre as you scroll (alignment flipped via CSS).
+export default function SplitBanner({
+  line1 = "Cumpără ce voiai oricum.",
+  line2 = "Doar mai smart.",
+  reversed = false,
+  converge = false,
+  cta,
+}: SplitBannerProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const line1Ref = useRef<HTMLParagraphElement>(null);
   const line2Ref = useRef<HTMLParagraphElement>(null);
@@ -27,10 +43,24 @@ export default function SplitBanner() {
       const progress = reduce
         ? 1
         : Math.min(Math.max((vh - rect.top) / (vh + rect.height), 0), 1);
-      // Inward pull (px) at progress 0, easing to 0 (edges) at progress 1.
-      const pull = (1 - progress) * window.innerWidth * 0.3;
-      l1.style.transform = `translateX(${pull}px)`; // left line: pulled right → settles left
-      l2.style.transform = `translateX(${-pull}px)`; // right line: pulled left → settles right
+      const base = window.innerWidth * 0.3;
+      if (converge) {
+        // Lines start at the outer edges and drift inward as it scrolls up.
+        // line2 ("Te alături acum?") drifts right by the standard amount. line1
+        // ("Primești…") drifts left ONLY until its text's left edge reaches the
+        // inner-left — i.e. where line2 starts — so it stops there instead of
+        // overshooting (a shorter, slower drift). Distance = block width − text width.
+        const range = document.createRange();
+        range.selectNodeContents(l1);
+        const l1Drift = Math.max(l1.clientWidth - range.getBoundingClientRect().width, 0);
+        l1.style.transform = `translateX(${-progress * l1Drift}px)`;
+        l2.style.transform = `translateX(${progress * base}px)`;
+      } else {
+        // Lines start pulled toward the centre and spread to the edges.
+        const pull = (1 - progress) * base;
+        l1.style.transform = `translateX(${pull}px)`; // left line: pulled right → settles left
+        l2.style.transform = `translateX(${-pull}px)`; // right line: pulled left → settles right
+      }
     };
 
     const onScroll = () => {
@@ -47,17 +77,41 @@ export default function SplitBanner() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [converge]);
+
+  const switzerLine = (
+    <p className="kluppi-banner-line1" ref={line1Ref}>
+      {line1}
+    </p>
+  );
+  const bricolageLine = (
+    <p className="kluppi-banner-line2" ref={line2Ref}>
+      {line2}
+    </p>
+  );
 
   return (
-    <section className="kluppi-banner" ref={sectionRef}>
+    <section
+      className={`kluppi-banner${converge ? " kluppi-banner--converge" : ""}`}
+      ref={sectionRef}
+    >
       <div className="kluppi-banner-inner">
-        <p className="kluppi-banner-line1" ref={line1Ref}>
-          Cumpără ce voiai oricum.
-        </p>
-        <p className="kluppi-banner-line2" ref={line2Ref}>
-          Doar mai smart.
-        </p>
+        {reversed ? (
+          <>
+            {bricolageLine}
+            {switzerLine}
+          </>
+        ) : (
+          <>
+            {switzerLine}
+            {bricolageLine}
+          </>
+        )}
+        {cta && (
+          <div className="kluppi-banner-cta" data-reveal>
+            {cta}
+          </div>
+        )}
       </div>
     </section>
   );

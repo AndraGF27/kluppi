@@ -19,7 +19,45 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
-### 2026-06-22 — Hero collage: lower the start of Hero3 & Hero5; Hero5 ends higher (requested)
+### 2026-06-22 — Band padding, banner CTA, reasons reveal (requested)
+
+- **`globals.css`** `.kluppi-band` padding `11rem … 7.5rem` → `10.5rem var(--gutter) 7rem`.
+- **`globals.css`** removed the `.kluppi-banner--converge { padding: 3.75rem }` override so the band banner inherits the standard section padding (`clamp(4rem,8vw,7rem)`, = 7rem at desktop), matching the other sections.
+- **CTA under the band banner**: `SplitBanner` gained an optional `cta` slot (rendered centred under the lines, inside the banner padding, with `data-reveal`); new `.kluppi-banner-cta` (centred, `margin-top: clamp(2.5rem,5vw,4rem)`). The band banner now passes the standard CTA `Rezervă-ți locul în club` + microcopy "Îți scriem mereu cu rost." (button label assumed = the page's standard CTA; flag if different.)
+- **`kluppi-reasons` reveal**: moved `data-reveal` off the `.kluppi-benefits-grid` container onto each of the 8 items (4 cards + 4 images), images with `--reveal-delay: 0.08s` so each row's text reveals then its image — so they animate element-by-element like the rest of the page (was fading as one block).
+
+Verified in-browser: band 168/112px, converge banner 112px, CTA present (correct label + microcopy), 8 reasons items with `data-reveal`, grid no longer reveals. Typecheck passes; CSS comments balance (187/187).
+
+**Reasons images replaced:** copied the 4 new photos from `~/Downloads/KP Reasons/` over `public/Reasons1–4.jpg` (same filenames → no code change). Order confirmed by viewing each: 1 redhead/hands-over-ears → i1, 2 popping-the-%-balloon → i2, 3 sunglasses/necklace → i3, 4 ball-chair/watch → i4. New files are light (290–360KB) so no optimisation needed. Verified in-browser: all 4 load (≈3060×1728).
+
+### 2026-06-22 — Band/banner polish: tighter padding, full-width grid, converge banner (requested)
+
+Follow-up tweaks to the redesigned band + its banner.
+
+**`src/app/globals.css`**
+- `.kluppi-band` padding `15rem … 7.5rem` → `7.5rem var(--gutter) 3.75rem` (dropped the old 15rem-top note).
+- `.kluppi-band-inner` `max-width: 60rem` → `none` so the grid is full-width and labels stay on one line ("Doar pentru membri" no longer wraps — verified 1 line).
+- Added a scoped `.kluppi-banner--converge` variant (bottom banner untouched): `padding: 3.75rem var(--gutter)`; line2 ("Te alături acum?") `text-align: left`; line1 ("Primești…") `text-align: right` + `font-size: 3.75rem` at ≥992px (mobile sizes fall through to the existing line1 queries).
+
+**`src/app/SplitBanner.tsx`** — added a `converge` prop: applies the `kluppi-banner--converge` class and inverts the scroll motion — instead of starting centred and spreading to the edges, the lines start at the outer edges and drift toward the centre (`translateX(±progress·0.3vw)`). Default (bottom banner) unchanged.
+
+**`src/app/page.tsx`** — band banner now `<SplitBanner … reversed converge />`.
+
+Verified in-browser (Chrome MCP): band padding 120/60px, grid 1406px (full width), all 3 labels 1 line, banner `converge` class on, padding 60px, "Te alături acum?" 7rem/left, "Primești…" 3.75rem/right, both `translateX(0)` (at edges) while below the fold. Typecheck passes; CSS comments balance (186/186). Note: banner padding/sizes/motion scoped to the new banner only — bottom banner unchanged (flag if its padding should drop too).
+
+**Follow-up (same day):** `.kluppi-band` padding `7.5rem … 3.75rem` → `11rem var(--gutter) 7.5rem` (a bit more breathing room). New banner's "Primești…" (converge `.kluppi-banner-line1` override) `3.75rem` → `4rem` (confirmed via question: just the new banner, not the bottom one — bottom stays 5rem).
+
+**Follow-up 2 (same day):** converge banner — "Primești…" should stop where "Te alături acum?" starts (the inner-left), moving slower than before. In `SplitBanner.tsx` converge branch, line1's leftward drift is now `progress × (blockWidth − textWidth)` (measured live via a `Range`) instead of `progress × base`, so its text left edge lands exactly at the inner-left regardless of viewport. line2 unchanged (drifts right by `base`). Verified in-browser at progress 0.618: drift ratio 0.73 (slower), and Primești extrapolates to left edge = 32px = inner-left. Note: the two lines now cross (Te alături ends center-right, Primești far-left) — that's the literal "stop where it starts"; flag if a non-crossing target is wanted.
+
+Reworked the `.kluppi-band` section.
+
+**`src/app/page.tsx`** — replaced the single-line title + Arctic sub-card with a `.kluppi-band-grid` (3 cols × 1 row). Each cell = centered Cassis lucide icon + label, labels keep the existing `.kluppi-band-title` formatting (Bricolage 700, Cassis, 2rem): Tickets → "Coduri dedicate", LockKeyhole → "Doar pentru membri", Heart → "Exact pe gustul tău" (`data-reveal` with 0/0.1/0.2s stagger). The Arctic `.kluppi-band-sub` ("Te alături acum? Primești…") is deleted; that copy now lives in a reused `<SplitBanner>` placed as its own section right after the band.
+
+**`src/app/SplitBanner.tsx`** — parameterized: `line1` (Switzer, spreads left), `line2` (Bricolage, spreads right), `reversed` (renders the Bricolage line above the Switzer line). Defaults keep the bottom banner identical. New band banner: `line1="Primești o surpriză specială la lansare." line2="Te alături acum?" reversed` — so "Te alături acum?" (Bricolage, like *Doar mai smart*) sits on top and "Primești…" (Switzer, like *Cumpără ce voiai oricum*) below, i.e. order flipped vs the bottom banner.
+
+**`src/app/globals.css`** — added `.kluppi-band-grid` (3-col grid, 2.5rem gap), `.kluppi-band-cell` (centered flex column), `.kluppi-band-icon` (3rem, `color: var(--text)` = Cassis). Removed the now-unused `.kluppi-band-sub` rule. Mobile (≤767px): grid stacks to 1 column. Band keeps its existing padding/inner width.
+
+Verified in-browser (Chrome MCP): icons 48px Cassis, labels correct, banner lines correctly formatted/ordered, long line doesn't overflow at wide widths. Typecheck passes; CSS comments balance (185/185). Note: "Doar pentru membri" (longest label) wraps to 2 lines in its column — looks fine, can tighten if wanted.
 
 Goal: the two "front" header images (Hero3 = `is-image-1`, left col; Hero5 = `is-image-5`, right col) sat higher than Hero6/Hero8. Drop their starting point so their tops line up with Hero6/Hero8; additionally Hero5 should end *higher* after the parallax (user picked "lower start, end rises").
 

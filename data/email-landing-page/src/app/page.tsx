@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Tickets, LockKeyhole, Heart } from "lucide-react";
 import PainPointsCarousel from "./PainPointsCarousel";
 import HowItWorks from "./HowItWorks";
 import SplitBanner from "./SplitBanner";
@@ -327,14 +327,35 @@ export default function Home() {
 
         <section className="kluppi-band">
           <div className="kluppi-band-inner">
-            <p className="text-size-large kluppi-band-title" data-reveal>
-              Coduri dedicate · Doar pentru membri · Exact pe gustul tău
-            </p>
-            <p className="kluppi-band-sub" data-reveal style={{ "--reveal-delay": "0.1s" } as React.CSSProperties}>
-              Te alături acum? Primești o surpriză specială la lansare.
-            </p>
+            <div className="kluppi-band-grid">
+              <div className="kluppi-band-cell" data-reveal>
+                <Tickets className="kluppi-band-icon" aria-hidden="true" strokeWidth={1.5} />
+                <p className="text-size-large kluppi-band-title">Coduri dedicate</p>
+              </div>
+              <div className="kluppi-band-cell" data-reveal style={{ "--reveal-delay": "0.1s" } as React.CSSProperties}>
+                <LockKeyhole className="kluppi-band-icon" aria-hidden="true" strokeWidth={1.5} />
+                <p className="text-size-large kluppi-band-title">Doar pentru membri</p>
+              </div>
+              <div className="kluppi-band-cell" data-reveal style={{ "--reveal-delay": "0.2s" } as React.CSSProperties}>
+                <Heart className="kluppi-band-icon" aria-hidden="true" strokeWidth={1.5} />
+                <p className="text-size-large kluppi-band-title">Exact pe gustul tău</p>
+              </div>
+            </div>
           </div>
         </section>
+
+        <SplitBanner
+          line1="Primești o surpriză specială la lansare."
+          line2="Te alături acum?"
+          reversed
+          converge
+          cta={
+            <>
+              <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+              <p className="kluppi-hero-trust">Îți scriem mereu cu rost.</p>
+            </>
+          }
+        />
 
         <section className="kluppi-painpoints">
           <div className="kluppi-painpoints-inner">
@@ -393,41 +414,41 @@ export default function Home() {
               <div className="section-padding-large">
                 <div className="kluppi-section-content">
                   <h2 className="kluppi-benefits-heading" data-reveal>Kluppi este pentru tine dacă…</h2>
-                  <div className="kluppi-benefits-grid" data-reveal>
-                    <article className="kluppi-benefit kluppi-benefit--b1">
+                  <div className="kluppi-benefits-grid">
+                    <article className="kluppi-benefit kluppi-benefit--b1" data-reveal>
                       <div className="kluppi-benefit-text">
                         <h3 className="kluppi-benefit-title">Îți place să cumperi, nu să fii influențat</h3>
                         <p className="kluppi-benefit-desc">Nu vrei să renunți la lucrurile care îți plac. Ai nevoie doar să știi că ai făcut o alegere bună.</p>
                       </div>
                     </article>
-                    <div className="kluppi-benefit-img kluppi-benefit-img--i1">
+                    <div className="kluppi-benefit-img kluppi-benefit-img--i1" data-reveal style={{ "--reveal-delay": "0.08s" } as React.CSSProperties}>
                       <img className="stat-image" src="/Reasons1.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
                     </div>
-                    <article className="kluppi-benefit kluppi-benefit--b2">
+                    <article className="kluppi-benefit kluppi-benefit--b2" data-reveal>
                       <div className="kluppi-benefit-text">
                         <h3 className="kluppi-benefit-title">Știi deja toate trucurile de marketing</h3>
                         <p className="kluppi-benefit-desc">Ai văzut suficiente oferte și reduceri “de neratat” ca să te mai impresioneze ceva.</p>
                       </div>
                     </article>
-                    <div className="kluppi-benefit-img kluppi-benefit-img--i2">
+                    <div className="kluppi-benefit-img kluppi-benefit-img--i2" data-reveal style={{ "--reveal-delay": "0.08s" } as React.CSSProperties}>
                       <img className="stat-image" src="/Reasons2.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
                     </div>
-                    <article className="kluppi-benefit kluppi-benefit--b3">
+                    <article className="kluppi-benefit kluppi-benefit--b3" data-reveal>
                       <div className="kluppi-benefit-text">
                         <h3 className="kluppi-benefit-title">Nu vrei motive să cumperi mai mult</h3>
                         <p className="kluppi-benefit-desc">Nu îți place să cumperi impulsiv. Cauți doar un preț mai bun pentru ceea ce voiai deja.</p>
                       </div>
                     </article>
-                    <div className="kluppi-benefit-img kluppi-benefit-img--i3">
+                    <div className="kluppi-benefit-img kluppi-benefit-img--i3" data-reveal style={{ "--reveal-delay": "0.08s" } as React.CSSProperties}>
                       <img className="stat-image" src="/Reasons3.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
                     </div>
-                    <article className="kluppi-benefit kluppi-benefit--b4">
+                    <article className="kluppi-benefit kluppi-benefit--b4" data-reveal>
                       <div className="kluppi-benefit-text">
                         <h3 className="kluppi-benefit-title">Preferi să alegi tu momentul potrivit</h3>
                         <p className="kluppi-benefit-desc">Iei decizii atunci când vrei tu, nu atunci când te grăbește cineva să acționezi.</p>
                       </div>
                     </article>
-                    <div className="kluppi-benefit-img kluppi-benefit-img--i4">
+                    <div className="kluppi-benefit-img kluppi-benefit-img--i4" data-reveal style={{ "--reveal-delay": "0.08s" } as React.CSSProperties}>
                       <img className="stat-image" src="/Reasons4.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
                     </div>
                   </div>

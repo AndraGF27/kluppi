@@ -299,12 +299,10 @@ p { text-wrap: pretty; }
 .kluppi-band {
   background-color: var(--bg);
   text-align: center;
-  /* NOTE: spec §4 intro band = clamp(3rem,7vw,6rem); the 15rem top is kept per the
-     user's earlier request (flagged, not auto-reverted). Sides use the gutter. */
-  padding: 15rem var(--gutter) 7.5rem;
+  padding: 10.5rem var(--gutter) 7rem;
 }
 .kluppi-band-inner {
-  max-width: 60rem;
+  max-width: none; /* full-width grid so labels stay on one line */
   margin-inline: auto;
 }
 .kluppi-band-title {
@@ -313,20 +311,30 @@ p { text-wrap: pretty; }
   color: #351E28; /* Cassis */
   font-size: 2rem; /* desktop/tablet; ≤767px → 1.5rem (keeps the ~0.75 proportion) */
 }
-.kluppi-band-sub {
-  display: inline-block; /* surprise / teaser card (spec §6) */
-  margin-top: 1.5rem;
-  font-family: var(--font-body);
-  font-weight: 300; /* Light */
-  font-size: var(--fs-body); /* 1.25rem */
-  color: var(--text); /* Cassis on Arctic */
-  background-color: var(--arctic); /* #AEE6ED */
-  padding: 1.5rem 2.25rem;
-  border-radius: var(--radius-card);
+/* 3-up feature row (replaces the old single-line title): each cell centres a
+   Cassis icon above its label; labels keep the .kluppi-band-title formatting. */
+.kluppi-band-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+.kluppi-band-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+.kluppi-band-icon {
+  flex: 0 0 auto;
+  width: 3rem;
+  height: 3rem;
+  color: var(--text); /* Cassis */
 }
 @media (max-width: 767px) {
   .kluppi-band { padding: 5.25rem var(--gutter); }
   .kluppi-band-title { font-size: 1.5rem; } /* 2rem × 0.75 */
+  .kluppi-band-grid { grid-template-columns: 1fr; gap: 2.5rem; }
 }
 
 /* ─── Pain-points carousel ("De câte ori ai…") — under the intro band ─── */
@@ -854,6 +862,22 @@ p { text-wrap: pretty; }
 @media (max-width: 767px) {
   .kluppi-banner-line1 { font-size: 2.25rem; }
   .kluppi-banner-line2 { font-size: 3rem; }
+}
+
+/* Converge variant — the band's "Te alături acum?" banner (scoped: bottom banner
+   untouched). Lines start at the outer edges and drift toward the centre as it
+   scrolls (motion in SplitBanner.tsx). Sides flipped vs the default: line2
+   ("Te alături acum?") sits left, line1 ("Primești…") sits right and smaller.
+   Padding inherits the standard section value from .kluppi-banner. */
+.kluppi-banner--converge .kluppi-banner-line2 { text-align: left; }
+.kluppi-banner--converge .kluppi-banner-line1 { text-align: right; }
+@media (min-width: 992px) {
+  .kluppi-banner--converge .kluppi-banner-line1 { font-size: 4rem; }
+}
+/* Optional CTA grouped under the banner's lines (centred). */
+.kluppi-banner-cta {
+  text-align: center;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
 }
 
 /* ─── Page background: Lemon Sorbet everywhere (no black) ─── */
