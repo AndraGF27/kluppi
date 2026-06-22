@@ -386,7 +386,7 @@ export default function Home() {
                       </div>
                     </article>
                     <div className="kluppi-benefit-img kluppi-benefit-img--i1">
-                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c35fc21fa23caa564836d4_lee-campbell-DtDlVpy-vvQ-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
+                      <img className="stat-image" src="/Reasons1.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
                     </div>
                     <article className="kluppi-benefit kluppi-benefit--b2">
                       <div className="kluppi-benefit-text">
@@ -395,7 +395,7 @@ export default function Home() {
                       </div>
                     </article>
                     <div className="kluppi-benefit-img kluppi-benefit-img--i2">
-                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66aba0a990cff59371467899_mk-2-yeQfucZ-g2I-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
+                      <img className="stat-image" src="/Reasons2.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
                     </div>
                     <article className="kluppi-benefit kluppi-benefit--b3">
                       <div className="kluppi-benefit-text">
@@ -404,7 +404,7 @@ export default function Home() {
                       </div>
                     </article>
                     <div className="kluppi-benefit-img kluppi-benefit-img--i3">
-                      <img className="stat-image" src="https://cdn.prod.website-files.com/66aa5c84201514536a227e7c/66c36022311552387248d6fa_ales-nesetril-Im7lZjxeLhg-unsplash.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
+                      <img className="stat-image" src="/Reasons3.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
                     </div>
                     <article className="kluppi-benefit kluppi-benefit--b4">
                       <div className="kluppi-benefit-text">
@@ -413,7 +413,7 @@ export default function Home() {
                       </div>
                     </article>
                     <div className="kluppi-benefit-img kluppi-benefit-img--i4">
-                      <img className="stat-image" src="/Hero8.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
+                      <img className="stat-image" src="/Reasons4.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
                     </div>
                   </div>
                   <div className="kluppi-benefits-cta-block" data-reveal>
