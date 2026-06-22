@@ -19,6 +19,17 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-22 — Steps timeline: stop the track line showing through unfilled dots (requested)
+
+**`src/app/globals.css` + `src/app/HowItWorks.tsx`** — the faded Cassis track between dots stays; the issue was that an *unfilled* dot's fill is translucent (`rgba(255,91,34,0.25)`), so the track line behind it showed THROUGH the dot. Fix layers the dot as `line → opaque Lemon → coloured face`:
+- `.kluppi-step-dot` now has an opaque `background-color: var(--bg)` (Lemon), so the dot itself sits on the line and the track can't show through.
+- The coloured face moved to a `.kluppi-step-dot::after` (inset 0, circle) whose `background-color` reads a new `--dot-fill` custom property.
+- `HowItWorks.tsx` now ramps `--dot-fill` (via `setProperty`) instead of the dot's `backgroundColor`; the scale transform is unchanged.
+
+Net: the dot keeps its faded look + orange ramp, but the translucent face composites over opaque Lemon (not over the line), so the line is masked exactly at each dot and stays visible between them. (Earlier iteration used a `box-shadow` backing — never committed — replaced by this layering, which matches "opaque Lemon between the line and the dot.")
+
+Typecheck (`tsc --noEmit`) passes; comment markers balance (182/182).
+
 ### 2026-06-22 — CTA button hover: lift + soft Cassis shadow (requested)
 
 **`src/app/globals.css`** — reworked the `.kluppi-hero-cta` hover so the orange (Dare Devil) fill no longer fades. Every CTA on the page shares this class — hero, pain-points, benefits (×2), steps, and the signup submit (`kluppi-hero-cta kluppi-signup-cta`) — so this single rule updates all six.

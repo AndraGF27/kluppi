@@ -80,7 +80,7 @@ export default function HowItWorks() {
       const ramp = 160; // px before a dot over which it brightens
       dots.forEach((dot, i) => {
         const t = Math.min(Math.max((scan - (centers[i] - ramp)) / ramp, 0), 1);
-        dot.style.backgroundColor = `rgba(255, 91, 34, ${0.25 + 0.75 * t})`;
+        dot.style.setProperty("--dot-fill", `rgba(255, 91, 34, ${0.25 + 0.75 * t})`); // colours the ::after face, not the dot's opaque Lemon base
         dot.style.transform = `scale(${1 + 0.15 * t})`;
       });
     };

@@ -628,7 +628,7 @@ p { text-wrap: pretty; }
   bottom: 0;
   width: 1px;
   border-radius: 1px;
-  background-color: rgba(53, 30, 40, 0.22); /* faded Cassis track */
+  background-color: rgba(53, 30, 40, 0.22); /* faded Cassis track between the dots */
   z-index: 0;
 }
 .kluppi-steps-line-fill {
@@ -663,7 +663,17 @@ p { text-wrap: pretty; }
   height: 1.125rem;
   border-radius: 50%;
   border: 3px solid var(--bg); /* Lemon ring lifts the dot off the line */
-  background-color: rgba(255, 91, 34, 0.25); /* base; JS ramps it 0.25 → 1 with scroll */
+  /* Opaque Lemon fills the dot itself, so it sits ON the line and the track
+     can't show through. The coloured face is painted on top via ::after, so
+     the layer order is line → opaque Lemon → dot face. */
+  background-color: var(--bg);
+}
+.kluppi-step-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--dot-fill, rgba(255, 91, 34, 0.25)); /* base; JS ramps it 0.25 → 1 with scroll */
 }
 
 .kluppi-step-card {
