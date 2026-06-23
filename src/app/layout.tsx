@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./webflow.css";
 import "./globals.css";
 
@@ -41,7 +42,22 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="body">{children}</body>
+      <body className="body">
+        {children}
+        {/* Google Analytics (GA4) — gtag.js */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-LNKD7TBG3N"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-LNKD7TBG3N');
+          `}
+        </Script>
+      </body>
     </html>
   );
 }
