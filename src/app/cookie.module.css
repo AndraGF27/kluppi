@@ -1,0 +1,87 @@
+/* Scoped styles for the cookie-consent banner. Inherits brand tokens from
+   :root, so it matches the site without touching globals.css. */
+
+.wrap {
+  position: fixed;
+  left: 50%;
+  bottom: clamp(0.75rem, 2vw, 1.5rem);
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: min(40rem, calc(100% - 1.5rem));
+  animation: cookieIn 0.35s ease both;
+}
+
+@keyframes cookieIn {
+  from { opacity: 0; transform: translate(-50%, 0.75rem); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrap { animation: none; }
+}
+
+.card {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: clamp(1rem, 0.8rem + 1vw, 1.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.text {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+.link:hover { color: var(--link-hover); }
+
+.actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-small);
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 1.15rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.accept {
+  background: var(--accent);
+  color: #fff;
+}
+.accept:hover { background: #d8430f; }
+
+.reject {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--hairline);
+}
+.reject:hover { border-color: var(--text); }
+
+@media (min-width: 560px) {
+  .card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .actions { flex-shrink: 0; }
+}

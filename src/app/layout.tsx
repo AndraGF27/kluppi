@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import CookieBanner from "./CookieBanner";
 import "./webflow.css";
 import "./globals.css";
 
@@ -44,7 +45,11 @@ export default function RootLayout({
       </head>
       <body className="body">
         {children}
-        {/* Google Analytics (GA4) — gtag.js */}
+        <CookieBanner />
+        {/* Google Analytics (GA4) — gtag.js with Consent Mode.
+            analytics_storage defaults to "denied" so GA doesn't track until the
+            visitor accepts via the cookie banner; a returning visitor's stored
+            "granted" choice is honored immediately. */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-LNKD7TBG3N"
           strategy="afterInteractive"
@@ -54,6 +59,14 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+            var stored = 'denied';
+            try { if (localStorage.getItem('kluppi-cookie-consent') === 'granted') stored = 'granted'; } catch (e) {}
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              analytics_storage: stored
+            });
             gtag('config', 'G-LNKD7TBG3N');
           `}
         </Script>
