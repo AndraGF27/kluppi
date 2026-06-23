@@ -13,9 +13,9 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Kluppi — Branding expert and specialist",
+  title: "Kluppi — Coduri și avantaje exclusive de la branduri",
   description:
-    "Portfolio and waitlist for a branding expert and specialist. Showcasing creative design work.",
+    "Clubul de shopping unde primești coduri de reducere și beneficii reale, direct de la branduri. Rezervă-ți gratuit locul și află când lansăm.",
 };
 
 export default function RootLayout({

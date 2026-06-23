@@ -19,6 +19,25 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-23 — Meta title + description (requested; SEO piece of §12)
+
+`src/app/layout.tsx` — replaced the template placeholder metadata with Kluppi copy (user-approved):
+- **title:** "Kluppi — Coduri și avantaje exclusive de la branduri" (was "Kluppi — Branding expert and specialist")
+- **description:** "Clubul de shopping unde primești coduri de reducere și beneficii reale, direct de la branduri. Rezervă-ți gratuit locul și află când lansăm."
+
+Next maps these to `<title>`, meta description, and `og:`/`twitter:` title+description — verified all six emit correctly (diacritics intact). This completes the social-share setup (image was wired earlier).
+
+### 2026-06-23 — §3 webflow.css prune (requested, deferred from the design-system pass)
+
+Pruned the vendored Webflow template to only what this page uses, then prettified it. File: `src/app/webflow.css` (**94 KB → 47 KB, ~50% smaller; now 2062 readable lines** vs 1 minified line).
+
+Method (postcss, scripted — git as safety net, output re-parse-validated before write):
+- Built the used-class set by scanning the components' `className`/`classList` + `globals.css` selectors, plus an explicit whitelist (`is-revealed`, `is-open`, `w--open`, `w--current`).
+- Dropped any rule whose selectors use *exclusively* unused classes. **Kept** all element/reset rules (no class selector), `@keyframes`/`@font-face`, every `.w-nav*` / `.w--*` (Webflow runtime, per spec), and anything matching a used class. Conservative — keeps a rule if *any* of its grouped selectors qualifies (e.g. `.portfolio-tag-item.w--current` survived via `.w--current`). Removed 702 rules, kept 415.
+- Dead `:root` tokens: replaced surviving `var(--black)` → `var(--text)`, then removed the `--black`, `--dark-grey`, `--mid-grey` defs (0 refs remaining). Kept `--white` (used by the form-input rebrand), plus `--light-grey`/`--large`/`--vertical` (not in scope). No `--green`/mangled entries existed.
+
+Verified (live DOM + visual, no layout shift): zero broken `var()` refs; hero collage intact (6 wrappers, column 323×1771, images sized/positioned); navbar fixed/flex 64px; `.form-input` 480×48 / 6px / white; body Lemon Sorbet + Switzer; `.container-large` 1200px; benefits grid 3×384px; H1 new accent. `styleguide-*` and template sections gone.
+
 ### 2026-06-23 — §12 brand assets: logo swap, favicon, social-share image (requested)
 
 The asset portion of §12. Files: `public/logo.svg`, `src/app/layout.tsx`, + new `src/app/{icon.svg, apple-icon.png, opengraph-image.jpg, twitter-image.jpg}`.
