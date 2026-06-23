@@ -2,7 +2,17 @@ import type { Metadata } from "next";
 import "./webflow.css";
 import "./globals.css";
 
+// Absolute base for OG/Twitter/icon URLs. Uses an explicit override if set,
+// else Vercel's production domain (auto-injected), else localhost in dev — so
+// the social-share tags resolve correctly in production without a hardcoded domain.
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Kluppi — Branding expert and specialist",
   description:
     "Portfolio and waitlist for a branding expert and specialist. Showcasing creative design work.",

@@ -19,6 +19,18 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-23 — §12 brand assets: logo swap, favicon, social-share image (requested)
+
+The asset portion of §12. Files: `public/logo.svg`, `src/app/layout.tsx`, + new `src/app/{icon.svg, apple-icon.png, opengraph-image.jpg, twitter-image.jpg}`.
+
+- **Logo swap:** replaced `public/logo.svg` (navbar + footer wordmark) with the new Dare Devil `#f5531c` wordmark (`~/Downloads/Kluppi Logo Dare Devil.svg`). Identical viewBox aspect (2.604:1) → pure recolor, no layout shift. Verified it renders at 96×37 in the navbar.
+- **Favicon:** added `src/app/icon.svg` (the square K mark, `~/Downloads/K logo mark.svg`, transparent `#f5531c`). Next emits `<link rel="icon" type="image/svg+xml">`.
+- **Apple touch icon:** generated `src/app/apple-icon.png` (180×180) with `sharp` — the K mark trimmed and centred on a Lemon Sorbet `#fff0bc` square (iOS renders transparency as black, so it needs a solid bg). Next emits `<link rel="apple-touch-icon" sizes="180x180">`.
+- **Social share:** added `src/app/opengraph-image.jpg` + `src/app/twitter-image.jpg` (the 1200×630 `~/Downloads/Social Share.jpg`). Next emits `og:image` (1200×630) and `twitter:image` + `twitter:card=summary_large_image`.
+- **metadataBase:** set in `layout.tsx` so the OG/icon URLs resolve absolutely — uses `NEXT_PUBLIC_SITE_URL` if set, else Vercel's `VERCEL_PROJECT_PRODUCTION_URL` (auto-injected in prod), else `localhost:3000` in dev. No hardcoded domain.
+
+Verified: all five asset routes 200 with correct content-types; head tags correct; logo renders. **Not yet done (flagged):** the metadata `title`/`description` are still the template placeholders ("Branding expert and specialist" / portfolio copy) and feed `og:title`/`og:description` in the share preview — left as the SEO/copy piece of §12 (copy change, awaiting the user). §3 webflow prune still pending (background-task chip).
+
 ### 2026-06-22 — Design-system cleanup §1–§11 (requested, from `kluppi-waitlist-design-system-fixes.md`)
 
 Implemented the spec's code sections. **§3's webflow.css prune was deferred per the user** (the file is a single 94 KB minified line — risky to surgically prune); only §3's safe parts were done now. §12 (logo/favicon re-export, brand-book hex) is non-code and left for the user.
