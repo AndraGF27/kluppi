@@ -587,9 +587,9 @@ export default function Home() {
             <div className="kluppi-footer-divider" />
             <div className="kluppi-footer-bottom">
               <div className="kluppi-footer-legal">
-                <a href="#" className="kluppi-footer-link">Termeni și condiții</a>
-                <a href="#" className="kluppi-footer-link">Politica de confidențialitate</a>
-                <a href="#" className="kluppi-footer-link">Politica de utilizare cookie-uri</a>
+                <a href="/termeni-si-conditii" target="_blank" rel="noopener noreferrer" className="kluppi-footer-link">Termeni și condiții</a>
+                <a href="/confidentialitate" target="_blank" rel="noopener noreferrer" className="kluppi-footer-link">Politica de confidențialitate</a>
+                <a href="/politica-cookies" target="_blank" rel="noopener noreferrer" className="kluppi-footer-link">Politica de utilizare cookie-uri</a>
               </div>
               <p className="kluppi-footer-copy">© Copyright {new Date().getFullYear()} · Toate drepturile rezervate</p>
             </div>

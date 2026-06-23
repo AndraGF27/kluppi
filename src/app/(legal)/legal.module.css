@@ -1,0 +1,78 @@
+/* Scoped styles for the legal page templates. Inherits the global brand
+   tokens (colors, fonts) from :root / .body, so nothing here overrides the
+   site styles — it only handles the legal-document reading layout. */
+
+.main {
+  width: 100%;
+  max-width: 46rem;
+  margin: 0 auto;
+  /* generous top padding clears the fixed navbar */
+  padding: clamp(6.5rem, 5.5rem + 6vw, 9rem) var(--gutter) clamp(3rem, 8vw, 5rem);
+}
+
+.h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--accent); /* Dare Devil */
+  font-size: clamp(2rem, 1.4rem + 3vw, 3.25rem);
+  line-height: 1.05;
+  letter-spacing: 0.5px;
+  margin: 0 0 0.75rem;
+}
+
+.updated {
+  font-size: var(--fs-small);
+  opacity: 0.65;
+  margin: 0 0 1.5rem;
+}
+
+/* placeholder banner — remove when real copy lands */
+.placeholderNote {
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  background: #ffffffcc;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  padding: 0.75rem 1rem;
+  margin: 0 0 2.75rem;
+}
+
+.body h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--accent); /* Dare Devil */
+  font-size: clamp(1.35rem, 1.1rem + 1vw, 1.6rem);
+  line-height: 1.2;
+  margin: 2.5rem 0 0.75rem;
+}
+
+.body p {
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  margin: 0 0 1rem;
+}
+
+.body ul {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.body li {
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  margin-bottom: 0.4rem;
+}
+
+.body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.body a:hover {
+  color: var(--link-hover); /* Electric */
+}
+
+.body strong {
+  font-weight: 600;
+}
