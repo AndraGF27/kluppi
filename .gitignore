@@ -26,3 +26,6 @@ npm-debug.log*
 *.swp
 .idea/
 .vscode/
+
+# graphify cache (auto-regenerated)
+graphify-out/

@@ -19,6 +19,12 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-23 — Switch git remote to new repo (requested)
+
+Changed `origin` from `git@github.com:SkylineStudio12/kluppi.git` to `https://github.com/AndraGF27/kluppi.git` (`git remote set-url`). The new repo already has `main` at the same commit `29fd0a0`, so `main` is in sync — no push needed.
+
+Then deleted the local `kluppi-rebrand` branch (`git branch -d`, was `29fd0a0` — identical to `main`, so nothing lost). The project now lives on a single branch, `main`, on the new repo.
+
 ### 2026-06-23 — Meta title + description (requested; SEO piece of §12)
 
 `src/app/layout.tsx` — replaced the template placeholder metadata with Kluppi copy (user-approved):
