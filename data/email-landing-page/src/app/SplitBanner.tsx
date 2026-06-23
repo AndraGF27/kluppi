@@ -92,7 +92,7 @@ export default function SplitBanner({
 
   return (
     <section
-      className={`kluppi-banner${converge ? " kluppi-banner--converge" : ""}`}
+      className={`kluppi-banner kluppi-section${converge ? " kluppi-banner--converge" : ""}`}
       ref={sectionRef}
     >
       <div className="kluppi-banner-inner">

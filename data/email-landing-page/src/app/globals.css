@@ -7,24 +7,25 @@ html {
 
 /* ─── Kluppi design tokens (locked spec, 2026-06-21) ─── */
 :root {
-  --bg: #FFF0BC;            /* page background (Lemon Sorbet) */
-  --text: #351E28;          /* body text (Cassis) */
-  --accent: #FF5B22;        /* Dare Devil — H1/H2, button fill */
-  --link-hover: #3939FF;    /* Electric — hyperlink hover only */
-  --surprise: #DBB8FF;      /* Royal */
-  --arctic: #AEE6ED;        /* Arctic — surprise/teaser card */
-  --card: #FFFFFF;
-  --hairline: rgba(53, 30, 40, 0.2);
-  --shadow-card: 0 12px 30px rgba(53, 30, 40, 0.12);
+  --bg: #fff0bc;            /* page background (Lemon Sorbet) */
+  --text: #351e28;          /* body text (Cassis) */
+  --accent: #f5531c;        /* Dare Devil — H1/H2, button fill (brighter orange) */
+  --link-hover: #3939ff;    /* Electric — hyperlink hover only */
+  --surprise: #dbb8ff;      /* Royal */
+  --arctic: #aee6ed;        /* Arctic — surprise/teaser card */
+  --card: #fff;
+  --hairline: #351e2833;    /* Cassis 20% — hairline dividers/borders (now used) */
+  --shadow-card: 0 12px 30px #351e281f;
   --font-display: "Bricolage Grotesque", sans-serif;
   --font-body: "Switzer", sans-serif;
-  --fs-display: clamp(2.5rem, 7vw, 4.5rem);  /* H1 hero */
-  --fs-h2: clamp(2rem, 5vw, 3.25rem);
-  --fs-h3: 1.5rem;
-  --fs-lead: 1.4rem;        /* hero subhead */
-  --fs-body: 1.25rem;       /* intro / standalone paragraphs */
-  --fs-small: 1rem;         /* card body + CTA microcopy */
-  --fs-caption: 0.85rem;    /* eyebrow, legal links */
+
+  /* type scale — display(H1) lives on .kluppi-hero-h1; banner sizes are intentional and stay literal */
+  --fs-h2:    clamp(2rem, 5vw, 3.25rem);                 /* unchanged */
+  --fs-h3:    clamp(1.25rem, 1.152rem + 0.43vw, 1.5rem);
+  --fs-lead:  clamp(1.2rem, 1.122rem + 0.35vw, 1.4rem);
+  --fs-body:  clamp(1.0625rem, 0.989rem + 0.33vw, 1.25rem);
+  --fs-small: clamp(0.9375rem, 0.913rem + 0.11vw, 1rem);
+
   --radius-card: 6px;
   --radius-pill: 100px;
   --gutter: clamp(1.25rem, 5vw, 2rem);
@@ -83,41 +84,11 @@ p { text-wrap: pretty; }
   .header-image-list.image-list-right { padding-top: 70.7vh; }
 }
 
-/* Waitlist form built from the template's own form components. */
-.waitlist-form-wrapper {
-  width: 100%;
-  max-width: 32rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.waitlist-field-row {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  align-items: stretch;
-}
-
-.waitlist-field-row .form-input {
-  flex: 1 1 16rem;
-  margin-bottom: 0;
-}
-
-.waitlist-field-row .button.is-form {
-  width: auto;
-  flex: 0 0 auto;
-  white-space: nowrap;
-}
-
-.waitlist-message {
-  margin-top: 1rem;
-}
-
 /* ─── Kluppi hero (added 2026-06-19) ─── */
 /* Scoped to the hero only via .kluppi-hero / .kluppi-hero-* hooks.
    Loaded after webflow.css, so these win over template defaults by source order. */
 .kluppi-hero {
-  background-color: #FFF0BC; /* Lemon Sorbet */
+  background-color: var(--bg); /* Lemon Sorbet */
 }
 
 /* Keep hero text above the template's parallax image columns */
@@ -129,7 +100,7 @@ p { text-wrap: pretty; }
 .kluppi-hero-eyebrow {
   font-family: var(--font-body);
   font-weight: 300; /* light */
-  font-size: var(--fs-caption); /* 0.85rem */
+  font-size: var(--fs-small); /* kicker — grows .85→1rem (was --fs-caption) */
   letter-spacing: 0.12em;
   text-transform: uppercase; /* ALL CAPS */
   color: var(--text); /* Cassis */
@@ -144,6 +115,10 @@ p { text-wrap: pretty; }
   /* Restored to the pre-spec sizing — the spec's --fs-display + 18ch cap wrapped
      the headline to ~4 lines on desktop. No max-width, taller ceiling. */
   font-size: clamp(2rem, 7.52vw + 0.24rem, 4.9rem);
+  /* Preserved from .heading-style-h1 so the H1 no longer depends on that Webflow
+     class (now removed from the markup). 2px tracking is subtle at display size. */
+  letter-spacing: 2px;
+  line-height: 1;
 }
 
 .kluppi-hero-body {
@@ -156,11 +131,11 @@ p { text-wrap: pretty; }
   margin-inline: auto;
 }
 
-.kluppi-hero-cta {
+.kluppi-btn {
   display: inline-block;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 1.25rem; /* spec: button label (flat, no desktop bump) */
+  font-size: var(--fs-body); /* button label (was 1.25rem) */
   line-height: 1;
   color: #FFFFFF;
   background-color: var(--accent); /* Dare Devil */
@@ -170,13 +145,13 @@ p { text-wrap: pretty; }
 }
 
 /* Hover: keep the Dare Devil fill, lift and float on a soft Cassis shadow */
-.kluppi-hero-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(53, 30, 40, 0.3); }
-.kluppi-hero-cta:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(53, 30, 40, 0.22); }
+.kluppi-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(53, 30, 40, 0.3); }
+.kluppi-btn:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(53, 30, 40, 0.22); }
 
 @media (prefers-reduced-motion: reduce) {
-  .kluppi-hero-cta { transition: box-shadow 0.2s ease; }
-  .kluppi-hero-cta:hover,
-  .kluppi-hero-cta:active { transform: none; }
+  .kluppi-btn { transition: box-shadow 0.2s ease; }
+  .kluppi-btn:hover,
+  .kluppi-btn:active { transform: none; }
 }
 
 .kluppi-hero-trust {
@@ -190,7 +165,7 @@ p { text-wrap: pretty; }
 
 /* ─── Kluppi navbar (added 2026-06-19) ─── */
 .navbar-component {
-  background-color: #FFF0BC; /* Lemon Sorbet */
+  background-color: var(--bg); /* Lemon Sorbet */
   border-bottom: none; /* remove template's 1px #363636 divider */
 }
 
@@ -199,7 +174,7 @@ p { text-wrap: pretty; }
 .navbar-menu-button .menu-icon-line-middle,
 .navbar-menu-button .menu-icon-line-middle-base,
 .navbar-menu-button .menu-icon-line-bottom {
-  background-color: #FF5B22; /* Dare Devil */
+  background-color: var(--accent); /* Dare Devil */
 }
 
 /* Animated hamburger → X (mirrors the original Webflow click animation).
@@ -246,11 +221,11 @@ p { text-wrap: pretty; }
 /* Nav menu (full-screen overlay): Lemon Sorbet bg, Cassis text. Link labels
    left as-is for now — only restyled, not renamed. */
 .navbar-menu {
-  background-color: #FFF0BC; /* Lemon Sorbet */
-  color: #351E28; /* Cassis */
+  background-color: var(--bg); /* Lemon Sorbet */
+  color: var(--text); /* Cassis */
 }
 .navbar-menu .navbar-link {
-  color: #351E28; /* Cassis — also overrides .navbar-link.w--current */
+  color: var(--text); /* Cassis — also overrides .navbar-link.w--current */
   font-family: "Switzer", sans-serif;
   font-size: 3rem; /* overrides the template's 5rem */
   text-transform: none; /* sentence case */
@@ -267,8 +242,8 @@ p { text-wrap: pretty; }
 .kluppi-benefits,
 .kluppi-reasons,
 .kluppi-signup-section {
-  background-color: #FFF0BC; /* Lemon Sorbet */
-  color: #351E28; /* Cassis */
+  background-color: var(--bg); /* Lemon Sorbet */
+  color: var(--text); /* Cassis */
 }
 /* Preserve the template's old .section-contact spacing above the signup section */
 .kluppi-signup-section { margin-top: 4rem; }
@@ -295,11 +270,18 @@ p { text-wrap: pretty; }
 /* (spec §5 put signup at 46rem, but that wrapped the heading — kept at 75rem so
    "Fii printre primii care află când lansăm." stays on one line; form is 30rem.) */
 
+/* Shared section rhythm (spec §7) — one class so every content section shares the
+   same 7rem vertical cadence (≈14rem between adjacent sections). Applied to
+   painpoints, steps, faq and both banner sections. (benefits/reasons get the same
+   cadence via the .section-padding-large utility on their inner wrapper, so they
+   keep that and are not double-padded with this class.) */
+.kluppi-section { padding: clamp(4rem, 8vw, 7rem) var(--gutter); }
+
 /* ─── Minimal intro band (above About): teaser "Coduri dedicate…" ─── */
 .kluppi-band {
   background-color: var(--bg);
   text-align: center;
-  padding: 10.5rem var(--gutter) 7rem;
+  padding: clamp(6rem, 12vw, 10.5rem) var(--gutter) clamp(4rem, 8vw, 7rem);
 }
 .kluppi-band-inner {
   max-width: none; /* full-width grid so labels stay on one line */
@@ -308,7 +290,7 @@ p { text-wrap: pretty; }
 .kluppi-band-title {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700; /* bold — overrides .text-size-large's 500 by source order */
-  color: #351E28; /* Cassis */
+  color: var(--text); /* Cassis */
   font-size: 2rem; /* desktop/tablet; ≤767px → 1.5rem (keeps the ~0.75 proportion) */
 }
 /* 3-up feature row (replaces the old single-line title): each cell centres a
@@ -332,7 +314,7 @@ p { text-wrap: pretty; }
   color: var(--text); /* Cassis */
 }
 @media (max-width: 767px) {
-  .kluppi-band { padding: 5.25rem var(--gutter); }
+  /* band padding now handled by the fluid clamp on .kluppi-band */
   .kluppi-band-title { font-size: 1.5rem; } /* 2rem × 0.75 */
   .kluppi-band-grid { grid-template-columns: 1fr; gap: 2.5rem; }
 }
@@ -340,7 +322,7 @@ p { text-wrap: pretty; }
 /* ─── Pain-points carousel ("De câte ori ai…") — under the intro band ─── */
 .kluppi-painpoints {
   background-color: var(--bg);
-  padding: clamp(4rem, 8vw, 7rem) var(--gutter); /* spec §4 standard section */
+  /* padding via .kluppi-section (spec §7) */
 }
 .kluppi-painpoints-inner {
   max-width: 75rem;
@@ -357,7 +339,7 @@ p { text-wrap: pretty; }
 .kluppi-painpoints-h2 {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
-  color: #FF5B22; /* Dare Devil */
+  color: var(--accent); /* Dare Devil */
   font-size: var(--fs-h2); /* matches the other section H2s */
   line-height: 1.05;
 }
@@ -400,9 +382,9 @@ p { text-wrap: pretty; }
 .kluppi-carousel-text {
   font-family: "Switzer", sans-serif;
   font-weight: 300;
-  color: #351E28; /* Cassis */
-  font-size: 1.3rem;
-  line-height: 1.45;
+  color: var(--text); /* Cassis */
+  font-size: var(--fs-body); /* was 1.3rem */
+  line-height: 1.5;
   text-align: left;
 }
 .kluppi-carousel-arrows {
@@ -416,10 +398,10 @@ p { text-wrap: pretty; }
   justify-content: center;
   width: 3rem;
   height: 3rem;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   border: 1px solid rgba(255, 255, 255, 0.7);
   background-color: rgba(255, 255, 255, 0.9);
-  color: #351E28; /* Cassis */
+  color: var(--text); /* Cassis */
   cursor: pointer;
   transition: background-color 0.15s ease, opacity 0.15s ease;
 }
@@ -433,8 +415,8 @@ p { text-wrap: pretty; }
 .kluppi-painpoints-outro .kluppi-hero-body {
   margin-top: 1rem;
   font-family: var(--font-body);
-  font-size: var(--fs-body); /* intro/standalone body = 1.25rem */
-  line-height: 1.55;
+  font-size: var(--fs-body); /* intro/standalone body */
+  line-height: 1.5;
   font-weight: 300;
   max-width: none; /* these cells are left-aligned — drop the hero lead's 42rem cap */
 }
@@ -458,7 +440,6 @@ p { text-wrap: pretty; }
 @media (max-width: 767px) {
   .kluppi-carousel { padding: 1.5rem; }
   .kluppi-carousel-card { max-width: none; padding: 1.75rem; }
-  .kluppi-carousel-text { font-size: 1.125rem; }
   .kluppi-painpoints-h2 { font-size: 1.5rem; } /* match the band title's mobile size */
 }
 
@@ -469,7 +450,7 @@ p { text-wrap: pretty; }
 .kluppi-benefits-heading {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
-  color: #FF5B22; /* Dare Devil */
+  color: var(--accent); /* Dare Devil */
   font-size: var(--fs-h2); /* matches the pain-points heading */
   line-height: 1.05;
   margin-bottom: 3rem;
@@ -522,8 +503,8 @@ p { text-wrap: pretty; }
 .kluppi-benefit-desc {
   font-family: "Switzer", sans-serif;
   font-weight: 300;
-  color: #351E28; /* Cassis */
-  font-size: 1rem;
+  color: var(--text); /* Cassis */
+  font-size: var(--fs-small); /* dense-grid body — stays small (was 1rem) */
   line-height: 1.5;
 }
 
@@ -589,7 +570,7 @@ p { text-wrap: pretty; }
   flex: 0 0 auto;
   width: 2.75rem;
   height: 2.75rem;
-  color: #FF5B22; /* Dare Devil */
+  color: var(--accent); /* Dare Devil */
 }
 .kluppi-bcard-text {
   display: flex;
@@ -606,8 +587,8 @@ p { text-wrap: pretty; }
 .kluppi-bcard-desc {
   font-family: "Switzer", sans-serif;
   font-weight: 300;
-  color: #351E28; /* Cassis */
-  font-size: 1rem;
+  color: var(--text); /* Cassis */
+  font-size: var(--fs-small); /* dense-grid body — stays small (was 1rem) */
   line-height: 1.5;
 }
 @media (max-width: 991px) {
@@ -621,20 +602,20 @@ p { text-wrap: pretty; }
 /* ─── Steps timeline ("Cum funcționează?") — new alternating, scroll-filled timeline ─── */
 .kluppi-steps {
   background-color: var(--bg);
-  padding: clamp(4rem, 8vw, 7rem) var(--gutter); /* spec §4 standard section */
+  /* padding via .kluppi-section (spec §7) */
 }
 .kluppi-steps-inner {
-  max-width: 68rem;
+  max-width: 75rem;
   margin-inline: auto;
 }
 .kluppi-steps-heading {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
-  color: #FF5B22; /* Dare Devil */
+  color: var(--accent); /* Dare Devil */
   font-size: var(--fs-h2); /* matches the other section headings */
   line-height: 1.05;
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem; /* spec §7 — was 4rem */
 }
 
 /* Timeline: vertical flex of step rows; the line is an absolute track behind them.
@@ -700,7 +681,7 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background-color: var(--dot-fill, rgba(255, 91, 34, 0.25)); /* base; JS ramps it 0.25 → 1 with scroll */
+  background-color: var(--dot-fill, color-mix(in srgb, var(--accent) 25%, transparent)); /* base; JS ramps it 0.25 → 1 with scroll */
 }
 
 .kluppi-step-card {
@@ -715,7 +696,7 @@ p { text-wrap: pretty; }
   font-weight: 300; /* spec groups the "Pasul" label with the eyebrow */
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-size: var(--fs-caption); /* 0.85rem */
+  font-size: var(--fs-small); /* PASUL 0X — grows .85→1rem (was --fs-caption) */
   color: var(--accent); /* Dare Devil (reverted per request) */
   margin-bottom: 0.75rem;
 }
@@ -730,8 +711,8 @@ p { text-wrap: pretty; }
 .kluppi-step-desc {
   font-family: "Switzer", sans-serif;
   font-weight: 300;
-  color: #351E28; /* Cassis */
-  font-size: 1rem;
+  color: var(--text); /* Cassis */
+  font-size: var(--fs-small); /* dense-grid body — stays small (was 1rem) */
   line-height: 1.5;
 }
 
@@ -758,7 +739,7 @@ p { text-wrap: pretty; }
 /* ─── FAQ accordion ("Întrebări frecvente") — native <details>/<summary> ─── */
 .kluppi-faq {
   background-color: var(--bg);
-  padding: clamp(4rem, 8vw, 7rem) var(--gutter); /* spec §4 standard section */
+  /* padding via .kluppi-section (spec §7) */
 }
 .kluppi-faq-inner {
   max-width: 46rem;
@@ -767,17 +748,17 @@ p { text-wrap: pretty; }
 .kluppi-faq-heading {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
-  color: #FF5B22; /* Dare Devil */
+  color: var(--accent); /* Dare Devil */
   font-size: var(--fs-h2); /* matches the other section headings */
   line-height: 1.05;
   text-align: center;
   margin-bottom: 3rem;
 }
 .kluppi-faq-list {
-  border-top: 1px solid rgba(53, 30, 40, 0.15); /* Cassis hairline dividers */
+  border-top: 1px solid var(--hairline); /* Cassis hairline dividers */
 }
 .kluppi-faq-item {
-  border-bottom: 1px solid rgba(53, 30, 40, 0.15);
+  border-bottom: 1px solid var(--hairline);
 }
 .kluppi-faq-question {
   display: flex;
@@ -792,7 +773,7 @@ p { text-wrap: pretty; }
   padding: 1.5rem 0;
   font-family: var(--font-body);
   font-weight: 500; /* spec §3 FAQ question */
-  font-size: 1.25rem;
+  font-size: var(--fs-body); /* was 1.25rem */
   line-height: 1.35;
   color: var(--text); /* Cassis */
 }
@@ -800,7 +781,7 @@ p { text-wrap: pretty; }
   flex: 0 0 auto;
   width: 1.25rem;
   height: 1.25rem;
-  color: #FF5B22; /* Dare Devil */
+  color: var(--accent); /* Dare Devil */
   transition: transform 0.25s ease;
 }
 .kluppi-faq-item.is-open .kluppi-faq-chevron { transform: rotate(180deg); }
@@ -815,20 +796,16 @@ p { text-wrap: pretty; }
   padding: 0 2.75rem 1.5rem 0; /* right pad keeps the answer clear of the chevron column */
   font-family: "Switzer", sans-serif;
   font-weight: 300;
-  font-size: 1.0625rem;
+  font-size: var(--fs-small); /* smaller than the question, by design (was 1.0625rem) */
   line-height: 1.55;
-  color: #351E28; /* Cassis */
-}
-
-@media (max-width: 767px) {
-  .kluppi-faq-question { font-size: 1.0625rem; }
+  color: var(--text); /* Cassis */
 }
 
 /* ─── Split tagline banner (below the form) — scroll-driven spread ─── */
 .kluppi-banner {
   background-color: var(--bg);
   overflow: hidden; /* clip the lines while they're pulled toward the centre */
-  padding: clamp(4rem, 8vw, 7rem) var(--gutter); /* spec §4 standard section */
+  /* padding via .kluppi-section (spec §7) */
 }
 .kluppi-banner-inner {
   max-width: 90rem;
@@ -844,14 +821,14 @@ p { text-wrap: pretty; }
 .kluppi-banner-line1 {
   font-family: "Switzer", sans-serif;
   font-weight: 300; /* light */
-  color: #351E28; /* Cassis */
+  color: var(--text); /* Cassis */
   font-size: 5rem;
   text-align: left;
 }
 .kluppi-banner-line2 {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 800; /* extra bold */
-  color: #FF5B22; /* Dare Devil */
+  color: var(--accent); /* Dare Devil */
   font-size: 7rem;
   text-align: right;
 }
@@ -924,14 +901,14 @@ p { text-wrap: pretty; }
 .kluppi-footer-social {
   font-family: "Switzer", sans-serif;
   font-weight: 300;
-  font-size: 1.125rem;
-  color: #351E28; /* Cassis */
+  font-size: var(--fs-body); /* was 1.125rem */
+  color: var(--text); /* Cassis */
   transition: color 0.15s ease;
 }
 .kluppi-footer-social:hover { color: var(--link-hover); } /* Electric (spec §6) */
 .kluppi-footer-divider {
   height: 1px;
-  background-color: rgba(53, 30, 40, 0.15);
+  background-color: var(--hairline);
   margin-bottom: 1.75rem;
 }
 .kluppi-footer-bottom {
@@ -950,7 +927,7 @@ p { text-wrap: pretty; }
 .kluppi-footer-copy {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: var(--fs-caption); /* legal links 0.85rem (spec §3) */
+  font-size: var(--fs-small); /* legal links — was --fs-caption */
   color: var(--text); /* Cassis */
 }
 .kluppi-footer-link { transition: color 0.15s ease; }
@@ -960,6 +937,23 @@ p { text-wrap: pretty; }
 @media (max-width: 767px) {
   .kluppi-footer-socials { gap: 1rem 1.75rem; }
   .kluppi-footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+
+/* ─── form-input rebrand (spec §3) — the template's .form-input restyled to the
+   Kluppi system. Added here (loaded after webflow.css) so these win by source
+   order; webflow's height / padding / font-size / line-height / transition stay. */
+.form-input {
+  background-color: var(--white);
+  color: var(--text);                 /* was var(--black) */
+  border: 1px solid var(--hairline);  /* resting border so the field reads as a field */
+  border-radius: var(--radius-card);  /* was literal 6px */
+}
+.form-input::placeholder { color: #7c7c7c; } /* unchanged */
+.form-input:hover { border-color: var(--text); }
+.form-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent); /* Dare Devil focus ring */
+  outline: none;
 }
 
 /* ─── Signup form ("Fii printre primii…") — centered column ─── */
@@ -1006,7 +1000,7 @@ p { text-wrap: pretty; }
 .kluppi-signup-message {
   margin-top: 1.25rem;
   font-family: "Switzer", sans-serif;
-  font-size: 1rem;
+  font-size: var(--fs-small); /* was 1rem */
 }
-.kluppi-signup-message.is-success { color: #351E28; } /* Cassis */
-.kluppi-signup-message.is-error { color: #FF5B22; } /* Dare Devil */
+.kluppi-signup-message.is-success { color: var(--text); } /* Cassis */
+.kluppi-signup-message.is-error { color: var(--accent); } /* Dare Devil */

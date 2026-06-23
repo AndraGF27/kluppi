@@ -19,6 +19,26 @@ A running record of every change made to this project, in order. Each entry note
 
 ## Changes
 
+### 2026-06-22 — Design-system cleanup §1–§11 (requested, from `kluppi-waitlist-design-system-fixes.md`)
+
+Implemented the spec's code sections. **§3's webflow.css prune was deferred per the user** (the file is a single 94 KB minified line — risky to surgically prune); only §3's safe parts were done now. §12 (logo/favicon re-export, brand-book hex) is non-code and left for the user.
+
+Files: `globals.css`, `page.tsx`, `SplitBanner.tsx`, `HowItWorks.tsx`.
+
+- **§1 Tokens:** rewrote `:root` — `--accent` `#ff5b22`→`#f5531c` (brighter Dare Devil); removed `--fs-display` + `--fs-caption`; `--fs-h3/-lead/-body/-small` now fluid `clamp()`s; `--hairline`/`--shadow-card` as hex (`#351e2833`/`#351e281f`).
+- **§2 Color via tokens:** every literal `#fff0bc`→`var(--bg)`, `#ff5b22`→`var(--accent)`, `#351e28`(text)→`var(--text)` in globals. `.kluppi-step-dot::after` default → `color-mix(in srgb, var(--accent) 25%, transparent)`. Left literal: CTA hover/active shadows, steps-line track (0.22), carousel-arrow whites, `#7c7c7c`. Also updated HowItWorks JS dot-ramp from old-orange `rgba(255,91,34,…)` → `color-mix` of `var(--accent)` so the dots track the line-fill (extends §2's accent-tracking intent).
+- **§3 (safe parts only):** `.form-input` rebrand added as a globals override (white bg, Cassis text, hairline border, `--radius-card`, hover→Cassis border, focus→accent border + accent 30% ring). Webflow selector/dead-token prune **deferred**.
+- **§4 Self-contained H1:** added `letter-spacing: 2px` + `line-height: 1` to `.kluppi-hero-h1`; removed `heading-style-h1` from the `<h1>` and `text-size-large` from the hero body in markup.
+- **§5 Orphan form removed:** deleted `.waitlist-form-wrapper/-field-row(+children)/-message`.
+- **§6 Type routing:** carousel→`--fs-body` (+lh 1.5), faq-question→`--fs-body`, faq-answer→`--fs-small`, footer-social→`--fs-body`, the three `*-desc`→`--fs-small`, eyebrow/step-label/footer-link/copy/signup-message→`--fs-small`; painpoints body lh 1.55→1.5; removed redundant `@767` carousel-text & faq-question overrides. (`.kluppi-signup-text` left at lh 1.55 — spec only named carousel + painpoints for the lh change.)
+- **§7 Spacing:** added `.kluppi-section { padding: clamp(4rem,8vw,7rem) var(--gutter) }`, applied to painpoints/steps/faq + both banners (removed their now-duplicate direct padding). **benefits/reasons left as-is** — they already get the same 7rem cadence via the inner `.section-padding-large`, so adding `.kluppi-section` would have double-padded them. Band padding → `clamp(6rem,12vw,10.5rem) … clamp(4rem,8vw,7rem)` (dropped the `@767` band-padding override). Steps-inner `68rem`→`75rem`. Steps-heading margin `4rem`→`3rem`.
+- **§8 Radii:** carousel-arrow `100px`→`var(--radius-pill)` (no other literal `6px`/`100px` outside token defs).
+- **§9 Button rename:** `.kluppi-hero-cta`→`.kluppi-btn` across CSS (base/hover/active/reduced-motion) and all markup; base font-size `1.25rem`→`var(--fs-body)`.
+- **§10 Stagger:** band cells `0.1s/0.2s`→`0.08s/0.16s`; HowItWorks steps `i*0.06`→`i*0.08`.
+- **§11 Hairlines:** faq-list/faq-item/footer-divider `rgba(53,30,40,0.15)`→`var(--hairline)` (now 20%). Steps line left as its own literal.
+
+Verified: §13 greps clean (zero `--fs-display`/`--fs-caption`; `#ff5b22` gone; `#351e28` only in `:root`). Dev server recompiles with no error overlay; live DOM confirms new accent `rgb(245,83,28)`, self-contained H1 (2px/lh 1), white Cassis form field, uniform 101px section paddings, fluid type. Hero renders correctly with the new orange.
+
 ### 2026-06-22 — Reasons section: swap 2nd & 4th photos (requested)
 
 - Replaced the 2nd (`i2` → `public/Reasons2.jpg`) and 4th (`i4` → `public/Reasons4.jpg`) reasons-section images with new files from `~/Downloads/KP Reasons/` (already named `Reasons2.jpg` / `Reasons4.jpg`). Content overwrite at existing paths — no markup, `sizes`, or order changes. Slots 1 and 3 untouched. Old images recoverable from git.

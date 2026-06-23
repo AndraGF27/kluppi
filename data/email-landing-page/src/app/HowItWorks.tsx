@@ -80,7 +80,7 @@ export default function HowItWorks() {
       const ramp = 160; // px before a dot over which it brightens
       dots.forEach((dot, i) => {
         const t = Math.min(Math.max((scan - (centers[i] - ramp)) / ramp, 0), 1);
-        dot.style.setProperty("--dot-fill", `rgba(255, 91, 34, ${0.25 + 0.75 * t})`); // colours the ::after face, not the dot's opaque Lemon base
+        dot.style.setProperty("--dot-fill", `color-mix(in srgb, var(--accent) ${25 + 75 * t}%, transparent)`); // tracks --accent; colours the ::after face, not the dot's opaque Lemon base
         dot.style.transform = `scale(${1 + 0.15 * t})`;
       });
     };
@@ -115,7 +115,7 @@ export default function HowItWorks() {
           key={step.label}
           className={`kluppi-step kluppi-step--${i % 2 === 0 ? "left" : "right"}`}
           data-reveal
-          style={{ "--reveal-delay": `${i * 0.06}s` } as React.CSSProperties}
+          style={{ "--reveal-delay": `${i * 0.08}s` } as React.CSSProperties}
         >
           <div
             className="kluppi-step-dot"

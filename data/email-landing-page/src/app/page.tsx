@@ -306,15 +306,15 @@ export default function Home() {
                   <div className="text-align-center">
                     <p className="kluppi-hero-eyebrow z-index-2" data-reveal>Lansăm în curând</p>
                     <div className="margin-bottom margin-small z-index-2" data-reveal style={{ "--reveal-delay": "0.08s" } as React.CSSProperties}>
-                      <h1 className="heading-style-h1 kluppi-hero-h1">
+                      <h1 className="kluppi-hero-h1">
                         Coduri și avantaje exclusive, direct de la branduri, în fiecare lună
                       </h1>
                     </div>
-                    <p className="text-size-large kluppi-hero-body z-index-2" data-reveal style={{ "--reveal-delay": "0.16s" } as React.CSSProperties}>
+                    <p className="kluppi-hero-body z-index-2" data-reveal style={{ "--reveal-delay": "0.16s" } as React.CSSProperties}>
                       Lucrăm direct cu brandurile și îți aducem, lună de lună, coduri de reducere și beneficii reale, create special pentru membrii Kluppi.
                     </p>
                     <div className="margin-top margin-medium z-index-2" data-reveal style={{ "--reveal-delay": "0.24s" } as React.CSSProperties}>
-                      <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+                      <a href="#contact" className="kluppi-btn">Rezervă-ți locul în club</a>
                       <p className="kluppi-hero-trust">Înscriere gratuită · Fără obligații</p>
                     </div>
                   </div>
@@ -332,11 +332,11 @@ export default function Home() {
                 <Tickets className="kluppi-band-icon" aria-hidden="true" strokeWidth={1.5} />
                 <p className="text-size-large kluppi-band-title">Coduri dedicate</p>
               </div>
-              <div className="kluppi-band-cell" data-reveal style={{ "--reveal-delay": "0.1s" } as React.CSSProperties}>
+              <div className="kluppi-band-cell" data-reveal style={{ "--reveal-delay": "0.08s" } as React.CSSProperties}>
                 <LockKeyhole className="kluppi-band-icon" aria-hidden="true" strokeWidth={1.5} />
                 <p className="text-size-large kluppi-band-title">Doar pentru membri</p>
               </div>
-              <div className="kluppi-band-cell" data-reveal style={{ "--reveal-delay": "0.2s" } as React.CSSProperties}>
+              <div className="kluppi-band-cell" data-reveal style={{ "--reveal-delay": "0.16s" } as React.CSSProperties}>
                 <Heart className="kluppi-band-icon" aria-hidden="true" strokeWidth={1.5} />
                 <p className="text-size-large kluppi-band-title">Exact pe gustul tău</p>
               </div>
@@ -351,13 +351,13 @@ export default function Home() {
           converge
           cta={
             <>
-              <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+              <a href="#contact" className="kluppi-btn">Rezervă-ți locul în club</a>
               <p className="kluppi-hero-trust">Îți scriem mereu cu rost.</p>
             </>
           }
         />
 
-        <section className="kluppi-painpoints">
+        <section className="kluppi-painpoints kluppi-section">
           <div className="kluppi-painpoints-inner">
             <h2 className="kluppi-painpoints-heading" data-reveal>De câte ori ai…</h2>
             <PainPointsCarousel />
@@ -373,7 +373,7 @@ export default function Home() {
                 Și am creat Kluppi: prietenul care are mereu un cod de reducere bun, exact când îți trebuie.
               </p>
               <div className="kluppi-painpoints-cta">
-                <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+                <a href="#contact" className="kluppi-btn">Rezervă-ți locul în club</a>
                 <p className="kluppi-hero-trust">Rapid, doar cu nume și e-mail.</p>
               </div>
             </div>
@@ -388,7 +388,7 @@ export default function Home() {
                   <h2 className="kluppi-benefits-heading" data-reveal>Ce te așteaptă în Kluppi?</h2>
                   <BenefitsCards />
                   <div className="kluppi-benefits-cta-block" data-reveal>
-                    <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+                    <a href="#contact" className="kluppi-btn">Rezervă-ți locul în club</a>
                     <p className="kluppi-hero-trust">Pleci oricând, fără explicații.</p>
                   </div>
                 </div>
@@ -397,12 +397,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="kluppi-steps" id="cum-functioneaza">
+        <section className="kluppi-steps kluppi-section" id="cum-functioneaza">
           <div className="kluppi-steps-inner">
             <h2 className="kluppi-steps-heading" data-reveal>Cum funcționează?</h2>
             <HowItWorks />
             <div className="kluppi-steps-cta-block" data-reveal>
-              <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+              <a href="#contact" className="kluppi-btn">Rezervă-ți locul în club</a>
               <p className="kluppi-hero-trust">În mai puțin de un minut.</p>
             </div>
           </div>
@@ -453,7 +453,7 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="kluppi-benefits-cta-block" data-reveal>
-                    <a href="#contact" className="kluppi-hero-cta">Rezervă-ți locul în club</a>
+                    <a href="#contact" className="kluppi-btn">Rezervă-ți locul în club</a>
                     <p className="kluppi-hero-trust">Surpriză specială la lansare.</p>
                   </div>
                 </div>
@@ -462,7 +462,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="kluppi-faq" id="intrebari-frecvente">
+        <section className="kluppi-faq kluppi-section" id="intrebari-frecvente">
           <div className="kluppi-faq-inner">
             <h2 className="kluppi-faq-heading" data-reveal>Întrebări frecvente</h2>
             <div className="kluppi-faq-list" data-reveal>
@@ -543,7 +543,7 @@ export default function Home() {
                       required
                       disabled={status === "loading"}
                     />
-                    <button className="kluppi-hero-cta kluppi-signup-cta" type="submit" disabled={status === "loading"}>
+                    <button className="kluppi-btn kluppi-signup-cta" type="submit" disabled={status === "loading"}>
                       {status === "loading" ? "Se trimite…" : "Rezervă-ți locul în club"}
                     </button>
                   </form>
