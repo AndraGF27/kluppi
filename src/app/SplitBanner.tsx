@@ -62,15 +62,23 @@ export default function SplitBanner({
         );
         l1.style.transform = `translateX(${-progress * l1Drift}px)`;
         l2.style.transform = `translateX(${progress * base}px)`;
+      } else if (window.innerWidth < 992) {
+        // Mobile/tablet: the CSS pins orange (line2) to the left edge and dark
+        // (line1) to the right. progress is 0.5 exactly when the banner is
+        // centred in the viewport, so anchor the lines AT their edges there
+        // (phase 0) and drift them inward as the banner enters/exits — that way
+        // the dark line reads as flush-right while you're reading it, instead of
+        // sitting permanently inset.
+        const phase = Math.abs(progress - 0.5) * 2; // 0 centred, →1 at the ends
+        const off = phase * base;
+        l1.style.transform = `translateX(${-off}px)`; // dark: right edge → drifts left
+        l2.style.transform = `translateX(${off}px)`; // orange: left edge → drifts right
       } else {
-        // Lines start pulled toward the centre and spread to the edges. On
-        // mobile/tablet the CSS flips the layout (orange line2 → left, dark line1
-        // → right), so flip the drift direction too — otherwise the lines push
-        // *past* the screen edges and get clipped instead of easing inward.
-        const dir = window.innerWidth < 992 ? -1 : 1;
+        // Desktop: lines start pulled toward the centre and spread to the edges
+        // (dark line1 → left, orange line2 → right) as the section scrolls up.
         const pull = (1 - progress) * base;
-        l1.style.transform = `translateX(${dir * pull}px)`; // left line: pulled right → settles left
-        l2.style.transform = `translateX(${-dir * pull}px)`; // right line: pulled left → settles right
+        l1.style.transform = `translateX(${pull}px)`; // left line: pulled right → settles left
+        l2.style.transform = `translateX(${-pull}px)`; // right line: pulled left → settles right
       }
     };
 

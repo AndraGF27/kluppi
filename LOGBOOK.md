@@ -952,3 +952,14 @@ The hero eyebrow was hidden behind the fixed navbar at 390/768, and the user wan
 
 **`src/app/SplitBanner.tsx`**
 - **Flipped the default-banner drift on mobile.** With the new edge layout (orange→left, dark→right — the opposite of the default banner's desktop sides), the spread-banner parallax pushed the lines *past* the screen edges (clipped). Added `const dir = window.innerWidth < 992 ? -1 : 1` and applied it to the default branch's `translateX`, so on mobile the lines ease *inward* from the edges instead of overflowing. Desktop direction unchanged; the converge branch already eased inward.
+
+### 2026-06-24 — Mobile: dark banner line flush-right + one-line converge subtitle (requested)
+
+Follow-up to the edge-split round. At 390/768 the dark line still didn't reach the right-most side, and the converge subtitle wrapped to two lines on the phone. Verified live at 390 (×844) and 768 (×1024); no horizontal overflow (scrollWidth==clientWidth at both); desktop ≥992 motion left byte-identical.
+
+**`src/app/globals.css`**
+- **Dropped the dark-line width cap.** The `≤991` dark `line1` had `max-width:85%`; at 390 that 85% box (298px) was narrower than the one-line "Cumpără ce voiai oricum." (316px), forcing a 2-line wrap that read as floating mid-block. Removed the cap (back to `max-width:100%`) so `fit-content` shrinks to the text and `margin-left:auto` pins it flush to the inner-right edge. Spread dark now one line, right edge == inner right (736 @768, 370 @390).
+- **One-line converge subtitle on phones.** "Primești o surpriză specială la lansare." is 474px @28px — too wide for the 350px phone content box, so it wrapped. Added `@media (max-width:479px){ .kluppi-banner--converge .kluppi-banner-line1 { font-size:1.2rem; white-space:nowrap } }` (≈325px) so it's a single line hugging the right. ≥480 (incl. 768) keeps the larger size / 2-line wrap, which the user confirmed is fine there.
+
+**`src/app/SplitBanner.tsx`**
+- **Re-phased the mobile spread drift so the lines rest AT their edges in view.** The previous `pull=(1-progress)*base` only reached the edges at `progress==1` (banner scrolled fully past), so while the banner was centred the dark line sat ~24px inset — never quite at the right-most side. `progress` is exactly `0.5` when the banner is viewport-centred, so switched the mobile branch to `phase = |progress-0.5|*2; off = phase*base` and `line1 → -off`, `line2 → +off`: the lines are flush to their edges when you're reading the banner and drift inward (≤24px) only as it enters/exits. Split the desktop branch back out unchanged (`pull=(1-progress)*base`, dir +1) — desktop behaviour is identical to before.

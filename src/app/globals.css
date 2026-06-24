@@ -922,10 +922,20 @@ p { text-wrap: pretty; }
   }
   .kluppi-banner-line2,
   .kluppi-banner--converge .kluppi-banner-line2 { margin-right: auto; margin-left: 0; }
-  /* cap the dark line under full width so a wrapping line still hugs the right
-     (margin-left:auto) instead of falling back to full-width / flush-left */
+  /* dark line: fit-content + margin-left:auto pins it flush to the right edge.
+     No width cap — a short line shrinks to its text and hugs right; a long line
+     (converge subtitle at ≥480) fills the width and wraps, still right-edged. */
   .kluppi-banner-line1,
-  .kluppi-banner--converge .kluppi-banner-line1 { margin-left: auto; margin-right: 0; max-width: 85%; }
+  .kluppi-banner--converge .kluppi-banner-line1 { margin-left: auto; margin-right: 0; }
+}
+/* Phone: the converge subtitle ("Primești o surpriză specială la lansare.") is
+   too long to fit one line at the ≤479 body sizes, so it wrapped to two. Shrink
+   it and keep it on a single line, still hugging the right edge. */
+@media (max-width: 479px) {
+  .kluppi-banner--converge .kluppi-banner-line1 {
+    font-size: 1.2rem;
+    white-space: nowrap;
+  }
 }
 /* Optional CTA grouped under the banner's lines (centred). */
 .kluppi-banner-cta {
