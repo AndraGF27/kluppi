@@ -84,6 +84,22 @@ p { text-wrap: pretty; }
   .header-image-list.image-list-right { padding-top: 70.7vh; }
 }
 
+/* Below 992 the content stacks taller, so push the topmost images further down
+   (the base 70vh start lands them on the CTA/microcopy otherwise). Both columns
+   get the override — the right column's 70.7vh rule is min-width:992 only.
+   Sticky structure / parallax are untouched; only the start offset moves. */
+@media (max-width: 991px) {
+  .header-image-list,
+  .header-image-list.image-list-right { padding-top: 80vh; }
+}
+@media (max-width: 479px) {
+  /* 100vh (not 85) so the collage clears the tall phone hero content even on
+     short viewports; images then drift up into view on scroll. Tune down if the
+     at-rest gap reads too large on tall phones. */
+  .header-image-list,
+  .header-image-list.image-list-right { padding-top: 100vh; }
+}
+
 /* ─── Kluppi hero (added 2026-06-19) ─── */
 /* Scoped to the hero only via .kluppi-hero / .kluppi-hero-* hooks.
    Loaded after webflow.css, so these win over template defaults by source order. */
@@ -371,6 +387,7 @@ p { text-wrap: pretty; }
 .kluppi-carousel-card {
   width: 100%;
   max-width: 42rem; /* spec §6 carousel quote card */
+  margin-inline: auto; /* center when max-width is lifted on tablet/phone */
   background-color: var(--card);
   border-radius: var(--radius-card);
   padding: 2.5rem;
@@ -435,6 +452,10 @@ p { text-wrap: pretty; }
   .kluppi-carousel,
   .kluppi-painpoints-conclusion,
   .kluppi-painpoints-outro { grid-column: 1 / -1; }
+  /* 768 fell through to the 3rem desktop padding; give it a tablet step and
+     drop the card max-width so it fills the centered column. */
+  .kluppi-carousel { padding: 2rem; }
+  .kluppi-carousel-card { max-width: none; }
 }
 
 @media (max-width: 767px) {
@@ -816,6 +837,7 @@ p { text-wrap: pretty; }
   margin: 0;
   line-height: 1.05;
   text-transform: none; /* sentence case */
+  text-wrap: balance; /* keep wrapped mobile lines even */
   will-change: transform;
 }
 .kluppi-banner-line1 {
@@ -837,8 +859,20 @@ p { text-wrap: pretty; }
   .kluppi-banner-line2 { font-size: 4rem; }
 }
 @media (max-width: 767px) {
-  .kluppi-banner-line1 { font-size: 2.25rem; }
-  .kluppi-banner-line2 { font-size: 3rem; }
+  .kluppi-banner-line1 { font-size: 2rem; }
+  .kluppi-banner-line2 { font-size: 2.5rem; }
+}
+@media (max-width: 479px) {
+  .kluppi-banner-line1 { font-size: 1.75rem; }
+  .kluppi-banner-line2 { font-size: 2rem; }
+}
+/* Center every banner line on mobile — the desktop left/right split reads ragged
+   once a line wraps. Converge selectors included so they win the cascade. */
+@media (max-width: 991px) {
+  .kluppi-banner-line1,
+  .kluppi-banner-line2,
+  .kluppi-banner--converge .kluppi-banner-line1,
+  .kluppi-banner--converge .kluppi-banner-line2 { text-align: center; }
 }
 
 /* Converge variant — the band's "Te alături acum?" banner (scoped: bottom banner
@@ -850,6 +884,13 @@ p { text-wrap: pretty; }
 .kluppi-banner--converge .kluppi-banner-line1 { text-align: right; }
 @media (min-width: 992px) {
   .kluppi-banner--converge .kluppi-banner-line1 { font-size: 4rem; }
+}
+/* Center the converge lines on mobile — placed after the right/left rules above
+   so it wins by source order (the earlier ≤991 center block is overridden by
+   the converge text-align rules otherwise). The JS drift is clamped at ≤991. */
+@media (max-width: 991px) {
+  .kluppi-banner--converge .kluppi-banner-line1,
+  .kluppi-banner--converge .kluppi-banner-line2 { text-align: center; }
 }
 /* Optional CTA grouped under the banner's lines (centred). */
 .kluppi-banner-cta {
@@ -934,9 +975,14 @@ p { text-wrap: pretty; }
 .kluppi-footer-link:hover { color: var(--link-hover); } /* Electric (spec §6) */
 .kluppi-footer-copy { margin: 0; }
 
+@media (max-width: 991px) {
+  /* Logo + socials are already centered; center the legal/copyright row to match
+     (it left-aligns and wraps awkwardly otherwise). Desktop keeps space-between. */
+  .kluppi-footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+  .kluppi-footer-legal  { justify-content: center; }
+}
 @media (max-width: 767px) {
   .kluppi-footer-socials { gap: 1rem 1.75rem; }
-  .kluppi-footer-bottom { flex-direction: column; align-items: flex-start; }
 }
 
 /* ─── form-input rebrand (spec §3) — the template's .form-input restyled to the
@@ -1004,3 +1050,11 @@ p { text-wrap: pretty; }
 }
 .kluppi-signup-message.is-success { color: var(--text); } /* Cassis */
 .kluppi-signup-message.is-error { color: var(--accent); } /* Dare Devil */
+
+/* ─── Horizontal-overflow guard (≤991, defensive) ───
+   Neutralizes any stray horizontal overflow on tablet/phone. Uses `clip`, NOT
+   `hidden` — `overflow-x: hidden` on <body> makes it a scroll container and
+   would break the sticky hero parallax that also runs at these widths. */
+@media (max-width: 991px) {
+  body { overflow-x: clip; }
+}

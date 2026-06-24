@@ -43,7 +43,11 @@ export default function SplitBanner({
       const progress = reduce
         ? 1
         : Math.min(Math.max((vh - rect.top) / (vh + rect.height), 0), 1);
-      const base = window.innerWidth * 0.3;
+      // Cap the drift on tablet/phone so the lines barely move (~12px) instead of
+      // ±30% of the width — at small widths the full drift shoves text off-centre
+      // and can spill past the viewport. Desktop (≥992) keeps the full motion.
+      const maxDrift = window.innerWidth < 992 ? 12 : Infinity;
+      const base = Math.min(window.innerWidth * 0.3, maxDrift);
       if (converge) {
         // Lines start at the outer edges and drift inward as it scrolls up.
         // line2 ("Te alături acum?") drifts right by the standard amount. line1
@@ -52,7 +56,10 @@ export default function SplitBanner({
         // overshooting (a shorter, slower drift). Distance = block width − text width.
         const range = document.createRange();
         range.selectNodeContents(l1);
-        const l1Drift = Math.max(l1.clientWidth - range.getBoundingClientRect().width, 0);
+        const l1Drift = Math.min(
+          Math.max(l1.clientWidth - range.getBoundingClientRect().width, 0),
+          maxDrift,
+        );
         l1.style.transform = `translateX(${-progress * l1Drift}px)`;
         l2.style.transform = `translateX(${progress * base}px)`;
       } else {
