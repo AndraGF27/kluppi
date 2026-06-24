@@ -88,16 +88,19 @@ p { text-wrap: pretty; }
    (the base 70vh start lands them on the CTA/microcopy otherwise). Both columns
    get the override — the right column's 70.7vh rule is min-width:992 only.
    Sticky structure / parallax are untouched; only the start offset moves. */
+/* Below 992 the headline grows tall enough to fill (or overflow) the 100vh sticky
+   box, so the collage has no room below the vertically-centred content. The fix is
+   two-part: top-align the content (see .kluppi-hero .header-content below — reclaims
+   the centring dead-space) AND start the images lower so they sit below the
+   microcopy and drift up on scroll. 88vh on tablet, 80vh on phones (phone ink is
+   shorter once top-aligned, so less push is needed and the at-rest gap stays small). */
 @media (max-width: 991px) {
   .header-image-list,
-  .header-image-list.image-list-right { padding-top: 80vh; }
+  .header-image-list.image-list-right { padding-top: 88vh; }
 }
-@media (max-width: 479px) {
-  /* 100vh (not 85) so the collage clears the tall phone hero content even on
-     short viewports; images then drift up into view on scroll. Tune down if the
-     at-rest gap reads too large on tall phones. */
+@media (max-width: 767px) {
   .header-image-list,
-  .header-image-list.image-list-right { padding-top: 100vh; }
+  .header-image-list.image-list-right { padding-top: 80vh; }
 }
 
 /* ─── Kluppi hero (added 2026-06-19) ─── */
@@ -232,6 +235,16 @@ p { text-wrap: pretty; }
 .kluppi-hero .header-content {
   padding-top: clamp(2.5rem, 5vw, 4rem);
   padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+/* Tablet + phones: top-align the hero content (the base .header-content is a flex
+   row that vertically centres it, leaving ~150px dead space above the eyebrow).
+   Pulling it to the top + a tighter top pad lets the image collage (started at
+   88/80vh above) sit just below the microcopy without overlap or a huge gap. */
+@media (max-width: 991px) {
+  .kluppi-hero .header-content {
+    align-items: flex-start;
+    padding-top: 1.5rem;
+  }
 }
 
 /* Nav menu (full-screen overlay): Lemon Sorbet bg, Cassis text. Link labels
@@ -368,6 +381,9 @@ p { text-wrap: pretty; }
 .kluppi-carousel {
   grid-column: 1 / -1; /* spans the full middle row (cells 3 + 4 merged) */
   grid-row: 2;
+  min-width: 0; /* grid items default to min-width:auto; without this the flex
+                   carousel-track refuses to shrink and blows the column (and the
+                   whole page) wider than the viewport on narrow screens */
   background-image: url("/PainPoints2.jpg");
   background-size: cover;
   background-position: center;
