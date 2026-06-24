@@ -246,6 +246,11 @@ p { text-wrap: pretty; }
     padding-top: 1.5rem;
   }
 }
+/* Phones: drop the hero lead from --fs-lead to --fs-body so it reads tighter and
+   frees a little more vertical room above the collage. */
+@media (max-width: 479px) {
+  .kluppi-hero-body { font-size: var(--fs-body); }
+}
 
 /* Nav menu (full-screen overlay): Lemon Sorbet bg, Cassis text. Link labels
    left as-is for now — only restyled, not renamed. */
@@ -459,6 +464,11 @@ p { text-wrap: pretty; }
 .kluppi-painpoints-cta {
   display: inline-block;
   text-align: center; /* keeps the microcopy centered under the button */
+}
+/* ≤991 the painpoints column stacks and is left-aligned; centre its CTA to match
+   every other section's CTA (hero/banner/benefits/steps are already centred). */
+@media (max-width: 991px) {
+  .kluppi-painpoints-cta { display: block; width: -moz-fit-content; width: fit-content; margin-inline: auto; }
 }
 
 @media (max-width: 991px) {
@@ -872,15 +882,15 @@ p { text-wrap: pretty; }
 }
 @media (max-width: 991px) {
   .kluppi-banner-line1 { font-size: 3rem; }
-  .kluppi-banner-line2 { font-size: 4rem; }
+  .kluppi-banner-line2 { font-size: 4.5rem; } /* orange line a touch larger */
 }
 @media (max-width: 767px) {
   .kluppi-banner-line1 { font-size: 2rem; }
-  .kluppi-banner-line2 { font-size: 2.5rem; }
+  .kluppi-banner-line2 { font-size: 2.75rem; }
 }
 @media (max-width: 479px) {
   .kluppi-banner-line1 { font-size: 1.75rem; }
-  .kluppi-banner-line2 { font-size: 2rem; }
+  .kluppi-banner-line2 { font-size: 2.25rem; }
 }
 /* Center every banner line on mobile — the desktop left/right split reads ragged
    once a line wraps. Converge selectors included so they win the cascade. */

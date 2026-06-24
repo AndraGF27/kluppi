@@ -928,3 +928,15 @@ Round 2's `100vh` phone hero left an empty gap (images pushed off-screen), and t
 **`src/app/globals.css`**
 - **Carousel overflow blowout (the "390 nightmare").** `.kluppi-carousel` is a grid item, so it defaulted to `min-width: auto` and refused to shrink below the flex `carousel-track`'s intrinsic width — blowing the painpoints grid column (and the whole page) out to ~588px on a 390px viewport. That forced horizontal overflow (masked by the `overflow-x: clip` guard) and made the carousel band far wider than every other section, squeezing the rest of the content narrow. Fix: added `min-width: 0` to the base `.kluppi-carousel` rule. Live test: this single change dropped page `scrollWidth` from 608 → 390 and restored the card to a sensible 302×184 (1.64:1). Harmless on desktop (column is already wide).
 - **Hero on mobile — top-align instead of vh guesswork.** The real problem: `.header-content` is a flex row that *vertically centres* the hero text in the 100vh sticky box, leaving ~150px of dead space above the eyebrow while the 4-line headline still runs long — so no `vh` start could both clear the text and keep images on-screen. Fix: at `≤991px`, `.kluppi-hero .header-content { align-items: flex-start; padding-top: 1.5rem }` (top-align + tighter top pad) reclaims that dead space; the headline keeps its full size (no shrink). Paired image start: `≤991px` → `88vh` (tablet), `≤767px` → `80vh` (phones — shorter ink once top-aligned). Result across 390/768 at both short (658) and tall (844/1024) heights: text sits at the top, the collage peeks just below the microcopy with no overlap, and drifts up on scroll. Desktop (`min-width:992`) stays vertically-centred at `70vh`/`70.7vh` — unchanged.
+
+### 2026-06-24 — Mobile polish: banner emphasis, hero lead, CTA centring (requested)
+
+Small tuning pass after round 3 was approved at 768/390. Verified live at 390 and 768 (orange lines stay one line; no overflow; desktop ≥992 untouched).
+
+**`src/app/SplitBanner.tsx`**
+- Bumped the mobile/tablet parallax cap `maxDrift` `12` → `24` (`< 992px`) so the horizontal banner drift reads more on phone/tablet. Desktop still uncapped (full ±30%vw).
+
+**`src/app/globals.css`**
+- **Banner orange line (`.kluppi-banner-line2`) a touch larger** at each mobile step: `≤991px` `4rem`→`4.5rem`, `≤767px` `2.5rem`→`2.75rem`, `≤479px` `2rem`→`2.25rem`. The dark `line1` and the desktop sizes are unchanged. Confirmed "Te alături acum?" / "Doar mai smart." stay on one line at 768 (72px) and 390 (36px).
+- **Hero lead smaller on phones.** `@media (max-width:479px) { .kluppi-hero-body { font-size: var(--fs-body) } }` (was `--fs-lead`) — tighter "Lucrăm direct…" paragraph, also frees a little room above the collage.
+- **Centre the painpoints CTA at ≤991.** `.kluppi-painpoints-cta` is `inline-block` inside the left-aligned painpoints column, so it sat left while every other section's CTA was centred. Added `@media (max-width:991px) { .kluppi-painpoints-cta { display:block; width:fit-content; margin-inline:auto } }`.

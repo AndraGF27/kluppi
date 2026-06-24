@@ -46,7 +46,7 @@ export default function SplitBanner({
       // Cap the drift on tablet/phone so the lines barely move (~12px) instead of
       // ±30% of the width — at small widths the full drift shoves text off-centre
       // and can spill past the viewport. Desktop (≥992) keeps the full motion.
-      const maxDrift = window.innerWidth < 992 ? 12 : Infinity;
+      const maxDrift = window.innerWidth < 992 ? 24 : Infinity;
       const base = Math.min(window.innerWidth * 0.3, maxDrift);
       if (converge) {
         // Lines start at the outer edges and drift inward as it scrolls up.
