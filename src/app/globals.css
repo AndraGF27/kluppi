@@ -928,14 +928,20 @@ p { text-wrap: pretty; }
   .kluppi-banner-line1,
   .kluppi-banner--converge .kluppi-banner-line1 { margin-left: auto; margin-right: 0; }
 }
-/* Phone: the converge subtitle ("Primești o surpriză specială la lansare.") is
-   too long to fit one line at the ≤479 body sizes, so it wrapped to two. Shrink
-   it and keep it on a single line, still hugging the right edge. */
-@media (max-width: 479px) {
+/* Tablet/phone: the converge subtitle ("Primești o surpriză specială la
+   lansare.") is too long to fit one line at the banner sizes, so it wrapped to
+   two and read as a left-aligned block. Keep it on a single line (nowrap) and
+   scale it to the viewport so it fits — fit-content + margin-left:auto then
+   pins that one line flush to the right edge. Scoped to the converge banner
+   only; the spread banner is unchanged. */
+@media (max-width: 991px) {
   .kluppi-banner--converge .kluppi-banner-line1 {
-    font-size: 1.2rem;
     white-space: nowrap;
+    font-size: min(2.5rem, 5vw);
   }
+}
+@media (max-width: 479px) {
+  .kluppi-banner--converge .kluppi-banner-line1 { font-size: 1.2rem; }
 }
 /* Optional CTA grouped under the banner's lines (centred). */
 .kluppi-banner-cta {

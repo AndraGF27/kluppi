@@ -963,3 +963,10 @@ Follow-up to the edge-split round. At 390/768 the dark line still didn't reach t
 
 **`src/app/SplitBanner.tsx`**
 - **Re-phased the mobile spread drift so the lines rest AT their edges in view.** The previous `pull=(1-progress)*base` only reached the edges at `progress==1` (banner scrolled fully past), so while the banner was centred the dark line sat ~24px inset — never quite at the right-most side. `progress` is exactly `0.5` when the banner is viewport-centred, so switched the mobile branch to `phase = |progress-0.5|*2; off = phase*base` and `line1 → -off`, `line2 → +off`: the lines are flush to their edges when you're reading the banner and drift inward (≤24px) only as it enters/exits. Split the desktop branch back out unchanged (`pull=(1-progress)*base`, dir +1) — desktop behaviour is identical to before.
+
+### 2026-06-24 — Tablet: one-line converge subtitle hugging right (requested)
+
+At 768 the converge subtitle still rendered at its full 48px (`≤991` size), so it filled the width as two lines and read as left-aligned. The one-line shrink from the prior round only applied at `≤479`. Extended it across the whole tablet/phone range, scoped to the converge banner so the spread banner is untouched.
+
+**`src/app/globals.css`**
+- Replaced the `≤479`-only converge-subtitle rule with a `≤991` one: `.kluppi-banner--converge .kluppi-banner-line1 { white-space:nowrap; font-size:min(2.5rem, 5vw) }`, then a `≤479` override keeping `1.2rem` for phones. `5vw` scales the single line to fit each viewport (38.4px @768 → 610px line in the 704px box), and `fit-content`+`margin-left:auto` pin it flush right (right edge 736 == inner right @768). Verified one line / right-hugging at 768; spread banner unchanged (dark still 48px flush-right); no horizontal overflow.
