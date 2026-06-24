@@ -63,10 +63,14 @@ export default function SplitBanner({
         l1.style.transform = `translateX(${-progress * l1Drift}px)`;
         l2.style.transform = `translateX(${progress * base}px)`;
       } else {
-        // Lines start pulled toward the centre and spread to the edges.
+        // Lines start pulled toward the centre and spread to the edges. On
+        // mobile/tablet the CSS flips the layout (orange line2 → left, dark line1
+        // → right), so flip the drift direction too — otherwise the lines push
+        // *past* the screen edges and get clipped instead of easing inward.
+        const dir = window.innerWidth < 992 ? -1 : 1;
         const pull = (1 - progress) * base;
-        l1.style.transform = `translateX(${pull}px)`; // left line: pulled right → settles left
-        l2.style.transform = `translateX(${-pull}px)`; // right line: pulled left → settles right
+        l1.style.transform = `translateX(${dir * pull}px)`; // left line: pulled right → settles left
+        l2.style.transform = `translateX(${-dir * pull}px)`; // right line: pulled left → settles right
       }
     };
 

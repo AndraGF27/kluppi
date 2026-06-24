@@ -940,3 +940,15 @@ Small tuning pass after round 3 was approved at 768/390. Verified live at 390 an
 - **Banner orange line (`.kluppi-banner-line2`) a touch larger** at each mobile step: `≤991px` `4rem`→`4.5rem`, `≤767px` `2.5rem`→`2.75rem`, `≤479px` `2rem`→`2.25rem`. The dark `line1` and the desktop sizes are unchanged. Confirmed "Te alături acum?" / "Doar mai smart." stay on one line at 768 (72px) and 390 (36px).
 - **Hero lead smaller on phones.** `@media (max-width:479px) { .kluppi-hero-body { font-size: var(--fs-body) } }` (was `--fs-lead`) — tighter "Lucrăm direct…" paragraph, also frees a little room above the collage.
 - **Centre the painpoints CTA at ≤991.** `.kluppi-painpoints-cta` is `inline-block` inside the left-aligned painpoints column, so it sat left while every other section's CTA was centred. Added `@media (max-width:991px) { .kluppi-painpoints-cta { display:block; width:fit-content; margin-inline:auto } }`.
+
+### 2026-06-24 — Mobile: show eyebrow + split banner lines to the edges (requested)
+
+The hero eyebrow was hidden behind the fixed navbar at 390/768, and the user wanted the banners un-centred (orange line left, dark line right). Verified live at 390 (×658) and 768 (×658 and ×1024); desktop ≥992 confirmed untouched (centred hero, 70vh images, converge keeps its right/left split).
+
+**`src/app/globals.css`**
+- **Eyebrow clears the navbar.** The round-3 top-align used `padding-top: 1.5rem`, which put the eyebrow (top ~24px) behind the `position:fixed` navbar (48px phone / 64px tablet). Raised the `≤991` `.kluppi-hero .header-content` top pad to `4.5rem` so the eyebrow sits clear (gap ~40–56px).
+- **Image start compensated.** Lowering the content pushed the ink down, so bumped the `≤991` image start `88vh` → `94vh` to keep the collage clear of the microcopy on short tablet viewports (768×658: ink 92vh, images 94vh — 12px gap). Phones stay at `80vh` (`≤767`). On a tall tablet (768×1024) the images peek ~60px and drift up.
+- **Banner lines split to the edges (≤991), both left-aligned.** Replaced the round-1/2 centring with: orange `line2` hugging the left, dark `line1` hugging the right — both `text-align:left`. Uses `width:fit-content; max-width:100%` + `margin-*:auto`; the dark line gets `max-width:85%` so a wrapping line still hugs the right (margin-left:auto) instead of falling back to full-width/flush-left. Applies to both banners, placed after the converge `text-align` defs so it wins there too. Desktop (`min-width:992`) split unchanged.
+
+**`src/app/SplitBanner.tsx`**
+- **Flipped the default-banner drift on mobile.** With the new edge layout (orange→left, dark→right — the opposite of the default banner's desktop sides), the spread-banner parallax pushed the lines *past* the screen edges (clipped). Added `const dir = window.innerWidth < 992 ? -1 : 1` and applied it to the default branch's `translateX`, so on mobile the lines ease *inward* from the edges instead of overflowing. Desktop direction unchanged; the converge branch already eased inward.
