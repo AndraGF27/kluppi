@@ -13,6 +13,8 @@ html {
   --link-hover: #3939ff;    /* Electric — hyperlink hover only */
   --surprise: #dbb8ff;      /* Royal */
   --arctic: #aee6ed;        /* Arctic — surprise/teaser card */
+  --success: #166534;       /* form feedback — success text (AA ≈6.3:1 on --bg) */
+  --error:   #b91c1c;       /* form feedback — error text (AA ≈5.7:1 on --bg) */
   --card: #fff;
   --hairline: #351e2833;    /* Cassis 20% — hairline dividers/borders (now used) */
   --shadow-card: 0 12px 30px #351e281f;
@@ -1099,8 +1101,8 @@ p { text-wrap: pretty; }
   font-family: "Switzer", sans-serif;
   font-size: var(--fs-small); /* was 1rem */
 }
-.kluppi-signup-message.is-success { color: var(--text); } /* Cassis */
-.kluppi-signup-message.is-error { color: var(--accent); } /* Dare Devil */
+.kluppi-signup-message.is-success { color: var(--success); } /* green, AA on --bg */
+.kluppi-signup-message.is-error { color: var(--error); } /* red, AA on --bg */
 
 /* ─── Horizontal-overflow guard (≤991, defensive) ───
    Neutralizes any stray horizontal overflow on tablet/phone. Uses `clip`, NOT

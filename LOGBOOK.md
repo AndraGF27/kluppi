@@ -1108,3 +1108,15 @@ Now that the form posts to `/api/add-subscriber`, the old KV path is fully unuse
 - Removed the orphaned `KV_REST_API_*` vars from `.env.example`.
 
 Confirmed no other references to `@vercel/kv` / `kv.` / `waitlist:` remain. **Verified with a full `npx next build` (exit 0)** — `/api/subscribe` gone, the 4 theMarketer routes present, app type-checks and builds clean. (Initial `tsc` error was just a stale `.next` validator cache referencing the deleted route; cleared by removing `.next`.)
+
+### 2026-06-25 — Signup form polish: placeholders, AA message colors, Waitlist tag (requested)
+
+**`src/app/page.tsx`**
+- Input placeholders shortened: "Introdu prenumele" → **"Prenume"**, "Introdu adresa de e-mail" → **"Adresă de e-mail"** (aria-labels already matched).
+- Form submit now sends `tags: "Waitlist"` → the add-subscriber route forwards it as `add_tags`, so **every contact added via this form gets the "Waitlist" tag** in theMarketer.
+
+**`src/app/globals.css`**
+- Added color tokens to `:root`: `--success: #166534` (green) and `--error: #b91c1c` (red), both verified **AA-pass on the Lemon-Sorbet `--bg` (#fff0bc)** — green 6.26:1, red 5.68:1 (≥4.5:1 for normal text).
+- `.kluppi-signup-message.is-success` now uses `var(--success)` (was `--text`/Cassis); `.is-error` uses `var(--error)` (was `--accent`/orange).
+
+**Verification:** `npx tsc --noEmit` clean; contrast ratios computed against `--bg`. Visual (message colors), not auto-previewed per user rule.

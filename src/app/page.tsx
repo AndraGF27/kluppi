@@ -188,7 +188,7 @@ export default function Home() {
       const response = await fetch("/api/add-subscriber", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, firstName }),
+        body: JSON.stringify({ email, firstName, tags: "Waitlist" }),
       });
       if (!response.ok) {
         setStatus("error");
@@ -533,7 +533,7 @@ export default function Home() {
                       className="form-input kluppi-signup-input"
                       type="text"
                       name="firstName"
-                      placeholder="Introdu prenumele"
+                      placeholder="Prenume"
                       aria-label="Prenume"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
@@ -544,7 +544,7 @@ export default function Home() {
                       className="form-input kluppi-signup-input"
                       type="email"
                       name="email"
-                      placeholder="Introdu adresa de e-mail"
+                      placeholder="Adresă de e-mail"
                       aria-label="Adresă de e-mail"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
