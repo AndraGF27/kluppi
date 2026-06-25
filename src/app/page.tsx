@@ -6,6 +6,7 @@ import PainPointsCarousel from "./PainPointsCarousel";
 import HowItWorks from "./HowItWorks";
 import SplitBanner from "./SplitBanner";
 import BenefitsCards from "./BenefitsCards";
+import { trackViewHomepage } from "./themarketer-events";
 
 const socials = [
   { href: "https://www.facebook.com/joinkluppi", label: "Facebook" },
@@ -82,6 +83,11 @@ export default function Home() {
   // mismatch.)
   const [contactHref, setContactHref] = useState<string>();
   const [partnersHref, setPartnersHref] = useState<string>();
+  // theMarketer: fire the __sm__view_homepage event once on landing.
+  useEffect(() => {
+    trackViewHomepage();
+  }, []);
+
   useEffect(() => {
     setContactHref(`mailto:${["hello", "kluppi.com"].join("@")}`);
     setPartnersHref(`mailto:${["partners", "kluppi.com"].join("@")}`);

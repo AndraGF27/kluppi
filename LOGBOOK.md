@@ -1059,3 +1059,18 @@ Coexists with the existing GA4 (gtag) tags and the theMarketer head loader; none
 Committed steps 1–6 on `kluppi-rebrand`, fast-forwarded `main` (`47ab933` → `2db1d1f`), pushed `main` + `kluppi-rebrand` to origin. Vercel auto-deploys `main` → `www.kluppi.com`. The gitignored `.env.local` is NOT deployed — **theMarketer/GTM API routes need `THEMARKETER_REST_KEY` + `THEMARKETER_CUSTOMER_ID` set in Vercel env vars** (the tracking snippet + GTM container work without them; only the server API routes require them).
 
 **Incident (fixed before any push):** the first commit accidentally included the real REST key in this logbook (step-2 entry). Caught by the safety check before pushing; redacted the value (logbook now references env-var names only) and amended the commit, so no secret ever entered pushed history. The REST key lives only in untracked `.env.local`.
+
+### 2026-06-25 — theMarketer on-site events: set_email + view_homepage (requested; step 7)
+
+On-site events are tracked by pushing into the GTM dataLayer (container GTM-5673VBFG, already installed).
+
+**New file `src/app/themarketer-events.ts`** — single place the dataLayer pushes are defined:
+- `trackSetEmail({ email, phone?, firstname?, lastname? })` → pushes `{ event: "__sm__set_email", email_address, phone?, firstname?, lastname? }` (event name + `email_address` key exactly per theMarketer's snippet; SSR-guarded; no-ops on empty email).
+- `trackViewHomepage()` → pushes `{ event: "__sm__view_homepage" }`.
+- Both guard `window.dataLayer = window.dataLayer || []` before pushing.
+
+**`src/app/page.tsx`** — imported `trackViewHomepage` and added a mount `useEffect(() => { trackViewHomepage(); }, [])` so `__sm__view_homepage` fires once on landing (page.tsx is the homepage / route `/`).
+
+**set_email NOT wired** — user's decision: theMarketer's embedded form (replacing the current signup form) fires `__sm__set_email` itself, so the existing form was left untouched. The helper stays available for any other future capture point (contact form, login, etc.).
+
+**Verification:** `npx tsc --noEmit` clean (exit 0). Browser-observable (dataLayer push), but preview not started per the user's standing rule; can verify the dataLayer entry in-browser on request. Uncommitted on `kluppi-rebrand`, awaiting "ship it".
