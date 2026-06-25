@@ -1074,3 +1074,13 @@ On-site events are tracked by pushing into the GTM dataLayer (container GTM-5673
 **set_email NOT wired** — user's decision: theMarketer's embedded form (replacing the current signup form) fires `__sm__set_email` itself, so the existing form was left untouched. The helper stays available for any other future capture point (contact form, login, etc.).
 
 **Verification:** `npx tsc --noEmit` clean (exit 0). Browser-observable (dataLayer push), but preview not started per the user's standing rule; can verify the dataLayer entry in-browser on request. Uncommitted on `kluppi-rebrand`, awaiting "ship it".
+
+### 2026-06-25 — Vercel Analytics (requested)
+
+Installed Vercel Web Analytics.
+- `npm i @vercel/analytics` → `@vercel/analytics@^2.0.1` (package.json + package-lock.json).
+- `src/app/layout.tsx` — imported `{ Analytics } from "@vercel/analytics/next"` and rendered `<Analytics />` in `<body>` (after `{children}`, before the GA/GTM scripts).
+
+**Notes:** Vercel Web Analytics is cookieless by default (no consent banner needed — the privacy-friendly one of the analytics stack here). Collects data only on the deployed Vercel site (no-op/debug locally), and **Web Analytics must also be enabled in the Vercel dashboard** (Project → Analytics → enable) for data to flow.
+
+**Verification:** `npx tsc --noEmit` clean (exit 0). Preview not started (per user rule; also wouldn't show data locally anyway). Uncommitted on `kluppi-rebrand`, awaiting "ship it".

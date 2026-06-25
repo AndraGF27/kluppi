@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import CookieBanner from "./CookieBanner";
 import "./webflow.css";
 import "./globals.css";
@@ -81,6 +82,7 @@ export default function RootLayout({
           />
         </noscript>
         {children}
+        <Analytics />
         <CookieBanner />
         {/* Google Analytics (GA4) — gtag.js with Consent Mode.
             analytics_storage defaults to "denied" so GA doesn't track until the
