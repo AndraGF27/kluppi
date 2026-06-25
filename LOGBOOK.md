@@ -1053,3 +1053,9 @@ Coexists with the existing GA4 (gtag) tags and the theMarketer head loader; none
 **Verification:** `npx tsc --noEmit` clean (exit 0). This change IS browser-observable (gtm.js network request + `window.dataLayer`), but per the user's standing "tell me when to visualize" rule I did NOT start the site preview — offered to verify the GTM load in-browser on request.
 
 **Note (GDPR / GA):** GTM loads immediately (not consent-gated). Like GA4's pre-Consent-Mode gap, this should be reconciled with the pending cookie-consent work; and since GTM can itself load tags (incl. GA), watch for double-counting if GA4 ends up fired both directly and via GTM. Flagged, not changed.
+
+### 2026-06-25 — Shipped theMarketer + GTM to main (requested: "ship it")
+
+Committed steps 1–6 on `kluppi-rebrand`, fast-forwarded `main` (`47ab933` → `2db1d1f`), pushed `main` + `kluppi-rebrand` to origin. Vercel auto-deploys `main` → `www.kluppi.com`. The gitignored `.env.local` is NOT deployed — **theMarketer/GTM API routes need `THEMARKETER_REST_KEY` + `THEMARKETER_CUSTOMER_ID` set in Vercel env vars** (the tracking snippet + GTM container work without them; only the server API routes require them).
+
+**Incident (fixed before any push):** the first commit accidentally included the real REST key in this logbook (step-2 entry). Caught by the safety check before pushing; redacted the value (logbook now references env-var names only) and amended the commit, so no secret ever entered pushed history. The REST key lives only in untracked `.env.local`.
