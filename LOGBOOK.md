@@ -970,3 +970,86 @@ At 768 the converge subtitle still rendered at its full 48px (`≤991` size), so
 
 **`src/app/globals.css`**
 - Replaced the `≤479`-only converge-subtitle rule with a `≤991` one: `.kluppi-banner--converge .kluppi-banner-line1 { white-space:nowrap; font-size:min(2.5rem, 5vw) }`, then a `≤479` override keeping `1.2rem` for phones. `5vw` scales the single line to fit each viewport (38.4px @768 → 610px line in the 704px box), and `fit-content`+`margin-left:auto` pin it flush right (right edge 736 == inner right @768). Verified one line / right-hugging at 768; spread banner unchanged (dark still 48px flush-right); no horizontal overflow.
+
+### 2026-06-25 — theMarketer tracking snippet (requested; step 1 of theMarketer setup)
+
+Added theMarketer's on-site tracking loader, per their Technical Integration instructions ("insert right before the closing `</head>` tag"). Tracking Key: `ZZRAFU8W` (account 6a132e3577b3812a800ea87e). User chose to load it immediately on every page view (NOT consent-gated like GA4) to match theMarketer's stock snippet.
+
+**`src/app/layout.tsx`**
+- Added a `next/script` tag (`id="themarketer"`, `strategy="afterInteractive"`) as the last child of `<head>`, containing theMarketer's verbatim IIFE loader with `mktr_key = "ZZRAFU8W"`. The IIFE creates an async `<script>` pointing at `https://t.themarketer.com/t/j/ZZRAFU8W` and injects it before the first existing script. Sits alongside the GA4 tags; `Script` was already imported.
+
+**Verification (dev, localhost:3000):** inline tag present, `window.mktr_key === "ZZRAFU8W"`, loader script injected with the correct src. No console errors. **Caveat:** the actual fetch of `t.themarketer.com/t/j/ZZRAFU8W` was blocked by Chrome ORB (`ERR_BLOCKED_BY_ORB`) in the preview — most likely because theMarketer serves a non-JS response (e.g. an error page) for the unrecognized `localhost` origin rather than the registered `kluppi.com` domain. Needs re-verification on the real domain once deployed. Integration code itself is correct.
+
+**Not done in this step:** REST key + customer ID (for server-side API calls) were provided but are for a later step; not used here and not committed anywhere.
+
+**Tooling note:** created `.claude/launch.json` (kluppi-dev → `npm run dev`, port 3000) to enable browser preview verification. Not site code.
+
+### 2026-06-25 — theMarketer Add Subscriber API (requested; step 2 of theMarketer setup)
+
+Server-side endpoint that wraps theMarketer's double-opt-in "Add Subscriber" API. The existing landing-page signup form is being replaced by an embedded theMarketer form (user's call), so this endpoint is the server-side piece for opted-in subscribers — it is NOT wired to the current form. The existing `/api/subscribe` (KV) route was left untouched.
+
+**New file `src/app/api/add-subscriber/route.ts`** (`POST`):
+- Reads secret `THEMARKETER_REST_KEY` + `THEMARKETER_CUSTOMER_ID` from env (server-only — REST key never reaches the browser). Returns a generic 500 if unconfigured.
+- Validates `email`; builds the `https://t.themarketer.com/api/v1/add_subscriber` query (`k`, `u`, `email`, plus optional `firstname`, `lastname`, `phone`, `city`, `country`, `channels`, `add_tags`, `birthday`, and `attributes[...]`) via `URLSearchParams`; POSTs server-side.
+- Maps non-200 upstream → generic client error (logs theMarketer's real status/message server-side so REST-key/config details never leak). Network failure → 502.
+- Intended to be called ONLY when a user explicitly opts in to promotional emails (a successful call makes theMarketer send the double-opt-in confirmation email). Non-opted-in visitors are still captured client-side via the `__sm_set_email` tracking event and must not be sent here.
+
+**`.env.example`** — documented `THEMARKETER_REST_KEY` (secret) + `THEMARKETER_CUSTOMER_ID`.
+**`.env.local`** (gitignored, created) — holds the real values for local dev (`THEMARKETER_REST_KEY` + `THEMARKETER_CUSTOMER_ID`). Secrets are NOT recorded in this logbook; see `.env.local` (untracked) / Vercel env vars.
+
+**Verification (dev, localhost:3000):** invalid email → 400, malformed body → 400, GET → 405; route compiled with no errors. The 400 (not 500) on invalid email confirms `.env.local` loaded. **Did NOT make a real successful call** — that would create a live subscriber and send a real double-opt-in email (outward-facing side effect); left for the user to trigger when ready.
+
+**TODO before this works in production:** set `THEMARKETER_REST_KEY` + `THEMARKETER_CUSTOMER_ID` in Vercel project env vars.
+
+### 2026-06-25 — theMarketer Remove Subscriber API (requested; step 3 of theMarketer setup)
+
+Mirror of the Add Subscriber endpoint, for the reverse flow: when a user unsubscribes on our side, also unsubscribe them in theMarketer.
+
+**New file `src/app/api/remove-subscriber/route.ts`** (`POST`):
+- Same secret-safe pattern as `/api/add-subscriber`: reads server-only `THEMARKETER_REST_KEY` + `THEMARKETER_CUSTOMER_ID`; validates `email`; POSTs to `https://t.themarketer.com/api/v1/remove_subscriber` with `k`, `u`, `email`, plus optional `channels` (e.g. "email,sms" — omit to remove entirely).
+- Non-200 upstream → generic client error (real status/message logged server-side); network failure → 502.
+
+Reuses the env vars already added in step 2 — no `.env` changes.
+
+**Verification:** `npx tsc --noEmit` clean (exit 0); route is a near-identical mirror of the curl-verified add-subscriber route, so validation paths (invalid email → 400, bad body → 400, GET → 405) behave the same. Per the user's standing rule, did NOT start the site preview for this backend change; also did NOT make a real unsubscribe call (outward-facing side effect on a live subscriber).
+
+**TODO (same as step 2):** the `THEMARKETER_*` env vars must be set in Vercel before prod.
+
+### 2026-06-25 — theMarketer Update Tags API (requested; step 4 of theMarketer setup)
+
+Contact-level tag management.
+
+**New file `src/app/api/update-tags/route.ts`** (`POST`):
+- Same secret-safe pattern as the other theMarketer routes (server-only `THEMARKETER_REST_KEY` + `THEMARKETER_CUSTOMER_ID`, reused — no `.env` changes).
+- POSTs to `https://t.themarketer.com/api/v1/update-tags` (note: **hyphen** in this path, vs the underscore of add_subscriber / remove_subscriber).
+- Body: `email` (required) + `addTags` / `removeTags` (each accepts string[], single string, or comma-separated → normalized to clean lists; sent as repeated `add_tags[]` / `remove_tags[]` array params) + optional `overwriteExisting` (truthy → `overwrite_existing=1`, replaces tags instead of merging).
+- Validates email; requires at least one add/remove tag (else 400). Non-200 upstream → generic client error (real status logged server-side); network failure → 502.
+
+**Verification:** `npx tsc --noEmit` clean (exit 0). Preview skipped (backend change, per user rule); no real tag-update call made.
+
+**TODO (same as steps 2–3):** `THEMARKETER_*` env vars must be set in Vercel before prod.
+
+### 2026-06-25 — theMarketer Subscriber Status API (requested; step 5 of theMarketer setup)
+
+Read endpoint: returns which channels an email is subscribed/unsubscribed to.
+
+**New file `src/app/api/subscriber-status/route.ts`** (`POST`):
+- Same secret-safe pattern + reused env vars (no `.env` changes).
+- Exposed as **POST with email in the JSON body** (consistent with the other routes; keeps the email out of our access-log query strings), even though theMarketer's upstream call is a **GET** to `https://t.themarketer.com/api/v1/status_subscriber`.
+- Validates email; forwards the status back to the caller as `{ subscribed: string[], unsubscribed: string[] }` (normalized to arrays). Non-200 upstream (incl. 404 "customer not found" = bad CUSTOMER_ID) → generic client error + server-side log; network failure → 502.
+
+**Verification:** `npx tsc --noEmit` clean (exit 0). Preview skipped (backend, per user rule); no real upstream call made (read-only, but still hits theMarketer + needs a real email — left for the user).
+
+**TODO (same as steps 2–4):** `THEMARKETER_*` env vars must be set in Vercel before prod.
+
+### 2026-06-25 — Google Tag Manager (requested; step 6 of theMarketer setup)
+
+Installed GTM container `GTM-5673VBFG` in `src/app/layout.tsx`, both required parts:
+- **Head script** — added as the FIRST child of `<head>` ("as high as possible", per GTM's instructions), as a `next/script` (`id="gtm"`, `strategy="afterInteractive"`) wrapping GTM's verbatim IIFE.
+- **noscript iframe** — added as the FIRST child of `<body>` (immediately after the opening tag), as JSX `<noscript><iframe .../></noscript>` with `style={{display:"none",visibility:"hidden"}}`.
+
+Coexists with the existing GA4 (gtag) tags and the theMarketer head loader; none removed.
+
+**Verification:** `npx tsc --noEmit` clean (exit 0). This change IS browser-observable (gtm.js network request + `window.dataLayer`), but per the user's standing "tell me when to visualize" rule I did NOT start the site preview — offered to verify the GTM load in-browser on request.
+
+**Note (GDPR / GA):** GTM loads immediately (not consent-gated). Like GA4's pre-Consent-Mode gap, this should be reconciled with the pending cookie-consent work; and since GTM can itself load tags (incl. GA), watch for double-counting if GA4 ends up fired both directly and via GTM. Flagged, not changed.
