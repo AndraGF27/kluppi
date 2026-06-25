@@ -1084,3 +1084,27 @@ Installed Vercel Web Analytics.
 **Notes:** Vercel Web Analytics is cookieless by default (no consent banner needed — the privacy-friendly one of the analytics stack here). Collects data only on the deployed Vercel site (no-op/debug locally), and **Web Analytics must also be enabled in the Vercel dashboard** (Project → Analytics → enable) for data to flow.
 
 **Verification:** `npx tsc --noEmit` clean (exit 0). Preview not started (per user rule; also wouldn't show data locally anyway). Uncommitted on `kluppi-rebrand`, awaiting "ship it".
+
+### 2026-06-25 — Wire on-page signup form to theMarketer double opt-in (requested; plan-approved)
+
+User chose to keep the existing custom form (not theMarketer's embed) and have every submission subscribe via theMarketer. (No contacts to backfill — the old KV route was never connected, nothing stored.)
+
+**`src/app/page.tsx`** — `handleSubmit`:
+- Now fires `trackSetEmail({ email, firstname: firstName })` on submit (`__sm__set_email` — captures the contact regardless of opt-in), then `POST`s to **`/api/add-subscriber`** (was the dead `/api/subscribe` KV route) with `{ email, firstName }` → theMarketer `add_subscriber` → double opt-in confirmation email.
+- Success copy (user-approved RO): "Super! Ți-am trimis un e-mail pentru a-ți confirma înscrierea în Kluppi."
+- Error copy: "Ceva nu a funcționat. Mai încearcă o dată." (RO fallback instead of the route's English `data.error`; dropped the now-unused `const data`).
+- Import merged: `{ trackSetEmail, trackViewHomepage }`. Form JSX, state, inputs, button, styling all unchanged.
+
+**Verification:** `npx tsc --noEmit` clean. Browser/E2E not auto-run (per user rule + a real submit sends a live double opt-in email — to be tested deliberately with a controlled address after Vercel env vars are set).
+
+**Still pending for prod:** set `THEMARKETER_REST_KEY` + `THEMARKETER_CUSTOMER_ID` in Vercel, else the form shows the error fallback.
+**Now dead (cleanup pending consent):** `src/app/api/subscribe/route.ts` + `@vercel/kv` dep — nothing calls them anymore.
+
+### 2026-06-25 — Remove dead Vercel KV waitlist code (requested)
+
+Now that the form posts to `/api/add-subscriber`, the old KV path is fully unused — removed it:
+- Deleted `src/app/api/subscribe/route.ts` (+ empty `api/subscribe/` dir).
+- `npm uninstall @vercel/kv` (package.json + package-lock.json).
+- Removed the orphaned `KV_REST_API_*` vars from `.env.example`.
+
+Confirmed no other references to `@vercel/kv` / `kv.` / `waitlist:` remain. **Verified with a full `npx next build` (exit 0)** — `/api/subscribe` gone, the 4 theMarketer routes present, app type-checks and builds clean. (Initial `tsc` error was just a stale `.next` validator cache referencing the deleted route; cleared by removing `.next`.)

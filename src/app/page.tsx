@@ -6,7 +6,7 @@ import PainPointsCarousel from "./PainPointsCarousel";
 import HowItWorks from "./HowItWorks";
 import SplitBanner from "./SplitBanner";
 import BenefitsCards from "./BenefitsCards";
-import { trackViewHomepage } from "./themarketer-events";
+import { trackSetEmail, trackViewHomepage } from "./themarketer-events";
 
 const socials = [
   { href: "https://www.facebook.com/joinkluppi", label: "Facebook" },
@@ -182,19 +182,21 @@ export default function Home() {
     setStatus("loading");
     setMessage("");
     try {
-      const response = await fetch("/api/subscribe", {
+      // Capture the contact in theMarketer regardless of opt-in confirmation.
+      trackSetEmail({ email, firstname: firstName });
+      // Subscribe via theMarketer (sends the double opt-in confirmation email).
+      const response = await fetch("/api/add-subscriber", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ firstName, email }),
+        body: JSON.stringify({ email, firstName }),
       });
-      const data = await response.json();
       if (!response.ok) {
         setStatus("error");
-        setMessage(data.error || "Ceva n-a mers. Mai încearcă o dată.");
+        setMessage("Ceva nu a funcționat. Mai încearcă o dată.");
         return;
       }
       setStatus("success");
-      setMessage("Gata! Ți-ai rezervat locul. Ne auzim curând.");
+      setMessage("Super! Ți-am trimis un e-mail pentru a-ți confirma înscrierea în Kluppi.");
       setFirstName("");
       setEmail("");
     } catch {
