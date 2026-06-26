@@ -162,7 +162,15 @@ export default function PoliticaCookies() {
           experiențe tehnice stabile.
         </p>
         <div className={styles.tableWrap}>
-          <table>
+          <table style={{tableLayout: "fixed", width: "87rem"}}>
+            <colgroup>
+              <col style={{width: "14rem"}} />
+              <col style={{width: "16rem"}} />
+              <col style={{width: "26rem"}} />
+              <col style={{width: "10rem"}} />
+              <col style={{width: "12rem"}} />
+              <col style={{width: "9rem"}} />
+            </colgroup>
             <thead>
               <tr>
                 <th>Instrument / furnizor</th>
