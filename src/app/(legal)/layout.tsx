@@ -14,7 +14,7 @@ const socials = [
 const legalLinks = [
   { href: "/termeni-si-conditii", label: "Termeni și condiții" },
   { href: "/confidentialitate", label: "Politica de confidențialitate" },
-  { href: "/politica-cookies", label: "Politica de utilizare cookie-uri" },
+  { href: "/politica-cookies", label: "Politica de cookies" },
 ];
 
 export default function LegalLayout({ children }: { children: ReactNode }) {
@@ -25,7 +25,6 @@ export default function LegalLayout({ children }: { children: ReactNode }) {
           <a href="/" className="navbar-logo-link">
             <img src="/logo.svg" alt="Kluppi" className="navbar-logo" />
           </a>
-          <a href="/" className="navbar-link w-nav-link">← Înapoi la site</a>
         </div>
       </div>
 

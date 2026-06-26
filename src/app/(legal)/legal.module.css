@@ -46,8 +46,18 @@
   margin: 2.5rem 0 0.75rem;
 }
 
+/* Subsection headings (6.1, 6.2, …) */
+.body h3 {
+  font-family: var(--font-display);
+  color: var(--text);
+  font-size: clamp(1.2rem, 1.05rem + 0.55vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 2rem 0 0.75rem;
+}
+
 .body p {
-  font-size: var(--fs-body);
+  font-size: var(--fs-small);
   line-height: 1.7;
   margin: 0 0 1rem;
 }
@@ -58,9 +68,40 @@
 }
 
 .body li {
-  font-size: var(--fs-body);
+  font-size: var(--fs-small);
   line-height: 1.7;
   margin-bottom: 0.4rem;
+}
+
+/* Tables — hairline borders; horizontal scroll keeps wide tables readable on
+   mobile instead of squashing/overflowing the columns. */
+.tableWrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 0 1.5rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+}
+
+.body table {
+  width: 100%;
+  min-width: 40rem; /* forces the scroll container on narrow screens */
+  border-collapse: collapse;
+  font-size: var(--fs-small);
+}
+
+.body th,
+.body td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--hairline);
+  line-height: 1.5;
+}
+
+.body th {
+  font-weight: 600;
+  background: #ffffff80;
 }
 
 .body a {

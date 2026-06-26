@@ -1152,3 +1152,23 @@ Cookie/consent audit found GA, GTM and theMarketer all loading *before* a cookie
 ### 2026-06-26 — Footer link text: "Politica de utilizare cookie-uri" → "Politica de cookies" (requested)
 
 **`src/app/page.tsx`** — footer legal link text only; `href="/politica-cookies"` and everything else unchanged. No preview (per user). Shipped directly to main.
+
+### 2026-06-26 — Cookie Policy: final content + layout polish (requested)
+
+Replaced the placeholder cookie policy with the final copy from `Waitlist Cookie Policy.docx`, plus the requested layout changes. (First of the three legal pages — confidențialitate + termeni still placeholder.)
+
+**`src/app/(legal)/politica-cookies/page.tsx`** — full rewrite with the document content:
+- H1 → "Politica de cookies" (doc title is all-caps "POLITICA DE COOKIES"; user chose sentence case to match the footer link). Updated line → "Data ultimei actualizări: 26 iunie 2026". Placeholder note removed.
+- 11 numbered sections as `<h2>`; subsections 6.1–6.4 as `<h3>`. Lettered enumerations (a., b., …) rendered as `<p>` with `<br/>` (matches the doc's single-paragraph line-break lists). 3 tables (6.1, 6.2, 6.3) each wrapped in `div.tableWrap`. `hello@kluppi.com` is a mailto link.
+- `<title>` metadata → "Politica de cookies — Kluppi". **Left `robots: { index:false }`** (still pre-launch — out of the requested scope; flag if indexing should now be enabled).
+
+**`src/app/(legal)/legal.module.css`**
+- `.body p` and `.body li` font-size `--fs-body` → **`--fs-small`** (item 5).
+- Added `.body h3` for subsections: `font-display`, `color: var(--text)`, `font-weight: 600`, `line-height: 1.2`, `font-size: clamp(1.2rem, 1.05rem + 0.55vw, 1.4rem)` (user's example used `clamp(1.4rem)` which is invalid; made it a proper clamp capped at 1.4rem).
+- Added table styles: borders `1px solid var(--hairline)`, `.tableWrap { overflow-x:auto }` + `table { min-width: 40rem }` so wide tables scroll horizontally on mobile instead of overflowing the page (item 7). Header row bold on a faint white fill.
+
+**`src/app/(legal)/layout.tsx`** (shared legal chrome — affects all 3 legal pages)
+- Removed the "← Înapoi la site" navbar button (item 1).
+- Footer legal nav label "Politica de utilizare cookie-uri" → "Politica de cookies" (consistency with the homepage-footer rename from earlier today).
+
+**Verification (preview, localhost:3000, /politica-cookies):** back button gone; H1/updated/title correct; no placeholder; paragraphs computed at `--fs-small` (~15.3px vs `--fs-body`); h2 = Bricolage/accent, h3 = Bricolage/Cassis/600; table borders = `rgba(53,30,40,0.2)` (`--hairline`). Mobile (375px): tables scroll horizontally (scrollWidth 699 > clientWidth 333) with **no page-level horizontal overflow**. `npx tsc --noEmit` clean. Not committed — awaiting review.
