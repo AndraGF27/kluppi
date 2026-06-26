@@ -1120,3 +1120,31 @@ Confirmed no other references to `@vercel/kv` / `kv.` / `waitlist:` remain. **Ve
 - `.kluppi-signup-message.is-success` now uses `var(--success)` (was `--text`/Cassis); `.is-error` uses `var(--error)` (was `--accent`/orange).
 
 **Verification:** `npx tsc --noEmit` clean; contrast ratios computed against `--bg`. Visual (message colors), not auto-previewed per user rule.
+
+### 2026-06-26 — Hard-gate analytics behind cookie consent + self-host fonts + form consent checkbox (requested)
+
+Cookie/consent audit found GA, GTM and theMarketer all loading *before* a cookie choice (only GA Consent Mode was soft-blocking — scripts still loaded, `collect` still fired after "Refuz"). Reworked so nothing non-essential loads until "Accept". Two scoped decisions confirmed by user: **(a) gate theMarketer too** (not strictly necessary — signup/double-opt-in is server-side via `/api/add-subscriber`); **(b) self-host both fonts** (removes the `__fontshare_key` cookie and all third-party font requests).
+
+**`src/app/CookieBanner.tsx`** — now the single owner of consent + all tracking scripts.
+- Consent values changed to **`"accepted"` / `"denied"`** (was `granted`/`denied`), key unchanged: `kluppi-cookie-consent`.
+- GA4 (`G-LNKD7TBG3N`), GTM (`GTM-5673VBFG`) and theMarketer (`ZZRAFU8W`) moved here into a `<ConsentedScripts>` subtree that renders **only when consent === "accepted"** — so they're injected on Accept, or immediately on a later visit if already accepted; never before a choice and never after "Refuz". GA `consent default` now sets `analytics_storage: 'granted'` (only loads post-consent), `ad_*` denied.
+- Banner copy updated to requested RO text: "Folosim cookies și tehnologii similare pentru a analiza traficul și a-ți îmbunătăți experiența. Află mai multe." Buttons unchanged ("Refuz" / "Accept").
+
+**`src/app/layout.tsx`** — removed the unconditional `<Script>` blocks for GTM, GA and theMarketer, the `<noscript>` GTM iframe, and the external font `<link>`s (Google Fonts + Fontshare) + their preconnects. Dropped now-unused `next/script` import; added `import "./fonts.css"`. `<head>` is now empty (metadata only); all tracking lives in `CookieBanner`.
+
+**`src/app/fonts.css`** (new) + **`public/fonts/`** (new) — self-hosted woff2: Switzer 200/300/400/500/600 (Fontshare static) and Bricolage Grotesque (Google Fonts variable, `font-weight: 400 800`, latin + latin-ext subsets for Romanian). `@font-face` family names match existing CSS (`"Switzer"`, `"Bricolage Grotesque"`), `font-display: swap`.
+
+**`src/app/themarketer-events.ts`** — `pushDataLayer` now no-ops unless `kluppi-cookie-consent === "accepted"`, so no on-site event (incl. the visitor's email) enters the dataLayer before consent.
+
+**`src/app/page.tsx`** — added a required, **unticked** consent checkbox before the submit button: "Sunt de acord să primesc e-mailuri despre serviciul Kluppi, am citit [Politica de confidențialitate] și accept [Termenii și condițiile]." (the two phrases link to `/confidentialitate` and `/termeni-si-conditii`). New `consent` state; submit button `disabled` until checked; `handleSubmit` also guards (form is `noValidate`) with RO error "Te rugăm să bifezi acordul pentru a continua."; `consent` resets on success.
+
+**`src/app/globals.css`** — added `.kluppi-signup-consent` (flex, **text-align: left**, checkbox beside text) + `.kluppi-signup-consent-box` (accent checkmark) + link styling. Reuses `.kluppi-hero-trust` for the text per request.
+
+**Verification (preview, localhost:3000):**
+- *Before any choice:* only self-hosted `/fonts/*.woff2` load; **zero** requests to googletagmanager.com / t.themarketer.com / fontshare / fonts.gstatic. Banner shows; form checkbox unchecked + required, CTA disabled, label left-aligned.
+- *After "Accept":* `gtag/js`, `gtm.js` and theMarketer all fire; GA `collect` → 204 with `gcs=G101` (analytics granted, ads denied). localStorage = `accepted`.
+- *"Refuz" + reload:* localStorage = `denied`, banner stays hidden, no tracking scripts in DOM, dataLayer empty.
+- Ticking the checkbox enables the CTA. `npx tsc --noEmit` clean.
+
+**Not changed (flagged for user):** `src/app/(legal)/politica-cookies/page.tsx` is still placeholder lorem-ipsum — left as-is (out of scope). When the final cookie policy is written it should document: `__sm__c` (theMarketer, now consent-gated, analytics/marketing) and the GA cookies; `__fontshare_key` is gone (fonts self-hosted). Vercel Web Analytics remains cookieless.
+**Pre-existing, unrelated:** `@vercel/speed-insights` wasn't installed (in package.json since the SpeedInsights commit); ran `npm install` to restore node_modules so tsc/build pass.

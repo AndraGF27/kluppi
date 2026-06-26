@@ -73,6 +73,7 @@ export default function Home() {
 
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<SubmitState>("idle");
   const [message, setMessage] = useState("");
 
@@ -179,6 +180,12 @@ export default function Home() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    // Guard: the form has noValidate, so enforce the required consent here too.
+    if (!consent) {
+      setStatus("error");
+      setMessage("Te rugăm să bifezi acordul pentru a continua.");
+      return;
+    }
     setStatus("loading");
     setMessage("");
     try {
@@ -199,6 +206,7 @@ export default function Home() {
       setMessage("Super! Ți-am trimis un e-mail pentru a-ți confirma înscrierea în Kluppi.");
       setFirstName("");
       setEmail("");
+      setConsent(false);
     } catch {
       setStatus("error");
       setMessage("Eroare de rețea. Mai încearcă o dată.");
@@ -551,7 +559,29 @@ export default function Home() {
                       required
                       disabled={status === "loading"}
                     />
-                    <button className="kluppi-btn kluppi-signup-cta" type="submit" disabled={status === "loading"}>
+                    <label className="kluppi-hero-trust kluppi-signup-consent">
+                      <input
+                        type="checkbox"
+                        className="kluppi-signup-consent-box"
+                        checked={consent}
+                        onChange={(e) => setConsent(e.target.checked)}
+                        required
+                        disabled={status === "loading"}
+                      />
+                      <span>
+                        Sunt de acord să primesc e-mailuri despre serviciul Kluppi,
+                        am citit{" "}
+                        <a href="/confidentialitate" target="_blank" rel="noopener noreferrer">
+                          Politica de confidențialitate
+                        </a>{" "}
+                        și accept{" "}
+                        <a href="/termeni-si-conditii" target="_blank" rel="noopener noreferrer">
+                          Termenii și condițiile
+                        </a>
+                        .
+                      </span>
+                    </label>
+                    <button className="kluppi-btn kluppi-signup-cta" type="submit" disabled={status === "loading" || !consent}>
                       {status === "loading" ? "Se trimite…" : "Rezervă-ți locul în club"}
                     </button>
                   </form>

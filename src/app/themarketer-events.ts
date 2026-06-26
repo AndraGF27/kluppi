@@ -13,8 +13,16 @@ declare global {
   }
 }
 
+// theMarketer is consent-gated (see CookieBanner.tsx). Until the visitor clicks
+// "Accept", we don't push anything to the dataLayer — so no on-site event (and
+// no email) is captured before consent, matching the gated tracking scripts.
 function pushDataLayer(payload: Record<string, unknown>): void {
   if (typeof window === "undefined") return;
+  try {
+    if (localStorage.getItem("kluppi-cookie-consent") !== "accepted") return;
+  } catch {
+    return;
+  }
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push(payload);
 }
