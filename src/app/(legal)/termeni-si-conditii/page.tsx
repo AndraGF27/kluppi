@@ -10,7 +10,7 @@ export default function TermeniSiConditii() {
   return (
     <main className={styles.main}>
       <h1 className={styles.h1}>Termeni și condiții</h1>
-      <h2>privind înscrierea pe lista de așteptare Kluppi</h2>
+      <div className={styles.body}><h2>privind înscrierea pe lista de așteptare Kluppi</h2></div>
       <p className={styles.updated}>Data ultimei actualizări: 26 iunie 2026</p>
 
       <div className={styles.body}>
