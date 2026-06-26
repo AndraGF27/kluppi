@@ -1148,3 +1148,7 @@ Cookie/consent audit found GA, GTM and theMarketer all loading *before* a cookie
 
 **Not changed (flagged for user):** `src/app/(legal)/politica-cookies/page.tsx` is still placeholder lorem-ipsum — left as-is (out of scope). When the final cookie policy is written it should document: `__sm__c` (theMarketer, now consent-gated, analytics/marketing) and the GA cookies; `__fontshare_key` is gone (fonts self-hosted). Vercel Web Analytics remains cookieless.
 **Pre-existing, unrelated:** `@vercel/speed-insights` wasn't installed (in package.json since the SpeedInsights commit); ran `npm install` to restore node_modules so tsc/build pass.
+
+### 2026-06-26 — Footer link text: "Politica de utilizare cookie-uri" → "Politica de cookies" (requested)
+
+**`src/app/page.tsx`** — footer legal link text only; `href="/politica-cookies"` and everything else unchanged. No preview (per user). Shipped directly to main.
