@@ -165,7 +165,7 @@ export default function PoliticaCookies() {
           <table>
             <thead>
               <tr>
-                <th>Instrument / Furnizor</th>
+                <th>Instrument / furnizor</th>
                 <th>Tehnologie / identificator</th>
                 <th>Scop</th>
                 <th>Tip</th>
@@ -271,7 +271,7 @@ export default function PoliticaCookies() {
           <table>
             <thead>
               <tr>
-                <th>Instrument / Furnizor</th>
+                <th>Instrument / furnizor</th>
                 <th>Tehnologie / cookie</th>
                 <th>Scop</th>
                 <th>Tip</th>
@@ -378,7 +378,7 @@ export default function PoliticaCookies() {
           <table>
             <thead>
               <tr>
-                <th>Instrument / Furnizor</th>
+                <th>Instrument / furnizor</th>
                 <th>Scop</th>
                 <th>Tip</th>
                 <th>Consimțământ</th>

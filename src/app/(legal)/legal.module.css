@@ -7,7 +7,7 @@
   max-width: 46rem;
   margin: 0 auto;
   /* generous top padding clears the fixed navbar */
-  padding: clamp(6.5rem, 5.5rem + 6vw, 9rem) var(--gutter) clamp(3rem, 8vw, 5rem);
+  padding: clamp(6.5rem, 5.5rem + 6vw, 9rem) 0 clamp(3rem, 8vw, 5rem);
 }
 
 .h1 {
@@ -89,9 +89,14 @@
 
 .body table {
   width: 100%;
-  min-width: 56rem; /* wider columns to better fit the text; scrolls horizontally when it exceeds the container */
+  min-width: 76rem;
   border-collapse: collapse;
   font-size: var(--fs-small);
+}
+
+.body th:last-child,
+.body td:last-child {
+  width: 9rem;
 }
 
 .body th,
