@@ -376,6 +376,12 @@ export default function PoliticaCookies() {
         </p>
         <div className={styles.tableWrap}>
           <table>
+            <colgroup>
+              <col />
+              <col style={{width: "11rem"}} />
+              <col />
+              <col />
+            </colgroup>
             <thead>
               <tr>
                 <th>Instrument / furnizor</th>
