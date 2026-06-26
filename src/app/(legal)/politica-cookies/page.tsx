@@ -167,9 +167,9 @@ export default function PoliticaCookies() {
               <col style={{width: "14rem"}} />
               <col style={{width: "16rem"}} />
               <col style={{width: "26rem"}} />
+              <col style={{width: "9rem"}} />
               <col style={{width: "10rem"}} />
               <col style={{width: "12rem"}} />
-              <col style={{width: "9rem"}} />
             </colgroup>
             <thead>
               <tr>
