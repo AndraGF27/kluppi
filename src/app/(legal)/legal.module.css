@@ -94,11 +94,6 @@
   font-size: var(--fs-small);
 }
 
-.body th:last-child,
-.body td:last-child {
-  width: 9rem;
-}
-
 .body th,
 .body td {
   text-align: left;
@@ -111,6 +106,7 @@
 .body th {
   font-weight: 600;
   background: #ffffff80;
+  white-space: nowrap;
 }
 
 .body a {
