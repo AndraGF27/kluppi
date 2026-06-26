@@ -1172,3 +1172,11 @@ Replaced the placeholder cookie policy with the final copy from `Waitlist Cookie
 - Footer legal nav label "Politica de utilizare cookie-uri" → "Politica de cookies" (consistency with the homepage-footer rename from earlier today).
 
 **Verification (preview, localhost:3000, /politica-cookies):** back button gone; H1/updated/title correct; no placeholder; paragraphs computed at `--fs-small` (~15.3px vs `--fs-body`); h2 = Bricolage/accent, h3 = Bricolage/Cassis/600; table borders = `rgba(53,30,40,0.2)` (`--hairline`). Mobile (375px): tables scroll horizontally (scrollWidth 699 > clientWidth 333) with **no page-level horizontal overflow**. `npx tsc --noEmit` clean. Not committed — awaiting review.
+
+### 2026-06-26 — Cookie Policy heading wrap + wider table columns (requested tweaks)
+
+Previewed on `kluppi-rebrand`; user flagged two things. **`src/app/(legal)/legal.module.css`** only:
+- Headings of §4, 5, 6, 9 and subsections 6.1/6.2 were splitting early (e.g. "acordul" / "dumneavoastră" on separate lines) — caused by the global `h1,h2,h3 { text-wrap: balance }` in globals.css. Added **`text-wrap: wrap`** to `.body h2` and `.body h3` so headings fill the full width. (First tried `text-wrap: normal` — *not a valid value* for the shorthand, so it was ignored and `balance` stayed; `wrap` is the greedy default and is correct.)
+- Table columns too narrow → bumped `.body table` `min-width` 40rem → **56rem** so cells fit more text per line (still scrolls horizontally when it exceeds the container, on desktop and mobile).
+
+**Verification:** computed `text-wrap: wrap` on all affected headings; §4/§5 now wrap "…dumneavoastră" onto line 1; table scrollWidth 896px. Nothing else touched (rest confirmed impeccable by user). Pushed to `kluppi-rebrand` for re-preview; `main` untouched.

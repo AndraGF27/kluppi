@@ -44,6 +44,9 @@
   font-size: clamp(1.35rem, 1.1rem + 1vw, 1.6rem);
   line-height: 1.2;
   margin: 2.5rem 0 0.75rem;
+  /* override the global `text-wrap: balance` so headings fill the full width
+     instead of being split early into even-length lines */
+  text-wrap: wrap;
 }
 
 /* Subsection headings (6.1, 6.2, …) */
@@ -54,6 +57,7 @@
   font-weight: 600;
   line-height: 1.2;
   margin: 2rem 0 0.75rem;
+  text-wrap: wrap; /* fill the full width (see .body h2) */
 }
 
 .body p {
@@ -85,7 +89,7 @@
 
 .body table {
   width: 100%;
-  min-width: 40rem; /* forces the scroll container on narrow screens */
+  min-width: 56rem; /* wider columns to better fit the text; scrolls horizontally when it exceeds the container */
   border-collapse: collapse;
   font-size: var(--fs-small);
 }
