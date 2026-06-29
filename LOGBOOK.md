@@ -1218,3 +1218,8 @@ updated to match. Scope: this one value only.
 ## 2026-06-29 — Hero collage 768–991px band: 86vh → 80vh
 **`src/app/globals.css`** — `@media (max-width: 991px)` `.header-image-list` padding-top
 `86vh` → `80vh` (now matches the ≤767 phone value). Phones/desktop unchanged. Comment updated.
+
+## 2026-06-29 — Hero collage 768–991px band: 80vh → 76vh (shipped to main)
+**`src/app/globals.css`** — `@media (max-width: 991px)` `.header-image-list` padding-top
+`80vh` → `76vh`. Phones (≤767, 80vh) and desktop unchanged. Comment updated.
+Shipped to `main` by fast-forward per user.
