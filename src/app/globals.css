@@ -36,7 +36,7 @@ html {
   --shadow-brand-2xl:   0 25px 50px -12px rgb(53 30 40 / 0.28);
   --shadow-brand-inner: inset 0 2px 4px 0 rgb(53 30 40 / 0.06);
 
-  /* /20 opacity-modifier variants (Tailwind's shadow-*/20): same shapes at 20% alpha */
+  /* 20%-alpha variants (Tailwind shadow opacity modifier "/20"): same shapes, stronger */
   --shadow-brand-lg-20: 0 10px 15px -3px rgb(53 30 40 / 0.2), 0 4px 6px -4px rgb(53 30 40 / 0.2);
   --shadow-brand-xl-20: 0 20px 25px -5px rgb(53 30 40 / 0.2), 0 8px 10px -6px rgb(53 30 40 / 0.2);
 
