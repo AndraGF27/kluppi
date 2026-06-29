@@ -1189,11 +1189,3 @@ The subtitle under the "Termeni și condiții" H1 ("privind înscrierea pe lista
 **`src/app/(legal)/termeni-si-conditii/page.tsx`** — subtitle markup `<div className={styles.body}><h2>…</h2></div>` → `<p className={styles.subtitle}>…</p>`.
 
 Scope: only the terms page. Confirmed with the user the other two legal pages have no subtitle, so they were left untouched.
-
-## 2026-06-29 — Lift hero collage higher on tablet & mobile
-**`src/app/globals.css`** — reduced the `.header-image-list` `padding-top` (the start offset that pushes the parallax image cluster down at small widths) so the images sit a bit higher at rest:
-- `@media (max-width: 991px)`: `94vh` → `84vh` (covers the 991px and 768px viewports the user flagged)
-- `@media (max-width: 767px)`: `80vh` → `72vh` (phones, e.g. iPhone 13 Pro)
-Also refreshed the explanatory comment above the rules to match the new values (it still read "88vh on tablet, 80vh on phones").
-
-Scope: only the two small-width `padding-top` values + their comment. Desktop (≥992px) collage positioning and the sticky/parallax structure untouched. Reported by the user with phone + 991px/768px screenshots showing the images sitting too low.
