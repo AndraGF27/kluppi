@@ -1367,3 +1367,16 @@ motion felt chaotic vs the desktop spread. Two files:
   `fit-content` block and the converge nowrap/≤479 blocks, so both banners rest in the desktop
   layout at every width (spread: dark left / orange right; converge: orange left / dark right).
 `npm run build` clean (TS + static gen). No preview per user request.
+
+## 2026-06-29 — Spread banner: settle lines to the navbar logo/menu-icon (more travel) — shipped
+User wanted the spread banner's lines to travel further horizontally and, when the banner
+reaches the fixed navbar, settle so the dark `line1` left edge aligns to the navbar logo's
+left and the orange `line2` right edge aligns to the menu icon's right. In
+**`src/app/SplitBanner.tsx`** (spread branch only — converge untouched) the rest position
+(progress→1) is no longer the inner-container edge (transform 0); it's now
+`settled1 = navbarLogo.left − inner.left` (negative → further left) and
+`settled2 = menuIcon.right − inner.right` (positive → further right), measured each frame
+from `.navbar-logo` and `.menu-icon` (both visible at all widths: navbar is `data-collapse="all"`,
+`position: fixed`, padding `.5rem 5%`). The entrance (progress 0) keeps the existing inward
+`freeTravel` pull, interpolating out to the navbar alignment. Falls back to the old inner-edge
+rest if the navbar elements aren't found. `npm run build` clean. No preview per user request.

@@ -64,9 +64,25 @@ export default function SplitBanner({
         l2.style.transform = `translateX(${progress * freeTravel(l2)}px)`;
       } else {
         // Spread (every width): lines start pulled toward the centre and spread
-        // to the edges (dark line1 → left, orange line2 → right) as it scrolls up.
-        l1.style.transform = `translateX(${(1 - progress) * freeTravel(l1)}px)`;
-        l2.style.transform = `translateX(${-(1 - progress) * freeTravel(l2)}px)`;
+        // OUT as the section scrolls up — settling so the dark line1's left edge
+        // lines up with the navbar logo and the orange line2's right edge lines
+        // up with the navbar menu icon (the references the banner reaches as it
+        // hits the fixed navbar). Settled offset = navbar reference − the line's
+        // natural edge (the inner container's edge, since the lines are full-width
+        // blocks). Falls back to the inner edges if the navbar isn't found.
+        const innerRect = inner?.getBoundingClientRect();
+        const logo = document.querySelector(".navbar-logo");
+        const menuIcon = document.querySelector(".menu-icon");
+        const settled1 =
+          innerRect && logo ? logo.getBoundingClientRect().left - innerRect.left : 0;
+        const settled2 =
+          innerRect && menuIcon ? menuIcon.getBoundingClientRect().right - innerRect.right : 0;
+        // Start (progress 0) keeps the current inward pull toward the centre;
+        // interpolate out to the settled navbar alignment as progress → 1.
+        const start1 = freeTravel(l1);
+        const start2 = -freeTravel(l2);
+        l1.style.transform = `translateX(${settled1 + (1 - progress) * (start1 - settled1)}px)`;
+        l2.style.transform = `translateX(${settled2 + (1 - progress) * (start2 - settled2)}px)`;
       }
     };
 
