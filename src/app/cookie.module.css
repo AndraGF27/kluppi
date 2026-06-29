@@ -77,6 +77,11 @@
 }
 .reject:hover { border-color: var(--text); }
 
+@media (max-width: 559.98px) {
+  .text { text-align: center; }
+  .actions { justify-content: center; }
+}
+
 @media (min-width: 560px) {
   .card {
     flex-direction: row;

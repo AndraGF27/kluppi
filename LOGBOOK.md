@@ -1341,3 +1341,10 @@ left edge lines up with the arrows below it (desktop only, nothing else changed)
 `.kluppi-carousel-card { margin-inline: 0; }` — overrides the default centering margin that
 indented the narrower max-width:42rem card from the carousel's left padding edge (where the
 arrows sit). No preview per user request.
+
+## 2026-06-29 — Mobile (<560px): center GDPR cookie banner text & buttons — shipped to both
+User wanted the cookie-consent banner's text and action buttons centered below 560px browser
+width. Added a `@media (max-width: 559.98px)` rule in **`src/app/cookie.module.css`** setting
+`.text { text-align: center; }` and `.actions { justify-content: center; }`. Mirrors the
+existing 560px breakpoint (above which the card switches to the row layout). No preview per
+user request.
