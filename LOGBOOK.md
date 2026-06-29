@@ -1395,3 +1395,11 @@ per user request.
 1.75rem felt a touch small; raised `.navbar-menu .navbar-link` mobile font-size
 to 2.25rem (globals.css `@media max-width:767px`). Centering unchanged. No preview
 per user request.
+
+## 2026-06-29 — Nav: "Înscrie-te în club" → pill CTA at end of menu
+Moved the "Înscrie-te în club" link to the bottom of the nav overlay list (after
+Contact) in **page.tsx** and gave it a `navbar-cta` modifier. New CSS in
+**globals.css** `.navbar-menu .navbar-cta`: white text on `var(--accent)` (Dare
+Devil), `var(--radius-pill)` radius, `0.5rem 1.5rem` padding so the fill reads as a
+button; inherits the existing link font-size. `:hover` pinned white to override the
+nav hover recolor. Build clean. No preview per user request.

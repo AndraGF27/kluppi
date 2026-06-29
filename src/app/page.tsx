@@ -259,7 +259,6 @@ export default function Home() {
             >
               <div className="navbar-menu-wrapper">
                 <div className="navbar-links-wrapper">
-                  <a href="#contact" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Înscrie-te în club</a>
                   <a href="#cum-functioneaza" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Cum funcționează</a>
                   <a href="#intrebari-frecvente" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Întrebări frecvente</a>
                   <a
@@ -289,6 +288,7 @@ export default function Home() {
                   >
                     Contact
                   </a>
+                  <a href="#contact" className="navbar-link navbar-cta w-nav-link" onClick={() => setMenuOpen(false)}>Înscrie-te în club</a>
                 </div>
               </div>
             </nav>

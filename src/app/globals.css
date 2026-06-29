@@ -315,6 +315,17 @@ p { text-wrap: pretty; }
 }
 .navbar-menu .navbar-link:hover { color: var(--link-hover); } /* Electric (spec §6) */
 
+/* "Înscrie-te în club" as an oversized pill CTA at the end of the menu. Keeps the
+   inherited link font-size; white text on Dare Devil, pill radius, with horizontal
+   padding so the fill reads as a button. */
+.navbar-menu .navbar-cta {
+  color: #fff;
+  background-color: var(--accent);
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 1.5rem;
+}
+.navbar-menu .navbar-cta:hover { color: #fff; } /* keep white over the hover recolor */
+
 /* Mobile: the 3rem links above are far too large on small screens. Shrink and
    centre them. (Higher specificity than the webflow @media .navbar-link rules,
    so it must live here to win.) */
