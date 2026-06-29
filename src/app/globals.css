@@ -410,11 +410,10 @@ p { text-wrap: pretty; }
       way to fill that tail without altering the (finished, approved) image motion is to
       pull the next section up into it. The hero and band share the same cream bg and the
       collage images paint above (z-index:1), so the band's content slides up beneath the
-      photos with no seam and no overlap. -32vh leaves ~104px of breathing room below the
-      lowest image — in line with the band's normal ~96px padding floor. (Tuning knob:
-      larger magnitude = tighter; smaller = roomier.) */
+      photos with no seam and no overlap. -26vh leaves ~155px of breathing room below the
+      lowest image. (Tuning knob: larger magnitude = tighter; smaller = roomier.) */
 @media (max-width: 479px) {
-  .kluppi-band { padding-top: 2rem; margin-top: -32vh; }
+  .kluppi-band { padding-top: 2rem; margin-top: -26vh; }
 }
 
 /* ─── Pain-points carousel ("De câte ori ai…") — under the intro band ─── */

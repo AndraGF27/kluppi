@@ -1328,3 +1328,8 @@ User: -38vh left too little breathing room (~53px, cramped). Eased the negative 
 **`src/app/globals.css`** `.kluppi-band` to `margin-top: -32vh`, giving ~104px between the
 lowest image and the band content at progress=1 — in line with the band's normal ~96px padding
 floor. Verified via preview DOM at 390×844. Magnitude is the tuning knob (larger = tighter).
+
+## 2026-06-29 — Phones (≤479): more breathing room below hero (-32vh → -26vh) — shipped to both
+User wanted more breathing room. Eased `.kluppi-band` margin-top to `-26vh` in
+**`src/app/globals.css`** → ~155px between the lowest image and the band content at progress=1
+(was ~104px). Verified via preview DOM at 390×844.
