@@ -1257,3 +1257,9 @@ and must stay unchanged. **`src/app/globals.css`** — added per-image width bum
 `@media (max-width: 479px)` block (~+6vw): is-image-1/2 22→28vw, is-image-3/5 20→26vw,
 is-image-4/6 18→24vw. Scoped to ≤479 so 480px+ (incl. the desktop layout down to ~517px)
 keeps the ≤991-block values untouched. height:auto reset retained.
+
+## 2026-06-29 — Reduce hero collage start on phones (≤479px): →60vh — shipped to both
+User: reduce mobile padding ~14vh. **`src/app/globals.css`** — added a `@media (max-width: 479px)`
+`.header-image-list` padding-top of `60vh` (was inheriting 74vh from the ≤767 block, −14vh).
+Scoped to ≤479 so the 480–767 band (incl. desktop down to ~517px, confirmed fine) stays at
+74vh. Comment updated.

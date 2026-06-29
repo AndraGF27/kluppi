@@ -94,7 +94,8 @@ p { text-wrap: pretty; }
    box, so the collage has no room below the vertically-centred content. The fix is
    two-part: top-align the content (see .kluppi-hero .header-content below — reclaims
    the centring dead-space) AND start the images lower so they sit below the
-   microcopy and drift up on scroll. 76vh on tablet, 74vh on phones (phone ink is
+   microcopy and drift up on scroll. 76vh on tablet, 74vh on the 480–767 band, 60vh
+   on real phones ≤479 (phone ink is
    shorter once top-aligned, so less push is needed and the at-rest gap stays small). */
 @media (max-width: 991px) {
   .header-image-list,
@@ -103,6 +104,13 @@ p { text-wrap: pretty; }
 @media (max-width: 767px) {
   .header-image-list,
   .header-image-list.image-list-right { padding-top: 74vh; }
+}
+/* Real phones (≤479) get a lower start than the 480–767 band so the collage sits
+   higher. Scoped to ≤479 so 480px+ (incl. the desktop layout down to ~517px) keeps
+   the 74vh above, untouched. */
+@media (max-width: 479px) {
+  .header-image-list,
+  .header-image-list.image-list-right { padding-top: 60vh; }
 }
 
 /* The template bumps each collage image's width UP at every step down
