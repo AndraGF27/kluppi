@@ -1202,3 +1202,7 @@ The "Politica de confidențialitate" H1 was splitting into two even-length lines
 - **Table 3** (4 cols): 14 / 20 / 12 / 30 rem → total 76rem (was auto, ~76rem).
 
 Shipped directly to `main` at user's request.
+
+### 2026-06-29 — Cookie Policy table 3 column-width tweak (requested)
+
+`src/app/(legal)/politica-cookies/page.tsx` — Table 3 columns 14/20/12/30 → **14 / 22 / 14 / 30 rem** (total 76 → 80rem). Shipped directly to `main`.

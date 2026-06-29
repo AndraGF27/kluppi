@@ -391,11 +391,11 @@ export default function PoliticaCookies() {
           tehnologiilor similare care nu sunt strict necesare.
         </p>
         <div className={styles.tableWrap}>
-          <table style={{tableLayout: "fixed", width: "76rem"}}>
+          <table style={{tableLayout: "fixed", width: "80rem"}}>
             <colgroup>
               <col style={{width: "14rem"}} />
-              <col style={{width: "20rem"}} />
-              <col style={{width: "12rem"}} />
+              <col style={{width: "22rem"}} />
+              <col style={{width: "14rem"}} />
               <col style={{width: "30rem"}} />
             </colgroup>
             <thead>
