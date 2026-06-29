@@ -162,14 +162,14 @@ export default function PoliticaCookies() {
           experiențe tehnice stabile.
         </p>
         <div className={styles.tableWrap}>
-          <table style={{tableLayout: "fixed", width: "87rem"}}>
+          <table style={{tableLayout: "fixed", width: "88rem"}}>
             <colgroup>
               <col style={{width: "14rem"}} />
-              <col style={{width: "16rem"}} />
-              <col style={{width: "26rem"}} />
-              <col style={{width: "9rem"}} />
-              <col style={{width: "10rem"}} />
+              <col style={{width: "14rem"}} />
+              <col style={{width: "20rem"}} />
               <col style={{width: "12rem"}} />
+              <col style={{width: "14rem"}} />
+              <col style={{width: "14rem"}} />
             </colgroup>
             <thead>
               <tr>
@@ -276,7 +276,15 @@ export default function PoliticaCookies() {
           utilizatorul apasă „Refuz”.
         </p>
         <div className={styles.tableWrap}>
-          <table>
+          <table style={{tableLayout: "fixed", width: "84rem"}}>
+            <colgroup>
+              <col style={{width: "14rem"}} />
+              <col style={{width: "12rem"}} />
+              <col style={{width: "20rem"}} />
+              <col style={{width: "12rem"}} />
+              <col style={{width: "14rem"}} />
+              <col style={{width: "12rem"}} />
+            </colgroup>
             <thead>
               <tr>
                 <th>Instrument / furnizor</th>
@@ -383,7 +391,13 @@ export default function PoliticaCookies() {
           tehnologiilor similare care nu sunt strict necesare.
         </p>
         <div className={styles.tableWrap}>
-          <table>
+          <table style={{tableLayout: "fixed", width: "76rem"}}>
+            <colgroup>
+              <col style={{width: "14rem"}} />
+              <col style={{width: "20rem"}} />
+              <col style={{width: "12rem"}} />
+              <col style={{width: "30rem"}} />
+            </colgroup>
             <thead>
               <tr>
                 <th>Instrument / furnizor</th>
