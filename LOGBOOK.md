@@ -1190,6 +1190,23 @@ The subtitle under the "Termeni și condiții" H1 ("privind înscrierea pe lista
 
 Scope: only the terms page. Confirmed with the user the other two legal pages have no subtitle, so they were left untouched.
 
+### 2026-06-29 — Confidentialitate H1 fills full width (requested fix)
+
+The "Politica de confidențialitate" H1 was splitting into two even-length lines because `.h1` inherited the global `h1 { text-wrap: balance }`. Added **`text-wrap: wrap`** to `.h1` in `src/app/(legal)/legal.module.css` so the title fills the full width (greedy wrap) before breaking — same fix already applied to `.body h2`/`h3`. `.h1` is shared by all 3 legal pages; the other two titles are short and don't wrap, so only this page is affected in practice. Shipped directly to `main` at user's request.
+
+### 2026-06-29 — Cookie Policy: explicit column widths on all 3 tables (requested)
+
+`src/app/(legal)/politica-cookies/page.tsx`. Set user-specified fixed column widths via `tableLayout: fixed` + `<colgroup>` on all three tables (table 1 already had it; tables 2 & 3 were previously auto-sized):
+- **Table 1** (6 cols): 14 / 14 / 20 / 12 / 14 / 14 rem → total 88rem (was 14/16/26/9/10/12 @ 87rem).
+- **Table 2** (6 cols): 14 / 12 / 20 / 12 / 14 / 12 rem → total 84rem (was auto, ~76rem).
+- **Table 3** (4 cols): 14 / 20 / 12 / 30 rem → total 76rem (was auto, ~76rem).
+
+Shipped directly to `main` at user's request.
+
+### 2026-06-29 — Cookie Policy table 3 column-width tweak (requested)
+
+`src/app/(legal)/politica-cookies/page.tsx` — Table 3 columns 14/20/12/30 → **14 / 22 / 14 / 30 rem** (total 76 → 80rem). Shipped directly to `main`.
+
 ## 2026-06-29 — Hero images: monotonic shrink (no size jump below 992px)
 Reverted the earlier padding-top lift (commit e873424) — it made things worse.
 Real cause (user's diagnosis, confirmed): `webflow.css` bumps each collage image's
@@ -1222,4 +1239,5 @@ updated to match. Scope: this one value only.
 ## 2026-06-29 — Hero collage 768–991px band: 80vh → 76vh (shipped to main)
 **`src/app/globals.css`** — `@media (max-width: 991px)` `.header-image-list` padding-top
 `80vh` → `76vh`. Phones (≤767, 80vh) and desktop unchanged. Comment updated.
-Shipped to `main` by fast-forward per user.
+Shipped to `main` per user (via merge of main into kluppi-rebrand then fast-forward —
+main had diverged with 3 legal/cookie commits not on rebrand; merge realigned both branches).
