@@ -403,16 +403,18 @@ p { text-wrap: pretty; }
 }
 /* Phones (≤479): close the gap below the hero. Two parts:
    1. padding-top → 2rem (the fluid clamp above floors at 6rem/96px here, dead space).
-   2. margin-top: -38vh. The felt gap is the hero's own tail — at progress=1 the
+   2. margin-top: -32vh. The felt gap is the hero's own tail — at progress=1 the
       collage rises to bring Hero1 to the navbar, leaving the lower ~40vh of the pinned
       frame empty (measured: lowest image bottom ≈502px on an 844px frame → 342px of
       cream). The band always lands at the viewport bottom at progress=1, so the ONLY
       way to fill that tail without altering the (finished, approved) image motion is to
       pull the next section up into it. The hero and band share the same cream bg and the
       collage images paint above (z-index:1), so the band's content slides up beneath the
-      photos with no seam and no overlap (it rests ~70px below the lowest image). */
+      photos with no seam and no overlap. -32vh leaves ~104px of breathing room below the
+      lowest image — in line with the band's normal ~96px padding floor. (Tuning knob:
+      larger magnitude = tighter; smaller = roomier.) */
 @media (max-width: 479px) {
-  .kluppi-band { padding-top: 2rem; margin-top: -38vh; }
+  .kluppi-band { padding-top: 2rem; margin-top: -32vh; }
 }
 
 /* ─── Pain-points carousel ("De câte ori ai…") — under the intro band ─── */

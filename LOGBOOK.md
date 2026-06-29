@@ -1322,3 +1322,9 @@ share the same cream bg (rgb 255,240,188) and the collage images paint above (z-
 band's content slides up beneath the photos with no seam; at progress=1 the band content now
 rests ~53–70px below the lowest image (band box top 844→523). Verified via preview DOM. Scoped
 to ≤479; 480px+ unchanged. Image motion (page.tsx) untouched.
+
+## 2026-06-29 — Phones (≤479): loosen the hero-tail margin (-38vh → -32vh) — shipped to both
+User: -38vh left too little breathing room (~53px, cramped). Eased the negative margin on
+**`src/app/globals.css`** `.kluppi-band` to `margin-top: -32vh`, giving ~104px between the
+lowest image and the band content at progress=1 — in line with the band's normal ~96px padding
+floor. Verified via preview DOM at 390×844. Magnitude is the tuning knob (larger = tighter).
