@@ -234,13 +234,13 @@ p { text-wrap: pretty; }
   background-color: var(--accent); /* Dare Devil */
   padding: 1.05rem 2.2rem;
   border-radius: var(--radius-pill);
-  box-shadow: var(--inset-shadow-sm-50);
+  box-shadow: var(--inset-shadow-sm);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* Hover: keep the Dare Devil fill, lift and float on a soft Cassis shadow (inset stays) */
-.kluppi-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-brand-xl-20), var(--inset-shadow-sm-50); }
-.kluppi-btn:active { transform: translateY(0); box-shadow: var(--shadow-brand-md), var(--inset-shadow-sm-50); }
+.kluppi-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-brand-xl-20), var(--inset-shadow-sm); }
+.kluppi-btn:active { transform: translateY(0); box-shadow: var(--shadow-brand-md), var(--inset-shadow-sm); }
 
 @media (prefers-reduced-motion: reduce) {
   .kluppi-btn { transition: box-shadow 0.2s ease; }
@@ -353,18 +353,18 @@ p { text-wrap: pretty; }
   font-size: 2rem; /* down from the 3rem nav links, still oversized vs global CTA */
   padding: 0.9em 1.9em; /* em-based → same proportions as .kluppi-btn at any font size */
   margin-top: 1.75rem; /* extra breathing room to set the CTA apart from the links */
-  box-shadow: var(--inset-shadow-sm-50);
+  box-shadow: var(--inset-shadow-sm);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 /* keep white over the nav hover recolor; lift + soft Cassis shadow like .kluppi-btn (inset stays) */
 .navbar-menu .navbar-cta:hover {
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-brand-xl-20), var(--inset-shadow-sm-50);
+  box-shadow: var(--shadow-brand-xl-20), var(--inset-shadow-sm);
 }
 .navbar-menu .navbar-cta:active {
   transform: translateY(0);
-  box-shadow: var(--shadow-brand-md), var(--inset-shadow-sm-50);
+  box-shadow: var(--shadow-brand-md), var(--inset-shadow-sm);
 }
 @media (prefers-reduced-motion: reduce) {
   .navbar-menu .navbar-cta { transition: box-shadow 0.2s ease; }
@@ -704,7 +704,6 @@ p { text-wrap: pretty; }
   min-height: 14rem;
   border-radius: var(--radius-card);
   overflow: hidden;
-  position: relative;
 }
 .kluppi-benefit-img .stat-image {
   aspect-ratio: auto;
@@ -713,18 +712,6 @@ p { text-wrap: pretty; }
   min-height: inherit;
   object-fit: cover;
   border-radius: var(--radius-card);
-}
-
-/* Inset-shadow-sm/50 on the hero and reasons images. An inset box-shadow set
-   directly on an <img> is hidden by the photo, so we overlay it on the wrapper. */
-.header-image-wrapper::after,
-.kluppi-benefit-img::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: var(--inset-shadow-sm-50);
-  pointer-events: none;
 }
 
 /* CTA + microcopy below the grid — reuses the hero CTA/trust styles, centered */
