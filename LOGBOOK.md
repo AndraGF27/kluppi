@@ -1298,3 +1298,13 @@ Verified via preview DOM at 390×844 (rAF throttled in preview, so computed from
 formula): at progress=1 travels are left 492 / Hero5 285 / Hero8 246 px (three distinct
 speeds), Hero1 lands at y=48=navbar, all images stay on-screen. tsc --noEmit clean.
 RIGHT_RATIO (0.5) and PHONE_EXTRA_VW (10) are tuning knobs.
+
+## 2026-06-29 — Phones (≤479): trim band top padding below the hero — shipped to both
+User: reduce the empty space between the hero and the next section ("just reduce the
+padding"). The next section (.kluppi-band) starts exactly where the 205vh hero track ends
+(no margin between); the only literal padding there is the band's own top padding, which the
+fluid `clamp(6rem,12vw,10.5rem)` floors at 6rem (96px) on a phone. **`src/app/globals.css`** —
+added `@media (max-width: 479px) .kluppi-band { padding-top: 2rem; }` (96px → 32px). Scoped to
+≤479; 480px+ keeps the clamp. NOTE for future: the bulk of the felt gap (~342px) is structural
+— the collage clearing the lower viewport as it rises to the navbar — not padding; only the
+per-image travel change (declined for now) would close that.

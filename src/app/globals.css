@@ -401,6 +401,14 @@ p { text-wrap: pretty; }
   .kluppi-band-title { font-size: 1.5rem; } /* 2rem × 0.75 */
   .kluppi-band-grid { grid-template-columns: 1fr; gap: 2.5rem; }
 }
+/* Phones (≤479): tighten the gap below the hero. The fluid clamp above floors at
+   6rem (96px) on a narrow screen, which reads as dead space right after the hero's
+   parallax. Pull the band's top padding in to ~2rem here only (480px+ keeps the
+   clamp). NOTE: most of the felt gap is the hero's own tail — the collage clearing
+   the lower viewport as it rises to the navbar — which is structural, not padding. */
+@media (max-width: 479px) {
+  .kluppi-band { padding-top: 2rem; }
+}
 
 /* ─── Pain-points carousel ("De câte ori ai…") — under the intro band ─── */
 .kluppi-painpoints {
