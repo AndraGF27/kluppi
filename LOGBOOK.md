@@ -1246,3 +1246,7 @@ main had diverged with 3 legal/cookie commits not on rebrand; merge realigned bo
 The previous commit accidentally put `76vh` on the `@media (max-width: 767px)` (phone)
 block and left `@media (max-width: 991px)` at `80vh` — backwards. Corrected so the
 768–991px tablet band is `76vh` and phones stay at `80vh`, as intended. `src/app/globals.css`.
+
+## 2026-06-29 — Hero collage phones (≤767px): 80vh → 74vh (shipped to both)
+**`src/app/globals.css`** — `@media (max-width: 767px)` `.header-image-list` padding-top
+`80vh` → `74vh`. Tablet band (768–991, 76vh) and desktop unchanged. Comment updated.
