@@ -1390,3 +1390,8 @@ after the nav-menu override: `.navbar-menu .navbar-link` → `font-size: 1.75rem
 `text-align: center`, and `.navbar-menu .navbar-links-wrapper` → `align-items: center`
 (links were inline-block, left-aligned in the column). Desktop unchanged. No preview
 per user request.
+
+## 2026-06-29 — Mobile nav links: bump to 2.25rem
+1.75rem felt a touch small; raised `.navbar-menu .navbar-link` mobile font-size
+to 2.25rem (globals.css `@media max-width:767px`). Centering unchanged. No preview
+per user request.

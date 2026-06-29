@@ -320,7 +320,7 @@ p { text-wrap: pretty; }
    so it must live here to win.) */
 @media (max-width: 767px) {
   .navbar-menu .navbar-link {
-    font-size: 1.75rem;
+    font-size: 2.25rem;
     text-align: center;
   }
   .navbar-menu .navbar-links-wrapper {
