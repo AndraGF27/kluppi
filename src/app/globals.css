@@ -322,8 +322,9 @@ p { text-wrap: pretty; }
   color: #fff;
   background-color: var(--accent);
   border-radius: var(--radius-pill);
-  font-size: 1.75rem; /* down from the 3rem nav links, still oversized vs global CTA */
+  font-size: 2rem; /* down from the 3rem nav links, still oversized vs global CTA */
   padding: 0.9em 1.9em; /* em-based → same proportions as .kluppi-btn at any font size */
+  margin-top: 1.75rem; /* extra breathing room to set the CTA apart from the links */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 /* keep white over the nav hover recolor; lift + soft Cassis shadow like .kluppi-btn */
@@ -351,7 +352,7 @@ p { text-wrap: pretty; }
     text-align: center;
   }
   .navbar-menu .navbar-cta {
-    font-size: 1.5rem; /* override the 2.25rem link size above for the pill CTA */
+    font-size: 1.75rem; /* override the 2.25rem link size above for the pill CTA */
   }
   .navbar-menu .navbar-links-wrapper {
     align-items: center;

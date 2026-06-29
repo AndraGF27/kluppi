@@ -1412,3 +1412,8 @@ as the global `.kluppi-btn` (1.05rem/2.2rem) at any size. Added the `.kluppi-btn
 hover/active animation — `translateY(-2px)` + `0 10px 24px rgba(53,30,40,.3)` shadow
 on hover, settle on active, with `prefers-reduced-motion` disabling the lift.
 Overrides webflow's `.navbar-link:hover` scale. Build clean. No preview per user request.
+
+## 2026-06-29 — Nav CTA: bump size + add top margin
+`.navbar-menu .navbar-cta` font-size 1.75→2rem desktop, 1.5→1.75rem mobile; padding
+stays `0.9em 1.9em` so it scales proportionally. Added `margin-top: 1.75rem` to set
+the pill apart from the menu links. Build clean. No preview per user request.
