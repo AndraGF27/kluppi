@@ -240,7 +240,7 @@ p { text-wrap: pretty; }
 }
 
 /* Hover: drop the resting inset, lift and float on a soft Cassis shadow */
-.kluppi-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-brand-xl-20); }
+.kluppi-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-brand-xl); }
 .kluppi-btn:active { transform: translateY(0); box-shadow: var(--shadow-brand-md); }
 
 @media (prefers-reduced-motion: reduce) {
@@ -361,7 +361,7 @@ p { text-wrap: pretty; }
 .navbar-menu .navbar-cta:hover {
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-brand-xl-20);
+  box-shadow: var(--shadow-brand-xl);
 }
 .navbar-menu .navbar-cta:active {
   transform: translateY(0);
