@@ -509,6 +509,13 @@ p { text-wrap: pretty; }
 .kluppi-carousel-arrow:hover { background-color: #FFFFFF; }
 .kluppi-carousel-arrow:disabled { opacity: 0.4; cursor: default; }
 
+/* Desktop (≥992px): left-align the carousel card so its left edge lines up with
+   the arrows below it (drop the centering margin that otherwise indents the
+   narrower max-width:42rem card from the carousel's left padding edge). */
+@media (min-width: 992px) {
+  .kluppi-carousel-card { margin-inline: 0; }
+}
+
 /* Conclusion / outro cells: left-aligned body under the H2 (reuses the hero body
    style); the CTA group keeps the microcopy centered to the button while the group
    itself sits left in the cell. */

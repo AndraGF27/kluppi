@@ -1333,3 +1333,11 @@ floor. Verified via preview DOM at 390×844. Magnitude is the tuning knob (large
 User wanted more breathing room. Eased `.kluppi-band` margin-top to `-26vh` in
 **`src/app/globals.css`** → ~155px between the lowest image and the band content at progress=1
 (was ~104px). Verified via preview DOM at 390×844.
+
+## 2026-06-29 — Desktop (≥992px): left-align painpoints carousel card to the arrows — shipped to both
+User wanted the carousel quote card in `.kluppi-painpoints` left-aligned on desktop so its
+left edge lines up with the arrows below it (desktop only, nothing else changed). Added a
+`@media (min-width: 992px)` rule in **`src/app/globals.css`** setting
+`.kluppi-carousel-card { margin-inline: 0; }` — overrides the default centering margin that
+indented the narrower max-width:42rem card from the carousel's left padding edge (where the
+arrows sit). No preview per user request.
