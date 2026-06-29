@@ -1189,3 +1189,7 @@ The subtitle under the "Termeni și condiții" H1 ("privind înscrierea pe lista
 **`src/app/(legal)/termeni-si-conditii/page.tsx`** — subtitle markup `<div className={styles.body}><h2>…</h2></div>` → `<p className={styles.subtitle}>…</p>`.
 
 Scope: only the terms page. Confirmed with the user the other two legal pages have no subtitle, so they were left untouched.
+
+### 2026-06-29 — Confidentialitate H1 fills full width (requested fix)
+
+The "Politica de confidențialitate" H1 was splitting into two even-length lines because `.h1` inherited the global `h1 { text-wrap: balance }`. Added **`text-wrap: wrap`** to `.h1` in `src/app/(legal)/legal.module.css` so the title fills the full width (greedy wrap) before breaking — same fix already applied to `.body h2`/`h3`. `.h1` is shared by all 3 legal pages; the other two titles are short and don't wrap, so only this page is affected in practice. Shipped directly to `main` at user's request.

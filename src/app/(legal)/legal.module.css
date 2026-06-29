@@ -18,6 +18,9 @@
   line-height: 1.05;
   letter-spacing: 0.5px;
   margin: 0 0 0.75rem;
+  /* override the global `text-wrap: balance` so the title fills the full width
+     instead of being split early into even-length lines */
+  text-wrap: wrap;
 }
 
 /* Subtitle directly under the H1 (e.g. "privind înscrierea pe lista…").
