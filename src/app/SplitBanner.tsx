@@ -43,42 +43,30 @@ export default function SplitBanner({
       const progress = reduce
         ? 1
         : Math.min(Math.max((vh - rect.top) / (vh + rect.height), 0), 1);
-      // Cap the drift on tablet/phone so the lines barely move (~12px) instead of
-      // ±30% of the width — at small widths the full drift shoves text off-centre
-      // and can spill past the viewport. Desktop (≥992) keeps the full motion.
-      const maxDrift = window.innerWidth < 992 ? 24 : Infinity;
-      const base = Math.min(window.innerWidth * 0.3, maxDrift);
-      if (converge) {
-        // Lines start at the outer edges and drift inward as it scrolls up.
-        // line2 ("Te alături acum?") drifts right by the standard amount. line1
-        // ("Primești…") drifts left ONLY until its text's left edge reaches the
-        // inner-left — i.e. where line2 starts — so it stops there instead of
-        // overshooting (a shorter, slower drift). Distance = block width − text width.
+      // Each line travels through exactly the whitespace it has on its row —
+      // (container width − rendered text width), capped at ±30% of the viewport
+      // (the old desktop drift). So the SAME spread gesture scales to every
+      // width: small travel when the text nearly fills the row, full travel when
+      // it's wide. Lines stay on one row (CSS nowrap), so the cap rarely bites.
+      const inner = section.querySelector(".kluppi-banner-inner");
+      const containerW = inner ? inner.clientWidth : window.innerWidth;
+      const cap = window.innerWidth * 0.3;
+      const freeTravel = (el: HTMLElement) => {
         const range = document.createRange();
-        range.selectNodeContents(l1);
-        const l1Drift = Math.min(
-          Math.max(l1.clientWidth - range.getBoundingClientRect().width, 0),
-          maxDrift,
-        );
-        l1.style.transform = `translateX(${-progress * l1Drift}px)`;
-        l2.style.transform = `translateX(${progress * base}px)`;
-      } else if (window.innerWidth < 992) {
-        // Mobile/tablet: the CSS pins orange (line2) to the left edge and dark
-        // (line1) to the right. progress is 0.5 exactly when the banner is
-        // centred in the viewport, so anchor the lines AT their edges there
-        // (phase 0) and drift them inward as the banner enters/exits — that way
-        // the dark line reads as flush-right while you're reading it, instead of
-        // sitting permanently inset.
-        const phase = Math.abs(progress - 0.5) * 2; // 0 centred, →1 at the ends
-        const off = phase * base;
-        l1.style.transform = `translateX(${-off}px)`; // dark: right edge → drifts left
-        l2.style.transform = `translateX(${off}px)`; // orange: left edge → drifts right
+        range.selectNodeContents(el);
+        const textW = range.getBoundingClientRect().width;
+        return Math.min(Math.max(containerW - textW, 0), cap);
+      };
+      if (converge) {
+        // Lines start at the outer edges and drift inward as it scrolls up:
+        // dark line1 (right) → centre, orange line2 (left) → centre.
+        l1.style.transform = `translateX(${-progress * freeTravel(l1)}px)`;
+        l2.style.transform = `translateX(${progress * freeTravel(l2)}px)`;
       } else {
-        // Desktop: lines start pulled toward the centre and spread to the edges
-        // (dark line1 → left, orange line2 → right) as the section scrolls up.
-        const pull = (1 - progress) * base;
-        l1.style.transform = `translateX(${pull}px)`; // left line: pulled right → settles left
-        l2.style.transform = `translateX(${-pull}px)`; // right line: pulled left → settles right
+        // Spread (every width): lines start pulled toward the centre and spread
+        // to the edges (dark line1 → left, orange line2 → right) as it scrolls up.
+        l1.style.transform = `translateX(${(1 - progress) * freeTravel(l1)}px)`;
+        l2.style.transform = `translateX(${-(1 - progress) * freeTravel(l2)}px)`;
       }
     };
 

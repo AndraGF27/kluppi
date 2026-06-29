@@ -933,34 +933,25 @@ p { text-wrap: pretty; }
   margin: 0;
   line-height: 1.05;
   text-transform: none; /* sentence case */
-  text-wrap: balance; /* keep wrapped mobile lines even */
+  white-space: nowrap; /* one row per line at every width — size scales via clamp() below */
   will-change: transform;
 }
+/* Fluid type: one clamp() per line scales smoothly from a narrow-screen floor (sized so the
+   longest fixed string fits on one row) up to the full desktop size, which it caps at —
+   so ≥~1350px is identical to before, with no breakpoint cliffs in between. */
 .kluppi-banner-line1 {
   font-family: "Switzer", sans-serif;
   font-weight: 300; /* light */
   color: var(--text); /* Cassis */
-  font-size: 5rem;
+  font-size: clamp(1.6rem, 7vw, 5rem);
   text-align: left;
 }
 .kluppi-banner-line2 {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 800; /* extra bold */
   color: var(--accent); /* Dare Devil */
-  font-size: 7rem;
+  font-size: clamp(2.25rem, 10vw, 7rem); /* orange line largest */
   text-align: right;
-}
-@media (max-width: 991px) {
-  .kluppi-banner-line1 { font-size: 3rem; }
-  .kluppi-banner-line2 { font-size: 4.5rem; } /* orange line a touch larger */
-}
-@media (max-width: 767px) {
-  .kluppi-banner-line1 { font-size: 2rem; }
-  .kluppi-banner-line2 { font-size: 2.75rem; }
-}
-@media (max-width: 479px) {
-  .kluppi-banner-line1 { font-size: 1.75rem; }
-  .kluppi-banner-line2 { font-size: 2.25rem; }
 }
 /* Converge variant — the band's "Te alături acum?" banner (scoped: bottom banner
    untouched). Lines start at the outer edges and drift toward the centre as it
@@ -968,48 +959,11 @@ p { text-wrap: pretty; }
    ("Te alături acum?") sits left, line1 ("Primești…") sits right and smaller.
    Padding inherits the standard section value from .kluppi-banner. */
 .kluppi-banner--converge .kluppi-banner-line2 { text-align: left; }
-.kluppi-banner--converge .kluppi-banner-line1 { text-align: right; }
-@media (min-width: 992px) {
-  .kluppi-banner--converge .kluppi-banner-line1 { font-size: 4rem; }
-}
-/* Mobile: split the two lines to opposite edges, both internally left-aligned —
-   orange (line2) hugs the left, dark (line1) hugs the right. Applies to both
-   banners; placed after the converge text-align defs above so it wins for them
-   too. fit-content + margin sits short lines at their edge (long wrapping lines
-   fall back to full width, staying left-aligned). The clamped JS drift then
-   spreads/converges them ~24px from these edges. */
-@media (max-width: 991px) {
-  .kluppi-banner-line1,
-  .kluppi-banner-line2,
-  .kluppi-banner--converge .kluppi-banner-line1,
-  .kluppi-banner--converge .kluppi-banner-line2 {
-    text-align: left;
-    width: -moz-fit-content;
-    width: fit-content;
-    max-width: 100%;
-  }
-  .kluppi-banner-line2,
-  .kluppi-banner--converge .kluppi-banner-line2 { margin-right: auto; margin-left: 0; }
-  /* dark line: fit-content + margin-left:auto pins it flush to the right edge.
-     No width cap — a short line shrinks to its text and hugs right; a long line
-     (converge subtitle at ≥480) fills the width and wraps, still right-edged. */
-  .kluppi-banner-line1,
-  .kluppi-banner--converge .kluppi-banner-line1 { margin-left: auto; margin-right: 0; }
-}
-/* Tablet/phone: the converge subtitle ("Primești o surpriză specială la
-   lansare.") is too long to fit one line at the banner sizes, so it wrapped to
-   two and read as a left-aligned block. Keep it on a single line (nowrap) and
-   scale it to the viewport so it fits — fit-content + margin-left:auto then
-   pins that one line flush to the right edge. Scoped to the converge banner
-   only; the spread banner is unchanged. */
-@media (max-width: 991px) {
-  .kluppi-banner--converge .kluppi-banner-line1 {
-    white-space: nowrap;
-    font-size: min(2.5rem, 5vw);
-  }
-}
-@media (max-width: 479px) {
-  .kluppi-banner--converge .kluppi-banner-line1 { font-size: 1.2rem; }
+/* line1 is the long subtitle ("Primești o surpriză specială la lansare.") and sits
+   smaller/right at every width; its own clamp keeps it on one row down to phone widths. */
+.kluppi-banner--converge .kluppi-banner-line1 {
+  text-align: right;
+  font-size: clamp(0.95rem, 4.3vw, 4rem);
 }
 /* Optional CTA grouped under the banner's lines (centred). */
 .kluppi-banner-cta {

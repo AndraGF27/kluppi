@@ -1348,3 +1348,22 @@ width. Added a `@media (max-width: 559.98px)` rule in **`src/app/cookie.module.c
 `.text { text-align: center; }` and `.actions { justify-content: center; }`. Mirrors the
 existing 560px breakpoint (above which the card switches to the row layout). No preview per
 user request.
+
+## 2026-06-29 — Banners: fluid type + unified spread motion across all widths — shipped
+User: the `SplitBanner`s only looked/animated well at ≥1350px — below that the type was too
+small (esp. orange `line2`) with abrupt cliffs at 991/767/479, and the sub-992 phase-based
+motion felt chaotic vs the desktop spread. Two files:
+- **`src/app/SplitBanner.tsx`** (`render()`): deleted the `<992` phase branch and the flat
+  24px `maxDrift` cap. All widths now use the desktop *spread* gesture, with per-line travel =
+  `min(max(containerWidth − textWidth, 0), innerWidth*0.3)` (new `freeTravel()` helper, reusing
+  the `Range` text-measure). So the same spread scales to every width (small travel when text
+  fills the row, full when wide). Converge keeps its inward direction, now also `freeTravel`-
+  capped on both lines (line1 moves on small screens again — was frozen by the old fit-content).
+- **`src/app/globals.css`**: added `white-space: nowrap` to the shared line rule; replaced the
+  fixed sizes + ≤991/≤767/≤479 step-downs with one `clamp()` per line — line1
+  `clamp(1.6rem, 7vw, 5rem)`, line2 `clamp(2.25rem, 10vw, 7rem)`, converge line1
+  `clamp(0.95rem, 4.3vw, 4rem)` — floors sized so the longest fixed string fits one row, caps =
+  the old desktop sizes (so ≥~1350px is unchanged). Removed the `max-width:991` edge-flip +
+  `fit-content` block and the converge nowrap/≤479 blocks, so both banners rest in the desktop
+  layout at every width (spread: dark left / orange right; converge: orange left / dark right).
+`npm run build` clean (TS + static gen). No preview per user request.
