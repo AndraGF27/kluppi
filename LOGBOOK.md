@@ -1403,3 +1403,12 @@ Contact) in **page.tsx** and gave it a `navbar-cta` modifier. New CSS in
 Devil), `var(--radius-pill)` radius, `0.5rem 1.5rem` padding so the fill reads as a
 button; inherits the existing link font-size. `:hover` pinned white to override the
 nav hover recolor. Build clean. No preview per user request.
+
+## 2026-06-29 — Nav CTA: smaller text, proportional padding, hover lift
+Tuned the "Înscrie-te în club" pill (globals.css `.navbar-menu .navbar-cta`):
+font-size 1.75rem desktop / 1.5rem mobile (down from the 3rem/2.25rem links);
+padding switched to em-based `0.9em 1.9em` so the pill keeps the same proportions
+as the global `.kluppi-btn` (1.05rem/2.2rem) at any size. Added the `.kluppi-btn`
+hover/active animation — `translateY(-2px)` + `0 10px 24px rgba(53,30,40,.3)` shadow
+on hover, settle on active, with `prefers-reduced-motion` disabling the lift.
+Overrides webflow's `.navbar-link:hover` scale. Build clean. No preview per user request.

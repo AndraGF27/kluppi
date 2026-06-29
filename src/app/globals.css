@@ -322,9 +322,25 @@ p { text-wrap: pretty; }
   color: #fff;
   background-color: var(--accent);
   border-radius: var(--radius-pill);
-  padding: 0.5rem 1.5rem;
+  font-size: 1.75rem; /* down from the 3rem nav links, still oversized vs global CTA */
+  padding: 0.9em 1.9em; /* em-based → same proportions as .kluppi-btn at any font size */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.navbar-menu .navbar-cta:hover { color: #fff; } /* keep white over the hover recolor */
+/* keep white over the nav hover recolor; lift + soft Cassis shadow like .kluppi-btn */
+.navbar-menu .navbar-cta:hover {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(53, 30, 40, 0.3);
+}
+.navbar-menu .navbar-cta:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(53, 30, 40, 0.22);
+}
+@media (prefers-reduced-motion: reduce) {
+  .navbar-menu .navbar-cta { transition: box-shadow 0.2s ease; }
+  .navbar-menu .navbar-cta:hover,
+  .navbar-menu .navbar-cta:active { transform: none; }
+}
 
 /* Mobile: the 3rem links above are far too large on small screens. Shrink and
    centre them. (Higher specificity than the webflow @media .navbar-link rules,
@@ -333,6 +349,9 @@ p { text-wrap: pretty; }
   .navbar-menu .navbar-link {
     font-size: 2.25rem;
     text-align: center;
+  }
+  .navbar-menu .navbar-cta {
+    font-size: 1.5rem; /* override the 2.25rem link size above for the pill CTA */
   }
   .navbar-menu .navbar-links-wrapper {
     align-items: center;
