@@ -17,7 +17,26 @@ html {
   --error:   #b91c1c;       /* form feedback — error text (AA ≈5.7:1 on --bg) */
   --card: #fff;
   --hairline: #351e2833;    /* Cassis 20% — hairline dividers/borders (now used) */
-  --shadow-card: 0 12px 30px #351e281f;
+  /* Shadow scale ported from Tailwind's box-shadow utilities.
+     Neutral set = Tailwind defaults verbatim; brand set = same shapes tinted
+     with Cassis (rgb(53 30 40)) so they sit naturally on the lemon --bg. */
+  --shadow-sm:    0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow:       0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md:    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg:    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl:    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl:   0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+
+  --shadow-brand-sm:    0 1px 2px 0 rgb(53 30 40 / 0.06);
+  --shadow-brand:       0 1px 3px 0 rgb(53 30 40 / 0.12), 0 1px 2px -1px rgb(53 30 40 / 0.12);
+  --shadow-brand-md:    0 4px 6px -1px rgb(53 30 40 / 0.12), 0 2px 4px -2px rgb(53 30 40 / 0.12);
+  --shadow-brand-lg:    0 10px 15px -3px rgb(53 30 40 / 0.12), 0 4px 6px -4px rgb(53 30 40 / 0.12);
+  --shadow-brand-xl:    0 20px 25px -5px rgb(53 30 40 / 0.14), 0 8px 10px -6px rgb(53 30 40 / 0.12);
+  --shadow-brand-2xl:   0 25px 50px -12px rgb(53 30 40 / 0.28);
+  --shadow-brand-inner: inset 0 2px 4px 0 rgb(53 30 40 / 0.06);
+
+  --shadow-card: var(--shadow-brand-lg);   /* was: 0 12px 30px #351e281f */
   --font-display: "Bricolage Grotesque", sans-serif;
   --font-body: "Switzer", sans-serif;
 
@@ -211,8 +230,8 @@ p { text-wrap: pretty; }
 }
 
 /* Hover: keep the Dare Devil fill, lift and float on a soft Cassis shadow */
-.kluppi-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(53, 30, 40, 0.3); }
-.kluppi-btn:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(53, 30, 40, 0.22); }
+.kluppi-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-brand-xl); }
+.kluppi-btn:active { transform: translateY(0); box-shadow: var(--shadow-brand-md); }
 
 @media (prefers-reduced-motion: reduce) {
   .kluppi-btn { transition: box-shadow 0.2s ease; }
@@ -331,11 +350,11 @@ p { text-wrap: pretty; }
 .navbar-menu .navbar-cta:hover {
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(53, 30, 40, 0.3);
+  box-shadow: var(--shadow-brand-xl);
 }
 .navbar-menu .navbar-cta:active {
   transform: translateY(0);
-  box-shadow: 0 4px 12px rgba(53, 30, 40, 0.22);
+  box-shadow: var(--shadow-brand-md);
 }
 @media (prefers-reduced-motion: reduce) {
   .navbar-menu .navbar-cta { transition: box-shadow 0.2s ease; }
