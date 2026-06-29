@@ -1250,3 +1250,10 @@ block and left `@media (max-width: 991px)` at `80vh` — backwards. Corrected so
 ## 2026-06-29 — Hero collage phones (≤767px): 80vh → 74vh (shipped to both)
 **`src/app/globals.css`** — `@media (max-width: 767px)` `.header-image-list` padding-top
 `80vh` → `74vh`. Tablet band (768–991, 76vh) and desktop unchanged. Comment updated.
+
+## 2026-06-29 — Enlarge hero images on phones (≤479px) — shipped to both
+User: images too small on mobile (iPhone 13 Pro ≈390px); desktop 1470→517px is fine
+and must stay unchanged. **`src/app/globals.css`** — added per-image width bumps to the
+`@media (max-width: 479px)` block (~+6vw): is-image-1/2 22→28vw, is-image-3/5 20→26vw,
+is-image-4/6 18→24vw. Scoped to ≤479 so 480px+ (incl. the desktop layout down to ~517px)
+keeps the ≤991-block values untouched. height:auto reset retained.

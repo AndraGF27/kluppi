@@ -118,11 +118,19 @@ p { text-wrap: pretty; }
   .header-image-wrapper.is-image-5 { width: 20vw; }
   .header-image-wrapper.is-image-6 { width: 18vw; }
 }
-/* ≤479 the template also forces height:35vw on every wrapper, which fights the
-   base padding-top:120% aspect once the widths are held smaller. Drop it so the
-   portrait aspect stays consistent with every larger breakpoint. */
+/* ≤479 (real phones): the held-down desktop vw widths read too small here, so
+   bump each image up (~+6vw) just on small phones — the 480px+ range (incl. the
+   desktop layout down to ~517px) keeps the values from the ≤991 block above and
+   is intentionally left unchanged. Also drop the template's height:35vw, which
+   fights the base padding-top:120% aspect once widths are held smaller. */
 @media (max-width: 479px) {
   .header-image-wrapper { height: auto; }
+  .header-image-wrapper.is-image-1,
+  .header-image-wrapper.is-image-2 { width: 28vw; }
+  .header-image-wrapper.is-image-3 { width: 26vw; }
+  .header-image-wrapper.is-image-4 { width: 24vw; }
+  .header-image-wrapper.is-image-5 { width: 26vw; }
+  .header-image-wrapper.is-image-6 { width: 24vw; }
 }
 
 /* ─── Kluppi hero (added 2026-06-19) ─── */
