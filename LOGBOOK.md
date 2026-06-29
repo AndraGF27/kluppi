@@ -1380,3 +1380,13 @@ from `.navbar-logo` and `.menu-icon` (both visible at all widths: navbar is `dat
 `position: fixed`, padding `.5rem 5%`). The entrance (progress 0) keeps the existing inward
 `freeTravel` pull, interpolating out to the navbar alignment. Falls back to the old inner-edge
 rest if the navbar elements aren't found. `npm run build` clean. No preview per user request.
+
+## 2026-06-29 — Mobile nav menu links: smaller + centered
+The full-screen nav overlay links were too large on mobile. The Kluppi override
+`.navbar-menu .navbar-link` (globals.css) pins font-size to 3rem for *all* widths —
+its specificity beats webflow's `@media .navbar-link` step-downs, so mobile never
+shrank. In **`src/app/globals.css`** added a `@media (max-width: 767px)` block right
+after the nav-menu override: `.navbar-menu .navbar-link` → `font-size: 1.75rem` +
+`text-align: center`, and `.navbar-menu .navbar-links-wrapper` → `align-items: center`
+(links were inline-block, left-aligned in the column). Desktop unchanged. No preview
+per user request.
