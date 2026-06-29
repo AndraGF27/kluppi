@@ -322,26 +322,26 @@ export default function Home() {
                 <div className="header-images-wrapper">
                   <div className="header-image-list" ref={leftListRef}>
                     <div className="header-image-wrapper is-image-1">
-                      <img className="header-image" src="/Hero3.jpg" alt="" sizes="(max-width: 767px) 30vw, (max-width: 991px) 28vw, 22vw" loading="lazy" />
+                      <img className="header-image" src="/Hero3.jpg" alt="Femeie care sugerează discreție, asociată cu avantaje exclusive pentru cumpărături online." sizes="(max-width: 767px) 30vw, (max-width: 991px) 28vw, 22vw" loading="lazy" />
                     </div>
                     <div className="header-image-wrapper is-image-2">
-                      <img className="header-image" src="/Hero6.jpg" alt="" sizes="(max-width: 767px) 30vw, (max-width: 991px) 28vw, 22vw" loading="lazy" />
+                      <img className="header-image" src="/Hero6.jpg" alt="Bărbat relaxat care descoperă beneficii online potrivite pentru stilul lui." sizes="(max-width: 767px) 30vw, (max-width: 991px) 28vw, 22vw" loading="lazy" />
                     </div>
                     <div className="header-image-wrapper is-image-3">
-                      <img className="header-image" src="/Hero4.jpg" loading="lazy" sizes="(max-width: 767px) 28vw, (max-width: 991px) 26vw, 20vw" alt="" />
+                      <img className="header-image" src="/Hero4.jpg" loading="lazy" sizes="(max-width: 767px) 28vw, (max-width: 991px) 26vw, 20vw" alt="Două tinere zâmbind în timp ce caută inspirație pentru cumpărături online." />
                     </div>
                     <div className="header-image-wrapper is-image-4">
-                      <img className="header-image" src="/Hero2.jpg" loading="lazy" sizes="(max-width: 767px) 26vw, (max-width: 991px) 24vw, 18vw" alt="" />
+                      <img className="header-image" src="/Hero2.jpg" loading="lazy" sizes="(max-width: 767px) 26vw, (max-width: 991px) 24vw, 18vw" alt="Persoană care ține mai multe carduri, simbolizând opțiuni și avantaje la cumpărături." />
                     </div>
                   </div>
                 </div>
                 <div className="header-images-wrapper images-wrapper-right">
                   <div className="header-image-list image-list-right" ref={rightListRef}>
                     <div className="header-image-wrapper is-image-5" ref={hero5Ref}>
-                      <img className="header-image" src="/Hero5.jpg" alt="" sizes="(max-width: 767px) 28vw, (max-width: 991px) 26vw, 20vw" loading="lazy" />
+                      <img className="header-image" src="/Hero5.jpg" alt="Sandală albastră prezentată ca produs de shopping fashion." sizes="(max-width: 767px) 28vw, (max-width: 991px) 26vw, 20vw" loading="lazy" />
                     </div>
                     <div className="header-image-wrapper is-image-6">
-                      <img className="header-image" src="/Hero8.jpg" alt="" sizes="(max-width: 767px) 26vw, (max-width: 991px) 24vw, 18vw" loading="lazy" />
+                      <img className="header-image" src="/Hero8.jpg" alt="Produse din categorii diferite, de la sport și gaming până la îngrijire personală." sizes="(max-width: 767px) 26vw, (max-width: 991px) 24vw, 18vw" loading="lazy" />
                     </div>
                   </div>
                 </div>
@@ -465,7 +465,7 @@ export default function Home() {
                       </div>
                     </article>
                     <div className="kluppi-benefit-img kluppi-benefit-img--i1" data-reveal style={{ "--reveal-delay": "0.08s" } as React.CSSProperties}>
-                      <img className="stat-image" src="/Reasons1.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
+                      <img className="stat-image" src="/Reasons1.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="Persoană care evită zgomotul ofertelor insistente." />
                     </div>
                     <article className="kluppi-benefit kluppi-benefit--b2" data-reveal>
                       <div className="kluppi-benefit-text">
@@ -474,7 +474,7 @@ export default function Home() {
                       </div>
                     </article>
                     <div className="kluppi-benefit-img kluppi-benefit-img--i2" data-reveal style={{ "--reveal-delay": "0.08s" } as React.CSSProperties}>
-                      <img className="stat-image" src="/Reasons2.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
+                      <img className="stat-image" src="/Reasons2.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="Persoană sceptică în fața trucurilor de marketing." />
                     </div>
                     <article className="kluppi-benefit kluppi-benefit--b3" data-reveal>
                       <div className="kluppi-benefit-text">
@@ -483,7 +483,7 @@ export default function Home() {
                       </div>
                     </article>
                     <div className="kluppi-benefit-img kluppi-benefit-img--i3" data-reveal style={{ "--reveal-delay": "0.08s" } as React.CSSProperties}>
-                      <img className="stat-image" src="/Reasons3.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
+                      <img className="stat-image" src="/Reasons3.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="Două persoane relaxate care cumpără fără presiune." />
                     </div>
                     <article className="kluppi-benefit kluppi-benefit--b4" data-reveal>
                       <div className="kluppi-benefit-text">
@@ -492,7 +492,7 @@ export default function Home() {
                       </div>
                     </article>
                     <div className="kluppi-benefit-img kluppi-benefit-img--i4" data-reveal style={{ "--reveal-delay": "0.08s" } as React.CSSProperties}>
-                      <img className="stat-image" src="/Reasons4.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="" />
+                      <img className="stat-image" src="/Reasons4.jpg" loading="lazy" sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 31vw" alt="Persoană relaxată care își alege singură momentul potrivit." />
                     </div>
                   </div>
                   <div className="kluppi-benefits-cta-block" data-reveal>
