@@ -1214,3 +1214,7 @@ left as-is. Desktop (≥992px) untouched.
 `94vh` → `86vh`. Only the 768–991px band is affected: the `@media (max-width: 767px)`
 rule (80vh) already overrides this for phones, so they're unchanged. Comment above
 updated to match. Scope: this one value only.
+
+## 2026-06-29 — Hero collage 768–991px band: 86vh → 80vh
+**`src/app/globals.css`** — `@media (max-width: 991px)` `.header-image-list` padding-top
+`86vh` → `80vh` (now matches the ≤767 phone value). Phones/desktop unchanged. Comment updated.
