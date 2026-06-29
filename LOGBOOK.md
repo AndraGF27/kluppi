@@ -1308,3 +1308,17 @@ added `@media (max-width: 479px) .kluppi-band { padding-top: 2rem; }` (96px → 
 ≤479; 480px+ keeps the clamp. NOTE for future: the bulk of the felt gap (~342px) is structural
 — the collage clearing the lower viewport as it rises to the navbar — not padding; only the
 per-image travel change (declined for now) would close that.
+
+## 2026-06-29 — Phones (≤479): pull the next section up to close the hero tail — shipped to both
+User: padding trim wasn't enough — "the gap is still huge" (animation is approved, must NOT
+change image motion). Measured the end-state at 390×844 (progress=1): Hero1 lands at navbar
+(y=48), the lowest image bottom is ~502px, leaving ~342px of empty cream in the lower frame;
+the band always lands at the viewport bottom (y=844) at progress=1 regardless of track height,
+so shortening the 205vh track only speeds the scrub — it cannot fill the tail. The only fixes
+are (a) change image end-positions (= changes the approved motion) or (b) pull the next section
+up into the tail. Chose (b). **`src/app/globals.css`** — `@media (max-width: 479px)
+.kluppi-band { margin-top: -38vh; }` (kept padding-top: 2rem). The hero (.kluppi-hero) and band
+share the same cream bg (rgb 255,240,188) and the collage images paint above (z-index:1), so the
+band's content slides up beneath the photos with no seam; at progress=1 the band content now
+rests ~53–70px below the lowest image (band box top 844→523). Verified via preview DOM. Scoped
+to ≤479; 480px+ unchanged. Image motion (page.tsx) untouched.
