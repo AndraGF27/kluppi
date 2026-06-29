@@ -1284,3 +1284,17 @@ Two changes, both scoped to ≤479 so the 480px+ layout (incl. desktop down to ~
    Verified via preview DOM at 390×844: at progress=1 the computed shift is 492px and both Hero1 and
    Hero5 tops land at y=48px = navbar bottom (img1AtNavbar=true). tsc --noEmit clean.
    (Couldn't watch the live scroll animation — the preview throttles rAF — but geometry + formula verified.)
+
+## 2026-06-29 — Hero phones (≤479): two list speeds + Hero5 extra drift (fix lockstep) — shipped to both
+User: after the prior change all phone images moved in lockstep; wanted the desktop feel
+(different speeds) back. Chosen model: mirror desktop (two list speeds + Hero5 extra). Keep
+Hero1→navbar anchor + 205vh pin. **`src/app/page.tsx`** only (no CSS change):
+- Phone branch: `leftShift = topImg.offsetTop − navbar` (Hero1 reaches navbar, unchanged
+  anchor); `rightShift = leftShift × 0.5` (RIGHT_RATIO) so the right list is a distinct,
+  slower speed instead of equal to the left (was the lockstep cause).
+- Hero5 block: extra drift now also runs on phones at 10vw (PHONE_EXTRA_VW), composing on the
+  right-list transform so Hero5 ≠ Hero8; desktop stays 12vw; 480–991 band still no extra.
+Verified via preview DOM at 390×844 (rAF throttled in preview, so computed from the exact
+formula): at progress=1 travels are left 492 / Hero5 285 / Hero8 246 px (three distinct
+speeds), Hero1 lands at y=48=navbar, all images stay on-screen. tsc --noEmit clean.
+RIGHT_RATIO (0.5) and PHONE_EXTRA_VW (10) are tuning knobs.

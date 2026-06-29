@@ -121,32 +121,41 @@ export default function Home() {
 
       // Phones (≤479): the columns are barely taller than the viewport, so the
       // overflow-based drift above is tiny (≈150px) and the shorter right column
-      // doesn't move at all — the parallax reads as broken. Instead, lift both
-      // columns far enough to bring the top image (Hero1) up to the navbar by the
-      // time the pin releases, mirroring the desktop feel where the collage rises
-      // through the hero before the next section appears. Both lists share the
-      // same padding-top, so the same shift lands both top images at the navbar.
-      if (window.matchMedia("(max-width: 479px)").matches) {
+      // doesn't move at all — the parallax can't key off overflow here. Instead,
+      // drive the LEFT list far enough to bring its top image (Hero1) up to the
+      // navbar by the time the pin releases, then move the RIGHT list a fraction
+      // of that so the two lists travel at different speeds — mirroring the
+      // desktop feel where the collage shears/layers as it rises rather than
+      // moving as one rigid block. (Hero5 then gets its extra drift below.)
+      const phone = window.matchMedia("(max-width: 479px)").matches;
+      if (phone) {
         const navH =
           document.querySelector<HTMLElement>(".navbar-component")?.offsetHeight ?? 0;
         const topImg = left.firstElementChild as HTMLElement | null;
         const startTop = topImg ? topImg.offsetTop : 0; // = the list's padding-top
-        const reach = Math.max(0, startTop - navH);
-        leftShift = reach;
-        rightShift = reach;
+        leftShift = Math.max(0, startTop - navH); // anchor: Hero1 reaches the navbar
+        const RIGHT_RATIO = 0.5; // right list noticeably slower than the left (tuning knob)
+        rightShift = leftShift * RIGHT_RATIO;
       }
 
       left.style.transform = `translate3d(0, ${-progress * leftShift}px, 0)`;
       right.style.transform = `translate3d(0, ${-progress * rightShift}px, 0)`;
 
-      // Hero5 (is-image-5) drifts a touch more than the rest of the right
-      // column: it now starts lower (CSS `top` on is-image-5) but this extra
-      // upward travel lands its end point higher on the page. 0 at the top of
-      // the page → 12vw by the end. Desktop only (matches the CSS offsets).
+      // Hero5 (is-image-5) drifts a touch more than the rest of the right list,
+      // composing on top of the right-list transform so it ends higher than its
+      // sibling (Hero8) — the third speed in the collage. On desktop it's 12vw
+      // (and pairs with the CSS `top` offset on is-image-5); on phones it's a
+      // slightly smaller 10vw so Hero5 ≠ Hero8 there too. The 480–991 band keeps
+      // no extra drift (transform cleared).
       const hero5 = hero5Ref.current;
       if (hero5) {
-        if (window.matchMedia("(min-width: 992px)").matches) {
-          const extra = (progress * 12 * window.innerWidth) / 100; // 12vw over the scroll
+        const extraVw = window.matchMedia("(min-width: 992px)").matches
+          ? 12
+          : phone
+          ? 10
+          : 0;
+        if (extraVw) {
+          const extra = (progress * extraVw * window.innerWidth) / 100;
           hero5.style.transform = `translate3d(0, ${-extra}px, 0)`;
         } else {
           hero5.style.transform = "";
