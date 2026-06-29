@@ -98,11 +98,11 @@ p { text-wrap: pretty; }
    shorter once top-aligned, so less push is needed and the at-rest gap stays small). */
 @media (max-width: 991px) {
   .header-image-list,
-  .header-image-list.image-list-right { padding-top: 80vh; }
+  .header-image-list.image-list-right { padding-top: 76vh; }
 }
 @media (max-width: 767px) {
   .header-image-list,
-  .header-image-list.image-list-right { padding-top: 76vh; }
+  .header-image-list.image-list-right { padding-top: 80vh; }
 }
 
 /* The template bumps each collage image's width UP at every step down

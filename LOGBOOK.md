@@ -1241,3 +1241,8 @@ updated to match. Scope: this one value only.
 `80vh` → `76vh`. Phones (≤767, 80vh) and desktop unchanged. Comment updated.
 Shipped to `main` per user (via merge of main into kluppi-rebrand then fast-forward —
 main had diverged with 3 legal/cookie commits not on rebrand; merge realigned both branches).
+
+## 2026-06-29 — Fix: 76vh was applied to the wrong band (correction)
+The previous commit accidentally put `76vh` on the `@media (max-width: 767px)` (phone)
+block and left `@media (max-width: 991px)` at `80vh` — backwards. Corrected so the
+768–991px tablet band is `76vh` and phones stay at `80vh`, as intended. `src/app/globals.css`.
