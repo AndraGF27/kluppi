@@ -1180,3 +1180,12 @@ Previewed on `kluppi-rebrand`; user flagged two things. **`src/app/(legal)/legal
 - Table columns too narrow → bumped `.body table` `min-width` 40rem → **56rem** so cells fit more text per line (still scrolls horizontally when it exceeds the container, on desktop and mobile).
 
 **Verification:** computed `text-wrap: wrap` on all affected headings; §4/§5 now wrap "…dumneavoastră" onto line 1; table scrollWidth 896px. Nothing else touched (rest confirmed impeccable by user). Pushed to `kluppi-rebrand` for re-preview; `main` untouched.
+
+### 2026-06-29 — Terms page subtitle spacing (requested fix)
+
+The subtitle under the "Termeni și condiții" H1 ("privind înscrierea pe lista de așteptare Kluppi") was an `<h2>` inside `.body`, inheriting `.body h2`'s `margin: 2.5rem 0 0.75rem` — the 2.5rem top margin created a weird gap below the title.
+
+**`src/app/(legal)/legal.module.css`** — added a `.subtitle` class: keeps the H2 look (display font, accent color, same clamp size, `text-wrap: wrap`) but with `margin: 0.75rem 0`.
+**`src/app/(legal)/termeni-si-conditii/page.tsx`** — subtitle markup `<div className={styles.body}><h2>…</h2></div>` → `<p className={styles.subtitle}>…</p>`.
+
+Scope: only the terms page. Confirmed with the user the other two legal pages have no subtitle, so they were left untouched.

@@ -20,6 +20,19 @@
   margin: 0 0 0.75rem;
 }
 
+/* Subtitle directly under the H1 (e.g. "privind înscrierea pe lista…").
+   Keeps the H2 look but with tight 0.75rem margins so it sits close to the
+   title instead of inheriting the H2's large 2.5rem top gap. */
+.subtitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--accent); /* Dare Devil */
+  font-size: clamp(1.35rem, 1.1rem + 1vw, 1.6rem);
+  line-height: 1.2;
+  margin: 0.75rem 0;
+  text-wrap: wrap;
+}
+
 .updated {
   font-size: var(--fs-small);
   opacity: 0.65;
