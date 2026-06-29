@@ -1208,3 +1208,9 @@ instead of continuing to shrink.
 
 Scope: only image widths (+ the ≤479 height reset). Positions/padding-top/parallax
 left as-is. Desktop (≥992px) untouched.
+
+## 2026-06-29 — Lower hero collage start on the 768–991px band only
+**`src/app/globals.css`** — `@media (max-width: 991px)` `.header-image-list` padding-top
+`94vh` → `86vh`. Only the 768–991px band is affected: the `@media (max-width: 767px)`
+rule (80vh) already overrides this for phones, so they're unchanged. Comment above
+updated to match. Scope: this one value only.
