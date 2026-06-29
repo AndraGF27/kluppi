@@ -1189,3 +1189,22 @@ The subtitle under the "Termeni și condiții" H1 ("privind înscrierea pe lista
 **`src/app/(legal)/termeni-si-conditii/page.tsx`** — subtitle markup `<div className={styles.body}><h2>…</h2></div>` → `<p className={styles.subtitle}>…</p>`.
 
 Scope: only the terms page. Confirmed with the user the other two legal pages have no subtitle, so they were left untouched.
+
+## 2026-06-29 — Hero images: monotonic shrink (no size jump below 992px)
+Reverted the earlier padding-top lift (commit e873424) — it made things worse.
+Real cause (user's diagnosis, confirmed): `webflow.css` bumps each collage image's
+width UP at every breakpoint going down — is-image-1 goes 22vw (≥992) → 28vw (≤991)
+→ 30vw (≤767/≤479) — so the images jump LARGER just below 992px (≈218px → ≈277px)
+instead of continuing to shrink.
+
+**`src/app/globals.css`** — added an override block (template left untouched):
+- `@media (max-width: 991px)`: hold each image at its desktop vw (is-image-1/2 22vw,
+  is-image-3 20vw, is-image-4 18vw, is-image-5 20vw, is-image-6 18vw). One ≤991 block
+  wins over the template's ≤767/≤479 width rules by source order, so it covers all
+  smaller widths → rendered px only ever decreases as the viewport narrows.
+- `@media (max-width: 479px)`: `.header-image-wrapper { height: auto; }` to drop the
+  template's `height:35vw` (it fought the base `padding-top:120%` aspect once widths
+  are held smaller); keeps the portrait aspect consistent with every breakpoint.
+
+Scope: only image widths (+ the ≤479 height reset). Positions/padding-top/parallax
+left as-is. Desktop (≥992px) untouched.

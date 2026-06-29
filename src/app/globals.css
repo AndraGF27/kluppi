@@ -105,6 +105,26 @@ p { text-wrap: pretty; }
   .header-image-list.image-list-right { padding-top: 80vh; }
 }
 
+/* The template bumps each collage image's width UP at every step down
+   (22vw → 28vw at ≤991, → 30vw at ≤767/≤479), so the images jump LARGER right
+   below 992px instead of continuing to shrink. Hold them at the desktop vw
+   values across all smaller widths so the rendered size only ever gets smaller
+   as the viewport narrows. Positions are left as the template sets them. */
+@media (max-width: 991px) {
+  .header-image-wrapper.is-image-1,
+  .header-image-wrapper.is-image-2 { width: 22vw; }
+  .header-image-wrapper.is-image-3 { width: 20vw; }
+  .header-image-wrapper.is-image-4 { width: 18vw; }
+  .header-image-wrapper.is-image-5 { width: 20vw; }
+  .header-image-wrapper.is-image-6 { width: 18vw; }
+}
+/* ≤479 the template also forces height:35vw on every wrapper, which fights the
+   base padding-top:120% aspect once the widths are held smaller. Drop it so the
+   portrait aspect stays consistent with every larger breakpoint. */
+@media (max-width: 479px) {
+  .header-image-wrapper { height: auto; }
+}
+
 /* ─── Kluppi hero (added 2026-06-19) ─── */
 /* Scoped to the hero only via .kluppi-hero / .kluppi-hero-* hooks.
    Loaded after webflow.css, so these win over template defaults by source order. */
