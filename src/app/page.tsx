@@ -116,8 +116,26 @@ export default function Home() {
       // images scrolling through seamlessly without over-running — the fixed
       // viewport multiples used before pushed the shorter right column right
       // off the screen, leaving an empty gap.
-      const leftShift = Math.max(0, left.offsetHeight - vh);
-      const rightShift = Math.max(0, right.offsetHeight - vh);
+      let leftShift = Math.max(0, left.offsetHeight - vh);
+      let rightShift = Math.max(0, right.offsetHeight - vh);
+
+      // Phones (≤479): the columns are barely taller than the viewport, so the
+      // overflow-based drift above is tiny (≈150px) and the shorter right column
+      // doesn't move at all — the parallax reads as broken. Instead, lift both
+      // columns far enough to bring the top image (Hero1) up to the navbar by the
+      // time the pin releases, mirroring the desktop feel where the collage rises
+      // through the hero before the next section appears. Both lists share the
+      // same padding-top, so the same shift lands both top images at the navbar.
+      if (window.matchMedia("(max-width: 479px)").matches) {
+        const navH =
+          document.querySelector<HTMLElement>(".navbar-component")?.offsetHeight ?? 0;
+        const topImg = left.firstElementChild as HTMLElement | null;
+        const startTop = topImg ? topImg.offsetTop : 0; // = the list's padding-top
+        const reach = Math.max(0, startTop - navH);
+        leftShift = reach;
+        rightShift = reach;
+      }
+
       left.style.transform = `translate3d(0, ${-progress * leftShift}px, 0)`;
       right.style.transform = `translate3d(0, ${-progress * rightShift}px, 0)`;
 

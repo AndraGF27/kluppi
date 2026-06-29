@@ -1263,3 +1263,24 @@ User: reduce mobile padding ~14vh. **`src/app/globals.css`** — added a `@media
 `.header-image-list` padding-top of `60vh` (was inheriting 74vh from the ≤767 block, −14vh).
 Scoped to ≤479 so the 480–767 band (incl. desktop down to ~517px, confirmed fine) stays at
 74vh. Comment updated.
+
+## 2026-06-29 — Hero phones (≤479): 64vh start + Hero1-reaches-navbar parallax — shipped to both
+User: on phones the collage sat a touch high (60vh) and the parallax felt weird/short.
+Two changes, both scoped to ≤479 so the 480px+ layout (incl. desktop down to ~517px) is untouched:
+
+1. **`src/app/globals.css`** — `@media (max-width: 479px)` `.header-image-list` padding-top
+   `60vh` → `64vh` (collage starts a touch lower). Comment updated.
+
+2. Parallax "mirror desktop" fix. Measured at 390×844: Hero1 starts 540px (64vh) down, but the
+   left column only overflowed the viewport by ~150px and the right column by 0, so the
+   overflow-based drift barely moved the images and the right column didn't move at all.
+   - **`src/app/page.tsx`** (scroll parallax `render`): added a `matchMedia("(max-width: 479px)")`
+     branch that, instead of drifting by column overflow, lifts BOTH lists by `padding-top − navbar`
+     (= topImg.offsetTop − navbar height) so Hero1 (and Hero5, same padding-top) land exactly at the
+     navbar when the pin releases. Desktop/tablet keep the original overflow-based drift untouched.
+   - **`src/app/globals.css`** — `@media (max-width: 479px) .header-component { height: 205vh }`
+     (template default 150vh) so the larger travel plays out at desktop's gentle ~0.55× scroll ratio
+     instead of racing. Comment added.
+   Verified via preview DOM at 390×844: at progress=1 the computed shift is 492px and both Hero1 and
+   Hero5 tops land at y=48px = navbar bottom (img1AtNavbar=true). tsc --noEmit clean.
+   (Couldn't watch the live scroll animation — the preview throttles rAF — but geometry + formula verified.)
