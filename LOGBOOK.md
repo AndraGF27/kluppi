@@ -1417,3 +1417,32 @@ Overrides webflow's `.navbar-link:hover` scale. Build clean. No preview per user
 `.navbar-menu .navbar-cta` font-size 1.75→2rem desktop, 1.5→1.75rem mobile; padding
 stays `0.9em 1.9em` so it scales proportionally. Added `margin-top: 1.75rem` to set
 the pill apart from the menu links. Build clean. No preview per user request.
+
+## 2026-07-06 — CLAUDE.md rewritten in English (merged, not replaced)
+Rewrote **CLAUDE.md** per Andra's request: all content of the old Romanian file
+carried over (Node 20+ / `nvm use 22`, section-component map, design tokens with
+the deliberate `#f5531c` accent, webflow.css hands-off rule, don't-read-LOGBOOK
+rule, token-economy tip) and translated to English. Added: strict branch workflow
+(`kluppi-rebrand` → preview; `main` fast-forward only on explicit "ship it"),
+legal pages `(legal)` + `CookieBanner.tsx`, theMarketer API route map, analytics
+IDs in `layout.tsx`. Updated one stale fact: signup form now posts to
+`/api/add-subscriber` (the old `/api/subscribe` Vercel KV route was removed
+2026-06-25). Universal working rules (scope, logbook, recap, no previews, plain
+language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated here.
+
+## 2026-07-09 — Cody onboarding: AGENTS.md + first task brief
+- **Files:** `AGENTS.md` (new), `tasks/01-about-page.md` (new). Not committed yet — will be committed together with reviewed task work.
+- **What:** Rulebook for Codex ("Cody") mirroring CLAUDE.md rules (scope discipline, branch workflow, legal-copy freeze, report format), plus the brief for the /despre About page (SiteChrome extraction + story page, RO copy included).
+- **Why:** New workflow — Claude plans/reviews, Cody executes; About page is the first end-to-end test.
+
+## 2026-07-09 — Task 01 About page
+
+- Files touched: src/app/SiteChrome.tsx; src/app/(legal)/layout.tsx; src/app/despre/page.tsx; src/app/despre/despre.module.css; LOGBOOK.md
+- What: Added the /despre About page and extracted the static header/footer chrome into shared SiteChrome.
+- Why: Reuse identical site chrome for legal and About pages while adding the pre-launch brand story page.
+
+## 2026-07-09 — Task 01 review fixes
+
+- Files touched: src/app/despre/page.tsx; LOGBOOK.md
+- What: Corrected About page CTA text, Romanian closing quote, and robots metadata comment.
+- Why: Addressed review feedback for Task 01.
