@@ -1446,3 +1446,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - Files touched: src/app/despre/page.tsx; LOGBOOK.md
 - What: Corrected About page CTA text, Romanian closing quote, and robots metadata comment.
 - Why: Addressed review feedback for Task 01.
+
+## 2026-07-10 — Task 02: About page content
+- Files: `src/app/despre/page.tsx`, `src/app/despre/_components/about-content.tsx`, `src/app/despre/despre.module.css`
+- What: Rebuilt `/despre` with the approved Romanian copy, homepage-style sections, card grid, and client-side scroll reveal effect.
+- Why: Replace the Task 01 placeholder with the final pre-launch About page.
