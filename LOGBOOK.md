@@ -1453,3 +1453,5 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - Why: Replace the Task 01 placeholder with the final pre-launch About page.
 
 2026-07-10 — Files: src/app/parteneri/page.tsx, src/app/parteneri/_components/partners-content.tsx, src/app/parteneri/parteneri.module.css, src/app/api/partner-inquiry/route.ts, src/app/despre/_components/about-content.tsx. What: Added the noindex partners page, inquiry form, FAQ accordion, and email API route; updated the About partner link. Why: Give brands a secure way to apply to join Kluppi.
+
+2026-07-10 — src/app/SavingsSimulator.tsx, src/app/savings-simulator.module.css, src/app/page.tsx, LOGBOOK.md — Added the interactive savings simulator and homepage placement so visitors can estimate annual Kluppi savings before joining.

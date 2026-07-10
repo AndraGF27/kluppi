@@ -6,6 +6,7 @@ import PainPointsCarousel from "./PainPointsCarousel";
 import HowItWorks from "./HowItWorks";
 import SplitBanner from "./SplitBanner";
 import BenefitsCards from "./BenefitsCards";
+import SavingsSimulator from "./SavingsSimulator";
 import { trackSetEmail, trackViewHomepage } from "./themarketer-events";
 
 const socials = [
@@ -505,6 +506,7 @@ export default function Home() {
           </div>
         </section>
 
+        <SavingsSimulator />
         <section className="kluppi-faq kluppi-section" id="intrebari-frecvente">
           <div className="kluppi-faq-inner">
             <h2 className="kluppi-faq-heading" data-reveal>Întrebări frecvente</h2>
