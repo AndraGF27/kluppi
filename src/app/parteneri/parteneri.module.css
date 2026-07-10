@@ -1,0 +1,41 @@
+.main { overflow: hidden; }
+.hero { padding: clamp(7rem, 12vw, 11rem) 0 clamp(4rem, 8vw, 7rem); text-align: center; }
+.heroInner { max-width: 52rem; margin-inline: auto; }
+.heroTitle, .formHeading { margin: 0; }
+.heroBody, .formIntro { margin: 1.5rem auto 0; }
+.heroCta, .readingCta, .centeredCta { margin-top: 2rem; }
+.readingSection, .stepsSection { background-color: var(--bg); }
+.readingColumn, .stepsInner { max-width: 46rem; margin-inline: auto; }
+.sectionHeading { margin: 0 0 1.5rem; }
+.readingColumn > p, .formIntro { color: var(--text); font-family: var(--font-body); font-size: var(--fs-body); font-weight: 300; line-height: 1.65; }
+.readingColumn > p { margin: 0 0 1.2rem; }
+.readingColumn > p:last-of-type { margin-bottom: 0; }
+.benefitsGrid, .fitGrid { display: grid; gap: 1.5rem; margin-top: 2rem; }
+.benefitsGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.fitGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.benefitCard { min-height: 15rem; }
+.stepsHeading, .centeredCta { text-align: center; }
+.stepsList { display: grid; gap: 0; margin: 2rem 0 0; padding: 0; list-style: none; border-top: 1px solid var(--hairline); }
+.step { display: grid; grid-template-columns: 2.75rem minmax(0, 1fr); gap: 1rem; padding: 1.5rem 0; border-bottom: 1px solid var(--hairline); }
+.stepNumber { display: grid; place-items: center; width: 2rem; height: 2rem; border: 1px solid var(--accent); border-radius: var(--radius-pill); color: var(--accent); font-family: var(--font-display); font-weight: 700; }
+.step p { margin: 0; color: var(--text); font-family: var(--font-body); font-size: var(--fs-body); font-weight: 300; line-height: 1.6; }
+.step strong { font-weight: 700; }
+.formSection { background-color: var(--accent); }
+.formInner { max-width: 52rem; margin-inline: auto; }
+.formSection :global(.kluppi-benefits-heading), .formSection :global(.kluppi-hero-trust), .formIntro, .formActions p, .formMessage { color: var(--white); }
+.formIntro { max-width: 44rem; }
+.form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+.field { display: grid; gap: 0.5rem; color: var(--white); font-family: var(--font-body); font-size: var(--fs-small); font-weight: 500; }
+.field :global(.form-input) { width: 100%; min-height: 3.25rem; padding: 0.75rem 1rem; font-family: var(--font-body); font-size: var(--fs-body); }
+.field textarea:global(.form-input) { min-height: 9rem; resize: vertical; }
+.fullWidth { grid-column: 1 / -1; }
+.honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.formActions { margin-top: 0.5rem; }
+.formActions :global(.kluppi-btn) { background-color: var(--white); color: var(--accent); }
+.formActions p, .formMessage { margin: 1rem 0 0; font-family: var(--font-body); font-size: var(--fs-small); font-weight: 300; line-height: 1.5; }
+.formActions a { color: inherit; text-decoration: underline; text-underline-offset: 0.2em; }
+.formMessage { max-width: 44rem; }
+.success, .error { font-weight: 500; }
+.error { text-decoration: underline; text-underline-offset: 0.2em; }
+.tagline { margin: 0; padding: 0 var(--gutter) clamp(4rem, 8vw, 7rem); color: var(--accent); font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 700; line-height: 1.2; text-align: center; }
+@media (max-width: 767px) { .hero { padding-top: 6rem; } .benefitsGrid, .fitGrid, .form { grid-template-columns: 1fr; } .benefitCard { min-height: 0; } }

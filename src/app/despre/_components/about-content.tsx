@@ -260,7 +260,7 @@ export function AboutContent() {
           </div>
           <p className={styles.partnerLine} data-reveal>
             <strong>Ai un brand?</strong>{" "}
-            <a href="mailto:partners@kluppi.com">Vezi cum devii partener →</a>
+            <a href="/parteneri">Vezi cum devii partener →</a>
           </p>
         </div>
       </section>
