@@ -140,6 +140,15 @@ p { text-wrap: pretty; }
   .header-image-list,
   .header-image-list.image-list-right { padding-top: 64vh; }
 }
+/* Instagram's in-app browser gives a short viewport, so 64vh collapses and the
+   collage rides up into the signup line. Give it a minimum floor with max().
+   Scoped to ≤390px so nothing above 390px changes. The JS parallax reads the
+   real rendered padding-top (page.tsx offsetTop), so the collage's end anchor
+   (Hero1 → navbar) stays correct; only its rise rate shifts slightly. */
+@media (max-width: 390px) {
+  .header-image-list,
+  .header-image-list.image-list-right { padding-top: max(64vh, 35rem); }
+}
 
 /* Phones (≤479): lengthen the hero scroll track (template default 150vh) so the
    collage's extended travel — see the phone branch in page.tsx, which lifts the
