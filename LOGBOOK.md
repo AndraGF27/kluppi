@@ -1455,3 +1455,9 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 2026-07-10 — Files: src/app/parteneri/page.tsx, src/app/parteneri/_components/partners-content.tsx, src/app/parteneri/parteneri.module.css, src/app/api/partner-inquiry/route.ts, src/app/despre/_components/about-content.tsx. What: Added the noindex partners page, inquiry form, FAQ accordion, and email API route; updated the About partner link. Why: Give brands a secure way to apply to join Kluppi.
 
 2026-07-10 — src/app/SavingsSimulator.tsx, src/app/savings-simulator.module.css, src/app/page.tsx, LOGBOOK.md — Added the interactive savings simulator and homepage placement so visitors can estimate annual Kluppi savings before joining.
+
+## 2026-07-14 — Hero collage min-height floor for Instagram in-app browser
+- File: src/app/globals.css
+- What: Added `@media (max-width: 390px)` rule setting `.header-image-list` padding-top to `max(64vh, 35rem)` (floors the collage start so it can't ride up into the signup line when Instagram's short in-app browser collapses 64vh).
+- Why: Reported overlap when opening kluppi.com via Instagram. Scoped to ≤390px per instruction (no change above 390px). JS parallax (page.tsx) reads real rendered padding-top, so Hero1 still anchors to the navbar; only rise rate shifts slightly.
+- Shipped to main (a700ab1). Note: 391–479px phones intentionally left unchanged.
