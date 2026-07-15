@@ -1461,3 +1461,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - What: Added `@media (max-width: 390px)` rule setting `.header-image-list` padding-top to `max(64vh, 35rem)` (floors the collage start so it can't ride up into the signup line when Instagram's short in-app browser collapses 64vh).
 - Why: Reported overlap when opening kluppi.com via Instagram. Scoped to ≤390px per instruction (no change above 390px). JS parallax (page.tsx) reads real rendered padding-top, so Hero1 still anchors to the navbar; only rise rate shifts slightly.
 - Shipped to main (a700ab1). Note: 391–479px phones intentionally left unchanged.
+
+## 2026-07-15 — Double opt-in confirmation page
+- Files: src/app/confirmare-abonare/page.tsx, src/app/confirmare-abonare/confirmare-abonare.module.css, LOGBOOK.md
+- What: Added a static `/confirmare-abonare` page with the approved Romanian confirmation copy, Instagram and Facebook links, and the existing Kluppi header and footer.
+- Why: Give confirmed waitlist subscribers a clear destination after completing double opt-in instead of returning them to the homepage.
