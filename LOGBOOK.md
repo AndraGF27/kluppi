@@ -1476,3 +1476,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - Files: src/app/globals.css, LOGBOOK.md
 - What: Reduced only the final split banner's minimum type sizes below 480px so both animated phrases remain fully visible; the converge banner and wider layouts are unchanged.
 - Why: The final banner was clipped horizontally on a Galaxy Z Flip5 inside Instagram's browser.
+
+## 2026-07-15 — Hide savings simulator from the waitlist page
+- Files: src/app/page.tsx, LOGBOOK.md
+- What: Removed the savings simulator import and rendered section from the current waitlist homepage while retaining its standalone component and styles for future use.
+- Why: The simulator belongs to the future full marketing site, not the current pre-launch waitlist page.
