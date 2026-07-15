@@ -1061,6 +1061,17 @@ p { text-wrap: pretty; }
   text-align: right;
   font-size: clamp(0.95rem, 4.3vw, 4rem);
 }
+/* Narrow phones: the converge banner uses longer copy than the final banner,
+   so it needs its own smaller floors to remain on-screen in in-app browsers. */
+@media (max-width: 479px) {
+  .kluppi-banner--converge .kluppi-banner-line2 {
+    font-size: clamp(1.55rem, 7.5vw, 2.25rem);
+  }
+
+  .kluppi-banner--converge .kluppi-banner-line1 {
+    font-size: clamp(0.75rem, 3.5vw, 0.95rem);
+  }
+}
 /* Optional CTA grouped under the banner's lines (centred). */
 .kluppi-banner-cta {
   text-align: center;

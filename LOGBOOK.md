@@ -1481,3 +1481,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - Files: src/app/page.tsx, LOGBOOK.md
 - What: Removed the savings simulator import and rendered section from the current waitlist homepage while retaining its standalone component and styles for future use.
 - Why: The simulator belongs to the future full marketing site, not the current pre-launch waitlist page.
+
+## 2026-07-15 — First-banner phone fit and production page gating
+- Files: src/app/globals.css, src/app/despre/page.tsx, src/app/parteneri/page.tsx, LOGBOOK.md
+- What: Added narrow-phone type sizes for the first animated banner and made the About and Partners pages return 404 on Vercel production while remaining available on the protected preview for post-launch work.
+- Why: Prevent first-banner clipping on a narrow Samsung/Instagram viewport and keep post-launch pages off the current public waitlist site.

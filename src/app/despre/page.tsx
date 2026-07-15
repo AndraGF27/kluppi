@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import SiteChrome from "../SiteChrome";
 import { AboutContent } from "./_components/about-content";
@@ -11,6 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  if (process.env.VERCEL_ENV === "production") {
+    notFound();
+  }
+
   return (
     <SiteChrome>
       <AboutContent />
