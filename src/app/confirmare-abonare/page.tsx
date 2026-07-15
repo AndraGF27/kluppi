@@ -21,7 +21,10 @@ export default function ConfirmareAbonarePage() {
               asigurat.
             </p>
             <p>
-              Până lansăm, ținem legătura pe social media. Ne găsești pe{" "}
+              Până atunci, ținem legătura pe social media.
+            </p>
+            <p>
+              Ne găsești pe{" "}
               <a
                 href="https://www.instagram.com/joinkluppi"
                 target="_blank"

@@ -1466,3 +1466,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - Files: src/app/confirmare-abonare/page.tsx, src/app/confirmare-abonare/confirmare-abonare.module.css, LOGBOOK.md
 - What: Added a static `/confirmare-abonare` page with the approved Romanian confirmation copy, Instagram and Facebook links, and the existing Kluppi header and footer.
 - Why: Give confirmed waitlist subscribers a clear destination after completing double opt-in instead of returning them to the homepage.
+
+## 2026-07-15 — Confirmation-page copy refinement
+- Files: src/app/confirmare-abonare/page.tsx, LOGBOOK.md
+- What: Changed “Până lansăm” to “Până atunci” and moved the social profile links into their own paragraph.
+- Why: Improve the rhythm and readability of the post-confirmation message.
