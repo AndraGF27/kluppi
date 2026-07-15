@@ -1471,3 +1471,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - Files: src/app/confirmare-abonare/page.tsx, LOGBOOK.md
 - What: Changed “Până lansăm” to “Până atunci” and moved the social profile links into their own paragraph.
 - Why: Improve the rhythm and readability of the post-confirmation message.
+
+## 2026-07-15 — Final banner fit on narrow phones
+- Files: src/app/globals.css, LOGBOOK.md
+- What: Reduced only the final split banner's minimum type sizes below 480px so both animated phrases remain fully visible; the converge banner and wider layouts are unchanged.
+- Why: The final banner was clipped horizontally on a Galaxy Z Flip5 inside Instagram's browser.

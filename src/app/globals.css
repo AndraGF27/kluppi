@@ -1036,6 +1036,19 @@ p { text-wrap: pretty; }
   font-size: clamp(2.25rem, 10vw, 7rem); /* orange line largest */
   text-align: right;
 }
+/* Narrow phones: keep the final banner's two fixed phrases fully visible in
+   short in-app browser viewports. The desktop-sized floors above are too wide
+   on devices such as the Galaxy Z Flip5. The converge banner keeps its own
+   sizing because it uses different copy. */
+@media (max-width: 479px) {
+  .kluppi-banner:not(.kluppi-banner--converge) .kluppi-banner-line1 {
+    font-size: clamp(1.2rem, 6vw, 1.6rem);
+  }
+
+  .kluppi-banner:not(.kluppi-banner--converge) .kluppi-banner-line2 {
+    font-size: clamp(1.7rem, 8vw, 2.25rem);
+  }
+}
 /* Converge variant — the band's "Te alături acum?" banner (scoped: bottom banner
    untouched). Lines start at the outer edges and drift toward the centre as it
    scrolls (motion in SplitBanner.tsx). Sides flipped vs the default: line2
