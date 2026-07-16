@@ -1496,3 +1496,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - **Files:** AGENTS.md
 - **What:** New hard rule: every page not meant for the live waitlist site ships with the production notFound() gate + noindex from its first commit (pattern from src/app/despre/page.tsx). Gates come off only on explicit brief instruction.
 - **Why:** The -rebrand branch reached main on 2026-07-14 and exposed post-launch pages; Andra chose gate-by-default (over disabling auto-deploy) to keep the branch always safe to ship.
+
+## 2026-07-16 — Referral redirect route
+- **Files:** src/app/r/[code]/route.ts
+- **What:** Added a dynamic referral route that validates eight-character codes and redirects to the app signup page.
+- **Why:** Shared member referral links must safely carry valid codes to signup while keeping the pre-launch route unavailable in production.
