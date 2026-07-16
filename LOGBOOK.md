@@ -1486,3 +1486,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - Files: src/app/globals.css, src/app/despre/page.tsx, src/app/parteneri/page.tsx, LOGBOOK.md
 - What: Added narrow-phone type sizes for the first animated banner and made the About and Partners pages return 404 on Vercel production while remaining available on the protected preview for post-launch work.
 - Why: Prevent first-banner clipping on a narrow Samsung/Instagram viewport and keep post-launch pages off the current public waitlist site.
+
+## 2026-07-16 — AGENTS.md: direct tasks from Andra
+- **Files:** AGENTS.md
+- **What:** Added a "Direct tasks from Andra" bullet to the task system section: chat requests from Andra count as briefs, all other rules unchanged, Claude review still gates shipping.
+- **Why:** Andra will now work with Cody directly on website/UX tasks, and the old wording ("execute written briefs — nothing else") forbade that.

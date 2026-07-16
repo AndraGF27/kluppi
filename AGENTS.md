@@ -6,6 +6,7 @@ Read `CLAUDE.md` for project facts (stack, file map, design tokens). It applies 
 
 ## The task system
 - Task briefs live in `tasks/NN-<slug>.md`. Execute only the brief you were pointed at.
+- **Direct tasks from Andra:** Andra may also give you tasks directly in chat, without a written brief. Treat her request as the brief — every other rule in this file still applies (scope, git, verification, report format, hard rules). If her request is ambiguous, ask her instead of exploring the repo or guessing. Her work still goes through Claude's PASS/FAIL review before anything ships.
 - **Scope discipline is rule #1: change ONLY the files the brief lists.** If the task seems to need another file, stop and flag it in your report instead of improvising.
 - If a brief is ambiguous, pick the smallest reasonable interpretation and flag the ambiguity in your report.
 
