@@ -1491,3 +1491,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - **Files:** AGENTS.md
 - **What:** Added a "Direct tasks from Andra" bullet to the task system section: chat requests from Andra count as briefs, all other rules unchanged, Claude review still gates shipping.
 - **Why:** Andra will now work with Cody directly on website/UX tasks, and the old wording ("execute written briefs — nothing else") forbade that.
+
+## 2026-07-16 — AGENTS.md: gate-by-default rule for post-launch pages
+- **Files:** AGENTS.md
+- **What:** New hard rule: every page not meant for the live waitlist site ships with the production notFound() gate + noindex from its first commit (pattern from src/app/despre/page.tsx). Gates come off only on explicit brief instruction.
+- **Why:** The -rebrand branch reached main on 2026-07-14 and exposed post-launch pages; Andra chose gate-by-default (over disabling auto-deploy) to keep the branch always safe to ship.

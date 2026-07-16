@@ -28,6 +28,7 @@ Read `CLAUDE.md` for project facts (stack, file map, design tokens). It applies 
 5. **Commit** — hash + message, and whether the branch was pushed.
 
 ## Hard rules
+- **Every new page or section that is not meant for the live waitlist site ships GATED from its first commit**: the page component calls `notFound()` when `process.env.VERCEL_ENV === "production"` (see `src/app/despre/page.tsx` for the pattern) AND sets `robots: { index: false, follow: false }` in its metadata. This keeps the branch permanently safe to deploy — post-launch content stays invisible on kluppi.com and visible on the Vercel preview. Remove a page's gate only when a brief explicitly says the page goes live.
 - **Never edit lawyer-approved legal copy**: the page content under `src/app/(legal)/` and the cookie-banner text in `CookieBanner.tsx`. Structural refactors there only when a brief explicitly says so — and the rendered copy must stay byte-identical.
 - Never touch `.env*` files, secrets, or API keys. Never add dependencies or paid services unless the brief explicitly approves them.
 - **Do not read `LOGBOOK.md`** (it is a ~25k-token archive). After each task, **append** one entry at the end: date, files touched, what, why.
