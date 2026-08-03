@@ -1486,3 +1486,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - Files: src/app/globals.css, src/app/despre/page.tsx, src/app/parteneri/page.tsx, LOGBOOK.md
 - What: Added narrow-phone type sizes for the first animated banner and made the About and Partners pages return 404 on Vercel production while remaining available on the protected preview for post-launch work.
 - Why: Prevent first-banner clipping on a narrow Samsung/Instagram viewport and keep post-launch pages off the current public waitlist site.
+
+## 2026-08-03 — DOI confirmation page: expanded copy
+- **Files:** src/app/confirmare-abonare/page.tsx, src/app/confirmare-abonare/confirmare-abonare.module.css
+- **What:** Replaced the short confirmation message with the full welcome copy (what Kluppi is, "Dar, de ce?", "Bine...", "Și până atunci?" sections), added bold emphasis, an `.subtitle` H2 style and a `strong` weight rule; switched `.main` to top alignment because the page is now longer than a viewport. Instagram/Facebook links unchanged.
+- **Why:** Andra wanted the post-confirmation page to explain the club and set expectations, not just confirm the address.
