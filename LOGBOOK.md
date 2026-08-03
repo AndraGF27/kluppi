@@ -1501,3 +1501,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - **Files:** src/app/r/[code]/route.ts
 - **What:** Added a dynamic referral route that validates eight-character codes and redirects to the app signup page.
 - **Why:** Shared member referral links must safely carry valid codes to signup while keeping the pre-launch route unavailable in production.
+
+## 2026-08-03 — DOI confirmation page: expanded copy
+- **Files:** src/app/confirmare-abonare/page.tsx, src/app/confirmare-abonare/confirmare-abonare.module.css
+- **What:** Replaced the short confirmation message with the full welcome copy (what Kluppi is, "Dar, de ce?", "Bine...", "Și până atunci?" sections), added bold emphasis, an `.subtitle` H2 style and a `strong` weight rule; switched `.main` to top alignment because the page is now longer than a viewport. Instagram/Facebook links unchanged.
+- **Why:** Andra wanted the post-confirmation page to explain the club and set expectations, not just confirm the address.
