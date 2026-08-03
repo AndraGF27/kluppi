@@ -1506,3 +1506,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - **Files:** src/app/confirmare-abonare/page.tsx, src/app/confirmare-abonare/confirmare-abonare.module.css
 - **What:** Replaced the short confirmation message with the full welcome copy (what Kluppi is, "Dar, de ce?", "Bine...", "Și până atunci?" sections), added bold emphasis, an `.subtitle` H2 style and a `strong` weight rule; switched `.main` to top alignment because the page is now longer than a viewport. Instagram/Facebook links unchanged.
 - **Why:** Andra wanted the post-confirmation page to explain the club and set expectations, not just confirm the address.
+
+## 2026-08-03 — CLAUDE.md refresh
+- **Files:** CLAUDE.md
+- **What:** Committed the pending rewrite (Romanian → English, stale `/api/subscribe` KV route replaced with the theMarketer `add-subscriber` flow, Bricolage Grotesque added, branch workflow + accent-colour rules documented) and corrected the analytics line: GA4/GTM/theMarketer are consent-gated in CookieBanner.tsx, not loaded from layout.tsx.
+- **Why:** The committed instructions pointed at an API route that no longer exists, and the draft misplaced the analytics scripts in a way that would have invited breaking cookie consent.
