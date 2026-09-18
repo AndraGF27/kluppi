@@ -1524,3 +1524,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - Files: `src/proxy.ts`, `src/app/despre/page.tsx`, `src/app/parteneri/page.tsx`, `LOGBOOK.md`.
 - Replaced production-only 404s for About and Partners with route-scoped HTTP Basic authentication. The gate also covers the partner inquiry endpoint and reserves `/2` for the requested homepage preview. It requires `SITE_GATE_PASSWORD` in the deployment environment and fails closed when unset; the public waitlist remains open.
 - Why: Andra requested live, password-protected previews before launch without publishing the pages openly. The `/2` page itself awaits the source of the updated homepage.
+
+## 2026-09-18 — Protected homepage preview at /2
+- Files: `src/app/2/page.tsx`, `src/app/2/HomePreview.tsx`, `src/app/SavingsSimulator.tsx`, `LOGBOOK.md`.
+- Added a noindex `/2` preview copied from the current homepage, with the existing savings calculator, signup CTAs pointing to the member app, and no waitlist form. The public `/` source remains unchanged.
+- Why: Andra requested a live, password-protected homepage preview alongside protected About and Partners pages before launch; the route is covered by the existing preview proxy.
