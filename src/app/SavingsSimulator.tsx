@@ -5,7 +5,7 @@ import styles from "./savings-simulator.module.css";
 
 // PLACEHOLDER — Andra validates every number before launch
 const AVG_BENEFIT = 0.10; // PLACEHOLDER: average member benefit per category
-const ANNUAL_PLAN_RON = 220; // real: annual Founding Price
+const ANNUAL_PLAN_RON = 220; // current annual plan price
 
 const categories = [
   { emoji: "👗", label: "Modă & accesorii", defaultValue: 300 },
@@ -93,7 +93,7 @@ export default function SavingsSimulator() {
         </div>
 
         <div className={styles.cta}>
-          <a href="#contact" className="kluppi-btn">Rezervă-ți locul în club</a>
+          <a href="https://app.kluppi.com/signup" className="kluppi-btn">Intră în club</a>
           <p className="kluppi-hero-trust">
             Gratuit la înscriere. Decizi mai târziu dacă vrei mai mult.
           </p>
