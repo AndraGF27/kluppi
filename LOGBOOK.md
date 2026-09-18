@@ -1503,3 +1503,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 ### 2026-09-18 — Make the approved September Terms route public on release
 - Files: `src/app/(legal)/termeni-si-conditii/2026-09-17/page.tsx`, `LOGBOOK.md`.
 - Removed the preview-only production 404 gate after Andra clarified that this approved versioned Terms page is meant to be publicly reachable. The original waitlist Terms route remains unchanged. A local production build serves both routes with HTTP 200; publication still depends on deployment.
+
+## 2026-09-18 — Temporary marketing preview gate
+- Files: `src/proxy.ts`, `src/app/despre/page.tsx`, `src/app/parteneri/page.tsx`, `LOGBOOK.md`.
+- Replaced production-only 404s for About and Partners with route-scoped HTTP Basic authentication. The gate also covers the partner inquiry endpoint and reserves `/2` for the requested homepage preview. It requires `SITE_GATE_PASSWORD` in the deployment environment and fails closed when unset; the public waitlist remains open.
+- Why: Andra requested live, password-protected previews before launch without publishing the pages openly. The `/2` page itself awaits the source of the updated homepage.
