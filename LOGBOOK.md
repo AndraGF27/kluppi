@@ -1491,3 +1491,15 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - **Files:** src/app/confirmare-abonare/page.tsx, src/app/confirmare-abonare/confirmare-abonare.module.css
 - **What:** Replaced the short confirmation message with the full welcome copy (what Kluppi is, "Dar, de ce?", "Bine...", "Și până atunci?" sections), added bold emphasis, an `.subtitle` H2 style and a `strong` weight rule; switched `.main` to top alignment because the page is now longer than a viewport. Instagram/Facebook links unchanged.
 - **Why:** Andra wanted the post-confirmation page to explain the club and set expectations, not just confirm the address.
+## 2026-08-03 — CLAUDE.md refresh
+- **Files:** CLAUDE.md
+- **What:** Committed the pending rewrite (Romanian → English, stale `/api/subscribe` KV route replaced with the theMarketer `add-subscriber` flow, Bricolage Grotesque added, branch workflow + accent-colour rules documented) and corrected the analytics line: GA4/GTM/theMarketer are consent-gated in CookieBanner.tsx, not loaded from layout.tsx.
+- **Why:** The committed instructions pointed at an API route that no longer exists, and the draft misplaced the analytics scripts in a way that would have invited breaking cookie consent.
+
+### 2026-09-17 — Stage versioned subscription Terms archive
+- Files: `src/app/(legal)/termeni-si-conditii/2026-09-17/page.tsx`, `src/app/(legal)/termeni-si-conditii/2026-09-17/terms.md`, `LOGBOOK.md`.
+- Added a production-gated, noindex page for the approved 17 September subscription Terms at a separate URL, preserving the live waitlist Terms. The Markdown source is byte-identical to Andra's lawyer-approved file; the page renders it without adding a dependency. This gives the app a version-specific target before publication.
+
+### 2026-09-18 — Make the approved September Terms route public on release
+- Files: `src/app/(legal)/termeni-si-conditii/2026-09-17/page.tsx`, `LOGBOOK.md`.
+- Removed the preview-only production 404 gate after Andra clarified that this approved versioned Terms page is meant to be publicly reachable. The original waitlist Terms route remains unchanged. A local production build serves both routes with HTTP 200; publication still depends on deployment.
