@@ -1529,3 +1529,8 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - Files: `src/app/2/page.tsx`, `src/app/2/HomePreview.tsx`, `src/app/SavingsSimulator.tsx`, `LOGBOOK.md`.
 - Added a noindex `/2` preview copied from the current homepage, with the existing savings calculator, signup CTAs pointing to the member app, and no waitlist form. The public `/` source remains unchanged.
 - Why: Andra requested a live, password-protected homepage preview alongside protected About and Partners pages before launch; the route is covered by the existing preview proxy.
+
+## 2026-09-20 — New permanent subscription Terms archive
+- Files: `src/app/(legal)/termeni-si-conditii/2026-09-20/page.tsx`, `src/app/(legal)/termeni-si-conditii/2026-09-20/terms.md`, `LOGBOOK.md`.
+- Added a public, noindex versioned page containing Andra's corrected September 20 Terms byte-for-byte. It preserves the September 17 archive for historical acceptances and leaves the waitlist Terms at the original URL.
+- Why: unused referral credit now survives a return to Free while the account remains open.
