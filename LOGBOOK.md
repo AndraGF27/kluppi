@@ -1534,3 +1534,36 @@ language) moved to the global `~/.claude/CLAUDE.md` so they aren't duplicated he
 - Files: `src/app/(legal)/termeni-si-conditii/2026-09-20/page.tsx`, `src/app/(legal)/termeni-si-conditii/2026-09-20/terms.md`, `LOGBOOK.md`.
 - Added a public, noindex versioned page containing Andra's corrected September 20 Terms byte-for-byte. It preserves the September 17 archive for historical acceptances and leaves the waitlist Terms at the original URL.
 - Why: unused referral credit now survives a return to Free while the account remains open.
+
+## 2026-09-22 — Terms links point at the 2026-09-20 archive
+
+**Files:** `src/app/SiteChrome.tsx`, `src/app/page.tsx`, `src/app/2/HomePreview.tsx`.
+
+Andra, 2026-09-22: "update the T&Cs link with the Sept 20th version, for now."
+
+`/termeni-si-conditii` still serves the WAITLIST terms — verified by fetching it:
+"Data ultimei actualizări: 26 iunie 2026", no Kluppi+, no pricing, no referral
+chapter, and §4 states that joining the list is not a subscription. So every
+general "Termeni și condiții" link was handing visitors the wrong document.
+Those three now point at `/termeni-si-conditii/2026-09-20`, the membership
+contract — the same URL the app's compliance footer uses. This matters for the
+Netopia compliance pack, which gates live payment activation.
+
+⚠️ **The waitlist consent checkbox (`page.tsx:605`) was deliberately NOT
+changed.** It reads "…am citit Politica de confidențialitate și accept Termenii
+și condițiile" inside the form that posts to `add-subscriber` (theMarketer,
+`Waitlist` tag). That consent is for joining the waiting list, and the waitlist
+terms are the correct document for it — pointing it at the membership contract
+would have people accept a paid subscription agreement they are not entering.
+Andra's own 2026-09-19 ruling says the June text is the waitlist document.
+
+⚠️ **"For now" is literal.** Revert all three to the bare `/termeni-si-conditii`
+once that page is replaced with the final membership terms (LAUNCH_PLAN A4),
+or the site will be pinned to a dated archive forever.
+
+`npx tsc --noEmit` EXIT=0 (after clearing the iCloud " 2" artifacts under
+`.next/`, which otherwise report four phantom errors).
+
+**NOT DEPLOYED.** This is on `kluppi-rebrand`. www.kluppi.com serves `main`, and
+per this repo's rules `main` is fast-forwarded only on Andra's explicit "ship
+it". Nothing changes for a visitor until that happens.

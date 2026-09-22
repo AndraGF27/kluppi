@@ -522,7 +522,7 @@ export default function HomePreview() {
             <div className="kluppi-footer-divider" />
             <div className="kluppi-footer-bottom">
               <div className="kluppi-footer-legal">
-                <a href="/termeni-si-conditii" target="_blank" rel="noopener noreferrer" className="kluppi-footer-link">Termeni și condiții</a>
+                <a href="/termeni-si-conditii/2026-09-20" target="_blank" rel="noopener noreferrer" className="kluppi-footer-link">Termeni și condiții</a>
                 <a href="/confidentialitate" target="_blank" rel="noopener noreferrer" className="kluppi-footer-link">Politica de confidențialitate</a>
                 <a href="/politica-cookies" target="_blank" rel="noopener noreferrer" className="kluppi-footer-link">Politica de cookies</a>
               </div>
