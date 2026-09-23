@@ -1567,3 +1567,10 @@ or the site will be pinned to a dated archive forever.
 **NOT DEPLOYED.** This is on `kluppi-rebrand`. www.kluppi.com serves `main`, and
 per this repo's rules `main` is fast-forwarded only on Andra's explicit "ship
 it". Nothing changes for a visitor until that happens.
+
+## 2026-09-23 — kluppi-rebrand ↔ main divergence ended (merge 3ebda47)
+- **Files:** none beyond the merge (LOGBOOK: one blank-line conflict, kept the separator).
+- **What:** Merged `origin/main` into `kluppi-rebrand`. `main` had five commits that exist on this branch only as cherry-picked copies under different SHAs, so a fast-forward of `main` was impossible and the 2026-09-22 Terms-link ship had to be a cherry-pick. `main` is now an ancestor of this branch again: the next "ship it" is a plain `git merge --ff-only`.
+- **How to read what is unshipped — use CONTENT, not the commit list.** `git log main..kluppi-rebrand` still lists ten commits, and `git cherry` marks all ten `+`, because the cherry-picks were not byte-identical patches (their LOGBOOK context differs). Both are misleading. The truthful measure is `git diff --stat main kluppi-rebrand`, which on 2026-09-23 is five files: `src/app/r/[code]/route.ts` (gated to `notFound()` in production), `tasks/05-referral-redirect.md`, `CLAUDE.md`, `AGENTS.md`, `LOGBOOK.md`. The DOI confirmation copy (`d450c44`) is already live — it shipped through `2091fc3`.
+- **Why:** Andra, 2026-09-23: "tidy up the divergence on kluppi-rebrand". The phantom list survives until the next fast-forward, when `main` absorbs both SHAs of each pair; ending it sooner would mean rewriting published history (force-push), which was not done.
+- **Rule going forward:** ship by fast-forwarding `main` to this branch, never by cherry-picking onto `main` — cherry-picks are what created the divergence.
