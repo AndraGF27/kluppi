@@ -1591,3 +1591,11 @@ Files: `src/app/CookieBanner.tsx`, `tasks/06-vercel-analytics-behind-consent.md`
 
 ## 2026-09-30 — Next.js 16.2.9 → 16.3.8 (kluppi-rebrand only)
 Files: `package-lock.json`, `CLAUDE.md`. Critical advisory GHSA-vcvr-r3jv-pc5j (RCE in `next/og` ImageResponse, 16.2.0–16.3.5); the site does not use `next/og`, so exposure was low. `npm update next` (package.json keeps `"latest"`): audit 8 → 4, the remaining 4 are build-tool packages (brace-expansion, browserslist, js-yaml, baseline-browser-mapping), unchanged. The live waitlist (`main`) is NOT upgraded, by Andra's choice. tsc + `npm run build` green. CLAUDE.md: corrected the stale line saying Vercel Analytics loads from layout.tsx (it is consent-gated since task 06).
+
+## 2026-09-30 — Dated policy archives (post-launch): /confidentialitate/2026-09-30, /politica-cookies/2026-09-30
+Files: `src/app/(legal)/LegalDocument.tsx` (new), `src/app/(legal)/confidentialitate/2026-09-30/{page.tsx,policy.md}`, `src/app/(legal)/politica-cookies/2026-09-30/{page.tsx,policy.md}`.
+- Andra: dated URLs like the T&Cs archive, linked from the app footer. Same pattern: the lawyer's Markdown file is published byte-for-byte (cmp-identical to ~/Downloads/Kluppi App * Policy.md), noindex, one folder per approved version.
+- `LegalDocument` renders headings, paragraphs, lists, pipe tables (existing `.tableWrap` styles), bold/italic, https links, escapes and entities; drops HTML comments (the lawyer's "de eliminat înainte de publicare" notes). Terms archives untouched. Each page reads its file with a literal path (a prop-built path made Turbopack trace the whole project).
+- ⚠️ **policy.md is TONIGHT'S DRAFT** ("proiect pentru revizuire", 9 bracketed gaps). Andra chose to wait for the lawyer's final: replace both policy.md files (and the folder date if the final is dated differently) BEFORE anything goes to `main`. Andra has approved shipping the final to live `main` ("Yes, ship to live"), then the app footer links switch to these URLs.
+- Verified: build clean (no warnings); rendered HTML: privacy 10 sections/2 tables/28 rows, cookies 11 sections/4 subsections/3 tables/13 rows, zero leaked `**`, `|---`, comments, escapes or entities.
+- Also: `.next` held 375 iCloud "… 2" duplicate files that broke `tsc`; cleared (gitignored cache).
