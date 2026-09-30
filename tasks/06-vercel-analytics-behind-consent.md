@@ -1,6 +1,6 @@
 # Task 06 — Vercel Web Analytics and Speed Insights only after "Accept" — DONE (record, not instructions)
 
-**Done by Claude on `kluppi-rebrand`, 2026-10-01 (commit 3e0ecb2) — not handed to Cody.** Andra: "put it
+**Done by Claude on `kluppi-rebrand`, 2026-09-30 (commit 3e0ecb2) — not handed to Cody.** Andra: "put it
 behind 'Accept'. And I think you can do this task yourself" (2026-09-30).
 
 ## What was done

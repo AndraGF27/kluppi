@@ -8,7 +8,7 @@ import styles from "./cookie.module.css";
 
 // Persists the visitor's choice so the banner shows only once, and gates all
 // non-essential tracking. The scripts below (GA4, GTM, theMarketer, Vercel Web
-// Analytics and Speed Insights — the last two since 2026-10-01) are injected
+// Analytics and Speed Insights — the last two since 2026-09-30) are injected
 // ONLY when this is "accepted" — nothing analytics-related loads before that, so
 // no GA/GTM request fires and no analytics cookie is set until the user opts in.
 const CONSENT_KEY = "kluppi-cookie-consent";

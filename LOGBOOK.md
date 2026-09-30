@@ -1575,7 +1575,7 @@ it". Nothing changes for a visitor until that happens.
 - **Why:** Andra, 2026-09-23: "tidy up the divergence on kluppi-rebrand". The phantom list survives until the next fast-forward, when `main` absorbs both SHAs of each pair; ending it sooner would mean rewriting published history (force-push), which was not done.
 - **Rule going forward:** ship by fast-forwarding `main` to this branch, never by cherry-picking onto `main` — cherry-picks are what created the divergence.
 
-## 2026-10-01 — Vercel Web Analytics + Speed Insights behind "Accept" (post-launch site, kluppi-rebrand)
+## 2026-09-30 — Vercel Web Analytics + Speed Insights behind "Accept" (post-launch site, kluppi-rebrand)
 - `src/app/layout.tsx`: `<Analytics />` and `<SpeedInsights />` removed from the always-on layout; comment
   lists them with GA/GTM/theMarketer as consent-gated, with the lawyer's reason.
 - `src/app/CookieBanner.tsx`: both rendered inside `ConsentedScripts` (only when consent === "accepted").
@@ -1585,3 +1585,6 @@ it". Nothing changes for a visitor until that happens.
 - Consequence for the app: the admin dashboard's "Visited the site" (Vercel Web Analytics on kluppi.com)
   will count only visitors who accepted, once this site is live.
 - `npm run build`: compiled, 21/21 pages.
+
+## 2026-09-30 — Date fix
+Files: `src/app/CookieBanner.tsx`, `tasks/06-vercel-analytics-behind-consent.md`, `LOGBOOK.md`. The Speed Insights/Web Analytics consent change was dated 2026-10-01; it was made 2026-09-30. Comment/record dates corrected, no behaviour change.
