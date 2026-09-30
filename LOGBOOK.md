@@ -1599,3 +1599,9 @@ Files: `src/app/(legal)/LegalDocument.tsx` (new), `src/app/(legal)/confidentiali
 - ⚠️ **policy.md is TONIGHT'S DRAFT** ("proiect pentru revizuire", 9 bracketed gaps). Andra chose to wait for the lawyer's final: replace both policy.md files (and the folder date if the final is dated differently) BEFORE anything goes to `main`. Andra has approved shipping the final to live `main` ("Yes, ship to live"), then the app footer links switch to these URLs.
 - Verified: build clean (no warnings); rendered HTML: privacy 10 sections/2 tables/28 rows, cookies 11 sections/4 subsections/3 tables/13 rows, zero leaked `**`, `|---`, comments, escapes or entities.
 - Also: `.next` held 375 iCloud "… 2" duplicate files that broke `tsc`; cleared (gitignored cache).
+
+## 2026-09-30 — Final policies published to the dated archives
+Files: `src/app/(legal)/confidentialitate/2026-09-30/policy.md`, `src/app/(legal)/politica-cookies/2026-09-30/policy.md`.
+- Replaced tonight's drafts with the lawyer's finals (~/Downloads/Kluppi * Policy — Publish.md, byte-identical): no "proiect", no brackets, no internal notes; still dated 30 septembrie 2026, so the URLs stay /2026-09-30.
+- Andra: "The final versions are in Downloads, publish them" → also copied onto `main` (live, auto-deploys), as approved ("Yes, ship to live"). Only the two dated folders + `LegalDocument.tsx` go to main; the waitlist's own /confidentialitate and /politica-cookies pages and links are untouched.
+- Verified: build clean; rendered pages 10/11 sections, 2/3 tables, zero leaked markup or brackets.

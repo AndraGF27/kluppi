@@ -1,6 +1,6 @@
 # **POLITICA DE COOKIES**
 
-Data ultimei actualizări: 30 septembrie 2026 (proiect pentru revizuire)
+Data ultimei actualizări: 30 septembrie 2026
 
 Îți mulțumim că vizitezi Kluppi.
 
@@ -65,7 +65,7 @@ Nu este necesar consimțământul dumneavoastră pentru cookies și tehnologiile
 
 Consimțământul este necesar pentru cookies și tehnologii similare care nu sunt strict necesare, cum ar fi anumite tehnologii de analiză a traficului, măsurare sau marketing.
 
-La accesarea site-ului, puteți fi informat(ă) printr-un banner privind utilizarea cookie-urilor și a tehnologiilor similare. Bannerul Kluppi permite acceptarea sau refuzarea tehnologiilor care nu sunt strict necesare.
+La accesarea site-ului, sunteți informat(ă) printr-un banner privind utilizarea cookie-urilor și a tehnologiilor similare. Bannerul Kluppi permite acceptarea sau refuzarea tehnologiilor care nu sunt strict necesare.
 
 Dacă refuzați cookies și tehnologiile care nu sunt strict necesare, veți putea accesa în continuare site-ul și aplicația Kluppi, însă anumite funcții de analiză, măsurare sau îmbunătățire a experienței pot să nu fie disponibile sau să funcționeze limitat.
 
@@ -85,9 +85,9 @@ Modul în care Kluppi prelucrează datele cu caracter personal este explicat în
 
 Site-ul kluppi.com și aplicația app.kluppi.com folosesc următoarele tehnologii, în funcție de interfață.
 
-Sentry raportează către serverele sale din Germania erori tehnice, adrese IP și date de performanță pentru fiecare vizită în aplicație. Conform configurației descrise, raportarea nu setează un cookie pe dispozitiv; acest lucru trebuie verificat în browser. Sentry este distinct de instrumentele de analiză a vizitelor. Detalii despre aceste date sunt în Politica de confidențialitate.
+Sentry raportează către serverele sale din Germania erori tehnice, adrese IP și date de performanță pentru fiecare vizită în aplicație. Sentry este utilizat pentru diagnosticarea și monitorizarea tehnică a aplicației, distinct de instrumentele de analiză a vizitelor. Detalii despre aceste date sunt în Politica de confidențialitate.
 
-Jurnalul propriu pentru etapele de plată și prima consultare a planurilor ori ofertelor funcționează pentru toate conturile, indiferent de plan. La prima atingere a fiecărei etape sau oferte, codul care afișează pagina trimite o cerere separată către serverul Kluppi, folosind sesiunea autentificată existentă. Cererea cuprinde numai etapa și planul lunar sau anual, respectiv identificatorul ofertei; serverul stabilește contul din sesiune. Nu sunt citite ori transmise caracteristici suplimentare ale browserului sau dispozitivului și nu se adaugă cookie ori altă stocare locală. Se păstrează o singură înregistrare pentru fiecare pereche cont–eveniment, nu fiecare vizită. [Trebuie evaluat separat dacă această cerere suplimentară de măsurare reprezintă acces la informații de pe dispozitiv în sensul art. 4 alin. (5) din Legea nr. 506/2004; lipsa unui cookie nou nu soluționează singură această întrebare.] Datele și păstrarea pe durata contului plus 180 de zile după închidere sunt explicate în Politica de confidențialitate.
+Jurnalul propriu pentru etapele de plată și prima consultare a planurilor ori ofertelor funcționează pentru toate conturile, indiferent de plan. La prima atingere a fiecărei etape sau oferte, codul care afișează pagina trimite o cerere separată către serverul Kluppi, folosind sesiunea autentificată existentă. Cererea cuprinde numai etapa și planul lunar sau anual, respectiv identificatorul ofertei; serverul stabilește contul din sesiune. Nu sunt citite ori transmise caracteristici suplimentare ale browserului sau dispozitivului și nu se adaugă cookie ori altă stocare locală. Se păstrează o singură înregistrare pentru fiecare pereche cont–eveniment, nu fiecare vizită. Datele și păstrarea pe durata contului plus 180 de zile după închidere sunt explicate în Politica de confidențialitate.
 
 ## **6.1. Tehnologii strict necesare, de securitate și de performanță tehnică**
 
@@ -118,11 +118,11 @@ Aceste tehnologii ne ajută să înțelegem modul în care este utilizat site-ul
 | Tehnologie | Scop | Cine o folosește | Durată | Acord |
 | --- | --- | --- | --- | --- |
 | Google Tag Manager, gtm.js | Încarcă și administrează instrumentele de măsurare acceptate | Google / Kluppi | Nu setează singur cookie-ul de analiză; instrumentele încărcate pot face acest lucru | Da, pentru încărcarea instrumentelor opționale |
-| Google Analytics, _ga | Distinge vizitatorii pentru statistici | Google / Kluppi | Până la 2 ani în configurația standard; [setarea activă de verificat] | Da |
-| Google Analytics, _ga_LNKD7TBG3N | Menține starea sesiunii de analiză pentru proprietatea Kluppi | Google / Kluppi | Până la 2 ani în configurația standard; [setarea activă de verificat] | Da |
-| theMarketer on-site tracking, __sm__c | Măsoară interacțiunile de pe site și legătura lor cu înscrierea, dacă este cazul | theMarketer | [durata reală de verificat în browser] | Da |
-| Vercel Web Analytics | Statistici privind vizitele pe site, fără cookie propriu de analiză în descrierea furnizorului | Vercel | Nu setează cookie propriu; [retenția de verificat] | Da, este încărcat numai după „Accept” |
-| Vercel Speed Insights | Măsoară performanța paginilor prin informații citite de script din browser și trimise la Vercel | Vercel | Nu setează cookie propriu potrivit furnizorului; [retenția de verificat] | Da, este încărcat numai după „Accept” |
+| Google Analytics, _ga | Distinge vizitatorii pentru statistici | Google / Kluppi | Până la 2 ani, conform setărilor Google Analytics | Da |
+| Google Analytics, _ga_LNKD7TBG3N | Menține starea sesiunii de analiză pentru proprietatea Kluppi | Google / Kluppi | Până la 2 ani, conform setărilor Google Analytics | Da |
+| theMarketer on-site tracking, __sm__c | Măsoară interacțiunile de pe site și legătura lor cu înscrierea, dacă este cazul | theMarketer | Conform duratei setate de theMarketer și afișate în browser la momentul setării cookie-ului | Da |
+| Vercel Web Analytics | Statistici privind vizitele pe site | Vercel | Nu se aplică; tehnologia nu setează cookie propriu | Da, este încărcat numai după „Accept” |
+| Vercel Speed Insights | Măsoară performanța paginilor prin informații citite de script din browser și trimise la Vercel | Vercel | Nu se aplică; tehnologia nu setează cookie propriu | Da, este încărcat numai după „Accept” |
 
 Google Analytics poate utiliza cookies precum _ga și _ga_LNKD7TBG3N pentru a distinge utilizatorii și pentru a genera statistici privind utilizarea site-ului. Aceste tehnologii sunt utilizate numai după acceptarea cookies și tehnologiilor similare care nu sunt strict necesare.
 
@@ -138,7 +138,7 @@ theMarketer măsoară deschiderea e-mailurilor comerciale și accesarea linkuril
 
 ## **6.4. Cookies de marketing și remarketing**
 
-Aplicația nu folosește cookies de marketing sau pixeli de remarketing. Pe kluppi.com, scriptul theMarketer de măsurare a interacțiunilor cu site-ul este inclus la secțiunea 6.2 și este condiționat de alegerea „Accept”. Orice folosire viitoare a unor tehnologii de remarketing sau publicitate comportamentală trebuie descrisă în această Politică și supusă regulilor de consimțământ aplicabile.
+Aplicația nu folosește cookies de marketing sau pixeli de remarketing. Pe kluppi.com, scriptul theMarketer de măsurare a interacțiunilor cu site-ul este inclus la secțiunea 6.2 și este condiționat de alegerea „Accept”. Dacă Kluppi introduce tehnologii de remarketing sau publicitate comportamentală, acestea vor fi descrise în această Politică și folosite pe baza consimțământului, atunci când legea îl impune.
 
 # **7\. Cookies proprii și cookies ale terților**
 
@@ -176,7 +176,7 @@ Puteți controla sau șterge cookies și prin setările browserului utilizat. Ma
 
 Dacă ștergeți cookies din browser, este posibil ca opțiunea exprimată anterior privind cookies să fie ștearsă și să vi se solicite din nou exprimarea unei opțiuni la o vizită ulterioară.
 
-Linkul permanent „Setări cookies”, care va redeschide alegerea din subsolul site-ului, este în curs de implementare și nu trebuie prezentat ca funcțional până la verificare.
+Pentru a vă exprima din nou alegerea prin banner, puteți șterge datele site-ului Kluppi din setările browserului și apoi reîncărca pagina.
 
 Aplicația app.kluppi.com nu afișează un banner sau opțiuni de cookies pentru mecanismele strict necesare descrise la secțiunea 6.1. Acordul pentru e-mailuri comerciale este separat de alegerea privind analiza pe kluppi.com.
 
@@ -192,5 +192,3 @@ Dacă vom introduce cookies sau tehnologii similare noi care necesită consimț�
 
 Pentru întrebări privind această Politică de cookies sau folosirea tehnologiilor similare, ne puteți contacta la hello@kluppi.com.
 
-
-<!-- NOTĂ INTERNĂ, de eliminat înainte de publicare. (1) verificarea în browser a tuturor identificatorilor și duratelor pe kluppi.com și app.kluppi.com, inclusiv dacă cookie-urile Google Analytics sunt limitate la kluppi.com și nu sunt transmise și către subdomeniul aplicației; (2) verificarea că Sentry nu scrie sau citește stocare în browser; (3) verificarea, la punerea în producție a site-ului post-lansare, că Google Tag Manager, Google Analytics, theMarketer tracking, Vercel Web Analytics și Vercel Speed Insights rămân blocate până la Accept; (4) durata cookie-ului theMarketer; (5) implementarea și verificarea linkului permanent „Setări cookies” pentru retragere; (6) menținerea stocării de sesiune din Setări numai pentru pagina, poziția de derulare și momentul salvării, până la închiderea filei; (7) evaluarea juridică a cererii suplimentare prin care jurnalul propriu transmite evenimentele din browser. -->

@@ -1,6 +1,6 @@
 # **POLITICA DE CONFIDENȚIALITATE**
 
-Data ultimei actualizări: 30 septembrie 2026 (proiect pentru revizuire)
+Data ultimei actualizări: 30 septembrie 2026
 
 În această Politică de confidențialitate explicăm modul în care Kluppi prelucrează datele dumneavoastră cu caracter personal în legătură cu site-ul kluppi.com, aplicația web app.kluppi.com, conturile de membru, ofertele, abonamentele și comunicările.
 
@@ -91,10 +91,10 @@ Prelucrările descrise în această Politică se întemeiază, după caz, pe urm
 | Administrarea abonamentului, plăților, reînnoirilor și rambursărilor | Date de abonament și plată | Lit. b: executarea contractului; lit. c când păstrarea sau comunicarea este impusă de lege |
 | Emiterea facturilor și păstrarea documentelor obligatorii | Date de facturare și tranzacții | Lit. c: obligație legală |
 | Programul de recomandări solicitat de membri | Coduri, relația dintre conturi și credit | Lit. b: executarea regulilor programului; lit. f pentru prevenirea abuzurilor |
-| Evidența copierii mesajelor și linkurilor de recomandare, pentru verificarea funcționării programului și prevenirea abuzurilor | Evenimentul copierii asociat contului, fără contactele destinatarilor | Lit. f: interes legitim, după documentarea necesității și a balanței cu drepturile membrilor |
+| Evidența copierii mesajelor și linkurilor de recomandare, pentru verificarea funcționării programului și prevenirea abuzurilor | Evenimentul copierii asociat contului, fără contactele destinatarilor | Lit. f: interes legitim pentru funcționarea corectă a programului și prevenirea abuzurilor |
 | Mesaje necesare contului, verificării prin SMS, securității, plății și modificărilor contractuale | Date de contact și datele relevante pentru mesaj | Lit. b sau c, potrivit naturii mesajului |
 | Prevenirea fraudei, a conturilor multiple și a folosirii abuzive a codurilor; diagnosticarea erorilor | Adrese IP, hash-uri, jurnale și evenimente strict relevante | Lit. f: interesul legitim de a proteja membrii și serviciul |
-| Măsurarea etapelor de plată și a primei consultări a planurilor și ofertelor, pentru a identifica dificultăți și a îmbunătăți serviciul | Evenimentele asociate contului descrise la secțiunea 2, fără datele introduse la plată | Lit. f: interesul legitim de a îmbunătăți funcționarea serviciului, după documentarea necesității și a balanței dintre acest interes și drepturile membrilor |
+| Măsurarea etapelor de plată și a primei consultări a planurilor și ofertelor, pentru a identifica dificultăți și a îmbunătăți serviciul | Evenimentele asociate contului descrise la secțiunea 2, fără datele introduse la plată | Lit. f: interesul legitim de a îmbunătăți funcționarea serviciului |
 | Răspunsul la cereri și reclamații; constatarea, exercitarea ori apărarea drepturilor | Corespondență și datele cazului | Lit. f sau c, după caz |
 | Beneficii aniversare, dacă introduceți voluntar data nașterii | Ziua, luna și anul nașterii | Lit. a: consimțământ, care poate fi retras |
 | E-mailuri comerciale, inclusiv digesturi cu oferte și promovarea partenerilor, și măsurarea deschiderilor și clicurilor prin theMarketer | E-mail, preferințe, dovada opțiunii și interacțiunile cu mesajele | Lit. a: consimțământ pentru comunicări comerciale, pe baza informării despre măsurarea interacțiunilor; se aplică și regulile Legii nr. 506/2004 |
@@ -131,28 +131,28 @@ Kluppi aplică măsuri tehnice și organizatorice rezonabile pentru protejarea d
 
 Nicio metodă de transmitere sau stocare electronică nu este complet lipsită de risc. În cazul unui incident de securitate care poate afecta drepturile și libertățile persoanelor vizate, Kluppi va lua măsurile impuse de legislația aplicabilă.
 
-Potrivit configurației comunicate pentru Kluppi, proiectele Supabase și baza de date Upstash sunt la Frankfurt, datele Sentry sunt stocate în Germania, iar funcțiile aplicației găzduite de Vercel rulează la Frankfurt. Vercel folosește o rețea globală de livrare. theMarketer, NETOPIA și Oblio sunt companii din România. Vercel, Sentry, Resend și Google sunt furnizori cu sediul în Statele Unite, iar Upstash este o companie din afara Uniunii Europene. Resend trimite mesajele din Irlanda, în Uniunea Europeană. Localizarea unui server în Uniunea Europeană nu exclude accesul la date din alte țări ori implicarea unor subcontractanți. [De completat din contractele de prelucrare și listele de subcontractanți: pentru fiecare transfer efectiv în afara Spațiului Economic European, țara, temeiul din art. 44–49 GDPR, garanțiile aplicabile și modul de obținere a unei copii.]
+Potrivit configurației Kluppi, proiectele Supabase și baza de date Upstash sunt la Frankfurt, datele Sentry sunt stocate în Germania, iar funcțiile aplicației găzduite de Vercel rulează la Frankfurt. Vercel folosește o rețea globală de livrare. theMarketer, NETOPIA și Oblio sunt companii din România. Vercel, Sentry, Resend și Google sunt furnizori cu sediul în Statele Unite, iar Upstash este o companie din afara Uniunii Europene. Resend trimite mesajele din Irlanda, în Uniunea Europeană. Localizarea unui server în Uniunea Europeană nu exclude accesul la date din alte țări ori implicarea unor subcontractanți. Dacă are loc un transfer de date în afara Spațiului Economic European, îl realizăm în condițiile art. 44–49 GDPR, inclusiv, după caz, pe baza unei decizii de adecvare, a clauzelor contractuale standard sau a altor garanții permise de lege. Puteți solicita informații despre garanțiile aplicabile la hello@kluppi.com.
 
 # **6\. Perioada pentru care stocăm datele**
 
 Datele necesare furnizării serviciului sunt păstrate cât timp contul este activ. La închiderea contului, acesta este marcat ca închis, conectarea este blocată, iar adresa de e-mail și numărul de telefon sunt eliberate pentru o eventuală înscriere nouă. La închiderea contului, adresa este retrasă automat de pe lista de comunicări comerciale. Un proces automat rulează zilnic pentru aplicarea termenelor de ștergere din tabelul de mai jos.
 
-| Categorie | Termen după închidere sau alt punct de pornire | Situație |
-| --- | --- | --- |
-| Jurnalul propriu de măsurare | Pe durata contului și 180 de zile după închidere; apoi ștergere automată zilnică a înregistrărilor individuale | Implementat și monitorizat; totalurile ireversibil anonimizate pot fi păstrate mai mult |
-| Telefonul și adresa de e-mail folosite la conectare; numele și celelalte copii ale adresei de e-mail | Telefonul și adresa de e-mail folosite la conectare sunt eliberate la închiderea contului. Numele și celelalte copii ale adresei de e-mail sunt șterse la 180 de zile după închidere | Implementat |
-| Preferințe, categorii de interes și data nașterii (ziua, luna și anul) | 180 de zile după închidere | Implementat |
-| Alocări de oferte și coduri acordate ori dezvăluite | 180 de zile după închidere | Implementat |
-| Istoricul copierii mesajelor și linkurilor de recomandare | 180 de zile după închidere | Implementat |
-| Tokenul de plată salvat pentru reînnoiri | Devine neutilizabil la închiderea contului și se șterge la 180 de zile după închidere | Implementat |
-| Datele rămase ale contului, inclusiv abonamente, plăți, rambursări și dovezile acceptării Termenilor | 3 ani după închidere; apoi contul este șters | Implementat; termenul de 3 ani folosește ca reper prescripția generală din art. 2517 Cod civil. Încadrarea evidențelor Kluppi privind plățile și rambursările ca documente justificative contabile se confirmă cu specialistul financiar |
-| Facturi, registre și documente justificative contabile | 5 ani calculați de la 1 iulie a anului următor exercițiului financiar în care au fost întocmite | Termen legal potrivit art. 25 din Legea contabilității nr. 82/1991; documentele aplicabile se confirmă cu specialistul financiar |
-| Tichete de suport închise și cereri de export de date finalizate | 3 ani de la închidere sau finalizare | Implementat |
-| Coduri de verificare prin telefon, evidențe interne ale joburilor și alerte rezolvate | 180 de zile de la eveniment | Implementat |
-| Date Sentry, inclusiv erori, date de performanță și jurnale | 30 de zile de la înregistrare | Implementat în planul Developer |
-| Copii de siguranță programate ale bazei de date | Nu se realizează copii de siguranță programate ale bazei de date | Plan Free, configurația actuală |
+| Categorie | Termen după închidere sau alt punct de pornire |
+| --- | --- |
+| Jurnalul propriu de măsurare | Pe durata contului și 180 de zile după închidere; totalurile ireversibil anonimizate pot fi păstrate mai mult |
+| Telefonul și adresa de e-mail folosite la conectare; numele și celelalte copii ale adresei de e-mail | Telefonul și adresa de e-mail folosite la conectare sunt eliberate la închiderea contului. Numele și celelalte copii ale adresei de e-mail sunt șterse la 180 de zile după închidere |
+| Preferințe, categorii de interes și data nașterii (ziua, luna și anul) | 180 de zile după închidere |
+| Alocări de oferte și coduri acordate ori dezvăluite | 180 de zile după închidere |
+| Istoricul copierii mesajelor și linkurilor de recomandare | 180 de zile după închidere |
+| Tokenul de plată salvat pentru reînnoiri | Devine neutilizabil la închiderea contului și se șterge la 180 de zile după închidere |
+| Datele rămase ale contului, inclusiv abonamente, plăți, rambursări și dovezile acceptării Termenilor | 3 ani după închidere; apoi contul este șters |
+| Facturi, registre și documente justificative contabile | 5 ani calculați de la 1 iulie a anului următor exercițiului financiar în care au fost întocmite |
+| Tichete de suport închise și cereri de export de date finalizate | 3 ani de la închidere sau finalizare |
+| Coduri de verificare prin telefon, evidențe interne ale joburilor și alerte rezolvate | 180 de zile de la eveniment |
+| Date Sentry, inclusiv erori, date de performanță și jurnale | 30 de zile de la înregistrare |
+| Copii de siguranță programate ale bazei de date | Nu se realizează copii de siguranță programate ale bazei de date |
 
-Nu există un termen unic GDPR pentru toate categoriile de date. Păstrarea trebuie limitată la scopul concret, potrivit art. 5 alin. (1) lit. e GDPR. Datele necesare unei reclamații sau unui litigiu concret pot fi izolate într-un dosar cu acces restrâns până la soluționarea definitivă și expirarea termenului aplicabil acelui caz; excepția nu prelungește automat păstrarea tuturor datelor contului. [De documentat justificarea păstrării jurnalului pe toată durata contului, inclusiv pentru conturile nefolosite.] Durata statisticilor Vercel Web Analytics de pe kluppi.com este separată și trebuie verificată în contract și setările proiectului.
+Nu există un termen unic GDPR pentru toate categoriile de date. Păstrarea este limitată la scopul concret, potrivit art. 5 alin. (1) lit. e GDPR. Datele necesare unei reclamații sau unui litigiu concret pot fi izolate într-un dosar cu acces restrâns până la soluționarea definitivă și expirarea termenului aplicabil acelui caz; excepția nu prelungește automat păstrarea tuturor datelor contului.
 
 Retragerea consimțământului oprește folosirea datelor pentru scopul respectiv; o dovadă minimă a retragerii poate fi păstrată pentru a respecta opțiunea exprimată.
 
@@ -201,5 +201,3 @@ Versiunea actualizată va fi publicată pe site-ul Kluppi și va indica data ult
 
 Dacă modificările sunt semnificative și afectează modul în care sunt prelucrate datele persoanelor vizate, Kluppi poate informa persoanele vizate prin e-mail sau prin alte mijloace adecvate, în măsura necesară potrivit legii.
 
-
-<!-- NOTĂ INTERNĂ — de eliminat înainte de publicare. De verificat: contractele furnizorilor și transferurile în afara SEE; procedura de divulgare graduală către parteneri; formatul datelor de card returnate de NETOPIA; datele societății și funcționarea adreselor de contact; implementarea post-lansare a încărcării Vercel Web Analytics și Vercel Speed Insights numai după „Accept”; documentarea interesului legitim pentru jurnal și a păstrării sale pe durata contului plus 180 de zile; analiza cererii de browser folosite la înregistrarea evenimentelor potrivit Legii nr. 506/2004; procedura pentru opoziții admise; confirmarea de către specialistul financiar dacă evidențele Kluppi privind plățile și rambursările sunt documente justificative contabile; alinierea închiderii administrative a conturilor cu regula de eliberare imediată a e-mailului și numărului de telefon, dacă aceasta este intenția Kluppi. -->
