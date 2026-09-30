@@ -1551,3 +1551,7 @@ or the site will be pinned to a dated archive forever.
 **NOT DEPLOYED.** This is on `kluppi-rebrand`. www.kluppi.com serves `main`, and
 per this repo's rules `main` is fast-forwarded only on Andra's explicit "ship
 it". Nothing changes for a visitor until that happens.
+
+## 2026-09-30 — Dated privacy + cookie policy archives published (live)
+Files: `src/app/(legal)/LegalDocument.tsx`, `src/app/(legal)/confidentialitate/2026-09-30/{page.tsx,policy.md}`, `src/app/(legal)/politica-cookies/2026-09-30/{page.tsx,policy.md}` — copied from `kluppi-rebrand` (e546855).
+- Andra: "The final versions are in Downloads, publish them" (live approved: "Yes, ship to live"). New dated, noindex pages for the post-launch policies, linked from the Kluppi app footer. The waitlist's own /confidentialitate and /politica-cookies pages and every waitlist link are unchanged.
