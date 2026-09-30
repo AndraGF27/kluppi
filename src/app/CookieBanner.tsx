@@ -2,10 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import styles from "./cookie.module.css";
 
 // Persists the visitor's choice so the banner shows only once, and gates all
-// non-essential tracking. The scripts below (GA4, GTM, theMarketer) are injected
+// non-essential tracking. The scripts below (GA4, GTM, theMarketer, Vercel Web
+// Analytics and Speed Insights — the last two since 2026-10-01) are injected
 // ONLY when this is "accepted" — nothing analytics-related loads before that, so
 // no GA/GTM request fires and no analytics cookie is set until the user opts in.
 const CONSENT_KEY = "kluppi-cookie-consent";
@@ -23,6 +26,10 @@ const THEMARKETER_KEY = "ZZRAFU8W";
 function ConsentedScripts() {
   return (
     <>
+      {/* Vercel Web Analytics and Speed Insights — cookieless, but consent-gated
+          on the lawyer's advice (see layout.tsx). */}
+      <Analytics />
+      <SpeedInsights />
       {/* Google Tag Manager */}
       <Script id="gtm" strategy="afterInteractive">
         {`

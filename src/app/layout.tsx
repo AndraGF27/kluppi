@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import CookieBanner from "./CookieBanner";
 import "./fonts.css";
 import "./webflow.css";
@@ -31,13 +29,14 @@ export default function RootLayout({
     <html lang="en">
       <body className="body">
         {/* Analytics & marketing (Google Analytics, Google Tag Manager,
-            theMarketer) are NOT loaded here. They are injected by <CookieBanner>
-            only after the visitor clicks "Accept", so no GA/GTM/theMarketer
-            request fires and no analytics cookie is set before consent. Fonts are
-            self-hosted (./fonts.css) — no third-party font requests either. */}
+            theMarketer, Vercel Web Analytics, Vercel Speed Insights) are NOT
+            loaded here. They are injected by <CookieBanner> only after the
+            visitor clicks "Accept", so none of them runs and no analytics cookie
+            is set before consent. Vercel's two tools set no cookie, but the
+            lawyer's advice (2026-09-29/30, Legea 506/2004 art. 4(5)–(6)) is that a
+            script sending browser information needs consent all the same. Fonts
+            are self-hosted (./fonts.css) — no third-party font requests either. */}
         {children}
-        <Analytics />
-        <SpeedInsights />
         <CookieBanner />
       </body>
     </html>

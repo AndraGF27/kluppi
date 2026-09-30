@@ -1574,3 +1574,14 @@ it". Nothing changes for a visitor until that happens.
 - **How to read what is unshipped — use CONTENT, not the commit list.** `git log main..kluppi-rebrand` still lists ten commits, and `git cherry` marks all ten `+`, because the cherry-picks were not byte-identical patches (their LOGBOOK context differs). Both are misleading. The truthful measure is `git diff --stat main kluppi-rebrand`, which on 2026-09-23 is five files: `src/app/r/[code]/route.ts` (gated to `notFound()` in production), `tasks/05-referral-redirect.md`, `CLAUDE.md`, `AGENTS.md`, `LOGBOOK.md`. The DOI confirmation copy (`d450c44`) is already live — it shipped through `2091fc3`.
 - **Why:** Andra, 2026-09-23: "tidy up the divergence on kluppi-rebrand". The phantom list survives until the next fast-forward, when `main` absorbs both SHAs of each pair; ending it sooner would mean rewriting published history (force-push), which was not done.
 - **Rule going forward:** ship by fast-forwarding `main` to this branch, never by cherry-picking onto `main` — cherry-picks are what created the divergence.
+
+## 2026-10-01 — Vercel Web Analytics + Speed Insights behind "Accept" (post-launch site, kluppi-rebrand)
+- `src/app/layout.tsx`: `<Analytics />` and `<SpeedInsights />` removed from the always-on layout; comment
+  lists them with GA/GTM/theMarketer as consent-gated, with the lawyer's reason.
+- `src/app/CookieBanner.tsx`: both rendered inside `ConsentedScripts` (only when consent === "accepted").
+- Why: the lawyer (2026-09-29/30) — a cookieless script that sends browser information still needs consent
+  under Legea 506/2004 art. 4(5)–(6); Andra agreed for both tools (2026-09-30). Done by Claude (not Cody),
+  on the post-launch branch only: `main` (waitlist, its own older policy) is unchanged.
+- Consequence for the app: the admin dashboard's "Visited the site" (Vercel Web Analytics on kluppi.com)
+  will count only visitors who accepted, once this site is live.
+- `npm run build`: compiled, 21/21 pages.
