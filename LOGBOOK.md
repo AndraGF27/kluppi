@@ -1588,3 +1588,6 @@ it". Nothing changes for a visitor until that happens.
 
 ## 2026-09-30 — Date fix
 Files: `src/app/CookieBanner.tsx`, `tasks/06-vercel-analytics-behind-consent.md`, `LOGBOOK.md`. The Speed Insights/Web Analytics consent change was dated 2026-10-01; it was made 2026-09-30. Comment/record dates corrected, no behaviour change.
+
+## 2026-09-30 — Next.js 16.2.9 → 16.3.8 (kluppi-rebrand only)
+Files: `package-lock.json`, `CLAUDE.md`. Critical advisory GHSA-vcvr-r3jv-pc5j (RCE in `next/og` ImageResponse, 16.2.0–16.3.5); the site does not use `next/og`, so exposure was low. `npm update next` (package.json keeps `"latest"`): audit 8 → 4, the remaining 4 are build-tool packages (brace-expansion, browserslist, js-yaml, baseline-browser-mapping), unchanged. The live waitlist (`main`) is NOT upgraded, by Andra's choice. tsc + `npm run build` green. CLAUDE.md: corrected the stale line saying Vercel Analytics loads from layout.tsx (it is consent-gated since task 06).

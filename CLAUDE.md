@@ -14,7 +14,7 @@ Single-page teaser/waitlist landing page for Kluppi — a shopping club with cod
 ## Where things live
 - Main page: `src/app/page.tsx`. Sections: `BenefitsCards.tsx`, `HowItWorks.tsx`, `PainPointsCarousel.tsx`, `SplitBanner.tsx`. Legal pages: `src/app/(legal)/`. Cookie banner: `CookieBanner.tsx`.
 - Signup form posts to `src/app/api/add-subscriber/route.ts` (theMarketer double opt-in, `Waitlist` tag). Sibling theMarketer wrappers: `remove-subscriber`, `update-tags`, `subscriber-status`. All need `THEMARKETER_REST_KEY` + `THEMARKETER_CUSTOMER_ID` (`.env.local` locally, Vercel in prod). (The old `/api/subscribe` Vercel KV route is gone.)
-- Analytics are **consent-gated in `src/app/CookieBanner.tsx`**, not in `layout.tsx`: GA4 `G-LNKD7TBG3N`, GTM `GTM-5673VBFG` and the theMarketer loader mount only after the visitor accepts, so nothing fires and no cookie is set beforehand. Don't move them into `layout.tsx` — that would load them unconditionally and break consent. Only Vercel Analytics loads from `layout.tsx` (cookieless).
+- Analytics are **consent-gated in `src/app/CookieBanner.tsx`**, not in `layout.tsx`: GA4 `G-LNKD7TBG3N`, GTM `GTM-5673VBFG` and the theMarketer loader mount only after the visitor accepts, so nothing fires and no cookie is set beforehand. Don't move them into `layout.tsx` — that would load them unconditionally and break consent. Vercel Web Analytics and Speed Insights are consent-gated there too (since 2026-09-30, on `kluppi-rebrand`); nothing analytics-related loads from `layout.tsx`.
 
 ## Design tokens (in `:root`, `src/app/globals.css`)
 - Accent: `#f5531c` (Dare Devil) · Background: `#fff0bc` (Lemon Sorbet) · Text: `#351e28` (Cassis).
