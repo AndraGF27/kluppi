@@ -12,15 +12,13 @@ const socials = [
 
 // Legal links always open in a new tab (per spec).
 //
-// ⚠️ The Terms link points at the DATED ARCHIVE, not at `/termeni-si-conditii`
-// (Andra, 2026-09-22, "for now"). The un-dated page still serves the WAITLIST
-// terms of 26 June 2026 — no Kluppi+, no pricing, no referral chapter — so a
-// visitor following a general "Termeni și condiții" link was being handed the
-// wrong document. The 2026-09-20 archive is the membership contract, and it is
-// the same URL the app's compliance footer uses. Revert this to the bare path
-// once the un-dated page is replaced with the final membership terms.
+// The Terms link points at the WAITLIST's own terms (`/termeni-si-conditii`),
+// like the privacy and cookie links next to it: the live site is still the
+// waitlist (Andra, 2026-10-01 — reverting the 2026-09-22 "for now" link to the
+// app's 2026-09-20 membership archive). At launch, the post-launch site
+// (kluppi-rebrand) links the app's documents instead.
 const legalLinks = [
-  { href: "/termeni-si-conditii/2026-09-20", label: "Termeni și condiții" },
+  { href: "/termeni-si-conditii", label: "Termeni și condiții" },
   { href: "/confidentialitate", label: "Politica de confidențialitate" },
   { href: "/politica-cookies", label: "Politica de cookies" },
 ];

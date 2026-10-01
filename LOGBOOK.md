@@ -1561,3 +1561,7 @@ Files: `src/app/(legal)/confidentialitate/2026-10-01/{page.tsx,policy.md}` (yest
 
 ## 2026-10-01 — Partnership Terms archive live: /termeni-parteneri/2026-10-01 + PDF
 Files: `src/app/(legal)/termeni-parteneri/2026-10-01/*`, `public/legal/kluppi-termeni-parteneriat-2026-10-01.pdf`, `scripts/build-legal-pdf.mjs`, `src/app/(legal)/LegalDocument.tsx`, `src/app/(legal)/legal.module.css` — from kluppi-rebrand fcf10b5. For the app's partner offer-approval flow (Andra, 2026-10-01). Nothing else on the waitlist site changes.
+
+## 2026-10-01 — Waitlist footer Terms link back to the waitlist Terms (live)
+Files: `src/app/SiteChrome.tsx`, `src/app/page.tsx`.
+- Andra: "the current Waitlist website has the app T&Cs linked in the footer, which is wrong. Please fix this". Reverts the 2026-09-22 "for now" change (4138fc4): the legal-page footer (SiteChrome) and the homepage footer now link `/termeni-si-conditii` (waitlist terms, 26 iunie 2026) again, matching the privacy/cookie links beside them. The /2 post-launch homepage preview keeps the app archive link (right document for that design). kluppi-rebrand is untouched (at launch it links the app documents).
