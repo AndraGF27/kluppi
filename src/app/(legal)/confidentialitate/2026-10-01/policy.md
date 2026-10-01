@@ -1,6 +1,6 @@
 # **POLITICA DE CONFIDENȚIALITATE**
 
-Data ultimei actualizări: 30 septembrie 2026
+Data ultimei actualizări: 1 octombrie 2026
 
 În această Politică de confidențialitate explicăm modul în care Kluppi prelucrează datele dumneavoastră cu caracter personal în legătură cu site-ul kluppi.com, aplicația web app.kluppi.com, conturile de membru, ofertele, abonamentele și comunicările.
 
@@ -27,7 +27,8 @@ a. accesează site-ul kluppi.com;
 b. creează sau utilizează un cont pe app.kluppi.com;  
 c. folosesc ofertele, codurile, abonamentele sau programul de recomandări Kluppi;  
 d. primesc comunicări de la Kluppi privind contul, abonamentul, ofertele sau, dacă și-au exprimat opțiunea, comunicări comerciale;  
-e. contactează Kluppi prin e-mail sau prin alte mijloace disponibile.
+e. contactează Kluppi prin e-mail sau prin alte mijloace disponibile;  
+f. reprezintă un Partener ori sunt persoane de contact ale acestuia în legătură cu negocierea, aprobarea sau administrarea colaborării cu Kluppi.
 
 Conturile Kluppi sunt destinate persoanelor care au împlinit 18 ani, potrivit Termenilor și condițiilor. Kluppi nu urmărește colectarea intenționată de date de la minori. Dacă aflăm că un cont aparține unui minor, vom lua măsuri rezonabile privind accesul și datele aferente contului.
 
@@ -51,9 +52,11 @@ f. date privind comunicările: corespondența cu noi, statusul livrării mesajel
 
 g. date tehnice și de securitate: adresa IP, tipul dispozitivului, tipul browserului, sistemul de operare, data și ora accesării, paginile accesate, erori tehnice, jurnale de securitate și date similare necesare pentru funcționarea, securitatea și administrarea site-ului și aplicației. Pentru limitarea încercărilor repetate, Upstash primește doar versiuni transformate criptografic, numite hash-uri, ale adresei IP și adresei de e-mail. Sentry primește adrese IP, date despre erorile aplicației și date de performanță pentru fiecare vizită în aplicație;
 
-h. date colectate prin cookies, analytics și tehnologii similare: identificatori online, sursa traficului, paginile vizitate, durata vizitei, interacțiuni cu site-ul și alte date statistice sau de analiză, în funcție de instrumentele utilizate și de opțiunile exprimate prin mecanismul de consimțământ pentru cookies.
+h. date colectate prin cookies, analytics și tehnologii similare: identificatori online, sursa traficului, paginile vizitate, durata vizitei, interacțiuni cu site-ul și alte date statistice sau de analiză, în funcție de instrumentele utilizate și de opțiunile exprimate prin mecanismul de consimțământ pentru cookies;
 
-Datele provin de la dumneavoastră, din utilizarea site-ului sau aplicației, de la Google când alegeți conectarea prin Google, de la NETOPIA pentru rezultatul plății și informațiile limitate despre metoda de plată și din codul de recomandare prezentat la înscriere. Partenerii ne transmit, în mod obișnuit, numai rezultate agregate ale campaniilor.
+i. date despre reprezentanții și persoanele de contact ale Partenerilor: numele, funcția sau rolul, adresa profesională de e-mail și datele de contact folosite în colaborare. Pentru persoana care aprobă online condițiile de colaborare și o Fișă a Ofertei, păstrăm și identitatea Partenerului, contul sau adresa de e-mail folosită, data și ora exactă a aprobării, confirmările și acțiunile de acceptare, identificatorii și copiile versiunilor aprobate ale condițiilor de colaborare și Fișei Ofertei, precum și dovada transmiterii confirmării. Aceste date arată cine a aprobat, în numele cărui Partener, ce versiune a aprobat și când.
+
+Datele provin de la dumneavoastră, din utilizarea site-ului sau aplicației, de la Google când alegeți conectarea prin Google, de la NETOPIA pentru rezultatul plății și informațiile limitate despre metoda de plată și din codul de recomandare prezentat la înscriere. Datele profesionale ale reprezentanților pot proveni și de la Partenerul pe care îl reprezintă; acțiunile de aprobare sunt înregistrate când reprezentantul le efectuează. În privința membrilor, Partenerii ne transmit, în mod obișnuit, numai rezultate agregate ale campaniilor.
 
 Kluppi nu solicită categorii speciale de date cu caracter personal, cum ar fi date privind sănătatea, opiniile politice, religia, apartenența sindicală, date biometrice, date genetice sau date privind condamnări penale. Vă rugăm să nu ne transmiteți astfel de date prin aplicație, e-mail sau capturi de ecran. Alegerea unei categorii comerciale nu este folosită pentru deducerea unui diagnostic.
 
@@ -75,7 +78,9 @@ f. prevenirea abuzurilor, diagnosticarea erorilor și măsurarea tehnică a perf
 
 g. măsurarea, prin jurnalul propriu al aplicației, a etapelor de plată și a primei consultări a planurilor și ofertelor;
 
-h. analizarea vizitelor și a performanței site-ului kluppi.com prin tehnologiile descrise în Politica de cookies.
+h. analizarea vizitelor și a performanței site-ului kluppi.com prin tehnologiile descrise în Politica de cookies;
+
+i. negocierea și administrarea colaborării cu Partenerii, transmiterea comunicărilor contractuale, gestionarea aprobărilor și păstrarea dovezii privind persoana care a acceptat o anumită versiune a condițiilor de colaborare sau a Fișei Ofertei și momentul acceptării, inclusiv pentru soluționarea neînțelegerilor și apărarea drepturilor.
 
 Pentru fiecare scop, datele folosite și temeiul juridic sunt detaliate în secțiunea 4.
 
@@ -96,6 +101,7 @@ Prelucrările descrise în această Politică se întemeiază, după caz, pe urm
 | Prevenirea fraudei, a conturilor multiple și a folosirii abuzive a codurilor; diagnosticarea erorilor | Adrese IP, hash-uri, jurnale și evenimente strict relevante | Lit. f: interesul legitim de a proteja membrii și serviciul |
 | Măsurarea etapelor de plată și a primei consultări a planurilor și ofertelor, pentru a identifica dificultăți și a îmbunătăți serviciul | Evenimentele asociate contului descrise la secțiunea 2, fără datele introduse la plată | Lit. f: interesul legitim de a îmbunătăți funcționarea serviciului |
 | Răspunsul la cereri și reclamații; constatarea, exercitarea ori apărarea drepturilor | Corespondență și datele cazului | Lit. f sau c, după caz |
+| Administrarea relației cu Partenerii și înregistrarea aprobărilor online, inclusiv dovedirea persoanei, versiunii și momentului acceptării | Datele profesionale și înregistrarea aprobării descrise la secțiunea 2 | Lit. f: interesul legitim al Kluppi și al Partenerului de a gestiona colaborarea și de a putea dovedi acordurile încheiate și executarea lor |
 | Beneficii aniversare, dacă introduceți voluntar data nașterii | Ziua, luna și anul nașterii | Lit. a: consimțământ, care poate fi retras |
 | E-mailuri comerciale, inclusiv digesturi cu oferte și promovarea partenerilor, și măsurarea deschiderilor și clicurilor prin theMarketer | E-mail, preferințe, dovada opțiunii și interacțiunile cu mesajele | Lit. a: consimțământ pentru comunicări comerciale, pe baza informării despre măsurarea interacțiunilor; se aplică și regulile Legii nr. 506/2004 |
 | Analiza traficului pe kluppi.com prin Google Analytics și Vercel Web Analytics | Datele vizitei și identificatori, după instrument | Lit. a: consimțământ prealabil pentru instrumentele opționale care accesează informații din dispozitiv; instrumentele sunt încărcate numai după alegerea „Accept” |
@@ -125,7 +131,7 @@ Linkurile către magazinele partenerilor nu conțin identificatorul membrului. C
 
 Putem furniza date autorităților ori instanțelor când legea cere aceasta. Consultanții și reprezentanții noștri pot avea acces limitat când este necesar pentru conformitate, reclamații sau apărarea drepturilor.
 
-În relația cu furnizorii care prelucrează date în numele Kluppi, urmărim ca aceștia să prelucreze datele conform instrucțiunilor noastre, în condiții de confidențialitate și securitate.
+Înregistrările aprobărilor Partenerilor sunt accesibile persoanelor autorizate din Kluppi și, în măsura necesară furnizării serviciilor tehnice, furnizorilor implicați în găzduire, stocare, transmiterea confirmărilor și diagnosticare, precum Vercel, Supabase, Resend și Sentry. Accesul unui furnizor la date în numele Kluppi nu îi dă dreptul să folosească acele date pentru scopuri proprii. Furnizorii care acționează ca persoane împuternicite prelucrează datele potrivit instrucțiunilor Kluppi și obligațiilor de confidențialitate și securitate.
 
 Kluppi aplică măsuri tehnice și organizatorice rezonabile pentru protejarea datelor cu caracter personal împotriva accesului neautorizat, pierderii, distrugerii, modificării, divulgării neautorizate sau prelucrării ilegale. Aceste măsuri pot include, după caz, limitarea accesului la date, autentificare, controlul accesului, monitorizare tehnică și proceduri interne de administrare. Funcția Sentry de mascare a datelor sensibile este activă.
 
@@ -135,7 +141,7 @@ Potrivit configurației Kluppi, proiectele Supabase și baza de date Upstash sun
 
 # **6\. Perioada pentru care stocăm datele**
 
-Datele necesare furnizării serviciului sunt păstrate cât timp contul este activ. La închiderea contului, acesta este marcat ca închis, conectarea este blocată, iar adresa de e-mail și numărul de telefon sunt eliberate pentru o eventuală înscriere nouă. La închiderea contului, adresa este retrasă automat de pe lista de comunicări comerciale. Un proces automat rulează zilnic pentru aplicarea termenelor de ștergere din tabelul de mai jos.
+Datele necesare furnizării serviciului sunt păstrate cât timp contul este activ. La închiderea contului, acesta este marcat ca închis, conectarea este blocată, iar adresa de e-mail și numărul de telefon sunt eliberate pentru o eventuală înscriere nouă. La închiderea contului, adresa este retrasă automat de pe lista de comunicări comerciale. Un proces automat rulează zilnic pentru aplicarea termenelor de ștergere aferente conturilor. Termenul pentru înregistrările aprobărilor Partenerilor se calculează separat, de la încetarea contractului cu Partenerul.
 
 | Categorie | Termen după închidere sau alt punct de pornire |
 | --- | --- |
@@ -148,6 +154,7 @@ Datele necesare furnizării serviciului sunt păstrate cât timp contul este act
 | Datele rămase ale contului, inclusiv abonamente, plăți, rambursări și dovezile acceptării Termenilor | 3 ani după închidere; apoi contul este șters |
 | Facturi, registre și documente justificative contabile | 5 ani calculați de la 1 iulie a anului următor exercițiului financiar în care au fost întocmite |
 | Tichete de suport închise și cereri de export de date finalizate | 3 ani de la închidere sau finalizare |
+| Datele profesionale ale reprezentanților și înregistrările aprobărilor Partenerilor, inclusiv copiile versiunilor acceptate și dovezile confirmării | Pe durata contractului cu Partenerul și 3 ani de la încetarea acestuia |
 | Coduri de verificare prin telefon, evidențe interne ale joburilor și alerte rezolvate | 180 de zile de la eveniment |
 | Date Sentry, inclusiv erori, date de performanță și jurnale | 30 de zile de la înregistrare |
 | Copii de siguranță programate ale bazei de date | Nu se realizează copii de siguranță programate ale bazei de date |
@@ -163,6 +170,8 @@ Nu aveți obligația legală de a crea un cont Kluppi.
 Totuși, dacă nu furnizați datele și verificările necesare pentru cont, inclusiv adresa de e-mail și numărul de telefon verificat, nu vom putea activa contul și nu veți putea utiliza funcțiile aferente. Datele necesare facturării și plății sunt cerute numai când alegeți un Plan cu Plată.
 
 Data nașterii, acordul pentru marketing și acceptarea tehnologiilor opționale de pe kluppi.com sunt facultative. Refuzul lor nu împiedică folosirea funcțiilor de bază ale planului.
+
+Pentru aprobarea online în numele unui Partener sunt necesare datele de identificare profesională și înregistrarea acțiunii de acceptare. Fără acestea, nu putem înregistra și dovedi aprobarea.
 
 # **8\. Drepturile dumneavoastră și informații privind exercitarea acestora**
 
@@ -181,6 +190,8 @@ h. dreptul de a nu fi supus unei decizii bazate exclusiv pe prelucrare automată
 
 Pentru celelalte cereri privind datele personale, scrieți la hello@kluppi.com. Putem cere informații rezonabile pentru verificarea identității. Răspundem, de regulă, în cel mult o lună, cu posibilitatea prelungirii în condițiile art. 12 alin. (3) GDPR. Dacă apreciați că drepturile v-au fost încălcate, puteți depune o plângere la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal: https://www.dataprotection.ro/.
 
+Reprezentanții Partenerilor pot exercita aceleași drepturi cu privire la propriile date, inclusiv accesul, rectificarea, ștergerea în condițiile legii și opoziția față de prelucrarea bazată pe interes legitim. Cererile se trimit la hello@kluppi.com. Dacă vă opuneți, analizăm motivele legate de situația dumneavoastră și nu continuăm prelucrarea vizată decât dacă demonstrăm motive legitime imperioase care prevalează ori dacă datele sunt necesare pentru constatarea, exercitarea sau apărarea unui drept.
+
 # **9\. Detaliile noastre de contact**
 
 Kluppi este operat de DRMX KALEIDOSCOPE LUX DIGITAL S.R.L., societate înregistrată la Registrul Comerțului sub nr. J2020000816159, CUI 42919124, cu sediul social în Târgoviște, str. Col. Ion Nicolin, nr. 2A, bl. 61B, sc. A, et. 2, ap. 10, județ Dâmbovița.
@@ -191,7 +202,7 @@ Pentru orice întrebări, solicitări sau cereri privind această Politică sau 
 
 # **10\. Situațiile în care se aplică această Politică și modificările sale**
 
-Această Politică se aplică prelucrărilor de date realizate de Kluppi în legătură cu site-ul kluppi.com, aplicația web app.kluppi.com, conturile de membru, abonamentele, ofertele și comunicările Kluppi.
+Această Politică se aplică prelucrărilor de date realizate de Kluppi în legătură cu site-ul kluppi.com, aplicația web app.kluppi.com, conturile de membru, abonamentele, ofertele, colaborările cu Partenerii și comunicările Kluppi.
 
 Această Politică nu se aplică site-urilor, serviciilor sau platformelor operate de terți, chiar dacă acestea pot fi accesate prin linkuri disponibile pe site sau în aplicația Kluppi. Prelucrarea datelor de către terți este guvernată de propriile politici și informări privind protecția datelor.
 
@@ -200,4 +211,3 @@ Kluppi poate modifica această Politică pentru a reflecta schimbări ale site-u
 Versiunea actualizată va fi publicată pe site-ul Kluppi și va indica data ultimei actualizări.
 
 Dacă modificările sunt semnificative și afectează modul în care sunt prelucrate datele persoanelor vizate, Kluppi poate informa persoanele vizate prin e-mail sau prin alte mijloace adecvate, în măsura necesară potrivit legii.
-

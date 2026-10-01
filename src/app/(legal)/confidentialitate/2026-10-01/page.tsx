@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 const policy = readFileSync(
-  path.join(process.cwd(), "src/app/(legal)/confidentialitate/2026-09-30/policy.md"),
+  path.join(process.cwd(), "src/app/(legal)/confidentialitate/2026-10-01/policy.md"),
   "utf8",
 );
 

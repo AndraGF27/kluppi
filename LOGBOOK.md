@@ -1555,3 +1555,6 @@ it". Nothing changes for a visitor until that happens.
 ## 2026-09-30 — Dated privacy + cookie policy archives published (live)
 Files: `src/app/(legal)/LegalDocument.tsx`, `src/app/(legal)/confidentialitate/2026-09-30/{page.tsx,policy.md}`, `src/app/(legal)/politica-cookies/2026-09-30/{page.tsx,policy.md}` — copied from `kluppi-rebrand` (e546855).
 - Andra: "The final versions are in Downloads, publish them" (live approved: "Yes, ship to live"). New dated, noindex pages for the post-launch policies, linked from the Kluppi app footer. The waitlist's own /confidentialitate and /politica-cookies pages and every waitlist link are unchanged.
+
+## 2026-10-01 — Privacy archive replaced: /confidentialitate/2026-09-30 → /2026-10-01 (live)
+Files: `src/app/(legal)/confidentialitate/2026-10-01/{page.tsx,policy.md}` (yesterday's 2026-09-30 folder removed), `src/app/(legal)/LegalDocument.tsx` — from kluppi-rebrand c34429f. Andra: "please implement that one (you can delete yesterday's URL)". Waitlist pages and links unchanged.
