@@ -1627,3 +1627,8 @@ Files: `src/app/globals.css` (tokens `--arctic-50`, `--electric`; `body:has(.the
 
 ## 2026-10-01 — Local: .next → .next.nosync (iCloud), duplicates removed again
 No tracked file changed. `.next` is now a symlink to `.next.nosync` (ignored via `.git/info/exclude`) so iCloud Drive stops syncing the build cache (meta-review #19 proposal I, Andra approved). Three iCloud " 2" copies had reappeared (`src/app/r/[code]/route 2.ts`, two `tasks/* 2.md`) — each cmp-identical to HEAD, removed. They will keep coming back while the repo lives in iCloud-synced Documents.
+
+## 2026-10-01 — App legal pages on Lemon Sorbet 50; partner Terms: "Descarcă PDF" in the header
+Files: `src/app/(app-legal)/layout.tsx` (new) + the four dated archives moved under it from `(legal)` (`confidentialitate/2026-10-01`, `politica-cookies/2026-09-30`, `termeni-si-conditii/2026-09-17`, `…/2026-09-20`; URLs unchanged, import paths updated), `src/app/SiteChrome.tsx` (`theme` "partner" | "app-legal", optional `headerAction`), `src/app/globals.css` (`--lemon-50`, `body:has(.theme-app-legal)`, `.navbar-action`), `src/app/(partner-legal)/termeni-parteneri/2026-10-01/page.tsx` (renders its own chrome with the header button; the button under the date is gone), `src/app/(partner-legal)/layout.tsx` (removed).
+- Andra: "Only on the Partner terms page, I'd like the \"Descarcă PDF\" button to appear in the header, on the right side, symmetrical to the logo" and "The Kluppi app Privacy Policy, Cookie Policy, and T&Cs (NOT the Waitlist ones) can have a Lemon Sorbet 50 background".
+- Verified in the build: partner Terms → theme-partner + header button; the four app archives → theme-app-legal; the undated waitlist pages → no theme, no button.

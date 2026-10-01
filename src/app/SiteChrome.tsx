@@ -28,19 +28,34 @@ const legalLinks = [
 export default function SiteChrome({
   children,
   theme,
+  headerAction,
 }: {
   children: ReactNode;
-  /** "partner" = the partner palette (Arctic 50 + Electric), see globals.css. */
-  theme?: "partner";
+  /**
+   * "partner" = the partner palette (Arctic 50 + Electric); "app-legal" = the
+   * app's own legal documents (Lemon Sorbet 50 ground). See globals.css.
+   */
+  theme?: "partner" | "app-legal";
+  /** A button at the right end of the header, opposite the logo. */
+  headerAction?: { href: string; label: string; download?: boolean };
 }) {
   const logo = theme === "partner" ? "/logo-electric.svg" : "/logo.svg";
   return (
-    <div className={theme === "partner" ? "page-wrapper theme-partner" : "page-wrapper"}>
+    <div className={theme ? `page-wrapper theme-${theme}` : "page-wrapper"}>
       <div className="navbar-component" role="banner">
         <div className="navbar-container">
           <a href="/" className="navbar-logo-link">
             <img src={logo} alt="Kluppi" className="navbar-logo" />
           </a>
+          {headerAction && (
+            <a
+              href={headerAction.href}
+              download={headerAction.download || undefined}
+              className="navbar-action"
+            >
+              {headerAction.label}
+            </a>
+          )}
         </div>
       </div>
 
