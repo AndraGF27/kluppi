@@ -1612,3 +1612,10 @@ Files: `src/app/(legal)/confidentialitate/2026-10-01/{page.tsx,policy.md}` (move
 - Yesterday's /confidentialitate/2026-09-30 is deleted, as asked. The cookie archive (/politica-cookies/2026-09-30) is unchanged.
 - Removed 8 untracked iCloud "… 2" duplicates from the source tree (each cmp-identical to a committed file, none ever committed).
 - Verified: build clean; rendered page 10 sections, 2 tables, 30 rows, no leaked markup, "1 octombrie 2026" present.
+
+## 2026-10-01 — Partnership Terms archive: /termeni-parteneri/2026-10-01 + PDF
+Files: `src/app/(legal)/termeni-parteneri/2026-10-01/{page.tsx,terms.md}` (new), `public/legal/kluppi-termeni-parteneriat-2026-10-01.pdf` (new), `scripts/build-legal-pdf.mjs` (new), `src/app/(legal)/LegalDocument.tsx` (optional download link), `src/app/(legal)/legal.module.css` (`.download`).
+- Andra: partners accept "the partnership T&Cs … we will need to host them on a dedicated URL too … The Terms URL should have a download button". T&Cs art. 4.2/4.7 require a stable link from which they can be read and downloaded.
+- terms.md = ~/Downloads/Termeni și Condiții de Parteneriat Kluppi.md byte-for-byte (sha256 277c2c30…). PDF built from the same file with `node scripts/build-legal-pdf.mjs <md> <pdf>` (Chrome headless, site fonts, A4, 18 pages); checked page 1 visually (diacritics OK). Regenerate only for a NEW dated version.
+- Verified: build clean; page 6 chapters / 26 articles, no leaked markup, noindex, "Descarcă PDF" link with `download`.
+- ⚠️ iCloud again created "… 2" duplicates (tasks/*, .next/cache) — the cache copies broke `next build` ("Failed to open database"). Removed (cmp-identical / cache).
