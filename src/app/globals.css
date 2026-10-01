@@ -13,6 +13,8 @@ html {
   --link-hover: #3939ff;    /* Electric — hyperlink hover only */
   --surprise: #dbb8ff;      /* Royal */
   --arctic: #aee6ed;        /* Arctic — surprise/teaser card */
+  --arctic-50: #effbfc;     /* Arctic 50 — partner pages background */
+  --electric: #3939ff;      /* Electric — the PARTNER palette's accent */
   --success: #166534;       /* form feedback — success text (AA ≈6.3:1 on --bg) */
   --error:   #b91c1c;       /* form feedback — error text (AA ≈5.7:1 on --bg) */
   --card: #fff;
@@ -1261,4 +1263,17 @@ p { text-wrap: pretty; }
    would break the sticky hero parallax that also runs at these widths. */
 @media (max-width: 991px) {
   body { overflow-x: clip; }
+}
+
+/* ─── Partner theme (Andra, 2026-10-01) ───
+   Pages addressed to partners (the partnership Terms archive) use the partner
+   palette: Arctic 50 ground, Electric wherever the site uses Dare Devil —
+   headings, buttons, links and the logo (SiteChrome swaps the logo file).
+   Scoped with :has() to pages whose chrome carries .theme-partner, so no
+   other page changes. Hover falls back to Cassis, since Electric — the
+   site's usual hover colour — is the resting colour here. */
+body:has(.theme-partner) {
+  --bg: var(--arctic-50);
+  --accent: var(--electric);
+  --link-hover: var(--text);
 }

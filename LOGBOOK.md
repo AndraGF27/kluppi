@@ -1619,3 +1619,8 @@ Files: `src/app/(legal)/termeni-parteneri/2026-10-01/{page.tsx,terms.md}` (new),
 - terms.md = ~/Downloads/Termeni și Condiții de Parteneriat Kluppi.md byte-for-byte (sha256 277c2c30…). PDF built from the same file with `node scripts/build-legal-pdf.mjs <md> <pdf>` (Chrome headless, site fonts, A4, 18 pages); checked page 1 visually (diacritics OK). Regenerate only for a NEW dated version.
 - Verified: build clean; page 6 chapters / 26 articles, no leaked markup, noindex, "Descarcă PDF" link with `download`.
 - ⚠️ iCloud again created "… 2" duplicates (tasks/*, .next/cache) — the cache copies broke `next build` ("Failed to open database"). Removed (cmp-identical / cache).
+
+## 2026-10-01 — Partnership Terms page in the partner palette (Arctic 50 + Electric)
+Files: `src/app/globals.css` (tokens `--arctic-50`, `--electric`; `body:has(.theme-partner)` theme), `src/app/SiteChrome.tsx` (`theme="partner"` → class + Electric logo), `src/app/(partner-legal)/layout.tsx` (new), `src/app/(partner-legal)/termeni-parteneri/2026-10-01/*` (moved from `(legal)`; URL unchanged), `public/logo-electric.svg` (new), `public/brand/kluppi-logo-electric.png` (new, 520×200 transparent — for partner e-mails), `scripts/build-legal-pdf.mjs` (optional accent arg), `public/legal/kluppi-termeni-parteneriat-2026-10-01.pdf` (rebuilt with Electric headings; same text).
+- Andra: "Only here, the background should be Arctic 50 … and Dare Devil should be Electric (both texts, buttons, and Kluppi logo)" — Electric is the palette for partners.
+- Scoped: only pages whose chrome carries `.theme-partner`. Verified in the build: that page has the class and 0 orange logos; /confidentialitate has neither the class nor the Electric logo; compiled CSS contains the theme rule.
