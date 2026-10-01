@@ -1568,3 +1568,6 @@ Files: `src/app/SiteChrome.tsx`, `src/app/page.tsx`.
 
 ## 2026-10-01 — Partnership Terms page in the partner palette (live)
 From kluppi-rebrand 140231a: `/termeni-parteneri/2026-10-01` now uses Arctic 50 + Electric (texts, download button, logo), only that page (`body:has(.theme-partner)`, `(partner-legal)` layout); PDF rebuilt with Electric headings (same text); `public/brand/kluppi-logo-electric.png` added for partner e-mails. Andra: "Only here, the background should be Arctic 50 … and Dare Devil should be Electric". The waitlist pages are unchanged.
+
+## 2026-10-01 — App legal pages on Lemon Sorbet 50; partner Terms PDF button in the header (live)
+From kluppi-rebrand 7621c51. The four dated archives of the APP's documents (`/confidentialitate/2026-10-01`, `/politica-cookies/2026-09-30`, `/termeni-si-conditii/2026-09-17` and `/2026-09-20`) moved to a `(app-legal)` route group with a Lemon Sorbet 50 ground (URLs unchanged); `/termeni-parteneri/2026-10-01` shows "Descarcă PDF" in the header, opposite the logo. Andra, 2026-10-01. The waitlist's own pages are unchanged.

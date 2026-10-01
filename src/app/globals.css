@@ -13,6 +13,7 @@ html {
   --link-hover: #3939ff;    /* Electric — hyperlink hover only */
   --surprise: #dbb8ff;      /* Royal */
   --arctic: #aee6ed;        /* Arctic — surprise/teaser card */
+  --lemon-50: #fffbeb;      /* Lemon Sorbet 50 — the app's legal documents */
   --arctic-50: #effbfc;     /* Arctic 50 — partner pages background */
   --electric: #3939ff;      /* Electric — the PARTNER palette's accent */
   --success: #166534;       /* form feedback — success text (AA ≈6.3:1 on --bg) */
@@ -1276,4 +1277,32 @@ body:has(.theme-partner) {
   --bg: var(--arctic-50);
   --accent: var(--electric);
   --link-hover: var(--text);
+}
+
+
+/* ─── App legal documents (Andra, 2026-10-01) ───
+   The dated archives of the Kluppi app's Privacy Policy, Cookie Policy and
+   Terms sit on Lemon Sorbet 50; the waitlist's own documents keep the site's
+   Lemon Sorbet. Scoped like the partner theme. */
+body:has(.theme-app-legal) {
+  --bg: var(--lemon-50);
+}
+
+/* A button at the right end of the header, opposite the logo (the partner
+   Terms page's "Descarcă PDF"). Outline in the page's accent. */
+.navbar-action {
+  flex: none;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 0.6rem 1.1rem;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.navbar-action:hover {
+  color: var(--link-hover);
+  border-color: var(--link-hover);
 }

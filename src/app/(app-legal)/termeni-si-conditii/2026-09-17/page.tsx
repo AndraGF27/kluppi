@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import styles from "../../legal.module.css";
+import styles from "../../../(legal)/legal.module.css";
 
 export const metadata: Metadata = {
   title: "Termeni și condiții — Kluppi",
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const terms = readFileSync(
   path.join(
     process.cwd(),
-    "src/app/(legal)/termeni-si-conditii/2026-09-17/terms.md",
+    "src/app/(app-legal)/termeni-si-conditii/2026-09-17/terms.md",
   ),
   "utf8",
 ).trim();
