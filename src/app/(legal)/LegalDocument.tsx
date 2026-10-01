@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import styles from "./legal.module.css";
 
 // Renders a dated, lawyer-approved policy archive (e.g.
-// /confidentialitate/2026-09-30) from the Markdown file the lawyer delivered,
+// /confidentialitate/2026-10-01) from the Markdown file the lawyer delivered,
 // so the published text is the approved text byte for byte — nothing is
 // retyped into JSX. Handles exactly the Markdown those files use: `#`/`##`
 // headings, paragraphs (trailing double-space = line break), `* `/`- ` lists,

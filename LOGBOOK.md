@@ -1605,3 +1605,10 @@ Files: `src/app/(legal)/confidentialitate/2026-09-30/policy.md`, `src/app/(legal
 - Replaced tonight's drafts with the lawyer's finals (~/Downloads/Kluppi * Policy — Publish.md, byte-identical): no "proiect", no brackets, no internal notes; still dated 30 septembrie 2026, so the URLs stay /2026-09-30.
 - Andra: "The final versions are in Downloads, publish them" → also copied onto `main` (live, auto-deploys), as approved ("Yes, ship to live"). Only the two dated folders + `LegalDocument.tsx` go to main; the waitlist's own /confidentialitate and /politica-cookies pages and links are untouched.
 - Verified: build clean; rendered pages 10/11 sections, 2/3 tables, zero leaked markup or brackets.
+
+## 2026-10-01 — Privacy archive replaced: /confidentialitate/2026-09-30 → /2026-10-01
+Files: `src/app/(legal)/confidentialitate/2026-10-01/{page.tsx,policy.md}` (moved from 2026-09-30), `src/app/(legal)/LegalDocument.tsx` (comment example).
+- Andra: "we have an updated Privacy Policy, please implement that one (you can delete yesterday's URL) and use it in the footer". New text = ~/Downloads/Kluppi Privacy Policy — Publish.md (1 octombrie 2026), byte-identical. Adds Partner representatives + online-approval records (legal basis row, recipients, retention: contract + 3 years, rights). The app has NO online partner-approval feature yet; the policy only covers it conditionally — when built, it must record exactly what §2(i) lists (no more, e.g. no IP) on the providers §5 names.
+- Yesterday's /confidentialitate/2026-09-30 is deleted, as asked. The cookie archive (/politica-cookies/2026-09-30) is unchanged.
+- Removed 8 untracked iCloud "… 2" duplicates from the source tree (each cmp-identical to a committed file, none ever committed).
+- Verified: build clean; rendered page 10 sections, 2 tables, 30 rows, no leaked markup, "1 octombrie 2026" present.
