@@ -115,7 +115,14 @@ function renderBlock(block: string, index: number): ReactNode {
  * literal path (as the Terms archives do): a path built from a prop here makes
  * the bundler trace — and deploy — the whole project.
  */
-export default function LegalDocument({ markdown }: { markdown: string }) {
+export default function LegalDocument({
+  markdown,
+  download,
+}: {
+  markdown: string;
+  /** Optional "download a copy" link, shown under the date (e.g. a PDF). */
+  download?: { href: string; label: string };
+}) {
   const source = markdown.replace(/<!--[\s\S]*?-->/g, "").trim();
   const [title, updated, ...blocks] = source.split(/\n\s*\n/);
 
@@ -123,6 +130,13 @@ export default function LegalDocument({ markdown }: { markdown: string }) {
     <main className={styles.main}>
       <h1 className={styles.h1}>{renderInline(title.replace(/^# /, ""))}</h1>
       <p className={styles.updated}>{renderInline(updated)}</p>
+      {download && (
+        <p className={styles.download}>
+          <a href={download.href} download>
+            {download.label}
+          </a>
+        </p>
+      )}
       <div className={styles.body}>{blocks.map(renderBlock)}</div>
     </main>
   );

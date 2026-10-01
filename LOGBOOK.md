@@ -1558,3 +1558,6 @@ Files: `src/app/(legal)/LegalDocument.tsx`, `src/app/(legal)/confidentialitate/2
 
 ## 2026-10-01 — Privacy archive replaced: /confidentialitate/2026-09-30 → /2026-10-01 (live)
 Files: `src/app/(legal)/confidentialitate/2026-10-01/{page.tsx,policy.md}` (yesterday's 2026-09-30 folder removed), `src/app/(legal)/LegalDocument.tsx` — from kluppi-rebrand c34429f. Andra: "please implement that one (you can delete yesterday's URL)". Waitlist pages and links unchanged.
+
+## 2026-10-01 — Partnership Terms archive live: /termeni-parteneri/2026-10-01 + PDF
+Files: `src/app/(legal)/termeni-parteneri/2026-10-01/*`, `public/legal/kluppi-termeni-parteneriat-2026-10-01.pdf`, `scripts/build-legal-pdf.mjs`, `src/app/(legal)/LegalDocument.tsx`, `src/app/(legal)/legal.module.css` — from kluppi-rebrand fcf10b5. For the app's partner offer-approval flow (Andra, 2026-10-01). Nothing else on the waitlist site changes.

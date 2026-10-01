@@ -42,6 +42,27 @@
   margin: 0 0 1.5rem;
 }
 
+/* "Descarcă PDF" link under the date of a dated legal archive. */
+.download {
+  margin: -0.75rem 0 2rem;
+}
+
+.download a {
+  display: inline-block;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  text-decoration: none;
+}
+
+.download a:hover {
+  color: var(--link-hover);
+  border-color: var(--link-hover);
+}
+
 /* placeholder banner — remove when real copy lands */
 .placeholderNote {
   font-size: var(--fs-small);
