@@ -1565,3 +1565,6 @@ Files: `src/app/(legal)/termeni-parteneri/2026-10-01/*`, `public/legal/kluppi-te
 ## 2026-10-01 — Waitlist footer Terms link back to the waitlist Terms (live)
 Files: `src/app/SiteChrome.tsx`, `src/app/page.tsx`.
 - Andra: "the current Waitlist website has the app T&Cs linked in the footer, which is wrong. Please fix this". Reverts the 2026-09-22 "for now" change (4138fc4): the legal-page footer (SiteChrome) and the homepage footer now link `/termeni-si-conditii` (waitlist terms, 26 iunie 2026) again, matching the privacy/cookie links beside them. The /2 post-launch homepage preview keeps the app archive link (right document for that design). kluppi-rebrand is untouched (at launch it links the app documents).
+
+## 2026-10-01 — Partnership Terms page in the partner palette (live)
+From kluppi-rebrand 140231a: `/termeni-parteneri/2026-10-01` now uses Arctic 50 + Electric (texts, download button, logo), only that page (`body:has(.theme-partner)`, `(partner-legal)` layout); PDF rebuilt with Electric headings (same text); `public/brand/kluppi-logo-electric.png` added for partner e-mails. Andra: "Only here, the background should be Arctic 50 … and Dare Devil should be Electric". The waitlist pages are unchanged.

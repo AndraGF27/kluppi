@@ -1,7 +1,10 @@
 // Builds the downloadable PDF of a dated legal archive from the SAME Markdown
 // file the page renders, so the PDF and the web page are one text.
 //
-//   node scripts/build-legal-pdf.mjs <terms.md> <public/legal/out.pdf>
+//   node scripts/build-legal-pdf.mjs <terms.md> <public/legal/out.pdf> [accent]
+//
+// [accent] is the heading/link colour: default Dare Devil (#f5531c); pass
+// #3939ff (Electric) for documents addressed to partners.
 //
 // Run once per approved version and commit the PDF (it is a static asset in
 // public/, never regenerated at deploy). Needs Google Chrome installed locally;
@@ -17,7 +20,8 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
-const [, , mdPath, outPath] = process.argv;
+const [, , mdPath, outPath, accentArg] = process.argv;
+const ACCENT = /^#[0-9a-fA-F]{6}$/.test(accentArg ?? "") ? accentArg : "#f5531c";
 if (!mdPath || !outPath) {
   console.error("usage: node scripts/build-legal-pdf.mjs <terms.md> <out.pdf>");
   process.exit(1);
@@ -75,15 +79,15 @@ const html = `<!doctype html><html lang="ro"><head><meta charset="utf-8">
 @font-face{font-family:Bricolage;src:url("${FONTS}/bricolage-latinext.woff2") format("woff2");font-weight:400 800;unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @page{size:A4;margin:22mm 20mm 20mm}
 body{font-family:Switzer,Helvetica,Arial,sans-serif;font-size:10pt;line-height:1.55;color:#351e28}
-h1{font-family:Bricolage,Switzer,sans-serif;font-weight:700;color:#f5531c;font-size:20pt;line-height:1.15;margin:0 0 6pt}
-h2{font-family:Bricolage,Switzer,sans-serif;font-weight:600;color:#f5531c;font-size:13pt;margin:18pt 0 6pt;break-after:avoid}
+h1{font-family:Bricolage,Switzer,sans-serif;font-weight:700;color:${ACCENT};font-size:20pt;line-height:1.15;margin:0 0 6pt}
+h2{font-family:Bricolage,Switzer,sans-serif;font-weight:600;color:${ACCENT};font-size:13pt;margin:18pt 0 6pt;break-after:avoid}
 h3{font-family:Bricolage,Switzer,sans-serif;font-weight:600;font-size:11.5pt;margin:14pt 0 5pt;break-after:avoid}
 .updated{opacity:.7;margin:0 0 14pt}
 p{margin:0 0 7pt}
 ul{margin:0 0 7pt;padding-left:14pt}
 li{margin-bottom:3pt}
 strong{font-weight:600}
-a{color:#f5531c}
+a{color:${ACCENT}}
 table{width:100%;border-collapse:collapse;margin:0 0 10pt;font-size:8.5pt}
 th,td{border:1px solid #d9cfd3;padding:4pt 5pt;text-align:left;vertical-align:top}
 </style></head><body>

@@ -23,13 +23,21 @@ const legalLinks = [
   { href: "/politica-cookies", label: "Politica de cookies" },
 ];
 
-export default function SiteChrome({ children }: { children: ReactNode }) {
+export default function SiteChrome({
+  children,
+  theme,
+}: {
+  children: ReactNode;
+  /** "partner" = the partner palette (Arctic 50 + Electric), see globals.css. */
+  theme?: "partner";
+}) {
+  const logo = theme === "partner" ? "/logo-electric.svg" : "/logo.svg";
   return (
-    <div className="page-wrapper">
+    <div className={theme === "partner" ? "page-wrapper theme-partner" : "page-wrapper"}>
       <div className="navbar-component" role="banner">
         <div className="navbar-container">
           <a href="/" className="navbar-logo-link">
-            <img src="/logo.svg" alt="Kluppi" className="navbar-logo" />
+            <img src={logo} alt="Kluppi" className="navbar-logo" />
           </a>
         </div>
       </div>
@@ -41,7 +49,7 @@ export default function SiteChrome({ children }: { children: ReactNode }) {
           <div className="kluppi-footer-inner">
             <div className="kluppi-footer-divider" />
             <a href="/" className="kluppi-footer-logo-link">
-              <img src="/logo.svg" alt="Kluppi" className="kluppi-footer-logo" />
+              <img src={logo} alt="Kluppi" className="kluppi-footer-logo" />
             </a>
             <nav className="kluppi-footer-socials" aria-label="Rețele sociale">
               {socials.map((s) => (
