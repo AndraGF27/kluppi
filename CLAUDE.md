@@ -1,6 +1,6 @@
 # Kluppi marketing site — kluppi.com
 
-Single-page teaser/waitlist landing page for Kluppi — a shopping club with codes and benefits from brands. All site copy is in Romanian. Becomes the full marketing site at launch; roadmap: `~/Documents/Kluppi/WEBSITE_PLAN.md`. The product app is a separate repo (`~/Documents/kluppi-app`).
+Single-page teaser/waitlist landing page for Kluppi — a shopping club with codes and benefits from brands. All site copy is in Romanian. Becomes the full marketing site at launch; roadmap: `~/Documents/Kluppi/WEBSITE_PLAN.md`. The product app is a separate repo (`~/Developer/kluppi-app`).
 
 ## Stack & how to run it
 - **Next.js** (App Router) + TypeScript. The code lives at the repo root.
