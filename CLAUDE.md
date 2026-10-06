@@ -7,7 +7,7 @@ beneficii de la branduri. Conținutul e în limba română.
 - **Next.js** (App Router) + TypeScript. Codul stă în rădăcina repo-ului.
 - Necesită **Node 20+** (`nvm use 22`). Pe Node 17 dă eroare.
 - Dezvoltare: `npm install`, apoi `npm run dev` → http://localhost:3000
-- Pagina principală: `src/app/page.tsx`. Secțiuni: `BenefitsCards.tsx`,
+- Pagina principală: `src/app/waitlist/page.tsx` (the waitlist page; moved from `/` on 2026-10-06 — `/` redirects there from `next.config.ts` until the new home page is built). Secțiuni: `BenefitsCards.tsx`,
   `HowItWorks.tsx`, `PainPointsCarousel.tsx`, `SplitBanner.tsx`.
 - Formularul de înscriere: `src/app/api/subscribe/route.ts` (Vercel KV / Redis).
 

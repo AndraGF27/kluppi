@@ -119,7 +119,7 @@ export function AboutContent() {
                 data-reveal
                 style={{ "--reveal-delay": "0.24s" } as React.CSSProperties}
               >
-                <a href="/#contact" className="kluppi-btn">Intră în club</a>
+                <a href="/waitlist#contact" className="kluppi-btn">Intră în club</a>
                 <p className="kluppi-hero-trust">Gratuit. Ca între prieteni.</p>
               </div>
             </div>
@@ -255,7 +255,7 @@ export function AboutContent() {
             Dacă ai citit până aici, probabil ești unul de-ai noștri.
           </p>
           <div className={styles.finalCtaButton} data-reveal>
-            <a href="/#contact" className="kluppi-btn">Intră în club</a>
+            <a href="/waitlist#contact" className="kluppi-btn">Intră în club</a>
             <p className="kluppi-hero-trust">Ne vedem înăuntru.</p>
           </div>
           <p className={styles.partnerLine} data-reveal>
