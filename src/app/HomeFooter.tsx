@@ -8,6 +8,7 @@
 const socials = [
   { href: "https://www.facebook.com/joinkluppi", label: "Facebook" },
   { href: "https://www.instagram.com/joinkluppi", label: "Instagram" },
+  { href: "https://www.linkedin.com/company/joinkluppi", label: "LinkedIn" },
 ];
 
 const legalLinks = [

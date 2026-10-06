@@ -18,8 +18,10 @@ const siteUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Kluppi — Coduri și avantaje exclusive de la branduri",
+  // The home page's description (proposed 2026-10-06, to be confirmed by
+  // Andra). The waitlist page keeps its own in `waitlist/layout.tsx`.
   description:
-    "Clubul de shopping unde primești coduri de reducere și beneficii reale, direct de la branduri. Rezervă-ți gratuit locul și află când lansăm.",
+    "Kluppi este clubul de shopping în care primești, lună de lună, coduri de reducere și beneficii reale, direct de la branduri. Intri gratuit.",
 };
 
 export default function RootLayout({

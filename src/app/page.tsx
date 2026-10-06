@@ -63,9 +63,12 @@ const faqs: { q: string; a: ReactNode }[] = [
     q: "Am un brand. Cum ajung în Kluppi?",
     a: (
       <>
-        Ne bucurăm să te cunoaștem! Găsești{" "}
-        <a href="/parteneri" style={linkStyle}>aici</a>{" "}
-        informații despre cum funcționează colaborarea și cum putem lua legătura.
+        {/* The design links the /parteneri page here ("Găsești aici
+            informații…"); while that page is hidden the answer gives the
+            partners address instead — wording to be confirmed by Andra. */}
+        Ne bucurăm să te cunoaștem! Scrie-ne la{" "}
+        <a href="mailto:partners@kluppi.com" style={linkStyle}>partners@kluppi.com</a>{" "}
+        și îți spunem cum funcționează colaborarea.
       </>
     ),
   },
@@ -269,8 +272,9 @@ export default function Home() {
               <div className="navbar-menu-wrapper">
                 <div className="navbar-links-wrapper">
                   <a href="#cum-functioneaza" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Cum funcționează</a>
-                  <a href="/parteneri" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Parteneri</a>
-                  <a href="/despre" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Despre noi</a>
+                  {/* "Parteneri" (/parteneri) and "Despre noi" (/despre) are in the
+                      design but hidden for now (Andra, 2026-10-06): both pages are
+                      still behind the preview password on the live site. */}
                   <a href="#intrebari-frecvente" className="navbar-link w-nav-link" onClick={() => setMenuOpen(false)}>Întrebări frecvente</a>
                   <a
                     href={contactHref}

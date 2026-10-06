@@ -8,22 +8,24 @@ import { Shirt, Leaf, House, Zap, Wine, Balloon, type LucideIcon } from "lucide-
 // price. The page states the assumption in the footnote below the result.
 const AVG_BENEFIT = 0.1; // a benefit worth 10% of the purchases
 const ANNUAL_PLAN_RON = 220; // annual Kluppi+ price (also shown in HomePlans)
+// Each slider runs from 0 to 10.000 lei a year and starts at 500 (Andra, 2026-10-06).
 const MAX_RON = 10000;
 const STEP_RON = 100;
+const DEFAULT_RON = 500;
 
-const categories: { Icon: LucideIcon; label: string; defaultValue: number }[] = [
-  { Icon: Shirt, label: "Modă & accesorii", defaultValue: 3600 },
-  { Icon: Leaf, label: "Îngrijire & sănătate", defaultValue: 2400 },
-  { Icon: House, label: "Casă & grădină", defaultValue: 0 },
-  { Icon: Zap, label: "Tehnologie & auto", defaultValue: 0 },
-  { Icon: Wine, label: "Gusturi & experiențe", defaultValue: 0 },
-  { Icon: Balloon, label: "Timp liber & familie", defaultValue: 0 },
+const categories: { Icon: LucideIcon; label: string }[] = [
+  { Icon: Shirt, label: "Modă & accesorii" },
+  { Icon: Leaf, label: "Îngrijire & sănătate" },
+  { Icon: House, label: "Casă & grădină" },
+  { Icon: Zap, label: "Tehnologie & auto" },
+  { Icon: Wine, label: "Gusturi & experiențe" },
+  { Icon: Balloon, label: "Timp liber & familie" },
 ];
 
 const formatRon = new Intl.NumberFormat("ro-RO", { maximumFractionDigits: 0 });
 
 export default function HomeSimulator({ signupUrl }: { signupUrl: string }) {
-  const [spends, setSpends] = useState(() => categories.map((c) => c.defaultValue));
+  const [spends, setSpends] = useState(() => categories.map(() => DEFAULT_RON));
 
   const total = spends.reduce((sum, spend) => sum + spend, 0);
   const net = Math.max(0, Math.round(total * AVG_BENEFIT - ANNUAL_PLAN_RON));
