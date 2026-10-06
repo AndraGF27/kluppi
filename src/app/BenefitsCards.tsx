@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ShieldCheck, Calendar, UserStar, Gift } from "lucide-react";
+import { ShieldCheck, Calendar, UserStar, Gift, type LucideIcon } from "lucide-react";
 
-const benefits = [
+// The waitlist wording. The home page passes its own post-launch cards.
+const waitlistBenefits = [
   {
     Icon: ShieldCheck,
     title: "Încredere la checkout",
@@ -28,7 +29,9 @@ const benefits = [
 
 const PEEK = 90; // px of each card left visible when fully stacked
 
-export default function BenefitsCards() {
+export type Benefit = { Icon: LucideIcon; title: string; desc: string };
+
+export default function BenefitsCards({ items: benefits = waitlistBenefits }: { items?: Benefit[] }) {
   const rowRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
 

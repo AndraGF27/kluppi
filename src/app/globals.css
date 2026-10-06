@@ -16,6 +16,8 @@ html {
   --lemon-50: #fffbeb;      /* Lemon Sorbet 50 — the app's legal documents */
   --arctic-50: #effbfc;     /* Arctic 50 — partner pages background */
   --electric: #3939ff;      /* Electric — the PARTNER palette's accent */
+  --lemon: #fff0bc;         /* Lemon Sorbet — chips and the lemon button on the home page */
+  --tone-alt: #fff4ed;      /* Dare Devil 50 — alternating sections on the home page */
   --success: #166534;       /* form feedback — success text (AA ≈6.3:1 on --bg) */
   --error:   #b91c1c;       /* form feedback — error text (AA ≈5.7:1 on --bg) */
   --card: #fff;
