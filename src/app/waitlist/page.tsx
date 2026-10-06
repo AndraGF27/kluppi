@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Tickets, LockKeyhole, Heart } from "lucide-react";
-import PainPointsCarousel from "./PainPointsCarousel";
-import HowItWorks from "./HowItWorks";
-import SplitBanner from "./SplitBanner";
-import BenefitsCards from "./BenefitsCards";
-import { trackSetEmail, trackViewHomepage } from "./themarketer-events";
+import PainPointsCarousel from "../PainPointsCarousel";
+import HowItWorks from "../HowItWorks";
+import SplitBanner from "../SplitBanner";
+import BenefitsCards from "../BenefitsCards";
+import { trackSetEmail, trackViewHomepage } from "../themarketer-events";
 
 const socials = [
   { href: "https://www.facebook.com/joinkluppi", label: "Facebook" },
@@ -248,9 +248,11 @@ export default function Home() {
         role="banner"
       >
         <div className="navbar-container">
-          <a href="#top" aria-current="page" className="navbar-logo-link w-nav-brand w--current">
+          {/* The logo is not a link on the waitlist page (Andra, 2026-10-06):
+              this page keeps its own header, apart from the home page. */}
+          <div className="navbar-logo-link w-nav-brand">
             <img src="/logo.svg" loading="lazy" alt="Kluppi" className="navbar-logo" />
-          </a>
+          </div>
           <div className="navbar-wrapper">
             <nav
               role="navigation"
@@ -652,7 +654,7 @@ export default function Home() {
             <div className="kluppi-footer-divider" />
             <div className="kluppi-footer-bottom">
               <div className="kluppi-footer-legal">
-                <a href="/termeni-si-conditii/2026-09-20" target="_blank" rel="noopener noreferrer" className="kluppi-footer-link">Termeni și condiții</a>
+                <a href="/termeni-si-conditii" target="_blank" rel="noopener noreferrer" className="kluppi-footer-link">Termeni și condiții</a>
                 <a href="/confidentialitate" target="_blank" rel="noopener noreferrer" className="kluppi-footer-link">Politica de confidențialitate</a>
                 <a href="/politica-cookies" target="_blank" rel="noopener noreferrer" className="kluppi-footer-link">Politica de cookies</a>
               </div>
