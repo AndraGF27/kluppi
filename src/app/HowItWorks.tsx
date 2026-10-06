@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
-const steps = [
+// The waitlist wording. The home page passes its own post-launch steps.
+const waitlistSteps = [
   {
     label: "Pasul 01",
     title: "Îți rezervi locul",
@@ -30,7 +31,9 @@ const steps = [
   },
 ];
 
-export default function HowItWorks() {
+export type Step = { label: string; title: string; desc: string };
+
+export default function HowItWorks({ steps = waitlistSteps }: { steps?: Step[] }) {
   const timelineRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLDivElement>(null);
