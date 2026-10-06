@@ -1649,3 +1649,10 @@ Files: `src/app/(app-legal)/layout.tsx` (new) + the four dated archives moved un
 - **Why:** Andra, 2026-10-06 — kluppi.com becomes the page Netopia checks (prices, plans, company details, ANPC, app Terms); the app stays gated; every button leads to `app.kluppi.com/signup`.
 - **Checked:** tsc 0; build OK; on the built site `/` carries the design's headings, prices, footer links (all three dated legal pages answer 200) and no waitlist wording, `/waitlist` keeps its own steps and form; off-screen renders at 1440 and 390 px of the simulator, plans and footer match the design, no horizontal overflow.
 - **Open for Andra:** the design links "Parteneri" and "Despre noi" (and the FAQ's "aici") to `/parteneri` and `/despre`, which are password-gated on the live site; the root page title/description still carries the waitlist description; the simulator's 10% and default amounts are the design's; LinkedIn is not in the design's footer. On `kluppi-rebrand` only — not shipped.
+
+## 2026-10-06 — Home page: Andra's four answers
+- `src/app/page.tsx`: "Parteneri" and "Despre noi" removed from the menu for now ("Hide the links for now" — both pages are still password-gated on the live site); the FAQ answer "Am un brand…" gives partners@kluppi.com instead of linking `/parteneri` (wording proposed, awaiting her confirmation).
+- `src/app/HomeSimulator.tsx`: every slider 0–10.000 lei a year, starting at 500 (result with the defaults: 80 lei).
+- `src/app/HomeFooter.tsx`: LinkedIn kept ("No, keep LinkedIn as well").
+- `src/app/layout.tsx`: new default description for search engines and link previews (proposed, awaiting her confirmation); new `src/app/waitlist/layout.tsx` keeps the waitlist page's previous title and description.
+- tsc 0, build OK; checked on the built site. On `kluppi-rebrand` only.
