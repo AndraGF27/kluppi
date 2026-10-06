@@ -1641,3 +1641,4 @@ Files: `src/app/(app-legal)/layout.tsx` (new) + the four dated archives moved un
 - **Why:** Andra, 2026-10-06 — for Netopia's POS check the home page of kluppi.com becomes the post-launch page (plans, prices, app Terms, ANPC/Netopia footer; her design is coming), the app stays gated, and the waitlist lives at `/waitlist` with its own header and footer and the only signup form.
 - **Checked:** tsc 0; build OK (`/waitlist` listed); on the built site `/?utm_source=x` → 307 `/waitlist?utm_source=x`, `/waitlist` 200, logo not a link, both Terms links `/termeni-si-conditii`.
 - **Not shipped:** on `kluppi-rebrand` only. ⚠️ `main` and `kluppi-rebrand` have DIVERGED (6 commits only on main, 25 only here), so going live is not a fast-forward — decide how with Andra when she says "ship it".
+- **Shipped to `main` 2026-10-06** on Andra's "ship the /waitlist": this one commit was cherry-picked onto `main` (9dcb2b5); the other preview-only commits stay here.
