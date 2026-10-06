@@ -65,7 +65,7 @@ const faqs: { q: string; a: ReactNode }[] = [
       <>
         {/* The design links the /parteneri page here ("Găsești aici
             informații…"); while that page is hidden the answer gives the
-            partners address instead — wording to be confirmed by Andra. */}
+            partners address instead (wording approved by Andra, 2026-10-06). */}
         Ne bucurăm să te cunoaștem! Scrie-ne la{" "}
         <a href="mailto:partners@kluppi.com" style={linkStyle}>partners@kluppi.com</a>{" "}
         și îți spunem cum funcționează colaborarea.

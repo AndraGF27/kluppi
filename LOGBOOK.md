@@ -1656,3 +1656,4 @@ Files: `src/app/(app-legal)/layout.tsx` (new) + the four dated archives moved un
 - `src/app/HomeFooter.tsx`: LinkedIn kept ("No, keep LinkedIn as well").
 - `src/app/layout.tsx`: new default description for search engines and link previews (proposed, awaiting her confirmation); new `src/app/waitlist/layout.tsx` keeps the waitlist page's previous title and description.
 - tsc 0, build OK; checked on the built site. On `kluppi-rebrand` only.
+- **Shipped to `main` 2026-10-06** on Andra's "ship it" (she confirmed the description, the FAQ answer and the plan perks against the Terms): the home page commits were cherry-picked onto `main`; the other preview-only commits stay here.
