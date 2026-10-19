@@ -32,7 +32,7 @@ function PlusTag() {
 
 export default function HomePlans({ signupUrl }: { signupUrl: string }) {
   return (
-    <section className="kluppi-section plans-section tone-alt" id="planuri" aria-labelledby="plans-heading">
+    <section className="kluppi-section plans-section" id="planuri" aria-labelledby="plans-heading">
       <div className="plans-inner">
         <div className="plans-intro" data-reveal>
           <h2 className="kluppi-benefits-heading" id="plans-heading">Alege cum vrei să începi</h2>
