@@ -1,7 +1,7 @@
 import { Check, Crown, Lock } from "lucide-react";
 
 // The three ways to join, with their prices (Andra's design, 2026-10-06).
-// Prices mirror the app's plans: free, Kluppi+ at 220 lei/year (18,33 lei a
+// Prices mirror the app's plans: free, Kluppi+ at 220 lei/year (18.33 lei a
 // month, i.e. two months free against the monthly price) or 22 lei/month.
 // If a price changes in the app, it changes here and in HomeSimulator too.
 const PLUS_PERKS = [
@@ -69,7 +69,7 @@ export default function HomePlans({ signupUrl }: { signupUrl: string }) {
               <span className="plan-tag plan-tag--lemon">2 luni gratuite</span>
             </div>
             <p className="plan-price plan-price--accent">
-              <span className="plan-amount">18,33</span>
+              <span className="plan-amount">18.33</span>
               <span className="plan-cur">lei</span>
               <span className="plan-per">/ lună</span>
             </p>

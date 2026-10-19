@@ -78,6 +78,9 @@ const SLIDES: Slide[] = [
 const NOTE = "Exemplu ilustrativ. Fiecare ofertă se aplică potrivit condițiilor specifice.";
 const SWIPE_PX = 50;
 const COUNT_MS = 700;
+// Moves on by itself every 5 seconds (Andra, 2026-10-19) — paused while the
+// visitor hovers, touches or keyboard-focuses it, off with reduced motion.
+const AUTOPLAY_MS = 5000;
 
 /** Counts up to `to` (ease-out cubic) each time `run` changes; shows `to` at once with reduced motion. */
 function CountUp({ to, run }: { to: number; run: number }) {
@@ -109,6 +112,7 @@ export default function AdvCarousel({ signupUrl }: { signupUrl: string }) {
   const [offset, setOffset] = useState(0);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
   const pointerX = useRef<number | null>(null);
+  const [paused, setPaused] = useState(false);
 
   const go = (i: number) => {
     const next = (i + SLIDES.length) % SLIDES.length;
@@ -127,6 +131,18 @@ export default function AdvCarousel({ signupUrl }: { signupUrl: string }) {
     return () => window.removeEventListener("resize", measure);
   }, [cur]);
 
+  // Autoplay. Re-armed on every move (manual or automatic), so a click resets
+  // the 5 seconds; never runs while paused, while the tab is hidden, or when
+  // the visitor asked their device for reduced motion.
+  useEffect(() => {
+    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setTimeout(() => {
+      if (document.visibilityState === "visible") go(cur + 1);
+    }, AUTOPLAY_MS);
+    return () => window.clearTimeout(id);
+    // `go` is recreated each render; `cur` is what the timer depends on.
+  }, [cur, paused, runs]);
+
   const onKeyDown = (e: KeyboardEvent) => {
     if (e.key === "ArrowLeft") go(cur - 1);
     if (e.key === "ArrowRight") go(cur + 1);
@@ -142,7 +158,19 @@ export default function AdvCarousel({ signupUrl }: { signupUrl: string }) {
   };
 
   return (
-    <section className="kluppi-section adv-section" id="simulator" onKeyDown={onKeyDown}>
+    <section
+      className="kluppi-section adv-section"
+      id="simulator"
+      onKeyDown={onKeyDown}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setPaused(false);
+      }}
+      onTouchStart={() => setPaused(true)}
+      onTouchEnd={() => setPaused(false)}
+    >
       <div className="adv-inner">
         <div className="adv-intro" data-reveal>
           <h2 className="kluppi-benefits-heading">Cât poți economisi cu Kluppi?</h2>
