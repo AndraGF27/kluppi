@@ -11,17 +11,19 @@ import {
   UserStar,
   Gift,
 } from "lucide-react";
-import PainPointsCarousel from "./PainPointsCarousel";
 import HowItWorks from "./HowItWorks";
 import SplitBanner from "./SplitBanner";
 import BenefitsCards from "./BenefitsCards";
-import HomeSimulator from "./HomeSimulator";
+import AdvCarousel from "./AdvCarousel";
 import HomePlans from "./HomePlans";
 import HomeFooter from "./HomeFooter";
 import { trackViewHomepage } from "./themarketer-events";
 import "./home.css";
 
-// The kluppi.com home page — the post-launch page (Andra's design, 2026-10-06).
+// The kluppi.com home page — the post-launch page (Andra's design, 2026-10-06;
+// reordered 2026-10-19: the pain-points carousel became the "verifică Kluppi"
+// banner, the savings simulator became the receipts carousel, and no section
+// alternates its background any more).
 // The waitlist it replaced lives at /waitlist with its own header, footer and
 // the only signup form; this page collects nothing and links the APP's legal
 // documents. Every call to action leads to the app's signup.
@@ -393,28 +395,16 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="kluppi-painpoints kluppi-section tone-alt">
-          <div className="kluppi-painpoints-inner">
-            <h2 className="kluppi-painpoints-heading" data-reveal>De câte ori ai…</h2>
-            <PainPointsCarousel />
-            <div className="kluppi-painpoints-conclusion" data-reveal>
-              <h3 className="kluppi-painpoints-h2">Nu ți s-a întâmplat doar ție.</h3>
-              <p className="text-size-large kluppi-hero-body">
-                A devenit din ce în ce mai rară senzația că plătești prețul corect atunci când cumperi online.
-              </p>
+        <SplitBanner
+          line1="Înainte să cumperi,"
+          line2="verifică Kluppi."
+          cta={
+            <div className="kluppi-painpoints-cta">
+              <a href={SIGNUP_URL} className="kluppi-btn">Intră în club</a>
+              <p className="kluppi-hero-trust">Coduri noi în fiecare lună</p>
             </div>
-            <div className="kluppi-painpoints-outro" data-reveal>
-              <h3 className="kluppi-painpoints-h2">Noi ne-am săturat de toate astea.</h3>
-              <p className="text-size-large kluppi-hero-body">
-                Și am creat Kluppi: prietenul care are mereu un cod de reducere bun, exact când îți trebuie.
-              </p>
-              <div className="kluppi-painpoints-cta">
-                <a href={SIGNUP_URL} className="kluppi-btn">Intră în club</a>
-                <p className="kluppi-hero-trust">Coduri noi în fiecare lună</p>
-              </div>
-            </div>
-          </div>
-        </section>
+          }
+        />
 
         <section className="kluppi-benefits" id="services">
           <div className="padding-global">
@@ -433,7 +423,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="kluppi-steps kluppi-section tone-alt" id="cum-functioneaza">
+
+
+        <AdvCarousel signupUrl={SIGNUP_URL} />
+
+        <section className="kluppi-steps kluppi-section" id="cum-functioneaza">
           <div className="kluppi-steps-inner">
             <h2 className="kluppi-steps-heading" data-reveal>Cum funcționează?</h2>
             <HowItWorks steps={steps} />
@@ -443,10 +437,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <HomeSimulator signupUrl={SIGNUP_URL} />
-
-        <HomePlans signupUrl={SIGNUP_URL} />
 
         <section className="kluppi-reasons">
           <div className="padding-global">
@@ -467,7 +457,7 @@ export default function Home() {
                     <article className="kluppi-benefit kluppi-benefit--b2" data-reveal>
                       <div className="kluppi-benefit-text">
                         <h3 className="kluppi-benefit-title">Știi deja toate trucurile de marketing</h3>
-                        <p className="kluppi-benefit-desc">Ai văzut suficiente oferte și reduceri “de neratat” ca să te mai impresioneze ceva.</p>
+                        <p className="kluppi-benefit-desc">Ai văzut suficiente oferte și reduceri „de neratat” ca să te mai impresioneze ceva.</p>
                       </div>
                     </article>
                     <div className="kluppi-benefit-img kluppi-benefit-img--i2" data-reveal style={{ "--reveal-delay": "0.08s" } as React.CSSProperties}>
@@ -502,7 +492,9 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="kluppi-faq kluppi-section tone-alt" id="intrebari-frecvente">
+        <HomePlans signupUrl={SIGNUP_URL} />
+
+        <section className="kluppi-faq kluppi-section" id="intrebari-frecvente">
           <div className="kluppi-faq-inner">
             <h2 className="kluppi-faq-heading" data-reveal>Întrebări frecvente</h2>
             <div className="kluppi-faq-list" data-reveal>
