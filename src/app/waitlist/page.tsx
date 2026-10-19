@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Tickets, LockKeyhole, Heart } from "lucide-react";
-import PainPointsCarousel from "../PainPointsCarousel";
 import HowItWorks from "../HowItWorks";
 import SplitBanner from "../SplitBanner";
 import BenefitsCards from "../BenefitsCards";
@@ -401,29 +400,6 @@ export default function Home() {
             </>
           }
         />
-
-        <section className="kluppi-painpoints kluppi-section">
-          <div className="kluppi-painpoints-inner">
-            <h2 className="kluppi-painpoints-heading" data-reveal>De câte ori ai…</h2>
-            <PainPointsCarousel />
-            <div className="kluppi-painpoints-conclusion" data-reveal>
-              <h3 className="kluppi-painpoints-h2">Nu ți s-a întâmplat doar ție.</h3>
-              <p className="text-size-large kluppi-hero-body">
-                A devenit din ce în ce mai rară senzația că plătești prețul corect atunci când cumperi online.
-              </p>
-            </div>
-            <div className="kluppi-painpoints-outro" data-reveal>
-              <h3 className="kluppi-painpoints-h2">Noi ne-am săturat de toate astea.</h3>
-              <p className="text-size-large kluppi-hero-body">
-                Și am creat Kluppi: prietenul care are mereu un cod de reducere bun, exact când îți trebuie.
-              </p>
-              <div className="kluppi-painpoints-cta">
-                <a href="#contact" className="kluppi-btn">Rezervă-ți locul în club</a>
-                <p className="kluppi-hero-trust">Rapid, doar cu nume și e-mail.</p>
-              </div>
-            </div>
-          </div>
-        </section>
 
         <section className="kluppi-benefits" id="services">
           <div className="padding-global">
