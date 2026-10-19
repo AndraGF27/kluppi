@@ -159,7 +159,7 @@ export default function AdvCarousel({ signupUrl }: { signupUrl: string }) {
 
   return (
     <section
-      className="kluppi-section adv-section"
+      className="kluppi-section rcpt-section"
       id="simulator"
       onKeyDown={onKeyDown}
       onMouseEnter={() => setPaused(true)}
@@ -171,12 +171,12 @@ export default function AdvCarousel({ signupUrl }: { signupUrl: string }) {
       onTouchStart={() => setPaused(true)}
       onTouchEnd={() => setPaused(false)}
     >
-      <div className="adv-inner">
-        <div className="adv-intro" data-reveal>
+      <div className="rcpt-inner">
+        <div className="rcpt-intro" data-reveal>
           <h2 className="kluppi-benefits-heading">Cât poți economisi cu Kluppi?</h2>
         </div>
-        <div className="adv-view" data-reveal onPointerDown={onPointerDown} onPointerUp={onPointerUp}>
-          <div className="adv-track" style={{ transform: `translateX(${-offset}px)` }}>
+        <div className="rcpt-view" data-reveal onPointerDown={onPointerDown} onPointerUp={onPointerUp}>
+          <div className="rcpt-track" style={{ transform: `translateX(${-offset}px)` }}>
             {SLIDES.map((s, k) => {
               const active = k === cur;
               return (
@@ -185,23 +185,23 @@ export default function AdvCarousel({ signupUrl }: { signupUrl: string }) {
                   ref={(el) => {
                     slideRefs.current[k] = el;
                   }}
-                  className={`adv-slide${active ? " is-active" : ""}`}
+                  className={`rcpt-slide${active ? " is-active" : ""}`}
                   aria-hidden={!active}
                   onClick={active ? undefined : () => go(k)}
                 >
-                  <div className="adv-sh">
-                    <article className="adv-tk">
-                      <div className="adv-main">
-                        <p className="adv-ey">
-                          <span className="adv-ic">
+                  <div className="rcpt-sh">
+                    <article className="rcpt-tk">
+                      <div className="rcpt-main">
+                        <p className="rcpt-ey">
+                          <span className="rcpt-ic">
                             <s.Icon aria-hidden="true" strokeWidth={1.5} />
                           </span>
                           {s.eyebrow}
                         </p>
-                        <h3 className="adv-t">{s.title}</h3>
-                        <div className="adv-rows">
+                        <h3 className="rcpt-t">{s.title}</h3>
+                        <div className="rcpt-rows">
                           {s.rows.map((r) => (
-                            <div key={r.label} className={`adv-row${r.kind ? ` ${r.kind}` : ""}`}>
+                            <div key={r.label} className={`rcpt-row${r.kind ? ` ${r.kind}` : ""}`}>
                               <span>{r.label}</span>
                               <span>
                                 {r.struck && <s>{r.struck}</s>}
@@ -211,15 +211,15 @@ export default function AdvCarousel({ signupUrl }: { signupUrl: string }) {
                           ))}
                         </div>
                       </div>
-                      <div className="adv-stub">
-                        <span className="adv-pill">{s.pill}</span>
+                      <div className="rcpt-stub">
+                        <span className="rcpt-pill">{s.pill}</span>
                         <div>
-                          <p className="adv-big">
+                          <p className="rcpt-big">
                             <CountUp to={s.amount} run={runs[k]} /> lei
                           </p>
-                          <p className="adv-tail">{s.tail}</p>
+                          <p className="rcpt-tail">{s.tail}</p>
                         </div>
-                        <p className="adv-note">{NOTE}</p>
+                        <p className="rcpt-note">{NOTE}</p>
                       </div>
                     </article>
                   </div>
@@ -228,12 +228,12 @@ export default function AdvCarousel({ signupUrl }: { signupUrl: string }) {
             })}
           </div>
         </div>
-        <div className="adv-bar">
-          <div className="adv-ctrl">
-            <button type="button" className="adv-chev" aria-label="Avantajul anterior" onClick={() => go(cur - 1)}>
+        <div className="rcpt-bar">
+          <div className="rcpt-ctrl">
+            <button type="button" className="rcpt-chev" aria-label="Avantajul anterior" onClick={() => go(cur - 1)}>
               <ChevronLeft aria-hidden="true" strokeWidth={1.5} />
             </button>
-            <div className="adv-seg">
+            <div className="rcpt-seg">
               {SLIDES.map((s, k) => (
                 <button
                   key={s.eyebrow}
@@ -245,12 +245,12 @@ export default function AdvCarousel({ signupUrl }: { signupUrl: string }) {
                 />
               ))}
             </div>
-            <button type="button" className="adv-chev" aria-label="Avantajul următor" onClick={() => go(cur + 1)}>
+            <button type="button" className="rcpt-chev" aria-label="Avantajul următor" onClick={() => go(cur + 1)}>
               <ChevronRight aria-hidden="true" strokeWidth={1.5} />
             </button>
           </div>
         </div>
-        <div className="adv-cta">
+        <div className="rcpt-cta">
           <a href={signupUrl} className="kluppi-btn">Intră în club</a>
           <p className="kluppi-hero-trust">Te înscrii gratuit, fără card</p>
         </div>
