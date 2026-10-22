@@ -16,7 +16,9 @@ const categories = [
   { emoji: "🎡", label: "Timp liber & ai tăi", defaultValue: 0 },
 ];
 
-const formatRon = new Intl.NumberFormat("ro-RO", { maximumFractionDigits: 0 });
+// Kluppi's one number format, as Oblio prints it: commas for thousands, a dot
+// before the bani (Andra, 2026-10-22).
+const formatRon = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
 export default function SavingsSimulator() {
   const [monthlySpends, setMonthlySpends] = useState(() =>

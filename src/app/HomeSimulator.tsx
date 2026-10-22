@@ -8,7 +8,7 @@ import { Shirt, Leaf, House, Zap, Wine, Balloon, type LucideIcon } from "lucide-
 // price. The page states the assumption in the footnote below the result.
 const AVG_BENEFIT = 0.1; // a benefit worth 10% of the purchases
 const ANNUAL_PLAN_RON = 220; // annual Kluppi+ price (also shown in HomePlans)
-// Each slider runs from 0 to 10.000 lei a year and starts at 500 (Andra, 2026-10-06).
+// Each slider runs from 0 to 10,000 lei a year and starts at 500 (Andra, 2026-10-06).
 const MAX_RON = 10000;
 const STEP_RON = 100;
 const DEFAULT_RON = 500;
@@ -22,7 +22,9 @@ const categories: { Icon: LucideIcon; label: string }[] = [
   { Icon: Balloon, label: "Timp liber & familie" },
 ];
 
-const formatRon = new Intl.NumberFormat("ro-RO", { maximumFractionDigits: 0 });
+// Kluppi's one number format, as Oblio prints it: commas for thousands, a dot
+// before the bani (Andra, 2026-10-22).
+const formatRon = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
 export default function HomeSimulator({ signupUrl }: { signupUrl: string }) {
   const [spends, setSpends] = useState(() => categories.map(() => DEFAULT_RON));

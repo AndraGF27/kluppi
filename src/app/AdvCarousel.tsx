@@ -65,9 +65,9 @@ const SLIDES: Slide[] = [
     eyebrow: "Alte avantaje exclusive",
     title: "Servicii incluse în preț.",
     rows: [
-      { label: "Subtotal", value: "1.200 lei" },
+      { label: "Subtotal", value: "1,200 lei" },
       { label: "Montaj la domiciliu", struck: "150 lei", value: "0 lei", kind: "hl" },
-      { label: "Total", value: "1.200 lei", kind: "tot" },
+      { label: "Total", value: "1,200 lei", kind: "tot" },
     ],
     pill: "Doar în club",
     amount: 150,

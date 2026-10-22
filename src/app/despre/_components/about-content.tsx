@@ -22,7 +22,7 @@ const clubParagraphs = [
 const subscriptionParagraphs = [
   "Ca să fim sinceri până la capăt: nu plătești pentru că reducerile ar fi scumpe. Plătești pentru cineva care caută, negociază și verifică în locul tău, în fiecare lună. Cam ce ai face pentru un prieten care îți poartă mereu de grijă.",
   "Și, dacă tot vorbim despre bani: nu lucrăm pe comisioane de afiliere. Nu câștigăm absolut nimic din ceea ce cumperi tu. Singura noastră „vânzare” este clubul însuși — așa că singura noastră grijă este ca el să merite, lună de lună.",
-  "Apropo, ai observat prețurile noastre? Numere rotunde. Fără 21,99, fără „reducere doar azi la abonament”. Un club care îți promite că nu te manipulează nu are voie să înceapă chiar cu propriul preț.",
+  "Apropo, ai observat prețurile noastre? Numere rotunde. Fără 21.99, fără „reducere doar azi la abonament”. Un club care îți promite că nu te manipulează nu are voie să înceapă chiar cu propriul preț.",
 ];
 
 const standards = [
